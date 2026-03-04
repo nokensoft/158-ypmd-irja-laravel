@@ -15,23 +15,26 @@ use App\Http\Controllers\Penulis\KegiatanController;
 use App\Http\Controllers\Penulis\CabangOlahragaController;
 use App\Http\Controllers\Penulis\GaleriController;
 use App\Http\Controllers\Penulis\MediaController;
+use App\Http\Controllers\StatistikPengunjungController;
 
 /*
 |--------------------------------------------------------------------------
 | Visitor (Public) Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/', [VisitorController::class, 'beranda'])->name('beranda');
-Route::get('/tentang', [VisitorController::class, 'tentang'])->name('tentang');
-Route::get('/pengurusan', [VisitorController::class, 'pengurusan'])->name('pengurusan');
-Route::get('/cabor', [VisitorController::class, 'cabor'])->name('cabor');
-Route::get('/event', [VisitorController::class, 'event'])->name('event');
-Route::get('/berita', [VisitorController::class, 'berita'])->name('berita');
-Route::get('/berita/kategori/{slug}', [VisitorController::class, 'beritaKategori'])->name('berita.kategori');
-Route::get('/berita/{slug}', [VisitorController::class, 'beritaDetail'])->name('berita.detail');
-Route::get('/galeri', [VisitorController::class, 'galeri'])->name('galeri');
-Route::get('/galeri/{slug}', [VisitorController::class, 'galeriDetail'])->name('galeri.detail');
-Route::get('/kontak', [VisitorController::class, 'kontak'])->name('kontak');
+Route::middleware('track.visitor')->group(function () {
+    Route::get('/', [VisitorController::class, 'beranda'])->name('beranda');
+    Route::get('/tentang', [VisitorController::class, 'tentang'])->name('tentang');
+    Route::get('/pengurusan', [VisitorController::class, 'pengurusan'])->name('pengurusan');
+    Route::get('/cabor', [VisitorController::class, 'cabor'])->name('cabor');
+    Route::get('/event', [VisitorController::class, 'event'])->name('event');
+    Route::get('/berita', [VisitorController::class, 'berita'])->name('berita');
+    Route::get('/berita/kategori/{slug}', [VisitorController::class, 'beritaKategori'])->name('berita.kategori');
+    Route::get('/berita/{slug}', [VisitorController::class, 'beritaDetail'])->name('berita.detail');
+    Route::get('/galeri', [VisitorController::class, 'galeri'])->name('galeri');
+    Route::get('/galeri/{slug}', [VisitorController::class, 'galeriDetail'])->name('galeri.detail');
+    Route::get('/kontak', [VisitorController::class, 'kontak'])->name('kontak');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +66,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth.custom', 'role:admin_m
     // Pengguna CRUD
     Route::resource('pengguna', PenggunaController::class)->except(['show']);
     Route::patch('/pengguna/{pengguna}/restore', [PenggunaController::class, 'restore'])->name('pengguna.restore');
+
+    // Statistik
+    Route::get('/statistik-pengunjung', [StatistikPengunjungController::class, 'index'])->name('statistik-pengunjung');
 });
 
 /*
@@ -92,4 +98,7 @@ Route::prefix('penulis')->name('penulis.')->middleware(['auth.custom', 'role:pen
     Route::patch('/media/{medium}/restore', [MediaController::class, 'restore'])->name('media.restore');
     Route::resource('galeri', GaleriController::class)->except(['show']);
     Route::patch('/galeri/{galeri}/restore', [GaleriController::class, 'restore'])->name('galeri.restore');
+
+    // Statistik
+    Route::get('/statistik-pengunjung', [StatistikPengunjungController::class, 'index'])->name('statistik-pengunjung');
 });

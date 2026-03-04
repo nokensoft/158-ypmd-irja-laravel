@@ -24,6 +24,7 @@ class Berita extends Model
         'gambar_url',
         'user_id',
         'status',
+        'jumlah_dibaca',
         'tanggal_terbit',
     ];
 

@@ -83,6 +83,14 @@
                             <span>Aktivitas Login</span>
                         </a>
                     </div>
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3 px-3">Laporan</p>
+                        <a href="{{ route('admin.statistik-pengunjung') }}"
+                           class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round {{ request()->routeIs('admin.statistik-pengunjung') ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
+                            <i class="fas fa-chart-bar w-6 text-center"></i>
+                            <span>Statistik Pengunjung</span>
+                        </a>
+                    </div>
                 @endif
 
                 @if ($user && $user['role'] === 'penulis')
@@ -132,6 +140,14 @@
                            class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round {{ request()->routeIs('penulis.galeri.*') ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
                             <i class="fas fa-images w-6 text-center"></i>
                             <span>Galeri</span>
+                        </a>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3 px-3">Laporan</p>
+                        <a href="{{ route('penulis.statistik-pengunjung') }}"
+                           class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round {{ request()->routeIs('penulis.statistik-pengunjung') ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
+                            <i class="fas fa-chart-bar w-6 text-center"></i>
+                            <span>Statistik Pengunjung</span>
                         </a>
                     </div>
                 @endif

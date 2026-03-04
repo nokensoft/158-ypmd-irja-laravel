@@ -98,6 +98,8 @@ class VisitorController extends Controller
             ->where('status', 'terbit')
             ->firstOrFail();
 
+        $berita->increment('jumlah_dibaca');
+
         $beritaLainnya = Berita::with('kategori', 'media')
             ->where('status', 'terbit')
             ->where('id', '!=', $berita->id)
