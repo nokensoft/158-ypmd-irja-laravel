@@ -69,6 +69,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth.custom', 'role:admin_m
 
     // Statistik
     Route::get('/statistik-pengunjung', [StatistikPengunjungController::class, 'index'])->name('statistik-pengunjung');
+
+    // Dokumentasi
+    Route::view('/dokumentasi', 'admin.dokumentasi')->name('dokumentasi');
 });
 
 /*
@@ -101,4 +104,7 @@ Route::prefix('penulis')->name('penulis.')->middleware(['auth.custom', 'role:pen
 
     // Statistik
     Route::get('/statistik-pengunjung', [StatistikPengunjungController::class, 'index'])->name('statistik-pengunjung');
+
+    // Dokumentasi
+    Route::view('/dokumentasi', 'admin.dokumentasi')->name('dokumentasi');
 });
