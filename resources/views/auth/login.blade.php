@@ -20,7 +20,7 @@
             @if (!empty($situs['logo']))
                 <img src="{{ asset('storage/' . $situs['logo']) }}" alt="Logo {{ $situs['nama_situs'] ?? 'KONI' }}" class="h-20 mx-auto mb-4 brightness-200">
             @else
-                <img src="{{ asset('img/logo-koni-papua-pegunungan-transparant.png') }}" alt="Logo KONI" class="h-20 mx-auto mb-4 brightness-200">
+                <img src="{{ asset('img/logo-koni-papua-pegunungan.jpeg') }}" alt="Logo KONI" class="h-20 mx-auto mb-4">
             @endif
             <h1 class="text-2xl font-extrabold text-white uppercase tracking-wide">{{ $situs['nama_situs'] ?? 'KONI Papua Pegunungan' }}</h1>
             <p class="text-gray-400 text-base mt-1">Masuk ke Dashboard</p>

@@ -35,7 +35,7 @@
                 @if (!empty($situs['logo']))
                     <img src="{{ asset('storage/' . $situs['logo']) }}" alt="Logo {{ $situs['nama_situs'] ?? 'KONI' }}" class="h-10">
                 @else
-                    <img src="{{ asset('img/logo-koni-papua-pegunungan-transparant.png') }}" alt="Logo" class="h-10">
+                    <img src="{{ asset('img/logo-koni-papua-pegunungan.jpeg') }}" alt="Logo" class="h-10">
                 @endif
                 <div>
                     <span class="font-bold text-lg leading-none text-primary block">{{ Str::before($situs['nama_situs'] ?? 'KONI', ' ') }}</span>

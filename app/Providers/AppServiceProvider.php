@@ -24,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
             'visitor.*',
             'admin.*',
             'penulis.*',
+            'errors.*',
         ], SitusComposer::class);
     }
 }
