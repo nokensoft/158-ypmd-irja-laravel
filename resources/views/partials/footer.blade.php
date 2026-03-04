@@ -3,9 +3,9 @@
         <div>
             <a href="{{ route('beranda') }}" class="inline-block">
                 @if (!empty($situs['logo']))
-                    <img src="{{ asset('storage/' . $situs['logo']) }}" class="h-50 mb-4 brightness-200" alt="Logo {{ $situs['nama_situs'] ?? 'KONI' }}">
+                    <img src="{{ asset('storage/' . $situs['logo']) }}" class="h-50 mb-4" alt="Logo {{ $situs['nama_situs'] ?? 'KONI' }}">
                 @else
-                    <img src="{{ asset('img/logo-koni-papua-pegunungan-transparant.png') }}" class="h-50 mb-4 brightness-200" alt="Logo KONI">
+                    <img src="{{ asset('img/logo-koni-papua-pegunungan.jpeg') }}" class="h-50 mb-4" alt="Logo KONI">
                 @endif
             </a>
             <p class="text-base text-gray-400 leading-relaxed">{{ $situs['deskripsi_situs'] ?? 'Wadah pembinaan olahraga prestasi di Provinsi Papua Pegunungan.' }}</p>
@@ -24,7 +24,7 @@
         <div>
             <h4 class="font-bold mb-6 uppercase text-primary tracking-wide text-lg">Link Terkait</h4>
             <ul class="text-base space-y-3 text-gray-400">
-                <li><a href="https://kfrfroni.or.id" target="_blank" class="hover:text-white transition">KONI Pusat</a></li>
+                <li><a href="https://koni.or.id" target="_blank" class="hover:text-white transition">KONI Pusat</a></li>
                 <li><a href="https://kemenpora.go.id" target="_blank" class="hover:text-white transition">Kemenpora RI</a></li>
                 <li><a href="#" class="hover:text-white transition">Dispora Papua Pegunungan</a></li>
                 <li><a href="#" class="hover:text-white transition">Pemerintah Provinsi</a></li>

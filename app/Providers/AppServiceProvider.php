@@ -17,8 +17,13 @@ class AppServiceProvider extends ServiceProvider
     {
         View::composer([
             'layouts.visitor',
+            'layouts.dashboard',
             'partials.header',
             'partials.footer',
+            'auth.login',
+            'visitor.*',
+            'admin.*',
+            'penulis.*',
         ], SitusComposer::class);
     }
 }

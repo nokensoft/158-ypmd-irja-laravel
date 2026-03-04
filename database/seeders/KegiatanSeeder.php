@@ -52,6 +52,27 @@ class KegiatanSeeder extends Seeder
                 'tanggal_selesai' => '2026-10-08',
                 'lokasi' => 'Kota Wamena',
             ],
+            [
+                'judul' => 'PON Bela Diri Sulawesi Utara',
+                'deskripsi' => 'Pekan Olahraga Nasional cabang bela diri yang diselenggarakan di Sulawesi Utara. Papua Pegunungan akan mengirimkan atlet terbaik untuk berkompetisi di tingkat nasional.',
+                'tanggal_mulai' => '2026-11-01',
+                'tanggal_selesai' => '2026-11-10',
+                'lokasi' => 'Sulawesi Utara',
+            ],
+            [
+                'judul' => 'PON Pantai',
+                'deskripsi' => 'Pekan Olahraga Nasional cabang olahraga pantai. Papua Pegunungan siap bersaing dalam ajang olahraga pantai tingkat nasional.',
+                'tanggal_mulai' => '2026-12-01',
+                'tanggal_selesai' => '2026-12-07',
+                'lokasi' => 'TBA',
+            ],
+            [
+                'judul' => 'PON Indoor & PON Remaja',
+                'deskripsi' => 'Pekan Olahraga Nasional Indoor dan PON Remaja sebagai ajang pembinaan atlet muda Papua Pegunungan menuju prestasi nasional.',
+                'tanggal_mulai' => '2027-06-01',
+                'tanggal_selesai' => '2027-06-10',
+                'lokasi' => 'TBA',
+            ],
         ];
 
         foreach ($kegiatan as $data) {

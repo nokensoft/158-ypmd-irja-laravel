@@ -64,6 +64,51 @@ html {
     z-index: 1;
 }
 
+/* ======================== */
+/* Hero Slider Ken Burns     */
+/* ======================== */
+
+.hero-slide {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.hero-slide.active {
+    opacity: 1;
+}
+
+.hero-slide .hero-slide-img {
+    animation: heroZoomOut 5s ease-in-out forwards;
+}
+
+.hero-slide.active .hero-slide-img {
+    animation: heroZoomIn 5s ease-in-out forwards;
+}
+
+@keyframes heroZoomIn {
+    0%   { transform: scale(1); }
+    100% { transform: scale(1.15); }
+}
+
+@keyframes heroZoomOut {
+    0%   { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+/* Hero slider indicators */
+.hero-indicator {
+    width: 2.5rem;
+    height: 0.25rem;
+    background: rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.hero-indicator.active {
+    background: #C8102E;
+    width: 3.5rem;
+}
+
 /* Stat counter animation */
 .stat-card:hover .stat-icon {
     transform: scale(1.1);

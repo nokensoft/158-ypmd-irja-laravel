@@ -32,58 +32,41 @@
     <section class="py-20 bg-accent">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <div x-data="{ sent: false }">
-                    <p class="text-primary font-bold uppercase tracking-widest text-base mb-2">Pesan</p>
-                    <h3 class="text-3xl font-extrabold mb-8">Kirim Pesan</h3>
-                    <div x-show="!sent">
-                        <form @submit.prevent="sent = true" class="space-y-5">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                <div>
-                                    <label class="text-base font-bold uppercase text-gray-500 block mb-2">Nama Lengkap</label>
-                                    <input type="text" required class="w-full border border-gray-300 p-4 text-base focus:border-primary focus:outline-none transition no-round" placeholder="Masukkan nama lengkap">
-                                </div>
-                                <div>
-                                    <label class="text-base font-bold uppercase text-gray-500 block mb-2">Email</label>
-                                    <input type="email" required class="w-full border border-gray-300 p-4 text-base focus:border-primary focus:outline-none transition no-round" placeholder="Masukkan email">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="text-base font-bold uppercase text-gray-500 block mb-2">Subjek</label>
-                                <select required class="w-full border border-gray-300 p-4 text-base focus:border-primary focus:outline-none transition bg-white no-round">
-                                    <option value="">Pilih Subjek</option>
-                                    <option>Informasi Umum</option>
-                                    <option>Pendaftaran Atlet</option>
-                                    <option>Kerjasama & Sponsorship</option>
-                                    <option>Media & Pers</option>
-                                    <option>Lainnya</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="text-base font-bold uppercase text-gray-500 block mb-2">Pesan</label>
-                                <textarea rows="5" required class="w-full border border-gray-300 p-4 text-base focus:border-primary focus:outline-none transition resize-none no-round" placeholder="Tulis pesan Anda..."></textarea>
-                            </div>
-                            <button type="submit" class="bg-primary text-white px-8 py-4 font-bold hover:bg-red-700 transition uppercase text-base tracking-wide w-full md:w-auto no-round">
-                                <i class="fas fa-paper-plane mr-2"></i> Kirim Pesan
-                            </button>
-                        </form>
+                @php
+                    $sosmedLinks = collect([
+                        ['key' => 'sosmed_facebook', 'icon' => 'fa-facebook-f', 'label' => 'Facebook', 'color' => 'bg-blue-600 hover:bg-blue-700'],
+                        ['key' => 'sosmed_instagram', 'icon' => 'fa-instagram', 'label' => 'Instagram', 'color' => 'bg-pink-500 hover:bg-pink-600'],
+                        ['key' => 'sosmed_youtube', 'icon' => 'fa-youtube', 'label' => 'YouTube', 'color' => 'bg-red-600 hover:bg-red-700'],
+                        ['key' => 'sosmed_twitter', 'icon' => 'fa-x-twitter', 'label' => 'Twitter / X', 'color' => 'bg-gray-900 hover:bg-black'],
+                        ['key' => 'sosmed_tiktok', 'icon' => 'fa-tiktok', 'label' => 'TikTok', 'color' => 'bg-gray-800 hover:bg-gray-900'],
+                    ])->filter(fn ($item) => !empty($situs[$item['key']]));
+                @endphp
+
+                @if ($sosmedLinks->isNotEmpty())
+                    <div>
+                        <p class="text-primary font-bold uppercase tracking-widest text-base mb-2">Sosial</p>
+                        <h3 class="text-3xl font-extrabold mb-8">Media Sosial</h3>
+                        <div class="space-y-4">
+                            @foreach ($sosmedLinks as $sosmed)
+                                <a href="{{ $situs[$sosmed['key']] }}" target="_blank" rel="noopener noreferrer"
+                                   class="flex items-center space-x-4 p-4 bg-white shadow-sm hover:shadow-md transition group">
+                                    <div class="w-12 h-12 {{ $sosmed['color'] }} text-white flex items-center justify-center transition">
+                                        <i class="fab {{ $sosmed['icon'] }} text-xl"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <p class="font-bold text-base">{{ $sosmed['label'] }}</p>
+                                        <p class="text-sm text-gray-400 truncate">{{ $situs[$sosmed['key']] }}</p>
+                                    </div>
+                                    <i class="fas fa-external-link-alt text-gray-300 group-hover:text-primary transition"></i>
+                                </a>
+                            @endforeach
+                        </div>
                     </div>
-                    <div x-show="sent" x-transition class="bg-green-50 border border-green-200 p-8 text-center">
-                        <i class="fas fa-check-circle text-green-500 text-4xl mb-4"></i>
-                        <h4 class="font-bold text-xl mb-2">Pesan Terkirim!</h4>
-                        <p class="text-gray-600 text-base mb-4">Terima kasih telah menghubungi kami. Kami akan merespons pesan Anda sesegera mungkin.</p>
-                        <button @click="sent = false" class="text-primary font-bold text-base uppercase hover:underline">Kirim Pesan Lagi</button>
-                    </div>
-                </div>
+                @endif
                 <div>
                     <p class="text-primary font-bold uppercase tracking-widest text-base mb-2">Lokasi</p>
                     <h3 class="text-3xl font-extrabold mb-8">Temukan Kami</h3>
-                    <div class="bg-gray-200 h-80 flex items-center justify-center shadow-md">
-                        <div class="text-center text-gray-500">
-                            <i class="fas fa-map-marked-alt text-4xl mb-3 text-gray-400"></i>
-                            <p class="font-bold text-base uppercase">Peta Lokasi</p>
-                            <p class="text-sm mt-1">Jl. Trikora No. 1, Wamena</p>
-                        </div>
-                    </div>
+                    <iframe width="100%" height="350" src="https://www.openstreetmap.org/export/embed.html?bbox=136.24145507812503%2C-6.189707330332176%2C141.21276855468753%2C-2.180259769681343&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/?#map=8/-4.188/138.727&amp;layers=NDG">View Larger Map</a></small>
                 </div>
             </div>
         </div>

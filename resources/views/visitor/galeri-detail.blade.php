@@ -23,35 +23,14 @@
                     <h3 class="text-3xl font-extrabold text-dark">{{ $galeri->judul }}</h3>
                     <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full">{{ $galeri->kategori }}</span>
                 </div>
-                @if ($galeri->deskripsi)
-                    <p class="text-gray-500 max-w-2xl">{{ $galeri->deskripsi }}</p>
-                @endif
-                <p class="text-gray-400 text-sm mt-2">
+                <p class="text-gray-400 text-sm my-2">
                     <i class="fas fa-image mr-1"></i>{{ $galeri->media->count() }} Foto
                     <span class="mx-2">&middot;</span>
                     <i class="far fa-calendar-alt mr-1"></i>{{ $galeri->created_at->translatedFormat('d F Y') }}
                 </p>
-            </div>
-
-            <!-- Share Buttons -->
-            <div class="mb-8 flex flex-wrap gap-3" x-data="{ copied: false }">
-                <button @click="navigator.clipboard.writeText('{{ route('galeri.detail', $galeri->slug) }}'); copied = true; setTimeout(() => copied = false, 2000)"
-                        class="flex items-center gap-2 px-4 py-2.5 border border-gray-300 text-gray-600 hover:border-primary hover:text-primary transition text-sm font-semibold rounded-lg">
-                    <i class="fas" :class="copied ? 'fa-check' : 'fa-link'"></i>
-                    <span x-text="copied ? 'Tersalin!' : 'Salin URL'"></span>
-                </button>
-                <a href="https://twitter.com/intent/tweet?url={{ urlencode(route('galeri.detail', $galeri->slug)) }}&text={{ urlencode($galeri->judul) }}" target="_blank"
-                   class="flex items-center gap-2 px-4 py-2.5 bg-black text-white hover:bg-gray-800 transition text-sm font-semibold rounded-lg">
-                    <i class="fab fa-x-twitter"></i> Post
-                </a>
-                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('galeri.detail', $galeri->slug)) }}" target="_blank"
-                   class="flex items-center gap-2 px-4 py-2.5 bg-blue-600 text-white hover:bg-blue-700 transition text-sm font-semibold rounded-lg">
-                    <i class="fab fa-facebook-f"></i> Share
-                </a>
-                <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(route('galeri.detail', $galeri->slug)) }}" target="_blank"
-                   class="flex items-center gap-2 px-4 py-2.5 bg-sky-700 text-white hover:bg-sky-800 transition text-sm font-semibold rounded-lg">
-                    <i class="fab fa-linkedin-in"></i> LinkedIn
-                </a>
+                @if ($galeri->deskripsi)
+                    <p class="text-gray-500">{{ $galeri->deskripsi }}</p>
+                @endif
             </div>
 
             <!-- Photo Grid -->
@@ -73,6 +52,29 @@
                     </div>
                 @endforelse
             </div>
+            
+
+            <!-- Share Buttons -->
+            <div class="mt-8 flex flex-wrap gap-3" x-data="{ copied: false }">
+                <button @click="navigator.clipboard.writeText('{{ route('galeri.detail', $galeri->slug) }}'); copied = true; setTimeout(() => copied = false, 2000)"
+                        class="flex items-center gap-2 px-4 py-2.5 border border-gray-300 text-gray-600 hover:border-primary hover:text-primary transition text-sm font-semibold rounded-lg">
+                    <i class="fas" :class="copied ? 'fa-check' : 'fa-link'"></i>
+                    <span x-text="copied ? 'Tersalin!' : 'Salin URL'"></span>
+                </button>
+                <a href="https://twitter.com/intent/tweet?url={{ urlencode(route('galeri.detail', $galeri->slug)) }}&text={{ urlencode($galeri->judul) }}" target="_blank"
+                   class="flex items-center gap-2 px-4 py-2.5 bg-black text-white hover:bg-gray-800 transition text-sm font-semibold rounded-lg">
+                    <i class="fab fa-x-twitter"></i> Post
+                </a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('galeri.detail', $galeri->slug)) }}" target="_blank"
+                   class="flex items-center gap-2 px-4 py-2.5 bg-blue-600 text-white hover:bg-blue-700 transition text-sm font-semibold rounded-lg">
+                    <i class="fab fa-facebook-f"></i> Share
+                </a>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(route('galeri.detail', $galeri->slug)) }}" target="_blank"
+                   class="flex items-center gap-2 px-4 py-2.5 bg-sky-700 text-white hover:bg-sky-800 transition text-sm font-semibold rounded-lg">
+                    <i class="fab fa-linkedin-in"></i> LinkedIn
+                </a>
+            </div>
+
         </div>
 
         <!-- Lightbox with Navigation -->

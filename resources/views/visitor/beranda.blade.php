@@ -4,78 +4,40 @@
 @section('seo-description', ($situs['seo_meta_description'] ?? 'Website resmi KONI Provinsi Papua Pegunungan'))
 
 @section('content')
-    <!-- Hero -->
-    <section class="relative h-[100vh] flex items-center bg-dark overflow-hidden">
-        <img src="{{ asset('img/bg/papua-pegunungan-dayung.png') }}" class="absolute inset-0 w-full h-full object-cover opacity-50" alt="Hero Background">
-        <div class="absolute inset-0 bg-gradient-to-r from-dark via-dark/70 to-transparent"></div>
+
+    <!-- Hero Slider -->
+    <section x-data="heroSlider" class="relative h-[100vh] flex items-center bg-dark overflow-hidden">
+        {{-- Background Slides --}}
+        <template x-for="(slide, index) in slides" :key="index">
+            <div class="hero-slide absolute inset-0" :class="{ 'active': current === index }">
+                <img :src="'{{ asset('') }}' + slide" class="hero-slide-img w-full h-full object-cover opacity-50" alt="Hero Background">
+            </div>
+        </template>
+
+        {{-- Gradient Overlay --}}
+        <div class="absolute inset-0 bg-gradient-to-r from-dark via-dark/70 to-transparent z-[1]"></div>
+
+        {{-- Content --}}
         <div class="container mx-auto px-4 relative z-10 text-white">
             <p class="text-primary font-bold uppercase tracking-widest mb-4 text-base">Komite Olahraga Nasional Indonesia</p>
-            <h2 class="text-4xl lg:text-6xl font-extrabold mb-4 uppercase leading-tight">Membangun Prestasi <br><span class="text-primary">Di Puncak Papua</span></h2>
+            <h2 class="text-4xl lg:text-6xl font-extrabold mb-4 uppercase leading-tight">Membangun Prestasi <br><span class="text-primary">Di Papua Pegunungan</span></h2>
             <p class="max-w-xl mb-8 text-gray-300 leading-relaxed text-lg">{{ $situs['deskripsi_situs'] ?? 'Berkomitmen memajukan atlet daerah Papua Pegunungan menuju pentas nasional dan internasional melalui pembinaan olahraga yang profesional.' }}</p>
             <div class="flex flex-wrap gap-4">
-                <a href="{{ route('tentang') }}" class="bg-primary px-8 py-4 font-bold no-round hover:bg-red-700 transition inline-block text-lg">Profil Kami</a>
+                <a href="{{ route('tentang') }}" class="bg-primary px-8 py-4 font-bold no-round hover:bg-red-700 transition inline-block text-lg">Profil Organisasi</a>
                 <a href="{{ route('event') }}" class="border border-white px-8 py-4 font-bold no-round hover:bg-white hover:text-dark transition inline-block text-lg">Event Mendatang</a>
             </div>
         </div>
-    </section>
 
-    <!-- Statistik -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
-                @foreach ($stats as $stat)
-                    <div class="stat-card text-center p-6 border-l-4 border-primary bg-gray-50">
-                        <div class="stat-icon text-primary text-3xl mb-3"><i class="fas {{ $stat['icon'] }}"></i></div>
-                        <p class="text-3xl font-extrabold text-dark">{{ $stat['value'] }}</p>
-                        <p class="text-base text-gray-500 uppercase tracking-wide font-medium mt-1">{{ $stat['label'] }}</p>
-                    </div>
-                @endforeach
-            </div>
+        {{-- Slide Indicators --}}
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-3">
+            <template x-for="(slide, index) in slides" :key="'ind-' + index">
+                <button @click="goTo(index)" class="hero-indicator" :class="{ 'active': current === index }"></button>
+            </template>
         </div>
     </section>
 
-    <!-- Tentang Preview -->
-    <section class="py-20 bg-accent">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <p class="text-primary font-bold uppercase tracking-widest text-base mb-2">Tentang Kami</p>
-                    <h3 class="text-3xl font-extrabold mb-6 leading-tight">KONI Provinsi<br>Papua Pegunungan</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4 text-lg">Komite Olahraga Nasional Indonesia (KONI) Provinsi Papua Pegunungan merupakan organisasi yang mengoordinasikan dan membina olahraga prestasi di wilayah Papua Pegunungan.</p>
-                    <p class="text-gray-600 leading-relaxed mb-8 text-lg">Berdiri sebagai wadah pemersatu seluruh cabang olahraga, KONI Papua Pegunungan berperan aktif dalam mencetak atlet-atlet berprestasi dari Tanah Papua.</p>
-                    <a href="{{ route('tentang') }}" class="bg-primary text-white px-8 py-4 font-bold no-round hover:bg-red-700 transition inline-block text-base uppercase tracking-wide">Selengkapnya <i class="fas fa-arrow-right ml-2"></i></a>
-                </div>
-                <div class="relative">
-                    <img src="{{ asset('img/bg/gubernur-papua-pegunungan.png') }}" alt="Tentang KONI" class="w-full shadow-lg">
-                    <div class="absolute -bottom-6 -left-6 bg-primary text-white p-6 shadow-lg hidden lg:block">
-                        <p class="text-3xl font-extrabold">2022</p>
-                        <p class="text-base uppercase tracking-wide">Tahun Berdiri</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Cabor Preview -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-wrap justify-between items-end mb-12">
-                <div>
-                    <p class="text-primary font-bold uppercase tracking-widest text-base mb-2">Olahraga</p>
-                    <h3 class="text-3xl font-extrabold">Cabang Olahraga</h3>
-                </div>
-                <a href="{{ route('cabor') }}" class="text-primary font-bold uppercase text-base hover:underline">Lihat Semua <i class="fas fa-arrow-right"></i></a>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                @foreach ($caborList as $cabor)
-                    <a href="{{ route('cabor') }}" class="bg-gray-50 p-6 text-center shadow-sm hover:text-white hover:bg-primary transition cursor-pointer group block">
-                        <i class="fas {{ $cabor->icon ?? 'fa-trophy' }} text-2xl mb-3 text-primary group-hover:text-white transition"></i>
-                        <p class="font-bold text-sm uppercase">{{ $cabor->nama }}</p>
-                    </a>
-                @endforeach
-            </div>
-        </div>
-    </section>
+
 
     <!-- Berita & Event Preview -->
     <section class="py-20 bg-accent">
@@ -124,6 +86,69 @@
                             <p class="text-gray-400 text-center py-8">Belum ada event.</p>
                         @endforelse
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    {{-- <!-- Tentang Preview -->
+    <section class="py-20 bg-accent">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <p class="text-primary font-bold uppercase tracking-widest text-base mb-2">Tentang Kami</p>
+                    <h3 class="text-3xl font-extrabold mb-6 leading-tight">KONI Provinsi<br>Papua Pegunungan</h3>
+                    <p class="text-gray-600 leading-relaxed mb-4 text-lg">Komite Olahraga Nasional Indonesia (KONI) Provinsi Papua Pegunungan merupakan organisasi yang mengoordinasikan dan membina olahraga prestasi di wilayah Papua Pegunungan.</p>
+                    <p class="text-gray-600 leading-relaxed mb-8 text-lg">Berdiri sebagai wadah pemersatu seluruh cabang olahraga, KONI Papua Pegunungan berperan aktif dalam mencetak atlet-atlet berprestasi dari Tanah Papua.</p>
+                    <a href="{{ route('tentang') }}" class="bg-primary text-white px-8 py-4 font-bold no-round hover:bg-red-700 transition inline-block text-base uppercase tracking-wide">Selengkapnya <i class="fas fa-arrow-right ml-2"></i></a>
+                </div>
+                <div class="relative">
+                    <img src="{{ asset('img/bg/gubernur-papua-pegunungan.png') }}" alt="Tentang KONI" class="w-full shadow-lg">
+                    <div class="absolute -bottom-6 -left-6 bg-primary text-white p-6 shadow-lg hidden lg:block">
+                        <p class="text-3xl font-extrabold">2022</p>
+                        <p class="text-base uppercase tracking-wide">Tahun Berdiri</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> --}}
+
+    <!-- Pencapaian Sejarah: PON XXI 2024 -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <p class="text-primary font-bold uppercase tracking-widest text-base mb-2">Pencapaian Sejarah</p>
+                <h3 class="text-3xl font-extrabold">PON XXI Aceh-Sumut 2024</h3>
+                <p class="text-gray-500 mt-3 text-lg max-w-2xl mx-auto">Partisipasi pertama Papua Pegunungan dengan masa persiapan hanya satu tahun.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 shadow-sm border-t-4 border-primary text-center">
+                    <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Peringkat Nasional</p>
+                    <p class="text-5xl font-extrabold text-primary">23</p>
+                    <p class="text-gray-500 text-base mt-2">Nasional</p>
+                </div>
+                <div class="bg-white p-8 shadow-sm border-t-4 border-primary text-center">
+                    <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Medali Emas</p>
+                    <p class="text-5xl font-extrabold text-yellow-500">6</p>
+                    <p class="text-gray-500 text-base mt-2">Medali Emas</p>
+                </div>
+                <div class="bg-white p-8 shadow-sm border-t-4 border-primary text-center">
+                    <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Medali Perunggu</p>
+                    <p class="text-5xl font-extrabold text-orange-400">3</p>
+                    <p class="text-gray-500 text-base mt-2">Medali Perunggu</p>
+                </div>
+            </div>
+
+            <div class="mt-10">
+                <h4 class="text-xl font-extrabold uppercase tracking-wide mb-5 text-center">Cabang Olahraga Unggulan (Peraih Emas)</h4>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                    @foreach (['Terbang Layang', 'Catur', 'Biliar', 'Sepak Bola', 'Dayung'] as $cabor)
+                        <div class="bg-white border border-gray-200 p-4 text-center shadow-sm">
+                            <p class="font-bold text-base text-dark">{{ $cabor }}</p>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>

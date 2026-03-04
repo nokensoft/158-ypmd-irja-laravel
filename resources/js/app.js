@@ -17,4 +17,32 @@ Alpine.data('scrollTop', () => ({
     }
 }));
 
+// Hero Slider
+Alpine.data('heroSlider', () => ({
+    current: 0,
+    slides: [
+        'img/bg/man-futsal-papua-pegunungan.png',
+        'img/bg/papua-pegunungan-dayung.png',
+        'img/bg/woman-foodbal-papua-pegunungan.png',
+    ],
+    interval: null,
+    init() {
+        this.startAutoplay();
+    },
+    startAutoplay() {
+        this.interval = setInterval(() => this.next(), 5000);
+    },
+    stopAutoplay() {
+        clearInterval(this.interval);
+    },
+    next() {
+        this.current = (this.current + 1) % this.slides.length;
+    },
+    goTo(index) {
+        this.current = index;
+        this.stopAutoplay();
+        this.startAutoplay();
+    },
+}));
+
 Alpine.start();

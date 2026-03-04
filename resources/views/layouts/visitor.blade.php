@@ -33,6 +33,8 @@
 
     @if (!empty($situs['logo']))
         <link rel="icon" type="image/png" href="{{ asset('storage/' . $situs['logo']) }}">
+    @else
+        <link rel="icon" type="image/jpeg" href="{{ asset('img/logo-koni-papua-pegunungan.jpeg') }}">
     @endif
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,6 +42,9 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans text-lg">
+
+    {{-- Page Loading --}}
+    @include('partials.page-loading')
 
     {{-- Disclaimer Modal --}}
     {{-- @include('partials.disclaimer') --}}

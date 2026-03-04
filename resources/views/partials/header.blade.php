@@ -2,7 +2,11 @@
     <nav class="container mx-auto px-4 py-3 flex justify-between items-center lg:flex-row flex-col" x-data="{ mobileMenuOpen: false }">
         <div class="flex items-center space-x-3 lg:w-auto w-full justify-center lg:justify-start relative">
             <a href="{{ route('beranda') }}" class="flex items-center space-x-3">
-                <img src="{{ asset('img/logo-koni-papua-pegunungan-transparant.png') }}" alt="Logo KONI" class="h-12">
+                @if (!empty($situs['logo']))
+                    <img src="{{ asset('storage/' . $situs['logo']) }}" alt="Logo {{ $situs['nama_situs'] ?? 'KONI' }}" class="h-12">
+                @else
+                    <img src="{{ asset('img/logo-koni-papua-pegunungan.jpeg') }}" alt="Logo KONI" class="h-12">
+                @endif
                 <div class="text-center lg:text-left">
                     <span class="font-bold text-xl leading-none text-primary block">KONI</span>
                     <span class="text-sm font-semibold tracking-widest uppercase block">Papua Pegunungan</span>

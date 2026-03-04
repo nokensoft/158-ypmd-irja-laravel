@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - KONI Papua Pegunungan</title>
+    <title>Login - {{ $situs['nama_situs'] ?? 'KONI Papua Pegunungan' }}</title>
+    <meta name="robots" content="noindex, nofollow">
+    @if (!empty($situs['logo']))
+        <link rel="icon" type="image/png" href="{{ asset('storage/' . $situs['logo']) }}">
+    @endif
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -13,8 +17,12 @@
     <div class="w-full max-w-md">
         {{-- Logo --}}
         <div class="text-center mb-8">
-            <img src="{{ asset('img/logo-koni-papua-pegunungan-transparant.png') }}" alt="Logo KONI" class="h-20 mx-auto mb-4 brightness-200">
-            <h1 class="text-2xl font-extrabold text-white uppercase tracking-wide">KONI Papua Pegunungan</h1>
+            @if (!empty($situs['logo']))
+                <img src="{{ asset('storage/' . $situs['logo']) }}" alt="Logo {{ $situs['nama_situs'] ?? 'KONI' }}" class="h-20 mx-auto mb-4 brightness-200">
+            @else
+                <img src="{{ asset('img/logo-koni-papua-pegunungan-transparant.png') }}" alt="Logo KONI" class="h-20 mx-auto mb-4 brightness-200">
+            @endif
+            <h1 class="text-2xl font-extrabold text-white uppercase tracking-wide">{{ $situs['nama_situs'] ?? 'KONI Papua Pegunungan' }}</h1>
             <p class="text-gray-400 text-base mt-1">Masuk ke Dashboard</p>
         </div>
 

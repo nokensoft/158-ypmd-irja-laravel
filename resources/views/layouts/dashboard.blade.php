@@ -3,13 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Dashboard') - KONI Papua Pegunungan</title>
+    <title>@yield('title', 'Dashboard') - {{ $situs['nama_situs'] ?? 'KONI Papua Pegunungan' }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="robots" content="noindex, nofollow">
+    @if (!empty($situs['logo']))
+        <link rel="icon" type="image/png" href="{{ asset('storage/' . $situs['logo']) }}">
+    @else
+        <link rel="icon" type="image/jpeg" href="{{ asset('img/logo-koni-papua-pegunungan.jpeg') }}">
+    @endif
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans text-lg" x-data="{ sidebarOpen: true, mobileSidebar: false }">
+
+    {{-- Page Loading --}}
+    @include('partials.page-loading')
 
     <div class="flex min-h-screen">
 
@@ -23,10 +32,14 @@
 
             {{-- Logo --}}
             <div class="px-6 py-5 border-b border-gray-800 flex items-center space-x-3">
-                <img src="{{ asset('img/logo-koni-papua-pegunungan-transparant.png') }}" alt="Logo" class="h-10 brightness-200">
+                @if (!empty($situs['logo']))
+                    <img src="{{ asset('storage/' . $situs['logo']) }}" alt="Logo {{ $situs['nama_situs'] ?? 'KONI' }}" class="h-10">
+                @else
+                    <img src="{{ asset('img/logo-koni-papua-pegunungan-transparant.png') }}" alt="Logo" class="h-10">
+                @endif
                 <div>
-                    <span class="font-bold text-lg leading-none text-primary block">KONI</span>
-                    <span class="text-xs font-medium tracking-widest uppercase text-gray-400 block">Papua Pegunungan</span>
+                    <span class="font-bold text-lg leading-none text-primary block">{{ Str::before($situs['nama_situs'] ?? 'KONI', ' ') }}</span>
+                    <span class="text-xs font-medium tracking-widest uppercase text-gray-400 block">{{ Str::after($situs['nama_situs'] ?? 'KONI Papua Pegunungan', ' ') }}</span>
                 </div>
             </div>
 

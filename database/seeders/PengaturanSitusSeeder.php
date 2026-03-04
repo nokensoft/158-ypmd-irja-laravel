@@ -18,11 +18,11 @@ class PengaturanSitusSeeder extends Seeder
             'alamat' => 'Jl. Trikora No. 1, Wamena, Jayawijaya',
             'logo' => null,
             // Media Sosial
-            'sosmed_facebook' => null,
-            'sosmed_instagram' => null,
-            'sosmed_youtube' => null,
-            'sosmed_twitter' => null,
-            'sosmed_tiktok' => null,
+            'sosmed_facebook' => 'https://facebook.com/konipapuapegunungan',
+            'sosmed_instagram' => 'https://instagram.com/konipapuapegunungan',
+            'sosmed_youtube' => 'https://youtube.com/@konipapuapegunungan',
+            'sosmed_twitter' => "https://x.com/konipapuapegunungan",
+            'sosmed_tiktok' => "https://tiktok.com/konipapuapegunungan",
             // SEO
             'seo_meta_keywords' => 'KONI, Papua Pegunungan, olahraga, prestasi, atlet',
             'seo_meta_description' => 'Website resmi KONI Provinsi Papua Pegunungan - Wadah pembinaan olahraga prestasi.',
