@@ -6,7 +6,7 @@
         'title' => 'Berita',
         'createRoute' => route('penulis.berita.create'),
         'trashedRoute' => route('penulis.berita.index'),
-        'columns' => ['Gambar', 'Judul', 'Kategori', 'Tanggal', 'Status'],
+        'columns' => ['Gambar', 'Judul', 'Kategori', 'Tanggal', 'Status', 'Dibaca'],
         'paginator' => $berita,
         'rows' => $berita->map(function ($b) {
             $media = $b->media;
@@ -30,6 +30,9 @@
                     $b->kategori?->nama ?? '-',
                     $b->created_at->format('d M Y'),
                     ucfirst($b->status),
+                    new \Illuminate\Support\HtmlString(
+                        '<span class="inline-flex items-center gap-1 text-gray-600"><i class="fas fa-eye text-sm"></i> ' . number_format($b->jumlah_dibaca ?? 0) . '</span>'
+                    ),
                 ],
                 'editRoute' => $b->trashed() ? null : route('penulis.berita.edit', $b->id),
                 'deleteRoute' => $b->trashed() ? null : route('penulis.berita.destroy', $b->id),
