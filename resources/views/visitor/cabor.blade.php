@@ -23,10 +23,10 @@
                             <i class="fas {{ $item->icon ?? 'fa-trophy' }} text-2xl"></i>
                         </div>
                         <h4 class="font-bold text-base uppercase mb-3">{{ $item->nama }}</h4>
-                        <div class="flex justify-center gap-4 text-sm text-gray-500">
+                        {{-- <div class="flex justify-center gap-4 text-sm text-gray-500">
                             <span><i class="fas fa-users text-primary mr-1"></i> {{ $item->jumlah_atlet ?? 0 }} Atlet</span>
                             <span><i class="fas fa-medal text-primary mr-1"></i> {{ $item->jumlah_medali ?? 0 }} Medali</span>
-                        </div>
+                        </div> --}}
                     </div>
                 @empty
                     <div class="col-span-full text-center py-12 text-gray-400">
