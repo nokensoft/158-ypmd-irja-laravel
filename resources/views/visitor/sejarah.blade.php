@@ -14,7 +14,7 @@
         <div class="max-w-4xl mx-auto px-6">
             <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2"><i class="fa-solid fa-leaf mr-2"></i>Tentang Kami</p>
             <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900 mb-6">Perjalanan 40 Tahun Pengabdian</h2>
-            <img src="{{ asset('img/ypmd-irja-ulang-tahun-38-jubi.jpg') }}" alt="YPMD IRJA HUT" class="w-full rounded-lg shadow-card mb-8 object-cover max-h-80"/>
+            <img src="{{ asset('img/logo-ypmd-irja.png') }}" alt="Logo YPMD IRJA" class="w-full rounded-lg shadow-card mb-8 object-contain max-h-80 bg-white p-4"/>
             <div class="space-y-5 text-neutral-600 leading-relaxed">
                 <p>Yayasan Pembangunan Masyarakat Desa Irian Jaya (YPMD IRJA) merupakan Lembaga Swadaya Masyarakat (LSM) pertama di Tanah Papua. Yayasan ini lahir dari keresahan sekelompok idealis yang berasal dari kalangan Gereja dan Tokoh Masyarakat.</p>
                 <p>Pada tahun 1982, kelompok ini mulai menerbitkan buletin <em>Kabar Dari Kampung</em> (KDK) sebagai media alternatif. Dua tahun kemudian, pada <strong>1984</strong>, kelompok ini secara resmi mendirikan YPMD IRJA sebagai lembaga formal.</p>

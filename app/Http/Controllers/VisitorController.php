@@ -117,7 +117,7 @@ class VisitorController extends Controller
 
     public function kdk()
     {
-        $kdkList = Kdk::orderByDesc('tanggal_terbit')->get();
+        $kdkList = Kdk::orderByDesc('tanggal_terbit')->paginate(12);
 
         return view('visitor.kdk', compact('kdkList'));
     }

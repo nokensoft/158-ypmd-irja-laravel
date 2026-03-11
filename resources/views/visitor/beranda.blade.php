@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="fade-in">
-                <img src="{{ asset('img/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD IRJA" class="w-full rounded-lg shadow-card object-cover"/>
+                <img src="{{ asset('img/galeri/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD IRJA" class="w-full rounded-lg shadow-card object-cover"/>
             </div>
         </div>
         {{-- Stats Bar --}}
@@ -116,10 +116,39 @@
                 <span class="text-xs font-semibold tracking-widest uppercase text-primary-500"><i class="fa-solid fa-list-check mr-2"></i>Kegiatan</span>
                 <h2 class="text-2xl md:text-4xl font-display font-bold text-neutral-900 mt-2">Program Unggulan</h2>
             </div>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <article class="shadow-card card-hover bg-white border border-neutral-100 fade-in"><div class="h-1.5 bg-primary-500"></div><div class="p-6"><div class="w-10 h-10 bg-primary-50 flex items-center justify-center mb-4"><i class="fa-solid fa-seedling text-primary-500"></i></div><h3 class="font-display font-bold text-neutral-900 mb-2">Ekonomi &amp; Ekspor Kakao Organik</h3><p class="text-neutral-500 text-sm leading-relaxed">Ekspor biji kakao organik dari Lembah Grime ke Jepang sejak 2010 melalui kemitraan dengan ATJ dan Green Coop.</p></div></article>
-                <article class="shadow-card card-hover bg-white border border-neutral-100 fade-in"><div class="h-1.5 bg-accent-400"></div><div class="p-6"><div class="w-10 h-10 bg-accent-50 flex items-center justify-center mb-4"><i class="fa-solid fa-users text-accent-400"></i></div><h3 class="font-display font-bold text-neutral-900 mb-2">Pendampingan Masyarakat Adat</h3><p class="text-neutral-500 text-sm leading-relaxed">Mendampingi dan mengorganisir masyarakat adat Papua sebagai subjek pembangunan.</p></div></article>
-                <article class="shadow-card card-hover bg-white border border-neutral-100 fade-in"><div class="h-1.5 bg-primary-400"></div><div class="p-6"><div class="w-10 h-10 bg-primary-50 flex items-center justify-center mb-4"><i class="fa-solid fa-piggy-bank text-primary-500"></i></div><h3 class="font-display font-bold text-neutral-900 mb-2">Keuangan Mikro</h3><p class="text-neutral-500 text-sm leading-relaxed">Mendirikan BPR Phidectama pada 1992 untuk membentuk kebiasaan menabung bagi masyarakat kampung.</p></div></article>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <article class="shadow-card card-hover bg-white border border-neutral-100 fade-in">
+                    <div class="h-1.5 bg-primary-500"></div>
+                    <div class="p-6">
+                        <div class="w-10 h-10 bg-primary-50 flex items-center justify-center mb-4"><i class="fa-solid fa-circle-info text-primary-500"></i></div>
+                        <h3 class="font-display font-bold text-neutral-900 mb-2">Informasi</h3>
+                        <p class="text-neutral-500 text-sm leading-relaxed">Penelitian, penerbitan buletin Kabar Dari Kampung (KDK), serta pengelolaan dokumentasi dan perpustakaan.</p>
+                    </div>
+                </article>
+                <article class="shadow-card card-hover bg-white border border-neutral-100 fade-in">
+                    <div class="h-1.5 bg-accent-400"></div>
+                    <div class="p-6">
+                        <div class="w-10 h-10 bg-accent-50 flex items-center justify-center mb-4"><i class="fa-solid fa-hand-holding-dollar text-accent-400"></i></div>
+                        <h3 class="font-display font-bold text-neutral-900 mb-2">Ekonomi Kerakyatan</h3>
+                        <p class="text-neutral-500 text-sm leading-relaxed">Pengembangan potensi ekonomi masyarakat, aksesibilitas pasar, serta program saving/simpanan keuangan berbasis komunitas.</p>
+                    </div>
+                </article>
+                <article class="shadow-card card-hover bg-white border border-neutral-100 fade-in">
+                    <div class="h-1.5 bg-primary-400"></div>
+                    <div class="p-6">
+                        <div class="w-10 h-10 bg-primary-50 flex items-center justify-center mb-4"><i class="fa-solid fa-droplet text-primary-500"></i></div>
+                        <h3 class="font-display font-bold text-neutral-900 mb-2">Clean Water Supply</h3>
+                        <p class="text-neutral-500 text-sm leading-relaxed">Penyediaan air bersih bagi masyarakat kampung di wilayah pedalaman Papua untuk meningkatkan kualitas hidup.</p>
+                    </div>
+                </article>
+                <article class="shadow-card card-hover bg-white border border-neutral-100 fade-in">
+                    <div class="h-1.5 bg-accent-400"></div>
+                    <div class="p-6">
+                        <div class="w-10 h-10 bg-accent-50 flex items-center justify-center mb-4"><i class="fa-solid fa-bullhorn text-accent-400"></i></div>
+                        <h3 class="font-display font-bold text-neutral-900 mb-2">Promosi Usaha</h3>
+                        <p class="text-neutral-500 text-sm leading-relaxed">Promosi dan pemasaran produk usaha masyarakat adat Papua untuk memperluas jangkauan pasar lokal maupun internasional.</p>
+                    </div>
+                </article>
             </div>
             <div class="text-center mt-10 fade-in">
                 <a href="{{ route('program') }}" class="inline-flex items-center gap-2 bg-primary-500 text-white px-8 py-3 text-sm font-semibold hover:bg-primary-600 transition-colors shadow-card">
@@ -145,14 +174,40 @@
                         </div>
                     @endif
                 @empty
-                    <div class="overflow-hidden rounded-lg shadow-card fade-in"><img src="{{ asset('img/ypmd-irja-ulang-tahun-38-jubi.jpg') }}" alt="" class="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-300"/></div>
-                    <div class="overflow-hidden rounded-lg shadow-card fade-in"><img src="{{ asset('img/Kantor YPMD-IRJA.png') }}" alt="" class="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-300"/></div>
-                    <div class="overflow-hidden rounded-lg shadow-card fade-in"><img src="{{ asset('img/ypmd-irja-ulang-tahun-38-jubi.jpg') }}" alt="" class="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-300"/></div>
+                    <div class="overflow-hidden rounded-lg shadow-card fade-in"><img src="{{ asset('img/galeri/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD IRJA" class="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-300"/></div>
+                    <div class="overflow-hidden rounded-lg shadow-card fade-in"><img src="{{ asset('img/galeri/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD IRJA" class="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-300"/></div>
+                    <div class="overflow-hidden rounded-lg shadow-card fade-in"><img src="{{ asset('img/galeri/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD IRJA" class="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-300"/></div>
                 @endforelse
             </div>
             <div class="text-center mt-10 fade-in">
                 <a href="{{ route('galeri') }}" class="inline-flex items-center gap-2 bg-primary-500 text-white px-8 py-3 text-sm font-semibold hover:bg-primary-600 transition-colors shadow-card">
                     Lihat Semua Galeri <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    {{-- Mitra Kerja --}}
+    <section class="py-16 bg-white border-t border-neutral-100">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-10 fade-in">
+                <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2"><i class="fa-solid fa-handshake mr-2"></i>Kemitraan</p>
+                <h2 class="text-xl md:text-2xl font-display font-bold text-neutral-900">Mitra Kerja & Sponsor</h2>
+            </div>
+            <div class="flex flex-wrap justify-center items-center gap-6">
+                @foreach ([
+                    'THD Asia Foundation', 'Pemerintah Canada', 'ICCO', 'PKN',
+                    'CEMOBE', 'BFDBW', 'Pemerintah Jepang', 'BP Bintuni', 'PT Freeport Indonesia',
+                ] as $nama)
+                <div class="fade-in">
+                    <img src="https://placehold.co/120x48/f5f5f5/aaaaaa?text={{ urlencode($nama) }}"
+                         alt="{{ $nama }}" class="h-10 object-contain grayscale hover:grayscale-0 transition">
+                </div>
+                @endforeach
+            </div>
+            <div class="text-center mt-8">
+                <a href="{{ route('mitra') }}" class="text-primary-600 text-sm font-semibold hover:underline">
+                    Lihat semua mitra kerja <i class="fa-solid fa-arrow-right text-xs ml-1"></i>
                 </a>
             </div>
         </div>

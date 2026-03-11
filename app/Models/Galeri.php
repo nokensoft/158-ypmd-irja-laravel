@@ -12,7 +12,7 @@ class Galeri extends Model
 
     protected $table = 'galeri';
 
-    const KATEGORI_LIST = ['Kegiatan', 'Prestasi', 'Organisasi', 'Atlet', 'Lainnya'];
+    const KATEGORI_LIST = ['Kegiatan', 'Budaya', 'Komunitas', 'Program', 'Lainnya'];
 
     protected $fillable = [
         'judul',

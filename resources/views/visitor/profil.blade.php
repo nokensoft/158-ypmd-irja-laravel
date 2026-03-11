@@ -19,7 +19,7 @@
                     <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900 mb-6">Tentang YPMD IRJA</h2>
                     <p class="text-neutral-600 leading-relaxed mb-4">Yayasan Pembangunan Masyarakat Desa Irian Jaya (YPMD IRJA) adalah lembaga non-pemerintah nirlaba yang bergerak di bidang pemberdayaan masyarakat adat Papua. Berdiri sejak 1984, YPMD IRJA merupakan LSM pertama di Tanah Papua.</p>
                     <p class="text-neutral-600 leading-relaxed mb-6">Berbasis di Jayapura, lembaga ini bekerja di empat wilayah utama Papua dengan fokus pada pendampingan komunitas, ekonomi berbasis masyarakat, dan advokasi hak-hak adat.</p>
-                    <img src="{{ asset('img/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD IRJA" class="w-full rounded-lg shadow-card"/>
+                    <img src="{{ asset('img/galeri/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD IRJA" class="w-full rounded-lg shadow-card"/>
                 </div>
                 <div class="space-y-8">
                     <div class="fade-in">
@@ -60,6 +60,57 @@
 
     <section class="py-20 bg-neutral-50">
         <div class="max-w-6xl mx-auto px-6">
+
+            {{-- Direktur dari Masa ke Masa --}}
+            <div class="mb-16">
+                <div class="mb-10 fade-in">
+                    <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2"><i class="fa-solid fa-user-tie mr-2"></i>Kepemimpinan</p>
+                    <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900">Direktur dari Masa ke Masa</h2>
+                </div>
+                <div class="relative">
+                    {{-- Timeline line --}}
+                    <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-primary-100 -translate-x-1/2"></div>
+                    <div class="space-y-6">
+                        @foreach ([
+                            ['no'=>1, 'nama'=>'Ir. Agus Rumansara, MA',       'periode'=>'1984 &ndash; 1986', 'keterangan'=>'Direktur Pertama &mdash; Pendiri'],
+                            ['no'=>2, 'nama'=>'Antonis A. Rahawarin, B.A',    'periode'=>'1987 &ndash; 1990', 'keterangan'=>''],
+                            ['no'=>3, 'nama'=>'Ir. Kliv R. Marlessi',         'periode'=>'1991 &ndash; 1994', 'keterangan'=>''],
+                            ['no'=>4, 'nama'=>'Dra. Fintje S. Jarangga',      'periode'=>'1995 &ndash; 1997', 'keterangan'=>''],
+                            ['no'=>5, 'nama'=>'Drs. Decky Rumaropen',         'periode'=>'1998 &ndash; 2020', 'keterangan'=>'Direktur Terlama &mdash; 22 Tahun'],
+                            ['no'=>6, 'nama'=>'Drs. Johanes Hambur',          'periode'=>'2024 &ndash; Sekarang', 'keterangan'=>'Direktur Aktif'],
+                        ] as $d)
+                        <div class="flex md:items-center gap-4 md:gap-0 fade-in">
+                            {{-- Kiri (nomor urut) --}}
+                            <div class="md:w-1/2 md:text-right md:pr-10 flex md:block items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-primary-500 text-white flex items-center justify-center font-bold text-sm flex-shrink-0 md:hidden">
+                                    {{ $d['no'] }}
+                                </div>
+                                <div>
+                                    <p class="font-display font-bold text-neutral-900 text-base">{{ $d['nama'] }}</p>
+                                    @if ($d['keterangan'])
+                                        <p class="text-xs text-primary-500 font-semibold mt-0.5">{!! $d['keterangan'] !!}</p>
+                                    @endif
+                                </div>
+                            </div>
+                            {{-- Titik tengah (desktop) --}}
+                            <div class="hidden md:flex w-10 flex-shrink-0 items-center justify-center relative z-10">
+                                <div class="w-10 h-10 rounded-full bg-primary-500 text-white flex items-center justify-center font-bold text-sm shadow-sm">
+                                    {{ $d['no'] }}
+                                </div>
+                            </div>
+                            {{-- Kanan (periode) --}}
+                            <div class="md:w-1/2 md:pl-10">
+                                <span class="inline-block bg-white border border-primary-100 text-primary-600 text-sm font-semibold px-4 py-2 shadow-sm">
+                                    <i class="fa-regular fa-calendar mr-2 text-primary-300"></i>{!! $d['periode'] !!}
+                                </span>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+            {{-- Identitas Lembaga --}}
             <div class="mb-12 fade-in">
                 <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2">Data</p>
                 <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900">Identitas Lembaga</h2>

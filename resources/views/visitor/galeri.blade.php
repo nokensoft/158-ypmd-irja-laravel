@@ -37,7 +37,7 @@
                 @forelse ($galeriList as $album)
                     @php
                         $cover = $album->media->first();
-                        $coverUrl = $cover ? asset('storage/' . $cover->file_path) : asset('img/ypmd-irja-ulang-tahun-38-jubi.jpg');
+$coverUrl = $cover ? asset('storage/' . $cover->file_path) : asset('img/galeri/ypmd-irja-ulang-tahun-38-jubi.jpg');
                     @endphp
                     <a href="{{ route('galeri.detail', $album->slug) }}"
                        class="group bg-white shadow-card card-hover border border-neutral-100 overflow-hidden">

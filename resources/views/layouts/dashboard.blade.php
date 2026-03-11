@@ -9,7 +9,7 @@
     @if (!empty($situs['logo']))
         <link rel="icon" type="image/png" href="{{ asset('storage/' . $situs['logo']) }}">
     @else
-        <link rel="icon" type="image/jpeg" href="{{ asset('img/logo-koni-papua-pegunungan.jpeg') }}">
+        <link rel="icon" type="image/png" href="{{ asset('img/logo-ypmd-irja.png') }}">
     @endif
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">

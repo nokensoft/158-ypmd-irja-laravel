@@ -29,24 +29,44 @@ class GaleriSeeder extends Seeder
         // Default user_id (penulis)
         $userId = 2;
 
-        // Buat album galeri
+        // Buat album galeri YPMD IRJA
         $albums = [
             [
-                'judul'     => 'Pengukuhan dan Pelantikan KONI Papua Pegunungan',
-                'deskripsi' => 'Dokumentasi pengukuhan dan pelantikan kepengurusan KONI Provinsi Papua Pegunungan masa bakti 2025-2029 di Kantor KONI Pusat Senayan, Jakarta.',
-                'kategori'  => 'Organisasi',
+                'judul'     => 'YPMD IRJA — 38 Tahun Berkarya',
+                'deskripsi' => 'Dokumentasi peringatan 38 tahun YPMD IRJA dalam mendampingi masyarakat adat Papua.',
+                'kategori'  => 'Kegiatan',
                 'images'    => [
-                    'KONI Papua Pegunungan, Pengukuhan dan Pelantikan.jpeg',
-                    'Ketum KONI Pusat Letjen TNI Purn Marciano Norman.jpeg',
+                    'ypmd-irja-ulang-tahun-38-jubi.jpg',
+                    'Kantor YPMD-IRJA.png',
                 ],
             ],
             [
-                'judul'     => 'Profil Ketua Umum KONI Papua Pegunungan',
-                'deskripsi' => 'Dokumentasi Dr. Hc. Jhon Tabo, SE, M.BA. selaku Ketua Umum KONI Provinsi Papua Pegunungan periode 2025-2029.',
-                'kategori'  => 'Organisasi',
+                'judul'     => 'Alam & Budaya Papua',
+                'deskripsi' => 'Keindahan alam dan kekayaan budaya Papua yang menjadi bagian dari wilayah kerja YPMD IRJA.',
+                'kategori'  => 'Budaya',
                 'images'    => [
-                    'Gubernur Jhon Tabo, KONI Papua Pegunungan.jpeg',
-                    'Ketum KONI Provinsi Papua Pegunungan.jpeg',
+                    'danau-sentani.png',
+                    'perahu-danau-sentani.png',
+                    'raja-ampat.png',
+                    'rumput-mei-wamena.png',
+                ],
+            ],
+            [
+                'judul'     => 'Seni & Arsitektur Tradisional Papua',
+                'deskripsi' => 'Dokumentasi seni ukir, arsitektur tradisional, dan warisan budaya masyarakat adat Papua.',
+                'kategori'  => 'Budaya',
+                'images'    => [
+                    'honai.png',
+                    'rumah-adat.png',
+                    'pahatan-kayu-sentani.png',
+                ],
+            ],
+            [
+                'judul'     => 'Kehidupan Masyarakat Adat',
+                'deskripsi' => 'Kehidupan sehari-hari masyarakat kampung Papua yang menjadi sasaran program YPMD IRJA.',
+                'kategori'  => 'Komunitas',
+                'images'    => [
+                    'anak-anak-mendayung.png',
                 ],
             ],
         ];

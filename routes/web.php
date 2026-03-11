@@ -29,6 +29,8 @@ Route::middleware('track.visitor')->group(function () {
     Route::view('/sejarah', 'visitor.sejarah')->name('sejarah');
     Route::view('/profil', 'visitor.profil')->name('profil');
     Route::view('/tokoh', 'visitor.tokoh')->name('tokoh');
+    Route::view('/mitra', 'visitor.mitra')->name('mitra');
+    Route::view('/bidang-kerja', 'visitor.bidang-kerja')->name('bidang-kerja');
 
     // Program (static)
     Route::view('/program', 'visitor.program')->name('program');

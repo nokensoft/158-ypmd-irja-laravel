@@ -26,11 +26,11 @@
             {{-- Tentang Dropdown --}}
             <li class="relative" x-data="{ open: false }" @mouseenter="open=true" @mouseleave="open=false">
                 <button class="nav-link text-sm font-medium flex items-center gap-1 transition-colors
-                    {{ request()->routeIs('sejarah') || request()->routeIs('profil') || request()->routeIs('tokoh') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">
+                    {{ request()->routeIs('sejarah') || request()->routeIs('profil') || request()->routeIs('tokoh') || request()->routeIs('mitra') || request()->routeIs('bidang-kerja') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">
                     Tentang <i class="fa-solid fa-chevron-down text-[10px]"></i>
                 </button>
                 <div x-show="open" x-transition style="display:none;"
-                     class="absolute top-full left-0 mt-1 w-48 bg-white shadow-lg border border-neutral-100 py-1 z-50">
+                     class="absolute top-full left-0 mt-1 w-52 bg-white shadow-lg border border-neutral-100 py-1 z-50">
                     <a href="{{ route('sejarah') }}"
                        class="block px-4 py-2.5 text-sm hover:bg-primary-50 hover:text-primary-600 {{ request()->routeIs('sejarah') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-600' }}">
                         Sejarah Singkat
@@ -41,7 +41,16 @@
                     </a>
                     <a href="{{ route('tokoh') }}"
                        class="block px-4 py-2.5 text-sm hover:bg-primary-50 hover:text-primary-600 {{ request()->routeIs('tokoh') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-600' }}">
-                        Tokoh Kunci
+                        Direktur
+                    </a>
+                    <a href="{{ route('bidang-kerja') }}"
+                       class="block px-4 py-2.5 text-sm hover:bg-primary-50 hover:text-primary-600 {{ request()->routeIs('bidang-kerja') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-600' }}">
+                        Bidang Kerja
+                    </a>
+                    <div class="border-t border-neutral-100 my-1"></div>
+                    <a href="{{ route('mitra') }}"
+                       class="block px-4 py-2.5 text-sm hover:bg-primary-50 hover:text-primary-600 {{ request()->routeIs('mitra') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-600' }}">
+                        <i class="fa-solid fa-handshake mr-1.5 text-xs"></i>Mitra Kerja
                     </a>
                 </div>
             </li>
@@ -82,14 +91,16 @@
             <li>
                 <button @click="tentangOpen=!tentangOpen"
                         class="w-full flex items-center justify-between px-6 py-3 text-sm
-                        {{ request()->routeIs('sejarah') || request()->routeIs('profil') || request()->routeIs('tokoh') ? 'text-primary-600 font-semibold bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">
+                        {{ request()->routeIs('sejarah') || request()->routeIs('profil') || request()->routeIs('tokoh') || request()->routeIs('mitra') || request()->routeIs('bidang-kerja') ? 'text-primary-600 font-semibold bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">
                     Tentang
                     <i class="fa-solid fa-chevron-down text-[10px] transition-transform" :class="tentangOpen && 'rotate-180'"></i>
                 </button>
                 <div x-show="tentangOpen" x-transition style="display:none;" class="bg-neutral-50">
                     <a href="{{ route('sejarah') }}" class="block px-10 py-2.5 text-sm {{ request()->routeIs('sejarah') ? 'font-semibold text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Sejarah Singkat</a>
                     <a href="{{ route('profil') }}" class="block px-10 py-2.5 text-sm {{ request()->routeIs('profil') ? 'font-semibold text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Profil Lembaga</a>
-                    <a href="{{ route('tokoh') }}" class="block px-10 py-2.5 text-sm {{ request()->routeIs('tokoh') ? 'font-semibold text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Tokoh Kunci</a>
+                    <a href="{{ route('tokoh') }}" class="block px-10 py-2.5 text-sm {{ request()->routeIs('tokoh') ? 'font-semibold text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Direktur</a>
+                    <a href="{{ route('bidang-kerja') }}" class="block px-10 py-2.5 text-sm {{ request()->routeIs('bidang-kerja') ? 'font-semibold text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Bidang Kerja</a>
+                    <a href="{{ route('mitra') }}" class="block px-10 py-2.5 text-sm {{ request()->routeIs('mitra') ? 'font-semibold text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}"><i class="fa-solid fa-handshake mr-1.5 text-xs"></i>Mitra Kerja</a>
                 </div>
             </li>
             <li><a href="{{ route('program') }}" class="block px-6 py-3 text-sm {{ request()->routeIs('program') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">Program</a></li>

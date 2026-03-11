@@ -44,7 +44,61 @@ class BeritaSeeder extends Seeder
         }
 
         // Fallback: sample berita bertema YPMD IRJA
+        $kantorImg = 'img/galeri/Kantor YPMD-IRJA.png';
+
         $samples = [
+            // ── Papua Today ──
+            [
+                'judul'      => 'Pemerintah Provinsi Papua Selatan Kucurkan Dana Pemberdayaan Masyarakat Melalui CSO Papua Selatan',
+                'slug'       => 'pemprov-papua-selatan-dana-pemberdayaan-masyarakat-cso',
+                'ringkasan'  => 'Pemerintah Provinsi Papua Selatan mengalokasikan dana khusus untuk program pemberdayaan masyarakat yang disalurkan melalui organisasi masyarakat sipil (CSO) di wilayah Papua Selatan.',
+                'konten'     => '<p>Pemerintah Provinsi Papua Selatan resmi mengucurkan dana pemberdayaan masyarakat yang disalurkan melalui sejumlah Civil Society Organization (CSO) di Papua Selatan. Dana ini ditujukan untuk mendukung program-program penguatan kapasitas masyarakat adat, peningkatan ekonomi kampung, serta perlindungan hak-hak dasar warga di wilayah pedalaman yang selama ini sulit dijangkau oleh program pemerintah pusat.</p>
+<p>Melalui skema pendanaan ini, CSO yang telah terverifikasi akan menjadi mitra langsung pemerintah provinsi dalam menjalankan program pemberdayaan di tingkat distrik dan kampung. Langkah ini dinilai strategis karena CSO memiliki kedekatan dengan masyarakat akar rumput dan pemahaman mendalam terhadap konteks lokal. Gubernur Papua Selatan menegaskan bahwa kolaborasi dengan CSO merupakan bentuk komitmen pemerintah daerah untuk memastikan dana pembangunan benar-benar menyentuh kebutuhan masyarakat Papua.</p>',
+                'kategori'   => 'Berita Papua',
+                'gambar_url' => $kantorImg,
+                'tanggal'    => '2026-03-10',
+            ],
+            [
+                'judul'      => 'Lokakarya Pertemuan CSO, LSM, dan Mitra Pembangunan Tanah Papua: Membaca Konteks Kekinian dan Menguatkan Visi Bersama Tanah Papua',
+                'slug'       => 'lokakarya-cso-lsm-mitra-pembangunan-tanah-papua',
+                'ringkasan'  => 'CSO, LSM, dan mitra pembangunan di Tanah Papua menggelar lokakarya bersama untuk membaca situasi terkini dan memperkuat visi kolaboratif bagi masa depan Tanah Papua.',
+                'konten'     => '<p>Sejumlah organisasi masyarakat sipil (CSO), lembaga swadaya masyarakat (LSM), dan mitra pembangunan yang beroperasi di Tanah Papua menggelar lokakarya bersama bertajuk "Membaca Konteks Kekinian dan Menguatkan Visi Bersama Tanah Papua". Pertemuan yang berlangsung selama tiga hari ini membahas berbagai isu strategis, mulai dari pemekaran wilayah, implementasi otonomi khusus, hingga tantangan pemberdayaan masyarakat adat di era desentralisasi.</p>
+<p>Para peserta sepakat bahwa koordinasi antar-lembaga perlu diperkuat agar tidak terjadi tumpang tindih program dan sumber daya. Lokakarya ini juga menghasilkan rekomendasi bersama yang akan disampaikan kepada pemerintah daerah dan lembaga donor internasional. Salah satu poin utama yang disepakati adalah pentingnya menempatkan masyarakat adat sebagai subjek utama pembangunan, bukan sekadar penerima manfaat pasif dari program-program yang dirancang dari luar.</p>',
+                'kategori'   => 'Berita Papua',
+                'gambar_url' => $kantorImg,
+                'tanggal'    => '2026-03-08',
+            ],
+            [
+                'judul'      => 'Walhi Daerah Papua Ganti Nahkoda',
+                'slug'       => 'walhi-daerah-papua-ganti-nahkoda',
+                'ringkasan'  => 'Wahana Lingkungan Hidup Indonesia (Walhi) Daerah Papua resmi melantik ketua baru dalam Musyawarah Daerah yang dihadiri berbagai elemen masyarakat sipil.',
+                'konten'     => '<p>Wahana Lingkungan Hidup Indonesia (Walhi) Daerah Papua resmi berganti kepemimpinan setelah pelaksanaan Musyawarah Daerah (Musda) yang dihadiri oleh perwakilan organisasi anggota, akademisi, dan tokoh masyarakat. Pergantian nahkoda ini diharapkan membawa semangat baru dalam perjuangan advokasi lingkungan hidup di Tanah Papua, khususnya terkait isu deforestasi, pencemaran sungai akibat aktivitas industri, serta perlindungan wilayah adat dari ekspansi korporasi.</p>
+<p>Ketua baru Walhi Papua dalam sambutannya menegaskan komitmen untuk melanjutkan dan memperkuat program-program perlindungan lingkungan hidup yang telah dirintis sebelumnya. Ia juga menyerukan agar seluruh pihak, termasuk pemerintah daerah dan sektor swasta, berkolaborasi dalam menjaga kelestarian hutan Papua yang merupakan salah satu paru-paru dunia. Agenda prioritas ke depan mencakup penguatan jaringan pemantau lingkungan di tingkat kampung serta pendampingan hukum bagi masyarakat adat yang terdampak kerusakan lingkungan.</p>',
+                'kategori'   => 'Berita Papua',
+                'gambar_url' => $kantorImg,
+                'tanggal'    => '2026-03-05',
+            ],
+            [
+                'judul'      => 'Pemerintah Kabupaten Jayapura Bantu SAPROTAN (Sarana Produksi Pertanian) bagi Unurumguai',
+                'slug'       => 'pemkab-jayapura-bantu-saprotan-unurumguai',
+                'ringkasan'  => 'Pemkab Jayapura menyalurkan bantuan sarana produksi pertanian (SAPROTAN) kepada kelompok tani di Distrik Unurumguai untuk mendukung ketahanan pangan lokal.',
+                'konten'     => '<p>Pemerintah Kabupaten Jayapura melalui Dinas Pertanian dan Ketahanan Pangan resmi menyerahkan bantuan Sarana Produksi Pertanian (SAPROTAN) kepada kelompok-kelompok tani di Distrik Unurumguai. Bantuan yang meliputi bibit unggul, pupuk, alat pertanian, dan pestisida organik ini bertujuan untuk meningkatkan produktivitas pertanian masyarakat lokal yang selama ini mengandalkan metode bercocok tanam tradisional.</p>
+<p>Kepala Dinas Pertanian Kabupaten Jayapura menyatakan bahwa penyaluran SAPROTAN ini merupakan bagian dari program strategis pemerintah daerah dalam mewujudkan ketahanan pangan di wilayah Papua. Masyarakat Unurumguai menyambut baik bantuan ini dan berharap program serupa dapat terus berlanjut dan diperluas ke distrik-distrik lainnya. Pendampingan teknis dari penyuluh pertanian juga akan dilakukan secara berkala untuk memastikan bantuan ini dimanfaatkan secara optimal oleh para petani.</p>',
+                'kategori'   => 'Berita Papua',
+                'gambar_url' => $kantorImg,
+                'tanggal'    => '2026-03-02',
+            ],
+            [
+                'judul'      => 'SKPKC Sinode GKI-TP Pendampingan Mama-Mama Janda di Biak Timur',
+                'slug'       => 'skpkc-gki-tp-pendampingan-mama-mama-janda-biak-timur',
+                'ringkasan'  => 'Sekretariat Keadilan, Perdamaian, dan Keutuhan Ciptaan (SKPKC) Sinode GKI di Tanah Papua melaksanakan program pendampingan bagi mama-mama janda di Biak Timur.',
+                'konten'     => '<p>Sekretariat Keadilan, Perdamaian, dan Keutuhan Ciptaan (SKPKC) Sinode Gereja Kristen Injili di Tanah Papua (GKI-TP) menggelar program pendampingan khusus bagi mama-mama janda di wilayah Biak Timur. Program ini mencakup pelatihan keterampilan ekonomi produktif seperti pembuatan noken, pengolahan hasil laut, serta pengelolaan keuangan rumah tangga. Kegiatan ini merupakan wujud nyata kepedulian gereja terhadap kelompok rentan yang kerap terpinggirkan dalam program pembangunan formal.</p>
+<p>Selain pelatihan ekonomi, SKPKC GKI-TP juga memberikan pendampingan psikososial dan penguatan spiritual bagi para peserta. Mama-mama janda di Biak Timur menghadapi tantangan ganda sebagai kepala keluarga sekaligus pencari nafkah utama, sehingga dukungan holistik sangat diperlukan. Koordinator program menyampaikan bahwa kegiatan ini akan dilanjutkan secara berkala dan diharapkan dapat menjadi model pendampingan yang dapat direplikasi di klasis-klasis lain di seluruh wilayah pelayanan GKI di Tanah Papua.</p>',
+                'kategori'   => 'Berita Papua',
+                'gambar_url' => $kantorImg,
+                'tanggal'    => '2026-02-28',
+            ],
+            // ── Berita lama YPMD IRJA ──
             [
                 'judul'      => 'YPMD IRJA Fasilitasi Ekspor Perdana Kakao Organik dari Boven Digoel',
                 'slug'       => 'ypmd-irja-fasilitasi-ekspor-perdana-kakao-organik-boven-digoel',
