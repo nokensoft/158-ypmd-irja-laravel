@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="id" x-data="{ topbarVisible: true, modalVisible: true, mobileMenuOpen: false }">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KampungNet — Portal Komunitas Digital Papua</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50:  '#eef6ff',
+              100: '#d9ebff',
+              200: '#bcd9fe',
+              300: '#8ebffb',
+              400: '#5a9cf5',
+              500: '#3478e8',   /* royal blue — portal identity */
+              600: '#2460d0',
+              700: '#1d4eaa',
+              800: '#1c4288',
+              900: '#1b3870',
+            },
+            forest: {
+              50:  '#f0faf4',
+              100: '#dbf2e4',
+              200: '#b9e5cb',
+              300: '#85d1a8',
+              400: '#4db67f',
+              500: '#2e9b61',   /* forest green — Papua */
+              600: '#237d4e',
+              700: '#1c633e',
+              800: '#184f33',
+              900: '#14402a',
+            },
+            earth: {
+              50:  '#fdf6ee',
+              100: '#f9e8d2',
+              200: '#f2cfa1',
+              300: '#e9ae65',
+              400: '#df8e35',   /* warm amber */
+              500: '#c9751e',
+              600: '#a85d18',
+            },
+            stone: {
+              50:  '#fafaf9',
+              100: '#f5f5f4',
+              200: '#e7e5e4',
+              300: '#d6d3d1',
+              400: '#a8a29e',
+              500: '#78716c',
+              600: '#57534e',
+              700: '#44403c',
+              800: '#292524',
+              900: '#1c1917',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          fontSize: {
+            xs:   ['13px', { lineHeight: '1.5' }],
+            sm:   ['14px', { lineHeight: '1.6' }],
+            base: ['15px', { lineHeight: '1.75' }],
+            lg:   ['17px', { lineHeight: '1.6' }],
+            xl:   ['19px', { lineHeight: '1.5' }],
+            '2xl':['22px', { lineHeight: '1.4' }],
+            '3xl':['28px', { lineHeight: '1.3' }],
+            '4xl':['36px', { lineHeight: '1.15' }],
+          },
+          boxShadow: {
+            'md':  '0 4px 16px rgba(0,0,0,0.08)',
+            'lg':  '0 8px 32px rgba(0,0,0,0.12)',
+            'card':'0 2px 10px rgba(0,0,0,0.06)',
+          },
+          borderRadius: {
+            DEFAULT: '0px', sm:'0px', md:'0px', lg:'0px', xl:'0px', full:'9999px'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; }
+
+    /* ── Floating sidebar ─────────────────────────────── */
+    #fsidebar {
+      position: fixed; right: 0; top: 50%;
+      transform: translateY(-50%); z-index: 40;
+      display: flex; flex-direction: column; gap: 1px;
+    }
+    #fsidebar a {
+      display: flex; align-items: center; gap: 0;
+      overflow: hidden; width: 40px;
+      transition: width .22s ease, background .15s;
+      background: #fff; border-left: 3px solid #3478e8;
+      box-shadow: -2px 2px 10px rgba(0,0,0,.09);
+      white-space: nowrap;
+    }
+    #fsidebar a:hover { width: 172px; background: #eef6ff; }
+    #fsidebar a .si { flex-shrink:0; width:37px; height:35px; display:flex; align-items:center; justify-content:center; color:#3478e8; font-size:12px; }
+    #fsidebar a .sl { font-size:12px; font-weight:600; color:#1d4eaa; padding-right:10px; opacity:0; transition:opacity .14s .05s; }
+    #fsidebar a:hover .sl { opacity:1; }
+
+    /* ── Utility ──────────────────────────────────────── */
+    .fade-up { opacity:0; transform:translateY(18px); transition:opacity .5s ease, transform .5s ease; }
+    .fade-up.visible { opacity:1; transform:none; }
+
+    section[id] { scroll-margin-top: 62px; }
+
+    .forum-card:hover { box-shadow:0 6px 24px rgba(0,0,0,.1); transform:translateY(-2px); }
+    .forum-card { transition: box-shadow .18s, transform .18s; }
+
+    tbody tr:hover { background:#f8fafc; }
+
+    /* map pin pulse */
+    @keyframes pulse-ring {
+      0%   { transform: scale(.9); opacity:.8; }
+      70%  { transform: scale(1.5); opacity:0; }
+      100% { transform: scale(1.5); opacity:0; }
+    }
+    .map-pin::after {
+      content:''; position:absolute; inset:0;
+      border-radius:9999px; background:inherit;
+      animation: pulse-ring 2s ease-out infinite;
+      opacity:.4;
+    }
+    .map-pin { position:relative; border-radius:9999px; }
+
+    /* tab active */
+    .tab-active { background:#3478e8 !important; color:#fff !important; }
+  </style>
+</head>
+
+<body class="bg-stone-100 text-stone-800">
+
+<!-- ═══════════════════════════════════════════════
+     DISCLAIMER MODAL
+═══════════════════════════════════════════════ -->
+<div x-show="modalVisible"
+     x-transition:enter="transition duration-300"
+     x-transition:enter-start="opacity-0"
+     x-transition:enter-end="opacity-100"
+     class="fixed inset-0 z-[9999] flex items-center justify-center px-4"
+     style="display:none;">
+  <div class="absolute inset-0 bg-stone-900/60 backdrop-blur-sm" @click="modalVisible=false"></div>
+  <div x-transition:enter="transition duration-300"
+       x-transition:enter-start="opacity-0 scale-95"
+       x-transition:enter-end="opacity-100 scale-100"
+       class="relative bg-white w-full max-w-lg z-10 shadow-lg">
+    <!-- Header -->
+    <div class="bg-earth-50 border-b border-earth-200 px-6 py-4 flex items-center justify-between" style="background:#fdf6ee;border-bottom-color:#f2cfa1;">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 flex items-center justify-center" style="background:#df8e35;">
+          <i class="fa-solid fa-triangle-exclamation text-white text-sm"></i>
+        </div>
+        <span class="font-semibold text-sm uppercase tracking-wider" style="color:#a85d18;">Disclaimer</span>
+      </div>
+      <button @click="modalVisible=false" class="w-8 h-8 flex items-center justify-center text-stone-400 hover:text-stone-700 hover:bg-stone-100 transition-colors">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <!-- Body -->
+    <div class="px-6 py-6">
+      <h2 class="font-bold text-stone-900 text-lg mb-3">Draft Desain Penawaran</h2>
+      <p class="text-stone-500 text-sm leading-relaxed mb-4">
+        Halaman ini merupakan <strong class="text-stone-700">draft desain penawaran</strong> aplikasi <strong class="text-primary-600">KampungNet</strong> yang dibuat berdasarkan hasil analisa dan riset tim pengembang. Seluruh tampilan bersifat prototipe dan belum merupakan produk final.
+      </p>
+      <ul class="text-sm text-stone-500 space-y-2 mb-5">
+        <li class="flex items-start gap-2"><i class="fa-solid fa-circle-check text-primary-500 mt-0.5 flex-shrink-0"></i><span>Data kampung, forum, dan konten yang ditampilkan merupakan data dummy untuk keperluan demo.</span></li>
+        <li class="flex items-start gap-2"><i class="fa-solid fa-circle-check text-primary-500 mt-0.5 flex-shrink-0"></i><span>Gambar menggunakan placeholder dan akan diganti dengan aset resmi dari lembaga.</span></li>
+        <li class="flex items-start gap-2"><i class="fa-solid fa-circle-check text-primary-500 mt-0.5 flex-shrink-0"></i><span>Desain ini dibuat khusus sebagai bahan presentasi penawaran kepada YPMD Papua.</span></li>
+      </ul>
+      <div class="border-t border-stone-100 pt-4 flex items-center justify-between">
+        <span class="text-xs text-stone-400">Dikembangkan oleh:</span>
+        <a href="https://nokensoft.com" target="_blank" class="flex items-center gap-2 text-primary-600 hover:text-primary-700 font-semibold text-sm">
+          <i class="fa-solid fa-code"></i> Nokensoft.com
+        </a>
+      </div>
+    </div>
+    <div class="px-6 pb-5">
+      <button @click="modalVisible=false" class="w-full bg-primary-500 hover:bg-primary-600 text-white font-semibold text-sm py-3 transition-colors">
+        Saya Mengerti, Lanjutkan
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     TOPBAR DISCLAIMER
+═══════════════════════════════════════════════ -->
+<div x-show="topbarVisible"
+     x-transition:leave="transition duration-200"
+     x-transition:leave-start="opacity-100"
+     x-transition:leave-end="opacity-0"
+     style="background:#df8e35; display:none;">
+  <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3 min-w-0">
+      <i class="fa-solid fa-triangle-exclamation flex-shrink-0 text-sm" style="color:#6b3b0a;"></i>
+      <p class="text-xs font-medium leading-snug truncate" style="color:#3d1a00;">
+        <strong>Draft Desain Penawaran</strong> — Prototipe portal KampungNet oleh tim pengembang.
+        <a href="https://nokensoft.com" target="_blank" class="underline font-bold ml-1" style="color:#1a0900;">Powered by Nokensoft.com</a>
+      </p>
+    </div>
+    <button @click="topbarVisible=false" class="flex-shrink-0 w-6 h-6 flex items-center justify-center" style="color:#6b3b0a;">
+      <i class="fa-solid fa-xmark text-sm"></i>
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     HEADER / NAV
+═══════════════════════════════════════════════ -->
+<header class="sticky top-0 z-30 bg-white border-b border-stone-200 shadow-md">
+  <nav class="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
+
+    <!-- Logo left (desktop) -->
+    <a href="#beranda" class="hidden md:flex items-center gap-2.5 flex-shrink-0">
+      <div class="w-8 h-8 bg-primary-500 flex items-center justify-center">
+        <i class="fa-solid fa-globe text-white text-sm"></i>
+      </div>
+      <div>
+        <span class="font-extrabold text-primary-700 text-base leading-none block">KampungNet</span>
+        <span class="text-stone-400 text-xs leading-none">Portal Komunitas Digital Papua</span>
+      </div>
+    </a>
+
+    <!-- Logo center (mobile) -->
+    <div class="md:hidden absolute left-1/2 -translate-x-1/2 flex items-center gap-2">
+      <div class="w-7 h-7 bg-primary-500 flex items-center justify-center">
+        <i class="fa-solid fa-globe text-white text-xs"></i>
+      </div>
+      <span class="font-extrabold text-primary-700 text-sm">KampungNet</span>
+    </div>
+
+    <!-- Desktop links -->
+    <ul class="hidden md:flex items-center gap-5 text-sm">
+      <li><a href="#beranda"   class="font-medium text-stone-600 hover:text-primary-600 transition-colors">Beranda</a></li>
+      <li><a href="#login"     class="font-medium text-stone-600 hover:text-primary-600 transition-colors">Login</a></li>
+      <li><a href="#dashboard" class="font-medium text-stone-600 hover:text-primary-600 transition-colors">Dashboard</a></li>
+      <li><a href="#forum"     class="font-medium text-stone-600 hover:text-primary-600 transition-colors">Forum</a></li>
+      <li><a href="#agenda"    class="font-medium text-stone-600 hover:text-primary-600 transition-colors">Agenda</a></li>
+      <li><a href="#direktori" class="font-medium text-stone-600 hover:text-primary-600 transition-colors">Direktori</a></li>
+      <li><a href="#profil-kampung" class="font-medium text-stone-600 hover:text-primary-600 transition-colors">Kampung</a></li>
+      <li><a href="#galeri"    class="font-medium text-stone-600 hover:text-primary-600 transition-colors">Galeri</a></li>
+      <li><a href="#berita"    class="font-medium text-stone-600 hover:text-primary-600 transition-colors">Berita</a></li>
+      <li><a href="#peta"      class="font-medium text-stone-600 hover:text-primary-600 transition-colors">Peta</a></li>
+    </ul>
+
+    <!-- Mobile hamburger -->
+    <button class="md:hidden ml-auto text-stone-600" @click="mobileMenuOpen=!mobileMenuOpen">
+      <i class="fa-solid text-lg" :class="mobileMenuOpen?'fa-xmark':'fa-bars'"></i>
+    </button>
+  </nav>
+
+  <!-- Mobile dropdown -->
+  <div x-show="mobileMenuOpen" x-transition class="md:hidden bg-white border-t border-stone-100 shadow-md" style="display:none;">
+    <ul class="py-1 grid grid-cols-2">
+      <li><a href="#beranda"       @click="mobileMenuOpen=false" class="block px-5 py-2.5 text-sm text-stone-700 hover:bg-stone-50 hover:text-primary-600">Beranda</a></li>
+      <li><a href="#login"         @click="mobileMenuOpen=false" class="block px-5 py-2.5 text-sm text-stone-700 hover:bg-stone-50 hover:text-primary-600">Login</a></li>
+      <li><a href="#dashboard"     @click="mobileMenuOpen=false" class="block px-5 py-2.5 text-sm text-stone-700 hover:bg-stone-50 hover:text-primary-600">Dashboard</a></li>
+      <li><a href="#forum"         @click="mobileMenuOpen=false" class="block px-5 py-2.5 text-sm text-stone-700 hover:bg-stone-50 hover:text-primary-600">Forum Diskusi</a></li>
+      <li><a href="#agenda"        @click="mobileMenuOpen=false" class="block px-5 py-2.5 text-sm text-stone-700 hover:bg-stone-50 hover:text-primary-600">Agenda</a></li>
+      <li><a href="#direktori"     @click="mobileMenuOpen=false" class="block px-5 py-2.5 text-sm text-stone-700 hover:bg-stone-50 hover:text-primary-600">Direktori Layanan</a></li>
+      <li><a href="#profil-kampung" @click="mobileMenuOpen=false" class="block px-5 py-2.5 text-sm text-stone-700 hover:bg-stone-50 hover:text-primary-600">Profil Kampung</a></li>
+      <li><a href="#galeri"        @click="mobileMenuOpen=false" class="block px-5 py-2.5 text-sm text-stone-700 hover:bg-stone-50 hover:text-primary-600">Galeri</a></li>
+      <li><a href="#berita"        @click="mobileMenuOpen=false" class="block px-5 py-2.5 text-sm text-stone-700 hover:bg-stone-50 hover:text-primary-600">Berita</a></li>
+      <li><a href="#peta"          @click="mobileMenuOpen=false" class="block px-5 py-2.5 text-sm text-stone-700 hover:bg-stone-50 hover:text-primary-600">Peta Kampung</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════
+     FLOATING SIDEBAR
+═══════════════════════════════════════════════ -->
+<nav id="fsidebar" class="hidden md:flex" aria-label="Navigasi Cepat">
+  <a href="#beranda">      <span class="si"><i class="fa-solid fa-house"></i></span>         <span class="sl">Beranda</span></a>
+  <a href="#login">        <span class="si"><i class="fa-solid fa-right-to-bracket"></i></span><span class="sl">Login</span></a>
+  <a href="#dashboard">   <span class="si"><i class="fa-solid fa-chart-pie"></i></span>       <span class="sl">Dashboard</span></a>
+  <a href="#forum">        <span class="si"><i class="fa-solid fa-comments"></i></span>        <span class="sl">Forum</span></a>
+  <a href="#agenda">       <span class="si"><i class="fa-solid fa-calendar-days"></i></span>  <span class="sl">Agenda</span></a>
+  <a href="#direktori">   <span class="si"><i class="fa-solid fa-list-ul"></i></span>          <span class="sl">Direktori</span></a>
+  <a href="#profil-kampung"><span class="si"><i class="fa-solid fa-landmark"></i></span>      <span class="sl">Profil Kampung</span></a>
+  <a href="#galeri">       <span class="si"><i class="fa-solid fa-images"></i></span>          <span class="sl">Galeri</span></a>
+  <a href="#berita">       <span class="si"><i class="fa-solid fa-newspaper"></i></span>       <span class="sl">Berita</span></a>
+  <a href="#peta">         <span class="si"><i class="fa-solid fa-map-location-dot"></i></span><span class="sl">Peta Kampung</span></a>
+</nav>
+
+<main>
+
+<!-- ═══════════════════════════════════════════════
+     BERANDA / HERO
+═══════════════════════════════════════════════ -->
+<section id="beranda">
+  <!-- Hero -->
+  <div class="relative overflow-hidden" style="background:linear-gradient(135deg,#1b3870 0%,#3478e8 60%,#2e9b61 100%);">
+    <!-- Decorative pattern -->
+    <div class="absolute inset-0 opacity-10">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="0.8"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)"/>
+      </svg>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-6 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-primary-200 mb-5">
+          <i class="fa-solid fa-globe-asia"></i> Portal Komunitas Digital · YPMD Papua
+        </span>
+        <h1 class="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-4">
+          Menghubungkan Kampung-Kampung Papua dalam Satu
+          <span class="text-earth-300" style="color:#f9e8d2;"> Portal Digital</span>
+        </h1>
+        <p class="text-primary-100 text-base leading-relaxed mb-8 max-w-md">
+          KampungNet menyatukan masyarakat desa, tokoh adat, dan staf YPMD Papua dalam satu ruang digital: forum diskusi, agenda kegiatan, direktori layanan, dan informasi lokal yang aktual.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a href="#register" class="font-semibold text-sm px-6 py-3 text-white transition-colors" style="background:#df8e35;">
+            <i class="fa-solid fa-user-plus mr-2"></i>Bergabung Sekarang
+          </a>
+          <a href="#login" class="border border-primary-300 text-primary-100 hover:bg-primary-700 font-semibold text-sm px-6 py-3 transition-colors">
+            <i class="fa-solid fa-right-to-bracket mr-2"></i>Masuk
+          </a>
+        </div>
+      </div>
+      <div class="hidden md:block">
+        <img src="./img/mockups/mockup-kampung-net.png" alt="" class="w-full shadow-lg opacity-90"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stat strip -->
+  <div class="bg-white border-b border-stone-200">
+    <div class="max-w-7xl mx-auto px-6 py-5 grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-primary-50 flex items-center justify-center flex-shrink-0">
+          <i class="fa-solid fa-map-location-dot text-primary-500"></i>
+        </div>
+        <div>
+          <div class="text-2xl font-extrabold text-stone-900 leading-none">48</div>
+          <div class="text-xs text-stone-400 uppercase tracking-wider">Kampung Binaan</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 flex items-center justify-center flex-shrink-0" style="background:#fdf6ee;">
+          <i class="fa-solid fa-users" style="color:#df8e35;"></i>
+        </div>
+        <div>
+          <div class="text-2xl font-extrabold text-stone-900 leading-none">1.240</div>
+          <div class="text-xs text-stone-400 uppercase tracking-wider">Anggota Komunitas</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-forest-50 flex items-center justify-center flex-shrink-0">
+          <i class="fa-solid fa-comments text-forest-500"></i>
+        </div>
+        <div>
+          <div class="text-2xl font-extrabold text-stone-900 leading-none">324</div>
+          <div class="text-xs text-stone-400 uppercase tracking-wider">Topik Forum</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-primary-50 flex items-center justify-center flex-shrink-0">
+          <i class="fa-solid fa-calendar-check text-primary-500"></i>
+        </div>
+        <div>
+          <div class="text-2xl font-extrabold text-stone-900 leading-none">18</div>
+          <div class="text-xs text-stone-400 uppercase tracking-wider">Agenda Aktif</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     LOGIN
+═══════════════════════════════════════════════ -->
+<section id="login" class="py-16 bg-stone-100">
+  <div class="max-w-md mx-auto px-6">
+    <div class="bg-white shadow-md">
+      <div class="px-6 py-5 border-b border-stone-100 flex items-center gap-3">
+        <div class="w-9 h-9 bg-primary-500 flex items-center justify-center">
+          <i class="fa-solid fa-right-to-bracket text-white"></i>
+        </div>
+        <div>
+          <h2 class="font-bold text-stone-900 text-lg leading-tight">Masuk ke KampungNet</h2>
+          <p class="text-stone-400 text-xs">Akses portal komunitas Anda</p>
+        </div>
+      </div>
+      <div class="p-6 space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-stone-500 uppercase tracking-wider mb-1.5">No. HP / Email</label>
+          <div class="flex border border-stone-200">
+            <span class="bg-stone-100 border-r border-stone-200 px-3 flex items-center">
+              <i class="fa-solid fa-user text-stone-400 text-sm"></i>
+            </span>
+            <input type="text" placeholder="Masukkan nomor HP atau email" class="flex-1 px-3 py-2.5 text-sm text-stone-700 outline-none bg-white" value="082199000000"/>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-stone-500 uppercase tracking-wider mb-1.5">Password</label>
+          <div class="flex border border-stone-200">
+            <span class="bg-stone-100 border-r border-stone-200 px-3 flex items-center">
+              <i class="fa-solid fa-lock text-stone-400 text-sm"></i>
+            </span>
+            <input type="password" class="flex-1 px-3 py-2.5 text-sm text-stone-700 outline-none bg-white" value="••••••••"/>
+          </div>
+        </div>
+        <div class="flex items-center justify-between text-sm">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" class="accent-primary-500" checked/>
+            <span class="text-stone-600">Ingat saya</span>
+          </label>
+          <a href="#" class="text-primary-600 hover:underline font-medium">Lupa password?</a>
+        </div>
+        <button class="w-full bg-primary-500 hover:bg-primary-600 text-white font-semibold py-3 text-sm transition-colors">
+          <i class="fa-solid fa-right-to-bracket mr-2"></i>Masuk
+        </button>
+        <!-- Social divider -->
+        <div class="flex items-center gap-3 my-1">
+          <div class="flex-1 h-px bg-stone-200"></div>
+          <span class="text-xs text-stone-400">atau masuk dengan</span>
+          <div class="flex-1 h-px bg-stone-200"></div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <button class="flex items-center justify-center gap-2 border border-stone-200 py-2 text-sm text-stone-600 hover:bg-stone-50 font-medium transition-colors">
+            <i class="fa-brands fa-google text-red-500"></i> Google
+          </button>
+          <button class="flex items-center justify-center gap-2 border border-stone-200 py-2 text-sm text-stone-600 hover:bg-stone-50 font-medium transition-colors">
+            <i class="fa-brands fa-facebook text-blue-600"></i> Facebook
+          </button>
+        </div>
+        <p class="text-center text-sm text-stone-500">Belum punya akun? <a href="#register" class="text-primary-600 font-semibold hover:underline">Daftar di sini</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     REGISTER
+═══════════════════════════════════════════════ -->
+<section id="register" class="py-16 bg-white">
+  <div class="max-w-xl mx-auto px-6">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl font-bold text-stone-900">Daftar sebagai Anggota</h2>
+      <p class="text-stone-400 text-sm mt-1">Bergabung dengan komunitas kampung binaan YPMD Papua</p>
+    </div>
+    <div class="bg-white shadow-md border border-stone-100">
+      <div class="p-6 grid grid-cols-2 gap-4">
+        <div class="col-span-2 md:col-span-1">
+          <label class="block text-xs font-semibold text-stone-500 uppercase tracking-wider mb-1.5">Nama Lengkap</label>
+          <input type="text" value="Agus Werimon" class="w-full border border-stone-200 px-3 py-2.5 text-sm outline-none focus:border-primary-400 bg-white"/>
+        </div>
+        <div class="col-span-2 md:col-span-1">
+          <label class="block text-xs font-semibold text-stone-500 uppercase tracking-wider mb-1.5">No. HP</label>
+          <input type="text" value="082199005678" class="w-full border border-stone-200 px-3 py-2.5 text-sm outline-none focus:border-primary-400 bg-white"/>
+        </div>
+        <div class="col-span-2">
+          <label class="block text-xs font-semibold text-stone-500 uppercase tracking-wider mb-1.5">Asal Kampung</label>
+          <select class="w-full border border-stone-200 px-3 py-2.5 text-sm outline-none focus:border-primary-400 bg-white">
+            <option>Kampung Berap, Biak Numfor</option>
+            <option>Kampung Manokwari Utara</option>
+            <option selected>Kampung Ayambori, Biak</option>
+            <option>Kampung Warmandi, Manokwari</option>
+          </select>
+        </div>
+        <div class="col-span-2 md:col-span-1">
+          <label class="block text-xs font-semibold text-stone-500 uppercase tracking-wider mb-1.5">Peran</label>
+          <select class="w-full border border-stone-200 px-3 py-2.5 text-sm outline-none focus:border-primary-400 bg-white">
+            <option selected>Warga Kampung</option>
+            <option>Tokoh Adat</option>
+            <option>Staf YPMD</option>
+            <option>Petugas Lapangan</option>
+          </select>
+        </div>
+        <div class="col-span-2 md:col-span-1">
+          <label class="block text-xs font-semibold text-stone-500 uppercase tracking-wider mb-1.5">Password</label>
+          <input type="password" value="••••••••" class="w-full border border-stone-200 px-3 py-2.5 text-sm outline-none focus:border-primary-400 bg-white"/>
+        </div>
+        <div class="col-span-2">
+          <label class="flex items-start gap-2 cursor-pointer">
+            <input type="checkbox" class="accent-primary-500 mt-0.5 flex-shrink-0" checked/>
+            <span class="text-sm text-stone-500">Saya menyetujui <a href="#" class="text-primary-600 hover:underline">syarat dan ketentuan</a> penggunaan portal KampungNet.</span>
+          </label>
+        </div>
+        <div class="col-span-2">
+          <button class="w-full bg-primary-500 hover:bg-primary-600 text-white font-semibold py-3 text-sm transition-colors">
+            <i class="fa-solid fa-user-plus mr-2"></i>Buat Akun
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     DASHBOARD
+═══════════════════════════════════════════════ -->
+<section id="dashboard" class="py-16 bg-stone-50">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="flex items-start justify-between mb-8 flex-wrap gap-4">
+      <div>
+        <span class="text-xs font-semibold uppercase tracking-widest text-primary-500"><i class="fa-solid fa-chart-pie mr-1"></i>Dashboard</span>
+        <h2 class="text-2xl font-bold text-stone-900 mt-1">Selamat Datang, Agus 👋</h2>
+        <p class="text-stone-400 text-sm mt-0.5">Minggu, 8 Maret 2025 · Kampung Ayambori, Biak</p>
+      </div>
+      <div class="flex items-center gap-3 flex-wrap">
+        <span class="bg-primary-50 text-primary-600 text-xs font-bold px-3 py-1.5 border border-primary-200">
+          <i class="fa-solid fa-circle-check mr-1"></i>Terverifikasi
+        </span>
+        <span class="bg-forest-50 text-forest-600 text-xs font-bold px-3 py-1.5 border border-forest-200">
+          <i class="fa-solid fa-landmark mr-1"></i>Warga Kampung
+        </span>
+      </div>
+    </div>
+
+    <!-- Stat cards -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div class="bg-white shadow-card p-5 border-t-2 border-primary-500 hover:-translate-y-1 transition-transform">
+        <div class="flex items-center justify-between mb-3">
+          <div class="w-9 h-9 bg-primary-50 flex items-center justify-center">
+            <i class="fa-solid fa-comments text-primary-500 text-sm"></i>
+          </div>
+          <span class="text-xs font-semibold text-green-600 bg-green-50 px-2 py-0.5">+5 baru</span>
+        </div>
+        <div class="text-2xl font-extrabold text-stone-900">12</div>
+        <div class="text-xs text-stone-400 mt-1 uppercase tracking-wider">Diskusi Aktif</div>
+      </div>
+      <div class="bg-white shadow-card p-5 border-t-2 hover:-translate-y-1 transition-transform" style="border-top-color:#df8e35;">
+        <div class="flex items-center justify-between mb-3">
+          <div class="w-9 h-9 flex items-center justify-center" style="background:#fdf6ee;">
+            <i class="fa-solid fa-calendar-days text-sm" style="color:#df8e35;"></i>
+          </div>
+          <span class="text-xs font-semibold text-red-600 bg-red-50 px-2 py-0.5">Segera</span>
+        </div>
+        <div class="text-2xl font-extrabold text-stone-900">3</div>
+        <div class="text-xs text-stone-400 mt-1 uppercase tracking-wider">Agenda Mendatang</div>
+      </div>
+      <div class="bg-white shadow-card p-5 border-t-2 border-forest-500 hover:-translate-y-1 transition-transform">
+        <div class="flex items-center justify-between mb-3">
+          <div class="w-9 h-9 bg-forest-50 flex items-center justify-center">
+            <i class="fa-solid fa-newspaper text-forest-500 text-sm"></i>
+          </div>
+          <span class="text-xs font-semibold text-stone-500 bg-stone-100 px-2 py-0.5">Minggu ini</span>
+        </div>
+        <div class="text-2xl font-extrabold text-stone-900">7</div>
+        <div class="text-xs text-stone-400 mt-1 uppercase tracking-wider">Berita Lokal</div>
+      </div>
+      <div class="bg-white shadow-card p-5 border-t-2 border-primary-300 hover:-translate-y-1 transition-transform">
+        <div class="flex items-center justify-between mb-3">
+          <div class="w-9 h-9 bg-primary-50 flex items-center justify-center">
+            <i class="fa-solid fa-bell text-primary-400 text-sm"></i>
+          </div>
+          <span class="text-xs font-semibold text-primary-600 bg-primary-50 px-2 py-0.5">Baru</span>
+        </div>
+        <div class="text-2xl font-extrabold text-stone-900">4</div>
+        <div class="text-xs text-stone-400 mt-1 uppercase tracking-wider">Notifikasi</div>
+      </div>
+    </div>
+
+    <!-- Charts + Aktivitas -->
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="md:col-span-2 bg-white shadow-card p-6">
+        <h3 class="text-sm font-bold text-stone-700 uppercase tracking-wider mb-4">Aktivitas Forum 6 Bulan Terakhir</h3>
+        <canvas id="forumChart" height="180"></canvas>
+      </div>
+      <div class="bg-white shadow-card p-6">
+        <h3 class="text-sm font-bold text-stone-700 uppercase tracking-wider mb-4">Sebaran Anggota per Wilayah</h3>
+        <canvas id="wilayahChart" height="180"></canvas>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FORUM DISKUSI
+═══════════════════════════════════════════════ -->
+<section id="forum" class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
+      <div>
+        <span class="text-xs font-semibold uppercase tracking-widest text-primary-500"><i class="fa-solid fa-comments mr-1"></i>Komunitas</span>
+        <h2 class="text-2xl font-bold text-stone-900 mt-1">Forum Diskusi per Kampung</h2>
+      </div>
+      <button class="bg-primary-500 hover:bg-primary-600 text-white font-semibold text-sm px-5 py-2.5 transition-colors">
+        <i class="fa-solid fa-plus mr-2"></i>Buat Topik Baru
+      </button>
+    </div>
+
+    <!-- Filter tabs -->
+    <div class="flex flex-wrap gap-2 mb-6" x-data="{tab:'semua'}">
+      <button @click="tab='semua'" :class="tab==='semua'?'tab-active':''" class="text-xs font-semibold px-4 py-2 border border-stone-200 bg-white text-stone-600 hover:bg-primary-50 transition-colors">Semua Kampung</button>
+      <button @click="tab='biak'" :class="tab==='biak'?'tab-active':''" class="text-xs font-semibold px-4 py-2 border border-stone-200 bg-white text-stone-600 hover:bg-primary-50 transition-colors">Biak Numfor</button>
+      <button @click="tab='manokwari'" :class="tab==='manokwari'?'tab-active':''" class="text-xs font-semibold px-4 py-2 border border-stone-200 bg-white text-stone-600 hover:bg-primary-50 transition-colors">Manokwari</button>
+      <button @click="tab='jayapura'" :class="tab==='jayapura'?'tab-active':''" class="text-xs font-semibold px-4 py-2 border border-stone-200 bg-white text-stone-600 hover:bg-primary-50 transition-colors">Jayapura</button>
+      <button @click="tab='umum'" :class="tab==='umum'?'tab-active':''" class="text-xs font-semibold px-4 py-2 border border-stone-200 bg-white text-stone-600 hover:bg-primary-50 transition-colors">Umum</button>
+    </div>
+
+    <!-- Forum threads -->
+    <div class="space-y-3">
+      <!-- Thread items -->
+      <article class="forum-card bg-white border border-stone-200 shadow-card p-5 flex gap-5">
+        <div class="w-10 h-10 bg-primary-500 flex items-center justify-center flex-shrink-0 text-white font-bold text-sm">AW</div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-start justify-between gap-3 flex-wrap">
+            <div>
+              <h3 class="font-bold text-stone-900 text-sm hover:text-primary-600 cursor-pointer">Pengalaman Panen Kakao Organik Musim Ini — Kampung Berap</h3>
+              <div class="flex items-center gap-3 mt-1 flex-wrap">
+                <span class="text-xs text-stone-400">Agus Werimon</span>
+                <span class="text-xs text-stone-300">·</span>
+                <span class="text-xs text-stone-400">Kampung Berap, Biak</span>
+                <span class="text-xs text-stone-300">·</span>
+                <span class="text-xs text-stone-400">2 jam lalu</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 flex-shrink-0">
+              <span class="bg-primary-50 text-primary-600 text-xs font-bold px-2 py-0.5 border border-primary-100">Kakao</span>
+              <span class="bg-green-50 text-green-700 text-xs font-bold px-2 py-0.5">Aktif</span>
+            </div>
+          </div>
+          <p class="text-sm text-stone-500 mt-2 leading-relaxed line-clamp-2">Musim ini hasil kakao di blok utara meningkat signifikan. Saya ingin berbagi pengalaman tentang teknik pemupukan organik yang saya terapkan sejak bulan Oktober...</p>
+          <div class="flex items-center gap-4 mt-3 text-xs text-stone-400">
+            <span><i class="fa-solid fa-comment mr-1"></i>24 balasan</span>
+            <span><i class="fa-solid fa-eye mr-1"></i>142 dilihat</span>
+            <span><i class="fa-solid fa-heart mr-1"></i>18 suka</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="forum-card bg-white border border-stone-200 shadow-card p-5 flex gap-5">
+        <div class="w-10 h-10 flex items-center justify-center flex-shrink-0 text-white font-bold text-sm" style="background:#2e9b61;">MK</div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-start justify-between gap-3 flex-wrap">
+            <div>
+              <h3 class="font-bold text-stone-900 text-sm hover:text-primary-600 cursor-pointer">Pertemuan Adat Terkait Batas Lahan Masyarakat — Kampung Warmandi</h3>
+              <div class="flex items-center gap-3 mt-1 flex-wrap">
+                <span class="text-xs text-stone-400">Maria Kafiar (Tokoh Adat)</span>
+                <span class="text-xs text-stone-300">·</span>
+                <span class="text-xs text-stone-400">Warmandi, Manokwari</span>
+                <span class="text-xs text-stone-300">·</span>
+                <span class="text-xs text-stone-400">Kemarin</span>
+              </div>
+            </div>
+            <span class="bg-earth-100 text-earth-600 text-xs font-bold px-2 py-0.5 border border-earth-200 flex-shrink-0" style="background:#fdf6ee;color:#c9751e;border-color:#f2cfa1;">Adat</span>
+          </div>
+          <p class="text-sm text-stone-500 mt-2 leading-relaxed line-clamp-2">Kami membutuhkan masukan dari warga kampung dan staf YPMD terkait rencana pertemuan adat untuk membahas batas-batas wilayah ulayat yang belum terselesaikan...</p>
+          <div class="flex items-center gap-4 mt-3 text-xs text-stone-400">
+            <span><i class="fa-solid fa-comment mr-1"></i>38 balasan</span>
+            <span><i class="fa-solid fa-eye mr-1"></i>290 dilihat</span>
+            <span><i class="fa-solid fa-heart mr-1"></i>52 suka</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="forum-card bg-white border border-stone-200 shadow-card p-5 flex gap-5">
+        <div class="w-10 h-10 bg-primary-700 flex items-center justify-center flex-shrink-0 text-white font-bold text-sm">YP</div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-start justify-between gap-3 flex-wrap">
+            <div>
+              <h3 class="font-bold text-stone-900 text-sm hover:text-primary-600 cursor-pointer">Program Tabungan Petani BPR Phidectama — Tanya Jawab</h3>
+              <div class="flex items-center gap-3 mt-1 flex-wrap">
+                <span class="text-xs text-stone-400">Staf YPMD</span>
+                <span class="text-xs text-stone-300">·</span>
+                <span class="text-xs text-stone-400">Semua Kampung</span>
+                <span class="text-xs text-stone-300">·</span>
+                <span class="text-xs text-stone-400">3 hari lalu</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 flex-shrink-0">
+              <span class="bg-primary-50 text-primary-600 text-xs font-bold px-2 py-0.5 border border-primary-100">Program</span>
+              <span class="bg-yellow-50 text-yellow-700 text-xs font-bold px-2 py-0.5">Resmi</span>
+            </div>
+          </div>
+          <p class="text-sm text-stone-500 mt-2 leading-relaxed line-clamp-2">Program tabungan petani kakao organik melalui BPR Phidectama kini membuka pendaftaran gelombang baru. Pelajari mekanisme dan keuntungan program ini bersama kami...</p>
+          <div class="flex items-center gap-4 mt-3 text-xs text-stone-400">
+            <span><i class="fa-solid fa-comment mr-1"></i>61 balasan</span>
+            <span><i class="fa-solid fa-eye mr-1"></i>418 dilihat</span>
+            <span><i class="fa-solid fa-heart mr-1"></i>74 suka</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="forum-card bg-white border border-stone-200 shadow-card p-5 flex gap-5">
+        <div class="w-10 h-10 flex items-center justify-center flex-shrink-0 text-white font-bold text-sm" style="background:#df8e35;">DW</div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-start justify-between gap-3 flex-wrap">
+            <div>
+              <h3 class="font-bold text-stone-900 text-sm hover:text-primary-600 cursor-pointer">Kondisi Jalan Menuju Kampung Ayambori — Perlu Perhatian Segera</h3>
+              <div class="flex items-center gap-3 mt-1 flex-wrap">
+                <span class="text-xs text-stone-400">Darius Wompere</span>
+                <span class="text-xs text-stone-300">·</span>
+                <span class="text-xs text-stone-400">Ayambori, Biak</span>
+                <span class="text-xs text-stone-300">·</span>
+                <span class="text-xs text-stone-400">5 hari lalu</span>
+              </div>
+            </div>
+            <span class="bg-red-50 text-red-600 text-xs font-bold px-2 py-0.5 border border-red-100 flex-shrink-0">Infrastruktur</span>
+          </div>
+          <p class="text-sm text-stone-500 mt-2 leading-relaxed line-clamp-2">Akses jalan menuju kampung semakin memburuk pasca hujan deras minggu lalu. Kami memohon bantuan dan perhatian dari semua pihak terkait kondisi ini...</p>
+          <div class="flex items-center gap-4 mt-3 text-xs text-stone-400">
+            <span><i class="fa-solid fa-comment mr-1"></i>19 balasan</span>
+            <span><i class="fa-solid fa-eye mr-1"></i>203 dilihat</span>
+            <span><i class="fa-solid fa-heart mr-1"></i>31 suka</span>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="mt-6 text-center">
+      <button class="border border-stone-200 text-stone-600 hover:bg-stone-50 font-semibold text-sm px-8 py-2.5 transition-colors">
+        Lihat Semua Diskusi <i class="fa-solid fa-arrow-down ml-2"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     AGENDA KEGIATAN
+═══════════════════════════════════════════════ -->
+<section id="agenda" class="py-16 bg-stone-50">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
+      <div>
+        <span class="text-xs font-semibold uppercase tracking-widest text-primary-500"><i class="fa-solid fa-calendar-days mr-1"></i>Jadwal</span>
+        <h2 class="text-2xl font-bold text-stone-900 mt-1">Agenda Kegiatan Pendampingan</h2>
+      </div>
+      <a href="#" class="text-primary-600 hover:text-primary-700 font-semibold text-sm flex items-center gap-2">
+        Lihat Semua <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5">
+      <!-- Event card 1 -->
+      <article class="bg-white shadow-card">
+        <div class="bg-primary-500 px-5 py-3 flex items-center justify-between">
+          <span class="text-white font-bold text-sm">Maret 2025</span>
+          <span class="bg-white/20 text-white text-xs font-bold px-2 py-0.5">Pelatihan</span>
+        </div>
+        <div class="p-5">
+          <div class="flex items-start gap-3 mb-3">
+            <div class="text-center bg-primary-50 px-3 py-2 flex-shrink-0">
+              <div class="text-2xl font-extrabold text-primary-600 leading-none">12</div>
+              <div class="text-xs text-primary-400 uppercase">Mar</div>
+            </div>
+            <div>
+              <h3 class="font-bold text-stone-900 text-sm">Pelatihan Fermentasi Kakao Organik</h3>
+              <p class="text-xs text-stone-400 mt-1"><i class="fa-solid fa-location-dot mr-1"></i>Balai Desa Berap, Biak Numfor</p>
+            </div>
+          </div>
+          <p class="text-sm text-stone-500 leading-relaxed mb-4">Workshop teknik fermentasi 5–7 hari untuk menghasilkan biji kakao grade A. Dipandu instruktur dari APF Japan Network.</p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-1.5 text-xs text-stone-400">
+              <i class="fa-solid fa-users"></i>
+              <span>32 / 40 Peserta</span>
+            </div>
+            <button class="bg-primary-500 hover:bg-primary-600 text-white font-semibold text-xs px-4 py-1.5 transition-colors">Daftar</button>
+          </div>
+          <div class="mt-3 bg-stone-100 h-1.5">
+            <div class="bg-primary-500 h-1.5" style="width:80%"></div>
+          </div>
+          <p class="text-xs text-stone-400 mt-1">80% kursi terisi</p>
+        </div>
+      </article>
+
+      <!-- Event card 2 -->
+      <article class="bg-white shadow-card">
+        <div class="px-5 py-3 flex items-center justify-between" style="background:#2e9b61;">
+          <span class="text-white font-bold text-sm">Maret 2025</span>
+          <span class="bg-white/20 text-white text-xs font-bold px-2 py-0.5">Musyawarah</span>
+        </div>
+        <div class="p-5">
+          <div class="flex items-start gap-3 mb-3">
+            <div class="text-center px-3 py-2 flex-shrink-0" style="background:#f0faf4;">
+              <div class="text-2xl font-extrabold leading-none" style="color:#2e9b61;">15</div>
+              <div class="text-xs uppercase" style="color:#4db67f;">Mar</div>
+            </div>
+            <div>
+              <h3 class="font-bold text-stone-900 text-sm">Musyawarah Masyarakat Kampung Warmandi</h3>
+              <p class="text-xs text-stone-400 mt-1"><i class="fa-solid fa-location-dot mr-1"></i>Aula Kampung Warmandi, Manokwari</p>
+            </div>
+          </div>
+          <p class="text-sm text-stone-500 leading-relaxed mb-4">Pembahasan rencana kerja pendampingan YPMD 2025 bersama tokoh adat dan warga. Agenda: laporan program, rencana ke depan, aspirasi warga.</p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-1.5 text-xs text-stone-400">
+              <i class="fa-solid fa-users"></i>
+              <span>120+ Warga Diundang</span>
+            </div>
+            <button class="text-white font-semibold text-xs px-4 py-1.5 transition-colors" style="background:#2e9b61;">Konfirmasi</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Event card 3 -->
+      <article class="bg-white shadow-card">
+        <div class="px-5 py-3 flex items-center justify-between" style="background:#df8e35;">
+          <span class="text-white font-bold text-sm">Maret 2025</span>
+          <span class="bg-white/20 text-white text-xs font-bold px-2 py-0.5">Pameran</span>
+        </div>
+        <div class="p-5">
+          <div class="flex items-start gap-3 mb-3">
+            <div class="text-center px-3 py-2 flex-shrink-0" style="background:#fdf6ee;">
+              <div class="text-2xl font-extrabold leading-none" style="color:#df8e35;">22</div>
+              <div class="text-xs uppercase" style="color:#c9751e;">Mar</div>
+            </div>
+            <div>
+              <h3 class="font-bold text-stone-900 text-sm">Pameran Produk Kakao Organik Papua</h3>
+              <p class="text-xs text-stone-400 mt-1"><i class="fa-solid fa-location-dot mr-1"></i>Café Kakao Kita, Jayapura</p>
+            </div>
+          </div>
+          <p class="text-sm text-stone-500 leading-relaxed mb-4">Pameran dan demo olahan produk kakao organik Papua. Terbuka untuk umum. Penampilan seni budaya lokal dan sesi foto bersama.</p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-1.5 text-xs text-stone-400">
+              <i class="fa-solid fa-ticket"></i>
+              <span>Gratis · Terbuka Umum</span>
+            </div>
+            <button class="text-white font-semibold text-xs px-4 py-1.5 transition-colors" style="background:#df8e35;">Detail</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     DIREKTORI LAYANAN DESA
+═══════════════════════════════════════════════ -->
+<section id="direktori" class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="mb-8">
+      <span class="text-xs font-semibold uppercase tracking-widest text-primary-500"><i class="fa-solid fa-list-ul mr-1"></i>Referensi</span>
+      <h2 class="text-2xl font-bold text-stone-900 mt-1">Direktori Layanan Desa</h2>
+      <p class="text-stone-400 text-sm mt-1 max-w-xl">Temukan layanan pemerintah, kesehatan, pendidikan, dan ekonomi yang tersedia di kampung-kampung binaan YPMD Papua.</p>
+    </div>
+
+    <!-- Search bar -->
+    <div class="flex gap-3 mb-6 flex-wrap">
+      <div class="flex border border-stone-200 flex-1 min-w-[240px]">
+        <span class="bg-stone-100 border-r border-stone-200 px-3 flex items-center">
+          <i class="fa-solid fa-search text-stone-400 text-sm"></i>
+        </span>
+        <input type="text" placeholder="Cari layanan atau kampung..." class="flex-1 px-3 py-2.5 text-sm outline-none bg-white"/>
+      </div>
+      <select class="border border-stone-200 px-3 py-2.5 text-sm outline-none bg-white">
+        <option>Semua Kategori</option>
+        <option>Kesehatan</option>
+        <option>Pendidikan</option>
+        <option>Ekonomi</option>
+        <option>Pemerintahan</option>
+      </select>
+      <button class="bg-primary-500 hover:bg-primary-600 text-white font-semibold text-sm px-5 py-2.5 transition-colors">
+        <i class="fa-solid fa-search mr-2"></i>Cari
+      </button>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="bg-white border border-stone-200 shadow-card p-5 hover:border-primary-300 transition-colors">
+        <div class="flex items-start gap-3 mb-3">
+          <div class="w-10 h-10 bg-red-50 flex items-center justify-center flex-shrink-0">
+            <i class="fa-solid fa-hospital text-red-500"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-stone-900 text-sm">Puskesmas Biak Numfor</h3>
+            <span class="bg-red-50 text-red-600 text-xs font-bold px-2 py-0.5">Kesehatan</span>
+          </div>
+        </div>
+        <p class="text-sm text-stone-500 leading-relaxed mb-3">Layanan kesehatan dasar, posyandu ibu dan anak, vaksinasi, dan konsultasi gizi untuk warga kampung binaan.</p>
+        <div class="text-xs text-stone-400 space-y-1">
+          <div><i class="fa-solid fa-location-dot mr-2"></i>Jl. Ahmad Yani, Biak</div>
+          <div><i class="fa-solid fa-phone mr-2"></i>0981-21234</div>
+          <div><i class="fa-solid fa-clock mr-2"></i>Sen–Jum · 07:00–14:00</div>
+        </div>
+      </div>
+
+      <div class="bg-white border border-stone-200 shadow-card p-5 hover:border-primary-300 transition-colors">
+        <div class="flex items-start gap-3 mb-3">
+          <div class="w-10 h-10 flex items-center justify-center flex-shrink-0" style="background:#fdf6ee;">
+            <i class="fa-solid fa-piggy-bank text-sm" style="color:#df8e35;"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-stone-900 text-sm">BPR Phidectama</h3>
+            <span class="text-xs font-bold px-2 py-0.5" style="background:#fdf6ee;color:#c9751e;">Keuangan</span>
+          </div>
+        </div>
+        <p class="text-sm text-stone-500 leading-relaxed mb-3">Bank Perkreditan Rakyat mitra YPMD. Layanan tabungan petani kakao, kredit usaha desa, dan konsultasi keuangan.</p>
+        <div class="text-xs text-stone-400 space-y-1">
+          <div><i class="fa-solid fa-location-dot mr-2"></i>Kotaraja, Jayapura</div>
+          <div><i class="fa-solid fa-phone mr-2"></i>0967-581071</div>
+          <div><i class="fa-solid fa-clock mr-2"></i>Sen–Sab · 08:00–15:00</div>
+        </div>
+      </div>
+
+      <div class="bg-white border border-stone-200 shadow-card p-5 hover:border-primary-300 transition-colors">
+        <div class="flex items-start gap-3 mb-3">
+          <div class="w-10 h-10 bg-blue-50 flex items-center justify-center flex-shrink-0">
+            <i class="fa-solid fa-graduation-cap text-blue-500"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-stone-900 text-sm">SDN Inpres Warmandi</h3>
+            <span class="bg-blue-50 text-blue-600 text-xs font-bold px-2 py-0.5">Pendidikan</span>
+          </div>
+        </div>
+        <p class="text-sm text-stone-500 leading-relaxed mb-3">Sekolah dasar kampung Warmandi dengan program literasi digital dan pendampingan guru oleh relawan YPMD.</p>
+        <div class="text-xs text-stone-400 space-y-1">
+          <div><i class="fa-solid fa-location-dot mr-2"></i>Kampung Warmandi, Manokwari</div>
+          <div><i class="fa-solid fa-phone mr-2"></i>Tidak tersedia</div>
+          <div><i class="fa-solid fa-clock mr-2"></i>Sen–Jum · 07:30–12:00</div>
+        </div>
+      </div>
+
+      <div class="bg-white border border-stone-200 shadow-card p-5 hover:border-primary-300 transition-colors">
+        <div class="flex items-start gap-3 mb-3">
+          <div class="w-10 h-10 bg-forest-50 flex items-center justify-center flex-shrink-0">
+            <i class="fa-solid fa-seedling text-forest-500"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-stone-900 text-sm">Kelompok Tani Kakao Berap</h3>
+            <span class="bg-forest-50 text-forest-600 text-xs font-bold px-2 py-0.5">Pertanian</span>
+          </div>
+        </div>
+        <p class="text-sm text-stone-500 leading-relaxed mb-3">Kelompok tani kakao organik dengan 45 anggota aktif. Pendampingan teknis dari staf lapangan YPMD setiap bulan.</p>
+        <div class="text-xs text-stone-400 space-y-1">
+          <div><i class="fa-solid fa-location-dot mr-2"></i>Kampung Berap, Biak Numfor</div>
+          <div><i class="fa-solid fa-phone mr-2"></i>082199001234</div>
+          <div><i class="fa-solid fa-calendar mr-2"></i>Pertemuan rutin tiap Senin</div>
+        </div>
+      </div>
+
+      <div class="bg-white border border-stone-200 shadow-card p-5 hover:border-primary-300 transition-colors">
+        <div class="flex items-start gap-3 mb-3">
+          <div class="w-10 h-10 bg-purple-50 flex items-center justify-center flex-shrink-0">
+            <i class="fa-solid fa-building-columns text-purple-500"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-stone-900 text-sm">Kantor Desa Ayambori</h3>
+            <span class="bg-purple-50 text-purple-600 text-xs font-bold px-2 py-0.5">Pemerintahan</span>
+          </div>
+        </div>
+        <p class="text-sm text-stone-500 leading-relaxed mb-3">Pelayanan administrasi kependudukan, surat pengantar, dan koordinasi program pemerintah daerah dengan YPMD.</p>
+        <div class="text-xs text-stone-400 space-y-1">
+          <div><i class="fa-solid fa-location-dot mr-2"></i>Kampung Ayambori, Biak</div>
+          <div><i class="fa-solid fa-phone mr-2"></i>0981-24567</div>
+          <div><i class="fa-solid fa-clock mr-2"></i>Sen–Rab · 08:00–13:00</div>
+        </div>
+      </div>
+
+      <div class="bg-white border border-stone-200 shadow-card p-5 hover:border-primary-300 transition-colors">
+        <div class="flex items-start gap-3 mb-3">
+          <div class="w-10 h-10 bg-primary-50 flex items-center justify-center flex-shrink-0">
+            <i class="fa-solid fa-wifi text-primary-500"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-stone-900 text-sm">Warnet Komunitas Biak</h3>
+            <span class="bg-primary-50 text-primary-600 text-xs font-bold px-2 py-0.5">Digital</span>
+          </div>
+        </div>
+        <p class="text-sm text-stone-500 leading-relaxed mb-3">Pusat akses internet komunitas dengan fasilitas komputer, printer, dan bimbingan literasi digital gratis untuk warga.</p>
+        <div class="text-xs text-stone-400 space-y-1">
+          <div><i class="fa-solid fa-location-dot mr-2"></i>Jl. Selat Makasar, Biak</div>
+          <div><i class="fa-solid fa-phone mr-2"></i>0981-33891</div>
+          <div><i class="fa-solid fa-clock mr-2"></i>Setiap hari · 08:00–20:00</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PROFIL KAMPUNG & TOKOH ADAT
+═══════════════════════════════════════════════ -->
+<section id="profil-kampung" class="py-16 bg-stone-50">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="mb-8">
+      <span class="text-xs font-semibold uppercase tracking-widest text-primary-500"><i class="fa-solid fa-landmark mr-1"></i>Komunitas</span>
+      <h2 class="text-2xl font-bold text-stone-900 mt-1">Profil Kampung & Tokoh Adat</h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <!-- Kampung profile -->
+      <div class="md:col-span-2">
+        <div class="bg-white shadow-card mb-5">
+          <div class="bg-primary-600 px-5 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 bg-white/20 flex items-center justify-center">
+                <i class="fa-solid fa-landmark text-white"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-white text-sm">Kampung Berap</h3>
+                <p class="text-primary-200 text-xs">Distrik Biak Kota · Biak Numfor</p>
+              </div>
+            </div>
+            <span class="bg-white/20 text-white text-xs font-bold px-2 py-0.5">Aktif</span>
+          </div>
+          <div class="p-5">
+            <img src="https://placehold.co/600x400/EEE/31343C" alt="" class="w-full h-40 object-cover mb-4"/>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm mb-4">
+              <div class="bg-stone-50 p-3">
+                <div class="text-xs text-stone-400 uppercase tracking-wider mb-1">Jumlah KK</div>
+                <div class="font-bold text-stone-900">128 KK</div>
+              </div>
+              <div class="bg-stone-50 p-3">
+                <div class="text-xs text-stone-400 uppercase tracking-wider mb-1">Penduduk</div>
+                <div class="font-bold text-stone-900">512 Jiwa</div>
+              </div>
+              <div class="bg-stone-50 p-3">
+                <div class="text-xs text-stone-400 uppercase tracking-wider mb-1">Marga Dominan</div>
+                <div class="font-bold text-stone-900">Mandowen</div>
+              </div>
+              <div class="bg-stone-50 p-3">
+                <div class="text-xs text-stone-400 uppercase tracking-wider mb-1">Luas Wilayah</div>
+                <div class="font-bold text-stone-900">12.4 km²</div>
+              </div>
+              <div class="bg-stone-50 p-3">
+                <div class="text-xs text-stone-400 uppercase tracking-wider mb-1">Binaan Sejak</div>
+                <div class="font-bold text-stone-900">2009</div>
+              </div>
+              <div class="bg-stone-50 p-3">
+                <div class="text-xs text-stone-400 uppercase tracking-wider mb-1">Program Aktif</div>
+                <div class="font-bold text-stone-900">Kakao Organik</div>
+              </div>
+            </div>
+            <p class="text-sm text-stone-500 leading-relaxed">Kampung Berap merupakan salah satu kampung perintis budidaya kakao organik binaan YPMD Papua sejak 2009. Memiliki lahan kakao seluas 38 hektar dengan 45 petani aktif.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tokoh adat -->
+      <div class="space-y-4">
+        <h3 class="font-bold text-stone-700 text-sm uppercase tracking-wider">Tokoh Adat & Komunitas</h3>
+        <div class="bg-white shadow-card p-4 flex items-start gap-3">
+          <img src="https://placehold.co/600x400/EEE/31343C" alt="" class="w-12 h-12 object-cover flex-shrink-0"/>
+          <div>
+            <h4 class="font-bold text-stone-900 text-sm">Bapak Yusuf Mandowen</h4>
+            <span class="text-xs font-semibold text-primary-600 bg-primary-50 px-2 py-0.5">Kepala Suku</span>
+            <p class="text-xs text-stone-500 mt-1.5 leading-relaxed">Ketua adat marga Mandowen, penggerak program kakao organik di Biak Numfor sejak awal pendampingan YPMD.</p>
+          </div>
+        </div>
+        <div class="bg-white shadow-card p-4 flex items-start gap-3">
+          <img src="https://placehold.co/600x400/EEE/31343C" alt="" class="w-12 h-12 object-cover flex-shrink-0"/>
+          <div>
+            <h4 class="font-bold text-stone-900 text-sm">Ibu Maria Kafiar</h4>
+            <span class="text-xs font-semibold text-xs px-2 py-0.5" style="background:#f0faf4;color:#2e9b61;">Tokoh Perempuan</span>
+            <p class="text-xs text-stone-500 mt-1.5 leading-relaxed">Pemimpin kelompok perempuan Kampung Warmandi. Aktif mendorong keterlibatan perempuan dalam ekonomi adat.</p>
+          </div>
+        </div>
+        <div class="bg-white shadow-card p-4 flex items-start gap-3">
+          <img src="https://placehold.co/600x400/EEE/31343C" alt="" class="w-12 h-12 object-cover flex-shrink-0"/>
+          <div>
+            <h4 class="font-bold text-stone-900 text-sm">Bapak Darius Wompere</h4>
+            <span class="text-xs font-semibold px-2 py-0.5" style="background:#fdf6ee;color:#c9751e;">Jurnalis Kampung</span>
+            <p class="text-xs text-stone-500 mt-1.5 leading-relaxed">Alumni program jurnalis kampung KdK YPMD. Kini aktif meliput dan melaporkan kondisi warga kepada publik.</p>
+          </div>
+        </div>
+        <div class="bg-white shadow-card p-4 flex items-start gap-3">
+          <img src="https://placehold.co/600x400/EEE/31343C" alt="" class="w-12 h-12 object-cover flex-shrink-0"/>
+          <div>
+            <h4 class="font-bold text-stone-900 text-sm">Bapak Petrus Ronsumbre</h4>
+            <span class="text-xs font-semibold text-primary-600 bg-primary-50 px-2 py-0.5">Ketua BPD</span>
+            <p class="text-xs text-stone-500 mt-1.5 leading-relaxed">Ketua Badan Permusyawaratan Desa Ayambori. Koordinator hubungan antara pemerintah desa dan YPMD.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     GALERI FOTO
+═══════════════════════════════════════════════ -->
+<section id="galeri" class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
+      <div>
+        <span class="text-xs font-semibold uppercase tracking-widest text-primary-500"><i class="fa-solid fa-images mr-1"></i>Dokumentasi</span>
+        <h2 class="text-2xl font-bold text-stone-900 mt-1">Galeri Foto Kegiatan Komunitas</h2>
+      </div>
+      <div class="flex gap-2">
+        <button class="text-xs font-semibold px-4 py-2 bg-primary-500 text-white">Semua</button>
+        <button class="text-xs font-semibold px-4 py-2 border border-stone-200 text-stone-600 hover:bg-stone-50">Pelatihan</button>
+        <button class="text-xs font-semibold px-4 py-2 border border-stone-200 text-stone-600 hover:bg-stone-50">Panen</button>
+        <button class="text-xs font-semibold px-4 py-2 border border-stone-200 text-stone-600 hover:bg-stone-50">Adat</button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+      <div class="relative group overflow-hidden">
+        <img src="https://placehold.co/600x400/EEE/31343C" alt="" class="w-full h-44 object-cover"/>
+        <div class="absolute inset-0 bg-primary-900/0 group-hover:bg-primary-900/60 transition-all flex items-end">
+          <div class="p-3 translate-y-full group-hover:translate-y-0 transition-transform">
+            <p class="text-white text-xs font-semibold">Pelatihan Fermentasi Kakao</p>
+            <p class="text-primary-200 text-xs">Kampung Berap · Feb 2025</p>
+          </div>
+        </div>
+      </div>
+      <div class="relative group overflow-hidden">
+        <img src="https://placehold.co/600x400/EEE/31343C" alt="" class="w-full h-44 object-cover"/>
+        <div class="absolute inset-0 bg-primary-900/0 group-hover:bg-primary-900/60 transition-all flex items-end">
+          <div class="p-3 translate-y-full group-hover:translate-y-0 transition-transform">
+            <p class="text-white text-xs font-semibold">Panen Raya Kakao Organik</p>
+            <p class="text-primary-200 text-xs">Kampung Berap · Mar 2025</p>
+          </div>
+        </div>
+      </div>
+      <div class="relative group overflow-hidden md:col-span-1 lg:col-span-1">
+        <img src="https://placehold.co/600x400/EEE/31343C" alt="" class="w-full h-44 object-cover"/>
+        <div class="absolute inset-0 bg-primary-900/0 group-hover:bg-primary-900/60 transition-all flex items-end">
+          <div class="p-3 translate-y-full group-hover:translate-y-0 transition-transform">
+            <p class="text-white text-xs font-semibold">Musyawarah Adat Kampung</p>
+            <p class="text-primary-200 text-xs">Warmandi · Jan 2025</p>
+          </div>
+        </div>
+      </div>
+      <div class="relative group overflow-hidden">
+        <img src="https://placehold.co/600x400/EEE/31343C" alt="" class="w-full h-44 object-cover"/>
+        <div class="absolute inset-0 bg-primary-900/0 group-hover:bg-primary-900/60 transition-all flex items-end">
+          <div class="p-3 translate-y-full group-hover:translate-y-0 transition-transform">
+            <p class="text-white text-xs font-semibold">Posyandu Ibu dan Anak</p>
+            <p class="text-primary-200 text-xs">Ayambori · Des 2024</p>
+          </div>
+        </div>
+      </div>
+      <div class="relative group overflow-hidden">
+        <img src="https://placehold.co/600x400/EEE/31343C" alt="" class="w-full h-44 object-cover"/>
+        <div class="absolute inset-0 bg-primary-900/0 group-hover:bg-primary-900/60 transition-all flex items-end">
+          <div class="p-3 translate-y-full group-hover:translate-y-0 transition-transform">
+            <p class="text-white text-xs font-semibold">Kunjungan APF Japan</p>
+            <p class="text-primary-200 text-xs">Jayapura · Nov 2024</p>
+          </div>
+        </div>
+      </div>
+      <div class="relative group overflow-hidden">
+        <img src="https://placehold.co/600x400/EEE/31343C" alt="" class="w-full h-44 object-cover"/>
+        <div class="absolute inset-0 bg-primary-900/0 group-hover:bg-primary-900/60 transition-all flex items-end">
+          <div class="p-3 translate-y-full group-hover:translate-y-0 transition-transform">
+            <p class="text-white text-xs font-semibold">Pembukaan Café Kakao Kita</p>
+            <p class="text-primary-200 text-xs">Jayapura · Okt 2024</p>
+          </div>
+        </div>
+      </div>
+      <div class="relative group overflow-hidden">
+        <img src="https://placehold.co/600x400/EEE/31343C" alt="" class="w-full h-44 object-cover"/>
+        <div class="absolute inset-0 bg-primary-900/0 group-hover:bg-primary-900/60 transition-all flex items-end">
+          <div class="p-3 translate-y-full group-hover:translate-y-0 transition-transform">
+            <p class="text-white text-xs font-semibold">Pelatihan Jurnalis Kampung</p>
+            <p class="text-primary-200 text-xs">Jayapura · Sep 2024</p>
+          </div>
+        </div>
+      </div>
+      <div class="relative group overflow-hidden">
+        <img src="https://placehold.co/600x400/EEE/31343C" alt="" class="w-full h-44 object-cover"/>
+        <div class="absolute inset-0 bg-primary-900/0 group-hover:bg-primary-900/60 transition-all flex items-end">
+          <div class="p-3 translate-y-full group-hover:translate-y-0 transition-transform">
+            <p class="text-white text-xs font-semibold">Tari Adat Biak Numfor</p>
+            <p class="text-primary-200 text-xs">HUT YPMD · Agt 2024</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-6 text-center">
+      <button class="border border-stone-200 text-stone-600 hover:bg-stone-50 font-semibold text-sm px-8 py-2.5 transition-colors">
+        Lihat Semua Foto <i class="fa-solid fa-arrow-down ml-2"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     BERITA & INFORMASI LOKAL
+═══════════════════════════════════════════════ -->
+<section id="berita" class="py-16 bg-stone-50">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
+      <div>
+        <span class="text-xs font-semibold uppercase tracking-widest text-primary-500"><i class="fa-solid fa-newspaper mr-1"></i>Informasi</span>
+        <h2 class="text-2xl font-bold text-stone-900 mt-1">Berita & Informasi Lokal</h2>
+      </div>
+      <a href="#" class="text-primary-600 hover:text-primary-700 font-semibold text-sm flex items-center gap-2">
+        Semua Berita <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5">
+      <!-- Featured news -->
+      <article class="md:col-span-2 bg-white shadow-card">
+        <img src="https://placehold.co/600x400/EEE/31343C" alt="" class="w-full h-52 object-cover"/>
+        <div class="p-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="bg-primary-500 text-white text-xs font-bold px-2 py-0.5">Utama</span>
+            <span class="text-xs text-stone-400">8 Maret 2025</span>
+          </div>
+          <h2 class="font-bold text-stone-900 text-lg leading-snug mb-2 hover:text-primary-600 cursor-pointer">
+            Ekspor Perdana Kakao Organik Papua Tahun 2025 ke Jepang Berhasil Lampaui Target
+          </h2>
+          <p class="text-stone-500 text-sm leading-relaxed mb-4">
+            YPMD Papua bersama kelompok tani binaan di Biak Numfor dan Manokwari berhasil mengirimkan 2,4 ton kakao organik grade A ke mitra APF Jepang, melampaui target awal sebesar 1,8 ton...
+          </p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2 text-xs text-stone-400">
+              <span><i class="fa-solid fa-user mr-1"></i>Tim YPMD</span>
+              <span>·</span>
+              <span><i class="fa-solid fa-eye mr-1"></i>1.240 dilihat</span>
+            </div>
+            <a href="#" class="text-primary-600 hover:text-primary-700 font-semibold text-sm">Baca selengkapnya →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Side news list -->
+      <div class="space-y-3">
+        <article class="bg-white shadow-card p-4 flex gap-3 hover:border-primary-300 border border-stone-100 transition-colors">
+          <img src="https://placehold.co/600x400/EEE/31343C" alt="" class="w-16 h-16 object-cover flex-shrink-0"/>
+          <div>
+            <span class="text-xs text-stone-400">5 Mar 2025</span>
+            <h3 class="font-bold text-stone-800 text-sm leading-snug hover:text-primary-600 cursor-pointer mt-0.5">Tokoh Adat Kampung Warmandi Dorong Sertifikasi Tanah Ulayat</h3>
+          </div>
+        </article>
+        <article class="bg-white shadow-card p-4 flex gap-3 hover:border-primary-300 border border-stone-100 transition-colors">
+          <img src="https://placehold.co/600x400/EEE/31343C" alt="" class="w-16 h-16 object-cover flex-shrink-0"/>
+          <div>
+            <span class="text-xs text-stone-400">3 Mar 2025</span>
+            <h3 class="font-bold text-stone-800 text-sm leading-snug hover:text-primary-600 cursor-pointer mt-0.5">Café Kakao Kita Papua Raih Penghargaan Produk Lokal Terbaik 2025</h3>
+          </div>
+        </article>
+        <article class="bg-white shadow-card p-4 flex gap-3 hover:border-primary-300 border border-stone-100 transition-colors">
+          <img src="https://placehold.co/600x400/EEE/31343C" alt="" class="w-16 h-16 object-cover flex-shrink-0"/>
+          <div>
+            <span class="text-xs text-stone-400">28 Feb 2025</span>
+            <h3 class="font-bold text-stone-800 text-sm leading-snug hover:text-primary-600 cursor-pointer mt-0.5">Program Tabungan Petani Buka Pendaftaran Gelombang Kedua</h3>
+          </div>
+        </article>
+        <article class="bg-white shadow-card p-4 flex gap-3 hover:border-primary-300 border border-stone-100 transition-colors">
+          <img src="https://placehold.co/600x400/EEE/31343C" alt="" class="w-16 h-16 object-cover flex-shrink-0"/>
+          <div>
+            <span class="text-xs text-stone-400">24 Feb 2025</span>
+            <h3 class="font-bold text-stone-800 text-sm leading-snug hover:text-primary-600 cursor-pointer mt-0.5">YPMD Papua Rilis Bulletin Kabar Kampung Digital Edisi Perdana</h3>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PETA SEBARAN KAMPUNG
+═══════════════════════════════════════════════ -->
+<section id="peta" class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="mb-8">
+      <span class="text-xs font-semibold uppercase tracking-widest text-primary-500"><i class="fa-solid fa-map-location-dot mr-1"></i>Sebaran</span>
+      <h2 class="text-2xl font-bold text-stone-900 mt-1">Peta Sebaran Kampung Binaan</h2>
+      <p class="text-stone-400 text-sm mt-1">48 kampung aktif tersebar di 3 wilayah utama Papua: Biak Numfor, Manokwari, dan Jayapura.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <!-- Fake map visualization -->
+      <div class="md:col-span-2 bg-stone-100 relative" style="height:400px; background:linear-gradient(160deg,#e0f2fe 0%,#bcd9fe 40%,#dbeafe 100%);">
+        <!-- Decorative coastline lines -->
+        <svg class="absolute inset-0 w-full h-full opacity-30" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,200 Q100,150 200,180 Q300,210 400,170 Q500,130 600,160 Q700,190 800,155 L800,400 L0,400 Z" fill="#7dd3fc" opacity="0.4"/>
+          <path d="M0,280 Q80,260 160,275 Q240,290 320,265 Q400,240 480,260 Q560,280 640,255 Q720,230 800,250 L800,400 L0,400 Z" fill="#38bdf8" opacity="0.3"/>
+        </svg>
+
+        <!-- Map label -->
+        <div class="absolute top-3 left-3 bg-white/90 px-3 py-1.5 text-xs font-bold text-stone-700 shadow-sm">
+          <i class="fa-solid fa-map mr-1 text-primary-500"></i>Papua · Indonesia
+        </div>
+
+        <!-- Map pins / kampung markers -->
+        <!-- Biak cluster -->
+        <div class="absolute map-pin w-4 h-4 bg-primary-500" style="top:38%;left:58%;" title="Biak Numfor"></div>
+        <div class="absolute map-pin w-3 h-3 bg-primary-400" style="top:32%;left:62%;"></div>
+        <div class="absolute map-pin w-3 h-3 bg-primary-400" style="top:44%;left:55%;"></div>
+        <div class="absolute map-pin w-3 h-3 bg-primary-400" style="top:36%;left:64%;"></div>
+        <div class="absolute map-pin w-3 h-3 bg-primary-400" style="top:41%;left:68%;"></div>
+
+        <!-- Manokwari cluster -->
+        <div class="absolute map-pin w-4 h-4 bg-forest-500" style="top:28%;left:28%;" title="Manokwari"></div>
+        <div class="absolute map-pin w-3 h-3 bg-forest-400" style="top:22%;left:32%;"></div>
+        <div class="absolute map-pin w-3 h-3 bg-forest-400" style="top:34%;left:24%;"></div>
+        <div class="absolute map-pin w-3 h-3 bg-forest-400" style="top:25%;left:20%;"></div>
+
+        <!-- Jayapura cluster -->
+        <div class="absolute map-pin w-4 h-4" style="top:55%;left:78%;background:#df8e35;" title="Jayapura"></div>
+        <div class="absolute map-pin w-3 h-3" style="top:50%;left:82%;background:#e9ae65;"></div>
+        <div class="absolute map-pin w-3 h-3" style="top:60%;left:75%;background:#e9ae65;"></div>
+
+        <!-- Region labels -->
+        <div class="absolute text-xs font-bold text-primary-700 bg-white/80 px-2 py-0.5" style="top:34%;left:54%;">Biak Numfor</div>
+        <div class="absolute text-xs font-bold text-forest-700 bg-white/80 px-2 py-0.5" style="top:24%;left:22%;">Manokwari</div>
+        <div class="absolute text-xs font-bold bg-white/80 px-2 py-0.5" style="top:51%;left:70%;color:#a85d18;">Jayapura</div>
+      </div>
+
+      <!-- Legend & stats -->
+      <div class="space-y-4">
+        <div class="bg-stone-50 p-4">
+          <h3 class="font-bold text-stone-700 text-sm uppercase tracking-wider mb-3">Legenda Peta</h3>
+          <div class="space-y-2.5">
+            <div class="flex items-center gap-3">
+              <div class="w-5 h-5 bg-primary-500 flex-shrink-0"></div>
+              <div>
+                <div class="text-sm font-semibold text-stone-700">Biak Numfor</div>
+                <div class="text-xs text-stone-400">22 kampung · Program Kakao</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-5 h-5 flex-shrink-0" style="background:#2e9b61;"></div>
+              <div>
+                <div class="text-sm font-semibold text-stone-700">Manokwari</div>
+                <div class="text-xs text-stone-400">16 kampung · Agroforestri</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-5 h-5 flex-shrink-0" style="background:#df8e35;"></div>
+              <div>
+                <div class="text-sm font-semibold text-stone-700">Jayapura</div>
+                <div class="text-xs text-stone-400">10 kampung · Advokasi</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white shadow-card p-4">
+          <h3 class="font-bold text-stone-700 text-sm uppercase tracking-wider mb-3">Statistik Wilayah</h3>
+          <div class="space-y-3">
+            <div>
+              <div class="flex justify-between text-xs mb-1">
+                <span class="font-medium text-stone-700">Biak Numfor</span>
+                <span class="text-stone-400">22 kampung</span>
+              </div>
+              <div class="h-2 bg-stone-100"><div class="h-2 bg-primary-500" style="width:46%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs mb-1">
+                <span class="font-medium text-stone-700">Manokwari</span>
+                <span class="text-stone-400">16 kampung</span>
+              </div>
+              <div class="h-2 bg-stone-100"><div class="h-2" style="width:33%;background:#2e9b61;"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs mb-1">
+                <span class="font-medium text-stone-700">Jayapura</span>
+                <span class="text-stone-400">10 kampung</span>
+              </div>
+              <div class="h-2 bg-stone-100"><div class="h-2" style="width:21%;background:#df8e35;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-primary-500 p-4 text-white">
+          <div class="text-3xl font-extrabold leading-none">48</div>
+          <div class="text-primary-100 text-xs uppercase tracking-wider mt-1">Total Kampung Binaan</div>
+          <div class="mt-3 pt-3 border-t border-primary-400 text-xs text-primary-200">
+            Tersebar di 3 kabupaten/kota · Papua & Papua Barat
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════ -->
+<footer class="bg-stone-900 text-stone-300">
+  <div class="max-w-7xl mx-auto px-6 py-12 grid md:grid-cols-4 gap-8">
+    <div class="md:col-span-1">
+      <div class="flex items-center gap-2.5 mb-4">
+        <div class="w-8 h-8 bg-primary-500 flex items-center justify-center">
+          <i class="fa-solid fa-globe text-white text-sm"></i>
+        </div>
+        <span class="font-extrabold text-white text-base">KampungNet</span>
+      </div>
+      <p class="text-stone-400 text-sm leading-relaxed mb-4">Portal komunitas digital untuk masyarakat desa Papua, difasilitasi oleh YPMD Papua.</p>
+      <div class="flex gap-3">
+        <a href="#" class="w-8 h-8 bg-stone-700 hover:bg-primary-600 flex items-center justify-center transition-colors text-xs"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#" class="w-8 h-8 bg-stone-700 hover:bg-primary-600 flex items-center justify-center transition-colors text-xs"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" class="w-8 h-8 bg-stone-700 hover:bg-primary-600 flex items-center justify-center transition-colors text-xs"><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div>
+      <h4 class="text-white text-xs font-bold uppercase tracking-widest mb-3">Fitur Portal</h4>
+      <ul class="space-y-2 text-sm text-stone-400">
+        <li><a href="#forum"     class="hover:text-white transition-colors">Forum Diskusi</a></li>
+        <li><a href="#agenda"    class="hover:text-white transition-colors">Agenda Kegiatan</a></li>
+        <li><a href="#direktori" class="hover:text-white transition-colors">Direktori Layanan</a></li>
+        <li><a href="#galeri"    class="hover:text-white transition-colors">Galeri Foto</a></li>
+        <li><a href="#berita"    class="hover:text-white transition-colors">Berita Lokal</a></li>
+        <li><a href="#peta"      class="hover:text-white transition-colors">Peta Kampung</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-white text-xs font-bold uppercase tracking-widest mb-3">Tentang YPMD</h4>
+      <ul class="space-y-2 text-sm text-stone-400">
+        <li>Yayasan Pembangunan Masyarakat Desa</li>
+        <li>Berdiri: 8 Desember 1984</li>
+        <li>Jl. Jeruk Nipis 117, Kotaraja</li>
+        <li>Jayapura, Papua 99225</li>
+        <li>Tel: 0967-581071</li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-white text-xs font-bold uppercase tracking-widest mb-3">Pengembang</h4>
+      <a href="https://nokensoft.com" target="_blank" class="flex items-center gap-2 text-primary-400 hover:text-primary-300 font-semibold text-sm transition-colors mb-3">
+        <i class="fa-solid fa-code"></i> Nokensoft.com
+      </a>
+      <p class="text-stone-500 text-xs leading-relaxed">Portal ini merupakan draft desain penawaran berdasarkan hasil analisa tim pengembang Nokensoft untuk YPMD Papua.</p>
+    </div>
+  </div>
+  <div class="border-t border-stone-800">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <p class="text-stone-600 text-xs">© 2025 KampungNet · YPMD Papua</p>
+      <p class="text-stone-700 text-xs flex items-center gap-2">
+        <i class="fa-solid fa-triangle-exclamation text-amber-500"></i>
+        Draft Desain Penawaran ·
+        <a href="https://nokensoft.com" target="_blank" class="text-primary-400 hover:text-primary-300 font-semibold ml-0.5">Nokensoft.com</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- Charts -->
+<script>
+  const ctx1 = document.getElementById('forumChart');
+  if(ctx1){
+    new Chart(ctx1,{
+      type:'bar',
+      data:{
+        labels:['Okt','Nov','Des','Jan','Feb','Mar'],
+        datasets:[
+          { label:'Topik Baru', data:[28,35,22,41,38,32], backgroundColor:'#3478e8', borderWidth:0 },
+          { label:'Balasan', data:[142,188,110,215,203,165], backgroundColor:'#bcd9fe', borderWidth:0 }
+        ]
+      },
+      options:{
+        responsive:true,
+        plugins:{ legend:{ position:'top', labels:{ font:{ family:'Plus Jakarta Sans', size:12 }, padding:12, boxWidth:10 }}},
+        scales:{
+          y:{ beginAtZero:true, ticks:{ font:{ family:'Plus Jakarta Sans', size:11 }}, grid:{ color:'#f5f5f4' }},
+          x:{ ticks:{ font:{ family:'Plus Jakarta Sans', size:11 }}, grid:{ display:false }}
+        }
+      }
+    });
+  }
+
+  const ctx2 = document.getElementById('wilayahChart');
+  if(ctx2){
+    new Chart(ctx2,{
+      type:'doughnut',
+      data:{
+        labels:['Biak Numfor','Manokwari','Jayapura','Lainnya'],
+        datasets:[{
+          data:[580,380,210,70],
+          backgroundColor:['#3478e8','#2e9b61','#df8e35','#a8a29e'],
+          borderWidth:0
+        }]
+      },
+      options:{
+        responsive:true,
+        cutout:'60%',
+        plugins:{
+          legend:{
+            position:'bottom',
+            labels:{ font:{ family:'Plus Jakarta Sans', size:11 }, padding:14, boxWidth:10 }
+          }
+        }
+      }
+    });
+  }
+
+  // Scroll fade-in
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+  },{ threshold:0.1 });
+  document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+</script>
+
+</body>
+</html>

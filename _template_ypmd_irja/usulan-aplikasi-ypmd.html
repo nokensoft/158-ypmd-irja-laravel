@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>Usulan Sistem Aplikasi YPMD Papua — Nokensoft.com</title>
+  <link rel="icon" href="./img/logo-sample.png"/>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50:  '#f0f7f2',
+              100: '#d9ede0',
+              200: '#b4dbc3',
+              300: '#82c19e',
+              400: '#4fa174',
+              500: '#2d8057',
+              600: '#1f6642',
+              700: '#1a5236',
+              800: '#163f2b',
+              900: '#0f2b1d',
+            },
+            accent: {
+              50:  '#fdf8ee',
+              100: '#f9eccc',
+              200: '#f2d68d',
+              300: '#e8bc4f',
+              400: '#c9972a',
+              500: '#a67820',
+            },
+            neutral: {
+              50:  '#fafafa',
+              100: '#f4f4f4',
+              200: '#e8e8e8',
+              300: '#d0d0d0',
+              400: '#a0a0a0',
+              500: '#707070',
+              600: '#505050',
+              700: '#383838',
+              800: '#242424',
+              900: '#141414',
+            }
+          },
+          fontFamily: {
+            display: ['Lora', 'Georgia', 'serif'],
+            body: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          fontSize: {
+            xs:   ['14px', { lineHeight: '1.5' }],
+            sm:   ['14px', { lineHeight: '1.6' }],
+            base: ['15px', { lineHeight: '1.75' }],
+            lg:   ['17px', { lineHeight: '1.7' }],
+            xl:   ['19px', { lineHeight: '1.6' }],
+            '2xl':['22px', { lineHeight: '1.5' }],
+            '3xl':['28px', { lineHeight: '1.3' }],
+            '4xl':['34px', { lineHeight: '1.2' }],
+          },
+          boxShadow: {
+            'card': '0 2px 12px rgba(0,0,0,0.07)',
+            'card-hover': '0 8px 28px rgba(0,0,0,0.13)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html { font-size: 15px; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; }
+    h1, h2, h3, .font-display { font-family: 'Lora', Georgia, serif; }
+    .card-app {
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+    }
+    .card-app:hover {
+      box-shadow: 0 8px 28px rgba(0,0,0,0.13);
+      transform: translateY(-3px);
+    }
+    /* Toast */
+    #copy-toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(16px);
+      opacity: 0;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    #copy-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    /* Tombol salin prompt: tersembunyi kecuali mode developer (?salin=1) */
+    .salin-btn { display: none !important; }
+    body.dev-mode .salin-btn { display: flex !important; }
+
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white; }
+    }
+  </style>
+</head>
+
+<body class="bg-neutral-100 text-neutral-800 min-h-screen" x-data="{ filter: 'semua' }">
+
+  <!-- Toast Notifikasi Copy -->
+  <div id="copy-toast" class="bg-neutral-900 text-white text-sm font-semibold px-5 py-3 shadow-card flex items-center gap-2">
+    <i class="fa-solid fa-circle-check text-green-400"></i>
+    Prompt berhasil disalin — siap paste ke AI
+  </div>
+
+  <div class="max-w-7xl mx-auto px-6 py-12">
+
+    <!-- ── PAGE HEADER ── -->
+    <div class="mb-10">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-7 h-7 flex items-center justify-center">
+              <img src="./img/logo-sample.png" alt="" class="w-7 h-7 object-contain">
+            </div>
+            <span class="text-xs font-semibold tracking-widest uppercase text-primary-500">YPMD Papua × Nokensoft.com</span>
+          </div>
+          <h1 class="font-display font-bold text-neutral-900 text-3xl md:text-4xl leading-tight">
+            Usulan Sistem Aplikasi<br/>
+            <span class="text-primary-600">YPMD Papua</span>
+          </h1>
+          <p class="text-neutral-500 text-sm mt-2">
+            Disusun oleh tim pengembang <strong class="text-neutral-700">Nokensoft.com</strong> · Draft Penawaran
+          </p>
+        </div>
+
+        <!-- Stats ringkas -->
+        <div class="flex gap-4 flex-wrap no-print">
+          <div class="bg-white shadow-card px-5 py-3 text-center">
+            <div class="text-2xl font-display font-bold text-primary-600">15</div>
+            <div class="text-xs text-neutral-400 uppercase tracking-wider mt-0.5">Total Usulan</div>
+          </div>
+          <div class="bg-white shadow-card px-5 py-3 text-center">
+            <div class="text-2xl font-display font-bold text-accent-400">5</div>
+            <div class="text-xs text-neutral-400 uppercase tracking-wider mt-0.5">Kategori</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="mt-6 h-px bg-neutral-200"></div>
+
+      <!-- Filter Tabs -->
+      <div class="mt-5 flex flex-wrap gap-2 no-print">
+        <template x-for="tab in [
+          { key: 'semua',      label: 'Semua',              icon: 'fa-border-all' },
+          { key: 'pertanian',  label: 'Pertanian & Kakao',  icon: 'fa-seedling' },
+          { key: 'komunitas',  label: 'Komunitas Adat',     icon: 'fa-users' },
+          { key: 'ekonomi',    label: 'Ekonomi & Keuangan', icon: 'fa-coins' },
+          { key: 'informasi',  label: 'Informasi & Berita', icon: 'fa-newspaper' },
+          { key: 'manajemen',  label: 'Manajemen Lembaga',  icon: 'fa-building' },
+        ]">
+          <button
+            @click="filter = tab.key"
+            :class="filter === tab.key
+              ? 'bg-primary-500 text-white shadow-card'
+              : 'bg-white text-neutral-600 hover:bg-neutral-50 hover:text-primary-600 shadow-card'"
+            class="flex items-center gap-2 px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-all"
+            x-text="tab.label"
+          ></button>
+        </template>
+      </div>
+    </div>
+
+    <!-- ════════════════════════ KATEGORI 1: PERTANIAN & KAKAO ════════════════════════ -->
+    <div x-show="filter === 'semua' || filter === 'pertanian'" x-transition class="mb-12">
+      <div class="flex items-center gap-3 mb-5">
+        <div class="w-8 h-8 bg-primary-500 flex items-center justify-center">
+          <i class="fa-solid fa-seedling text-white text-xs"></i>
+        </div>
+        <div>
+          <h2 class="font-display font-bold text-neutral-900 text-xl">Pertanian & Kakao Organik</h2>
+          <p class="text-neutral-400 text-xs mt-0.5">Mendukung rantai produksi dan perdagangan kakao organik Papua</p>
+        </div>
+        <span class="ml-auto bg-primary-50 text-primary-600 text-xs font-bold px-3 py-1">4 Aplikasi</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+        <!-- Card 1 -->
+        <article class="card-app bg-white shadow-card flex flex-col">
+          <div class="h-1 bg-primary-500"></div>
+          <div class="p-5 flex flex-col flex-1">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 bg-primary-50 flex items-center justify-center">
+                <i class="fa-solid fa-leaf text-primary-500"></i>
+              </div>
+              <span class="text-xs font-bold text-primary-400 bg-primary-50 px-2 py-0.5">Web + Mobile</span>
+            </div>
+            <h3 class="font-display font-bold text-neutral-900 text-base mb-2">KakaoKita</h3>
+            <p class="text-neutral-500 text-sm leading-relaxed flex-1">
+              Manajemen kebun kakao organik: pencatatan panen harian, pemantauan kualitas biji, jadwal perawatan pohon, dan riwayat kebun per petani.
+            </p>
+            <div class="mt-4 pt-3 border-t border-neutral-100 flex flex-wrap gap-1">
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Pencatatan Panen</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Kualitas Biji</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Perawatan</span>
+            </div>
+            <button
+              onclick="copyPrompt(`Buat desain prototype aplikasi KakaoKita.
+
+Deskripsi Sistem:
+Aplikasi manajemen kebun kakao organik untuk petani binaan YPMD Papua. Mencakup pencatatan panen harian, pemantauan kualitas biji kakao, jadwal perawatan pohon, dan riwayat kebun per petani.
+
+Kategori: Pertanian & Kakao Organik
+Platform: Web + Mobile
+Pengguna: Petani kakao organik, petugas lapangan YPMD
+
+Fitur Utama:
+- Dashboard ringkasan kebun
+- Pencatatan hasil panen harian
+- Pemantauan kualitas biji (grade A/B/C)
+- Jadwal perawatan dan pemupukan
+- Riwayat kebun per petani
+- Profil petani dan data lahan
+- Laporan panen bulanan
+- Notifikasi jadwal perawatan
+
+Tampilkan semua fitur dalam satu halaman,
+gunakan sidebar mengambang di sisi kanan untuk navigasi semua fitur,
+fitur mulai dari halaman beranda/landing page, login, register, dashboard, dan fitur lainnya sesuai konteks system.
+
+Teknologi:
+HTML, CSS Tailwind, Alpine.js, Font Awesome Icons, chart.js (setup cdn)
+
+Tampilan Mobile:
+Logo dan title di tengah, icon menu navigasi di sisi kanan atas
+
+Gaya Desain:
+Kotak (tidak rounded), warna putih dominan, shadow md, clean, modern, minimalis
+
+Tailwind Config:
+Buat tema warna variabel custom agar mudah diubah
+
+Ketentuan:
+- Gunakan semantic HTML
+- Konten utama masuk di <main>
+- Gunakan <section> untuk setiap partisi konten
+- Gunakan <header>, <nav>, <footer> dan elemen lainnya sesuai fungsi
+- Klik navigasi scroll animasi smooth
+- Gunakan font Jakarta Sans ukuran minimal 14px
+
+Jika ada gambar, gunakan https://placehold.co/600x400/EEE/31343C tanpa teks pengganti
+
+Disclaimer:
+- Buat disclaimer bahwa ini merupakan draft desain penawaran yang dibuat berdasarkan hasil analisa tim pengembang
+- Powered by Nokensoft.com
+- Buat dalam bentuk topbar alert di paling atas website
+- Buat juga dalam bentuk modal setiap kali load halaman, modal muncul dengan tombol close`)"
+              class="mt-4 w-full flex items-center justify-center gap-2 border border-neutral-200 hover:border-primary-400 hover:bg-primary-50 text-neutral-400 hover:text-primary-600 text-xs font-semibold py-2 transition-all no-print salin-btn"
+            >
+              <i class="fa-solid fa-copy text-xs"></i> Salin Prompt AI
+            </button>
+            <a href="kakaokita-prototype.html" target="_blank" rel="noopener"
+              class="mt-2 w-full flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white text-xs font-semibold py-2 transition-all no-print"
+            >
+              <i class="fa-solid fa-eye text-xs"></i> Lihat Demo
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="card-app bg-white shadow-card flex flex-col">
+          <div class="h-1 bg-primary-500"></div>
+          <div class="p-5 flex flex-col flex-1">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 bg-primary-50 flex items-center justify-center">
+                <i class="fa-solid fa-truck-ramp-box text-primary-500"></i>
+              </div>
+              <span class="text-xs font-bold text-primary-400 bg-primary-50 px-2 py-0.5">Web</span>
+            </div>
+            <h3 class="font-display font-bold text-neutral-900 text-base mb-2">PanenTrack</h3>
+            <p class="text-neutral-500 text-sm leading-relaxed flex-1">
+              Sistem pelacakan hasil panen dari kebun hingga pengiriman ke pembeli internasional, lengkap dengan laporan bulanan transparan yang dikirim ke mitra di Jepang.
+            </p>
+            <div class="mt-4 pt-3 border-t border-neutral-100 flex flex-wrap gap-1">
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Lacak Pengiriman</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Laporan Ekspor</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Transparansi</span>
+            </div>
+            <button
+              onclick="copyPrompt(`Buat desain prototype aplikasi PanenTrack.
+
+Deskripsi Sistem:
+Sistem pelacakan hasil panen kakao organik Papua dari kebun hingga pengiriman ke pembeli internasional (Jepang). Mencakup laporan bulanan transparan yang dapat diakses petani dan mitra pembeli.
+
+Kategori: Pertanian & Kakao Organik
+Platform: Web
+Pengguna: Staf YPMD, petani, mitra pembeli internasional (APF Jepang)
+
+Fitur Utama:
+- Dashboard pelacakan panen real-time
+- Input data panen dari lapangan
+- Status pengiriman dan logistik
+- Laporan bulanan otomatis (PDF/Excel)
+- Histori transaksi per petani
+- Portal transparansi untuk mitra Jepang
+- Notifikasi status pengiriman
+- Manajemen kualitas dan grading
+
+Tampilkan semua fitur dalam satu halaman,
+gunakan sidebar mengambang di sisi kanan untuk navigasi semua fitur,
+fitur mulai dari halaman beranda/landing page, login, register, dashboard, dan fitur lainnya sesuai konteks system.
+
+Teknologi:
+HTML, CSS Tailwind, Alpine.js, Font Awesome Icons, chart.js (setup cdn)
+
+Tampilan Mobile:
+Logo dan title di tengah, icon menu navigasi di sisi kanan atas
+
+Gaya Desain:
+Kotak (tidak rounded), warna putih dominan, shadow md, clean, modern, minimalis
+
+Tailwind Config:
+Buat tema warna variabel custom agar mudah diubah
+
+Ketentuan:
+- Gunakan semantic HTML
+- Konten utama masuk di <main>
+- Gunakan <section> untuk setiap partisi konten
+- Gunakan <header>, <nav>, <footer> dan elemen lainnya sesuai fungsi
+- Klik navigasi scroll animasi smooth
+- Gunakan font Jakarta Sans ukuran minimal 14px
+
+Jika ada gambar, gunakan https://placehold.co/600x400/EEE/31343C tanpa teks pengganti
+
+Disclaimer:
+- Buat disclaimer bahwa ini merupakan draft desain penawaran yang dibuat berdasarkan hasil analisa tim pengembang
+- Powered by Nokensoft.com
+- Buat dalam bentuk topbar alert di paling atas website
+- Buat juga dalam bentuk modal setiap kali load halaman, modal muncul dengan tombol close`)"
+              class="mt-4 w-full flex items-center justify-center gap-2 border border-neutral-200 hover:border-primary-400 hover:bg-primary-50 text-neutral-400 hover:text-primary-600 text-xs font-semibold py-2 transition-all no-print salin-btn"
+            >
+              <i class="fa-solid fa-copy text-xs"></i> Salin Prompt AI
+            </button>
+            <a href="#" style="display:none"
+              class="mt-2 w-full flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white text-xs font-semibold py-2 transition-all no-print"
+            >
+              <i class="fa-solid fa-eye text-xs"></i> Lihat Demo
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="card-app bg-white shadow-card flex flex-col">
+          <div class="h-1 bg-accent-400"></div>
+          <div class="p-5 flex flex-col flex-1">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 bg-accent-50 flex items-center justify-center">
+                <i class="fa-solid fa-store text-accent-400"></i>
+              </div>
+              <span class="text-xs font-bold text-accent-400 bg-accent-50 px-2 py-0.5">Web + Mobile</span>
+            </div>
+            <h3 class="font-display font-bold text-neutral-900 text-base mb-2">CacaoMarket</h3>
+            <p class="text-neutral-500 text-sm leading-relaxed flex-1">
+              Platform perdagangan langsung (<em>people to people trade</em>) antara petani Papua dan konsumen luar negeri tanpa perantara. Mendukung konsep APF.
+            </p>
+            <div class="mt-4 pt-3 border-t border-neutral-100 flex flex-wrap gap-1">
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">P2P Trade</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Harga Langsung</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Multi Bahasa</span>
+            </div>
+            <button
+              onclick="copyPrompt(`Buat desain prototype aplikasi CacaoMarket.
+
+Deskripsi Sistem:
+Platform perdagangan langsung (people to people trade) kakao organik Papua antara petani dan konsumen luar negeri tanpa perantara. Mendukung konsep jaringan APF.
+
+Kategori: Pertanian & Kakao Organik
+Platform: Web + Mobile
+Pengguna: Petani Papua, konsumen internasional, staf CV Cacao Kita
+
+Fitur Utama:
+- Landing page marketplace kakao organik
+- Katalog produk kakao (grade
+- harga
+- asal daerah)
+- Profil petani dan kebun
+- Sistem pemesanan langsung buyer ke petani
+- Konversi kurs otomatis (IDR/JPY/USD)
+- Histori transaksi dan pembelian
+- Chat antara petani dan buyer
+- Laporan dan invoice otomatis
+- Dukungan multi bahasa (Indonesia & Inggris)
+
+Tampilkan semua fitur dalam satu halaman,
+gunakan sidebar mengambang di sisi kanan untuk navigasi semua fitur,
+fitur mulai dari halaman beranda/landing page, login, register, dashboard, dan fitur lainnya sesuai konteks system.
+
+Teknologi:
+HTML, CSS Tailwind, Alpine.js, Font Awesome Icons, chart.js (setup cdn)
+
+Tampilan Mobile:
+Logo dan title di tengah, icon menu navigasi di sisi kanan atas
+
+Gaya Desain:
+Kotak (tidak rounded), warna putih dominan, shadow md, clean, modern, minimalis
+
+Tailwind Config:
+Buat tema warna variabel custom agar mudah diubah
+
+Ketentuan:
+- Gunakan semantic HTML
+- Konten utama masuk di <main>
+- Gunakan <section> untuk setiap partisi konten
+- Gunakan <header>, <nav>, <footer> dan elemen lainnya sesuai fungsi
+- Klik navigasi scroll animasi smooth
+- Gunakan font Jakarta Sans ukuran minimal 14px
+
+Jika ada gambar, gunakan https://placehold.co/600x400/EEE/31343C tanpa teks pengganti
+
+Disclaimer:
+- Buat disclaimer bahwa ini merupakan draft desain penawaran yang dibuat berdasarkan hasil analisa tim pengembang
+- Powered by Nokensoft.com
+- Buat dalam bentuk topbar alert di paling atas website
+- Buat juga dalam bentuk modal setiap kali load halaman, modal muncul dengan tombol close`)"
+              class="mt-4 w-full flex items-center justify-center gap-2 border border-neutral-200 hover:border-accent-400 hover:bg-accent-50 text-neutral-400 hover:text-accent-500 text-xs font-semibold py-2 transition-all no-print salin-btn"
+            >
+              <i class="fa-solid fa-copy text-xs"></i> Salin Prompt AI
+            </button>
+            <a href="#" style="display:none"
+              class="mt-2 w-full flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white text-xs font-semibold py-2 transition-all no-print"
+            >
+              <i class="fa-solid fa-eye text-xs"></i> Lihat Demo
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="card-app bg-white shadow-card flex flex-col">
+          <div class="h-1 bg-primary-400"></div>
+          <div class="p-5 flex flex-col flex-1">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 bg-primary-50 flex items-center justify-center">
+                <i class="fa-solid fa-certificate text-primary-500"></i>
+              </div>
+              <span class="text-xs font-bold text-primary-400 bg-primary-50 px-2 py-0.5">Web</span>
+            </div>
+            <h3 class="font-display font-bold text-neutral-900 text-base mb-2">OrganikLog</h3>
+            <p class="text-neutral-500 text-sm leading-relaxed flex-1">
+              Aplikasi sertifikasi dan pencatatan praktik pertanian organik sesuai standar internasional. Menyimpan histori lahan dan memudahkan proses audit sertifikasi.
+            </p>
+            <div class="mt-4 pt-3 border-t border-neutral-100 flex flex-wrap gap-1">
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Sertifikasi</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Histori Lahan</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Audit Log</span>
+            </div>
+            <button
+              onclick="copyPrompt(`Buat desain prototype aplikasi OrganikLog.
+
+Deskripsi Sistem:
+Aplikasi sertifikasi dan pencatatan praktik pertanian organik untuk petani binaan YPMD Papua sesuai standar internasional. Menyimpan histori lahan dan memudahkan proses audit.
+
+Kategori: Pertanian & Kakao Organik
+Platform: Web
+Pengguna: Petani, auditor sertifikasi, staf YPMD
+
+Fitur Utama:
+- Dashboard status sertifikasi per petani
+- Form pencatatan praktik pertanian harian
+- Upload foto dokumentasi lahan
+- Histori penggunaan pupuk dan pestisida
+- Checklist standar organik internasional
+- Jadwal inspeksi dan audit lapangan
+- Laporan kepatuhan organik
+- Manajemen dokumen sertifikat
+- Alert masa berlaku sertifikat
+
+Tampilkan semua fitur dalam satu halaman,
+gunakan sidebar mengambang di sisi kanan untuk navigasi semua fitur,
+fitur mulai dari halaman beranda/landing page, login, register, dashboard, dan fitur lainnya sesuai konteks system.
+
+Teknologi:
+HTML, CSS Tailwind, Alpine.js, Font Awesome Icons, chart.js (setup cdn)
+
+Tampilan Mobile:
+Logo dan title di tengah, icon menu navigasi di sisi kanan atas
+
+Gaya Desain:
+Kotak (tidak rounded), warna putih dominan, shadow md, clean, modern, minimalis
+
+Tailwind Config:
+Buat tema warna variabel custom agar mudah diubah
+
+Ketentuan:
+- Gunakan semantic HTML
+- Konten utama masuk di <main>
+- Gunakan <section> untuk setiap partisi konten
+- Gunakan <header>, <nav>, <footer> dan elemen lainnya sesuai fungsi
+- Klik navigasi scroll animasi smooth
+- Gunakan font Jakarta Sans ukuran minimal 14px
+
+Jika ada gambar, gunakan https://placehold.co/600x400/EEE/31343C tanpa teks pengganti
+
+Disclaimer:
+- Buat disclaimer bahwa ini merupakan draft desain penawaran yang dibuat berdasarkan hasil analisa tim pengembang
+- Powered by Nokensoft.com
+- Buat dalam bentuk topbar alert di paling atas website
+- Buat juga dalam bentuk modal setiap kali load halaman, modal muncul dengan tombol close`)"
+              class="mt-4 w-full flex items-center justify-center gap-2 border border-neutral-200 hover:border-primary-400 hover:bg-primary-50 text-neutral-400 hover:text-primary-600 text-xs font-semibold py-2 transition-all no-print salin-btn"
+            >
+              <i class="fa-solid fa-copy text-xs"></i> Salin Prompt AI
+            </button>
+            <a href="#" style="display:none"
+              class="mt-2 w-full flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white text-xs font-semibold py-2 transition-all no-print"
+            >
+              <i class="fa-solid fa-eye text-xs"></i> Lihat Demo
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- ════════════════════════ KATEGORI 2: KOMUNITAS ADAT ════════════════════════ -->
+    <div x-show="filter === 'semua' || filter === 'komunitas'" x-transition class="mb-12">
+      <div class="flex items-center gap-3 mb-5">
+        <div class="w-8 h-8 bg-emerald-600 flex items-center justify-center">
+          <i class="fa-solid fa-users text-white text-xs"></i>
+        </div>
+        <div>
+          <h2 class="font-display font-bold text-neutral-900 text-xl">Pemberdayaan & Komunitas Adat</h2>
+          <p class="text-neutral-400 text-xs mt-0.5">Menguatkan partisipasi dan hak-hak masyarakat adat Papua</p>
+        </div>
+        <span class="ml-auto bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1">3 Aplikasi</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+        <!-- Card 5 -->
+        <article class="card-app bg-white shadow-card flex flex-col">
+          <div class="h-1 bg-emerald-600"></div>
+          <div class="p-5 flex flex-col flex-1">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 bg-emerald-50 flex items-center justify-center">
+                <i class="fa-solid fa-globe text-emerald-600"></i>
+              </div>
+              <span class="text-xs font-bold text-emerald-500 bg-emerald-50 px-2 py-0.5">Web + Mobile</span>
+            </div>
+            <h3 class="font-display font-bold text-neutral-900 text-base mb-2">KampungNet</h3>
+            <p class="text-neutral-500 text-sm leading-relaxed flex-1">
+              Portal komunitas digital untuk masyarakat desa Papua: informasi program, forum diskusi, pengumuman kegiatan pendampingan, dan direktori layanan desa.
+            </p>
+            <div class="mt-4 pt-3 border-t border-neutral-100 flex flex-wrap gap-1">
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Forum</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Pengumuman</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Direktori</span>
+            </div>
+            <button
+              onclick="copyPrompt(`Buat desain prototype aplikasi KampungNet.
+
+Deskripsi Sistem:
+Portal komunitas digital untuk masyarakat desa Papua. Menyediakan informasi program YPMD, forum diskusi, pengumuman kegiatan pendampingan, dan direktori layanan desa.
+
+Kategori: Pemberdayaan & Komunitas Adat
+Platform: Web + Mobile
+Pengguna: Masyarakat desa Papua, staf YPMD, tokoh adat
+
+Fitur Utama:
+- Beranda portal komunitas
+- Forum diskusi per kampung
+- Pengumuman dan agenda kegiatan
+- Direktori layanan desa
+- Profil kampung dan tokoh adat
+- Galeri foto kegiatan komunitas
+- Berita dan informasi lokal
+- Peta sebaran kampung binaan
+
+Tampilkan semua fitur dalam satu halaman,
+gunakan sidebar mengambang di sisi kanan untuk navigasi semua fitur,
+fitur mulai dari halaman beranda/landing page, login, register, dashboard, dan fitur lainnya sesuai konteks system.
+
+Teknologi:
+HTML, CSS Tailwind, Alpine.js, Font Awesome Icons, chart.js (setup cdn)
+
+Tampilan Mobile:
+Logo dan title di tengah, icon menu navigasi di sisi kanan atas
+
+Gaya Desain:
+Kotak (tidak rounded), warna putih dominan, shadow md, clean, modern, minimalis
+
+Tailwind Config:
+Buat tema warna variabel custom agar mudah diubah
+
+Ketentuan:
+- Gunakan semantic HTML
+- Konten utama masuk di <main>
+- Gunakan <section> untuk setiap partisi konten
+- Gunakan <header>, <nav>, <footer> dan elemen lainnya sesuai fungsi
+- Klik navigasi scroll animasi smooth
+- Gunakan font Jakarta Sans ukuran minimal 14px
+
+Jika ada gambar, gunakan https://placehold.co/600x400/EEE/31343C tanpa teks pengganti
+
+Disclaimer:
+- Buat disclaimer bahwa ini merupakan draft desain penawaran yang dibuat berdasarkan hasil analisa tim pengembang
+- Powered by Nokensoft.com
+- Buat dalam bentuk topbar alert di paling atas website
+- Buat juga dalam bentuk modal setiap kali load halaman, modal muncul dengan tombol close`)"
+              class="mt-4 w-full flex items-center justify-center gap-2 border border-neutral-200 hover:border-emerald-400 hover:bg-emerald-50 text-neutral-400 hover:text-emerald-600 text-xs font-semibold py-2 transition-all no-print salin-btn"
+            >
+              <i class="fa-solid fa-copy text-xs"></i> Salin Prompt AI
+            </button>
+            <a href="kampungnet.html" target="_blank" rel="noopener"
+              class="mt-2 w-full flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white text-xs font-semibold py-2 transition-all no-print"
+            >
+              <i class="fa-solid fa-eye text-xs"></i> Lihat Demo
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 6 -->
+        <article class="card-app bg-white shadow-card flex flex-col">
+          <div class="h-1 bg-emerald-600"></div>
+          <div class="p-5 flex flex-col flex-1">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 bg-emerald-50 flex items-center justify-center">
+                <i class="fa-solid fa-map-location-dot text-emerald-600"></i>
+              </div>
+              <span class="text-xs font-bold text-emerald-500 bg-emerald-50 px-2 py-0.5">Web + GIS</span>
+            </div>
+            <h3 class="font-display font-bold text-neutral-900 text-base mb-2">AdatKu</h3>
+            <p class="text-neutral-500 text-sm leading-relaxed flex-1">
+              Aplikasi dokumentasi dan pemetaan wilayah adat, hak tanah ulayat, serta kearifan lokal masyarakat Papua. Dilengkapi fitur GIS untuk batas wilayah adat.
+            </p>
+            <div class="mt-4 pt-3 border-t border-neutral-100 flex flex-wrap gap-1">
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Peta GIS</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Hak Tanah</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Dokumentasi</span>
+            </div>
+            <button
+              onclick="copyPrompt(`Buat desain prototype aplikasi AdatKu.
+
+Deskripsi Sistem:
+Aplikasi dokumentasi dan pemetaan wilayah adat, hak tanah ulayat, serta kearifan lokal masyarakat Papua. Dilengkapi fitur GIS untuk visualisasi batas wilayah adat.
+
+Kategori: Pemberdayaan & Komunitas Adat
+Platform: Web + GIS
+Pengguna: Tokoh adat, staf YPMD, peneliti, lembaga advokasi
+
+Fitur Utama:
+- Peta interaktif wilayah adat (GIS)
+- Dokumentasi batas tanah ulayat
+- Database tokoh dan silsilah adat
+- Arsip kearifan lokal dan tradisi
+- Upload dokumen hak tanah
+- Histori klaim wilayah
+- Laporan sengketa dan resolusi
+- Galeri dokumentasi budaya
+
+Tampilkan semua fitur dalam satu halaman,
+gunakan sidebar mengambang di sisi kanan untuk navigasi semua fitur,
+fitur mulai dari halaman beranda/landing page, login, register, dashboard, dan fitur lainnya sesuai konteks system.
+
+Teknologi:
+HTML, CSS Tailwind, Alpine.js, Font Awesome Icons, chart.js (setup cdn)
+
+Tampilan Mobile:
+Logo dan title di tengah, icon menu navigasi di sisi kanan atas
+
+Gaya Desain:
+Kotak (tidak rounded), warna putih dominan, shadow md, clean, modern, minimalis
+
+Tailwind Config:
+Buat tema warna variabel custom agar mudah diubah
+
+Ketentuan:
+- Gunakan semantic HTML
+- Konten utama masuk di <main>
+- Gunakan <section> untuk setiap partisi konten
+- Gunakan <header>, <nav>, <footer> dan elemen lainnya sesuai fungsi
+- Klik navigasi scroll animasi smooth
+- Gunakan font Jakarta Sans ukuran minimal 14px
+
+Jika ada gambar, gunakan https://placehold.co/600x400/EEE/31343C tanpa teks pengganti
+
+Disclaimer:
+- Buat disclaimer bahwa ini merupakan draft desain penawaran yang dibuat berdasarkan hasil analisa tim pengembang
+- Powered by Nokensoft.com
+- Buat dalam bentuk topbar alert di paling atas website
+- Buat juga dalam bentuk modal setiap kali load halaman, modal muncul dengan tombol close`)"
+              class="mt-4 w-full flex items-center justify-center gap-2 border border-neutral-200 hover:border-emerald-400 hover:bg-emerald-50 text-neutral-400 hover:text-emerald-600 text-xs font-semibold py-2 transition-all no-print salin-btn"
+            >
+              <i class="fa-solid fa-copy text-xs"></i> Salin Prompt AI
+            </button>
+            <a href="#" style="display:none"
+              class="mt-2 w-full flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white text-xs font-semibold py-2 transition-all no-print"
+            >
+              <i class="fa-solid fa-eye text-xs"></i> Lihat Demo
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 7 -->
+        <article class="card-app bg-white shadow-card flex flex-col">
+          <div class="h-1 bg-emerald-500"></div>
+          <div class="p-5 flex flex-col flex-1">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 bg-emerald-50 flex items-center justify-center">
+                <i class="fa-solid fa-clipboard-check text-emerald-600"></i>
+              </div>
+              <span class="text-xs font-bold text-emerald-500 bg-emerald-50 px-2 py-0.5">Mobile</span>
+            </div>
+            <h3 class="font-display font-bold text-neutral-900 text-base mb-2">DampingApp</h3>
+            <p class="text-neutral-500 text-sm leading-relaxed flex-1">
+              Sistem manajemen pendampingan lapangan: penjadwalan kunjungan petugas, laporan aktivitas harian, foto dokumentasi, dan monitoring progres komunitas binaan.
+            </p>
+            <div class="mt-4 pt-3 border-t border-neutral-100 flex flex-wrap gap-1">
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Jadwal Kunjungan</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Laporan</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Monitoring</span>
+            </div>
+            <button
+              onclick="copyPrompt(`Buat desain prototype aplikasi DampingApp.
+
+Deskripsi Sistem:
+Sistem manajemen pendampingan lapangan YPMD Papua: penjadwalan kunjungan petugas, laporan aktivitas harian, foto dokumentasi, dan monitoring progres komunitas binaan.
+
+Kategori: Pemberdayaan & Komunitas Adat
+Platform: Mobile
+Pengguna: Petugas lapangan YPMD, koordinator program, manajemen
+
+Fitur Utama:
+- Jadwal kunjungan lapangan
+- Check-in/check-out lokasi (GPS)
+- Form laporan aktivitas harian
+- Upload foto dokumentasi
+- Tracking progress komunitas binaan
+- Manajemen tugas petugas
+- Notifikasi jadwal kunjungan
+- Dashboard ringkasan pendampingan
+
+Tampilkan semua fitur dalam satu halaman,
+gunakan sidebar mengambang di sisi kanan untuk navigasi semua fitur,
+fitur mulai dari halaman beranda/landing page, login, register, dashboard, dan fitur lainnya sesuai konteks system.
+
+Teknologi:
+HTML, CSS Tailwind, Alpine.js, Font Awesome Icons, chart.js (setup cdn)
+
+Tampilan Mobile:
+Logo dan title di tengah, icon menu navigasi di sisi kanan atas
+
+Gaya Desain:
+Kotak (tidak rounded), warna putih dominan, shadow md, clean, modern, minimalis
+
+Tailwind Config:
+Buat tema warna variabel custom agar mudah diubah
+
+Ketentuan:
+- Gunakan semantic HTML
+- Konten utama masuk di <main>
+- Gunakan <section> untuk setiap partisi konten
+- Gunakan <header>, <nav>, <footer> dan elemen lainnya sesuai fungsi
+- Klik navigasi scroll animasi smooth
+- Gunakan font Jakarta Sans ukuran minimal 14px
+
+Jika ada gambar, gunakan https://placehold.co/600x400/EEE/31343C tanpa teks pengganti
+
+Disclaimer:
+- Buat disclaimer bahwa ini merupakan draft desain penawaran yang dibuat berdasarkan hasil analisa tim pengembang
+- Powered by Nokensoft.com
+- Buat dalam bentuk topbar alert di paling atas website
+- Buat juga dalam bentuk modal setiap kali load halaman, modal muncul dengan tombol close`)"
+              class="mt-4 w-full flex items-center justify-center gap-2 border border-neutral-200 hover:border-emerald-400 hover:bg-emerald-50 text-neutral-400 hover:text-emerald-600 text-xs font-semibold py-2 transition-all no-print salin-btn"
+            >
+              <i class="fa-solid fa-copy text-xs"></i> Salin Prompt AI
+            </button>
+            <a href="#" style="display:none"
+              class="mt-2 w-full flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white text-xs font-semibold py-2 transition-all no-print"
+            >
+              <i class="fa-solid fa-eye text-xs"></i> Lihat Demo
+            </a>
+          </div>
+        </article>
+
+        <!-- Card placeholder kosong untuk keseimbangan grid -->
+        <div class="hidden lg:block"></div>
+
+      </div>
+    </div>
+
+    <!-- ════════════════════════ KATEGORI 3: EKONOMI & KEUANGAN ════════════════════════ -->
+    <div x-show="filter === 'semua' || filter === 'ekonomi'" x-transition class="mb-12">
+      <div class="flex items-center gap-3 mb-5">
+        <div class="w-8 h-8 bg-accent-400 flex items-center justify-center">
+          <i class="fa-solid fa-coins text-white text-xs"></i>
+        </div>
+        <div>
+          <h2 class="font-display font-bold text-neutral-900 text-xl">Ekonomi & Keuangan Komunitas</h2>
+          <p class="text-neutral-400 text-xs mt-0.5">Mendorong kemandirian ekonomi dan literasi keuangan petani</p>
+        </div>
+        <span class="ml-auto bg-accent-50 text-accent-500 text-xs font-bold px-3 py-1">3 Aplikasi</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+        <!-- Card 8 -->
+        <article class="card-app bg-white shadow-card flex flex-col">
+          <div class="h-1 bg-accent-400"></div>
+          <div class="p-5 flex flex-col flex-1">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 bg-accent-50 flex items-center justify-center">
+                <i class="fa-solid fa-piggy-bank text-accent-400"></i>
+              </div>
+              <span class="text-xs font-bold text-accent-400 bg-accent-50 px-2 py-0.5">Mobile</span>
+            </div>
+            <h3 class="font-display font-bold text-neutral-900 text-base mb-2">TabungTani</h3>
+            <p class="text-neutral-500 text-sm leading-relaxed flex-1">
+              Aplikasi simpan-pinjam dan tabungan digital khusus kelompok petani. Terintegrasi dengan program tabungan YPMD bersama Bank BPR Phidectama Jayapura.
+            </p>
+            <div class="mt-4 pt-3 border-t border-neutral-100 flex flex-wrap gap-1">
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Tabungan</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Simpan Pinjam</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Integrasi Bank</span>
+            </div>
+            <button
+              onclick="copyPrompt(`Buat desain prototype aplikasi TabungTani.
+
+Deskripsi Sistem:
+Aplikasi simpan-pinjam dan tabungan digital khusus kelompok petani. Terintegrasi dengan program tabungan YPMD bersama Bank BPR Phidectama Jayapura.
+
+Kategori: Ekonomi & Keuangan Komunitas
+Platform: Mobile
+Pengguna: Petani anggota kelompok, pengurus kelompok tani, staf YPMD
+
+Fitur Utama:
+- Dashboard saldo tabungan
+- Setoran dan penarikan tabungan
+- Pengajuan pinjaman
+- Cicilan dan jadwal angsuran
+- Mutasi rekening digital
+- Laporan keuangan kelompok
+- Notifikasi jatuh tempo cicilan
+- Integrasi bank mitra
+
+Tampilkan semua fitur dalam satu halaman,
+gunakan sidebar mengambang di sisi kanan untuk navigasi semua fitur,
+fitur mulai dari halaman beranda/landing page, login, register, dashboard, dan fitur lainnya sesuai konteks system.
+
+Teknologi:
+HTML, CSS Tailwind, Alpine.js, Font Awesome Icons, chart.js (setup cdn)
+
+Tampilan Mobile:
+Logo dan title di tengah, icon menu navigasi di sisi kanan atas
+
+Gaya Desain:
+Kotak (tidak rounded), warna putih dominan, shadow md, clean, modern, minimalis
+
+Tailwind Config:
+Buat tema warna variabel custom agar mudah diubah
+
+Ketentuan:
+- Gunakan semantic HTML
+- Konten utama masuk di <main>
+- Gunakan <section> untuk setiap partisi konten
+- Gunakan <header>, <nav>, <footer> dan elemen lainnya sesuai fungsi
+- Klik navigasi scroll animasi smooth
+- Gunakan font Jakarta Sans ukuran minimal 14px
+
+Jika ada gambar, gunakan https://placehold.co/600x400/EEE/31343C tanpa teks pengganti
+
+Disclaimer:
+- Buat disclaimer bahwa ini merupakan draft desain penawaran yang dibuat berdasarkan hasil analisa tim pengembang
+- Powered by Nokensoft.com
+- Buat dalam bentuk topbar alert di paling atas website
+- Buat juga dalam bentuk modal setiap kali load halaman, modal muncul dengan tombol close`)"
+              class="mt-4 w-full flex items-center justify-center gap-2 border border-neutral-200 hover:border-accent-400 hover:bg-accent-50 text-neutral-400 hover:text-accent-500 text-xs font-semibold py-2 transition-all no-print salin-btn"
+            >
+              <i class="fa-solid fa-copy text-xs"></i> Salin Prompt AI
+            </button>
+            <a href="#" style="display:none"
+              class="mt-2 w-full flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white text-xs font-semibold py-2 transition-all no-print"
+            >
+              <i class="fa-solid fa-eye text-xs"></i> Lihat Demo
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 9 -->
+        <article class="card-app bg-white shadow-card flex flex-col">
+          <div class="h-1 bg-accent-400"></div>
+          <div class="p-5 flex flex-col flex-1">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 bg-accent-50 flex items-center justify-center">
+                <i class="fa-solid fa-file-invoice-dollar text-accent-400"></i>
+              </div>
+              <span class="text-xs font-bold text-accent-400 bg-accent-50 px-2 py-0.5">Web + Mobile</span>
+            </div>
+            <h3 class="font-display font-bold text-neutral-900 text-base mb-2">KasCampung</h3>
+            <p class="text-neutral-500 text-sm leading-relaxed flex-1">
+              Manajemen keuangan kelompok tani dan koperasi desa: pencatatan kas masuk/keluar, laporan keuangan sederhana, dan distribusi hasil penjualan antar anggota.
+            </p>
+            <div class="mt-4 pt-3 border-t border-neutral-100 flex flex-wrap gap-1">
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Kas Kelompok</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Laporan</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Distribusi Hasil</span>
+            </div>
+            <button
+              onclick="copyPrompt(`Buat desain prototype aplikasi KasCampung.
+
+Deskripsi Sistem:
+Manajemen keuangan kelompok tani dan koperasi desa Papua: pencatatan kas masuk/keluar, laporan keuangan sederhana, dan distribusi hasil penjualan antar anggota.
+
+Kategori: Ekonomi & Keuangan Komunitas
+Platform: Web + Mobile
+Pengguna: Bendahara kelompok tani, ketua koperasi desa, pengurus YPMD
+
+Fitur Utama:
+- Buku kas digital (masuk/keluar)
+- Manajemen anggota kelompok
+- Pencatatan hasil penjualan
+- Distribusi hasil ke anggota
+- Laporan keuangan bulanan
+- Neraca sederhana
+- Export laporan PDF/Excel
+- Riwayat transaksi kelompok
+
+Tampilkan semua fitur dalam satu halaman,
+gunakan sidebar mengambang di sisi kanan untuk navigasi semua fitur,
+fitur mulai dari halaman beranda/landing page, login, register, dashboard, dan fitur lainnya sesuai konteks system.
+
+Teknologi:
+HTML, CSS Tailwind, Alpine.js, Font Awesome Icons, chart.js (setup cdn)
+
+Tampilan Mobile:
+Logo dan title di tengah, icon menu navigasi di sisi kanan atas
+
+Gaya Desain:
+Kotak (tidak rounded), warna putih dominan, shadow md, clean, modern, minimalis
+
+Tailwind Config:
+Buat tema warna variabel custom agar mudah diubah
+
+Ketentuan:
+- Gunakan semantic HTML
+- Konten utama masuk di <main>
+- Gunakan <section> untuk setiap partisi konten
+- Gunakan <header>, <nav>, <footer> dan elemen lainnya sesuai fungsi
+- Klik navigasi scroll animasi smooth
+- Gunakan font Jakarta Sans ukuran minimal 14px
+
+Jika ada gambar, gunakan https://placehold.co/600x400/EEE/31343C tanpa teks pengganti
+
+Disclaimer:
+- Buat disclaimer bahwa ini merupakan draft desain penawaran yang dibuat berdasarkan hasil analisa tim pengembang
+- Powered by Nokensoft.com
+- Buat dalam bentuk topbar alert di paling atas website
+- Buat juga dalam bentuk modal setiap kali load halaman, modal muncul dengan tombol close`)"
+              class="mt-4 w-full flex items-center justify-center gap-2 border border-neutral-200 hover:border-accent-400 hover:bg-accent-50 text-neutral-400 hover:text-accent-500 text-xs font-semibold py-2 transition-all no-print salin-btn"
+            >
+              <i class="fa-solid fa-copy text-xs"></i> Salin Prompt AI
+            </button>
+            <a href="#" style="display:none"
+              class="mt-2 w-full flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white text-xs font-semibold py-2 transition-all no-print"
+            >
+              <i class="fa-solid fa-eye text-xs"></i> Lihat Demo
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 10 -->
+        <article class="card-app bg-white shadow-card flex flex-col">
+          <div class="h-1 bg-accent-300"></div>
+          <div class="p-5 flex flex-col flex-1">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 bg-accent-50 flex items-center justify-center">
+                <i class="fa-solid fa-calculator text-accent-400"></i>
+              </div>
+              <span class="text-xs font-bold text-accent-400 bg-accent-50 px-2 py-0.5">Mobile</span>
+            </div>
+            <h3 class="font-display font-bold text-neutral-900 text-base mb-2">PanenRupiah</h3>
+            <p class="text-neutral-500 text-sm leading-relaxed flex-1">
+              Kalkulator harga kakao real-time dan proyeksi pendapatan petani berdasarkan kualitas, kuantitas, dan kurs nilai tukar terkini untuk transaksi ekspor.
+            </p>
+            <div class="mt-4 pt-3 border-t border-neutral-100 flex flex-wrap gap-1">
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Harga Real-time</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Proyeksi</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Kurs Ekspor</span>
+            </div>
+            <button
+              onclick="copyPrompt(`Buat desain prototype aplikasi PanenRupiah.
+
+Deskripsi Sistem:
+Kalkulator harga kakao real-time dan proyeksi pendapatan petani berdasarkan kualitas, kuantitas, dan kurs nilai tukar terkini untuk transaksi ekspor ke Jepang.
+
+Kategori: Ekonomi & Keuangan Komunitas
+Platform: Mobile
+Pengguna: Petani kakao, staf CV Cacao Kita, pembeli internasional
+
+Fitur Utama:
+- Kalkulator harga kakao per grade
+- Update harga pasar real-time
+- Konversi kurs IDR/JPY/USD
+- Proyeksi pendapatan per musim panen
+- Simulasi berbagai skenario harga
+- Histori harga kakao
+- Notifikasi perubahan harga signifikan
+- Perbandingan harga antar periode
+
+Tampilkan semua fitur dalam satu halaman,
+gunakan sidebar mengambang di sisi kanan untuk navigasi semua fitur,
+fitur mulai dari halaman beranda/landing page, login, register, dashboard, dan fitur lainnya sesuai konteks system.
+
+Teknologi:
+HTML, CSS Tailwind, Alpine.js, Font Awesome Icons, chart.js (setup cdn)
+
+Tampilan Mobile:
+Logo dan title di tengah, icon menu navigasi di sisi kanan atas
+
+Gaya Desain:
+Kotak (tidak rounded), warna putih dominan, shadow md, clean, modern, minimalis
+
+Tailwind Config:
+Buat tema warna variabel custom agar mudah diubah
+
+Ketentuan:
+- Gunakan semantic HTML
+- Konten utama masuk di <main>
+- Gunakan <section> untuk setiap partisi konten
+- Gunakan <header>, <nav>, <footer> dan elemen lainnya sesuai fungsi
+- Klik navigasi scroll animasi smooth
+- Gunakan font Jakarta Sans ukuran minimal 14px
+
+Jika ada gambar, gunakan https://placehold.co/600x400/EEE/31343C tanpa teks pengganti
+
+Disclaimer:
+- Buat disclaimer bahwa ini merupakan draft desain penawaran yang dibuat berdasarkan hasil analisa tim pengembang
+- Powered by Nokensoft.com
+- Buat dalam bentuk topbar alert di paling atas website
+- Buat juga dalam bentuk modal setiap kali load halaman, modal muncul dengan tombol close`)"
+              class="mt-4 w-full flex items-center justify-center gap-2 border border-neutral-200 hover:border-accent-400 hover:bg-accent-50 text-neutral-400 hover:text-accent-500 text-xs font-semibold py-2 transition-all no-print salin-btn"
+            >
+              <i class="fa-solid fa-copy text-xs"></i> Salin Prompt AI
+            </button>
+            <a href="#" style="display:none"
+              class="mt-2 w-full flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white text-xs font-semibold py-2 transition-all no-print"
+            >
+              <i class="fa-solid fa-eye text-xs"></i> Lihat Demo
+            </a>
+          </div>
+        </article>
+
+        <div class="hidden lg:block"></div>
+
+      </div>
+    </div>
+
+    <!-- ════════════════════════ KATEGORI 4: INFORMASI & BERITA ════════════════════════ -->
+    <div x-show="filter === 'semua' || filter === 'informasi'" x-transition class="mb-12">
+      <div class="flex items-center gap-3 mb-5">
+        <div class="w-8 h-8 bg-sky-600 flex items-center justify-center">
+          <i class="fa-solid fa-newspaper text-white text-xs"></i>
+        </div>
+        <div>
+          <h2 class="font-display font-bold text-neutral-900 text-xl">Informasi & Jurnalisme Kampung</h2>
+          <p class="text-neutral-400 text-xs mt-0.5">Meneruskan semangat buletin Kabar dari Kampung secara digital</p>
+        </div>
+        <span class="ml-auto bg-sky-50 text-sky-600 text-xs font-bold px-3 py-1">2 Aplikasi</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+        <!-- Card 11 -->
+        <article class="card-app bg-white shadow-card flex flex-col">
+          <div class="h-1 bg-sky-600"></div>
+          <div class="p-5 flex flex-col flex-1">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 bg-sky-50 flex items-center justify-center">
+                <i class="fa-solid fa-rss text-sky-600"></i>
+              </div>
+              <span class="text-xs font-bold text-sky-500 bg-sky-50 px-2 py-0.5">Web + Mobile</span>
+            </div>
+            <h3 class="font-display font-bold text-neutral-900 text-base mb-2">KabarKampung</h3>
+            <p class="text-neutral-500 text-sm leading-relaxed flex-1">
+              Aplikasi berita dan informasi dari kampung-kampung Papua. Melanjutkan semangat buletin <em>Kabar dari Kampung</em> (KdK) secara digital dengan konten hiperlokal.
+            </p>
+            <div class="mt-4 pt-3 border-t border-neutral-100 flex flex-wrap gap-1">
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Berita Lokal</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Multimedia</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Offline Mode</span>
+            </div>
+            <button
+              onclick="copyPrompt(`Buat desain prototype aplikasi KabarKampung.
+
+Deskripsi Sistem:
+Aplikasi berita dan informasi hiperlokal dari kampung-kampung Papua. Melanjutkan semangat buletin Kabar dari Kampung (KdK) secara digital dengan dukungan mode offline.
+
+Kategori: Informasi & Jurnalisme Kampung
+Platform: Web + Mobile
+Pengguna: Masyarakat Papua, jurnalis warga, staf YPMD, pembaca umum
+
+Fitur Utama:
+- Feed berita hiperlokal Papua
+- Kategori berita (pertanian
+- adat
+- lingkungan
+- ekonomi)
+- Mode offline (baca tanpa internet)
+- Galeri foto dan video kampung
+- Profil penulis/jurnalis warga
+- Komentar dan diskusi artikel
+- Pencarian berita dan arsip
+- Notifikasi berita terbaru
+
+Tampilkan semua fitur dalam satu halaman,
+gunakan sidebar mengambang di sisi kanan untuk navigasi semua fitur,
+fitur mulai dari halaman beranda/landing page, login, register, dashboard, dan fitur lainnya sesuai konteks system.
+
+Teknologi:
+HTML, CSS Tailwind, Alpine.js, Font Awesome Icons, chart.js (setup cdn)
+
+Tampilan Mobile:
+Logo dan title di tengah, icon menu navigasi di sisi kanan atas
+
+Gaya Desain:
+Kotak (tidak rounded), warna putih dominan, shadow md, clean, modern, minimalis
+
+Tailwind Config:
+Buat tema warna variabel custom agar mudah diubah
+
+Ketentuan:
+- Gunakan semantic HTML
+- Konten utama masuk di <main>
+- Gunakan <section> untuk setiap partisi konten
+- Gunakan <header>, <nav>, <footer> dan elemen lainnya sesuai fungsi
+- Klik navigasi scroll animasi smooth
+- Gunakan font Jakarta Sans ukuran minimal 14px
+
+Jika ada gambar, gunakan https://placehold.co/600x400/EEE/31343C tanpa teks pengganti
+
+Disclaimer:
+- Buat disclaimer bahwa ini merupakan draft desain penawaran yang dibuat berdasarkan hasil analisa tim pengembang
+- Powered by Nokensoft.com
+- Buat dalam bentuk topbar alert di paling atas website
+- Buat juga dalam bentuk modal setiap kali load halaman, modal muncul dengan tombol close`)"
+              class="mt-4 w-full flex items-center justify-center gap-2 border border-neutral-200 hover:border-sky-400 hover:bg-sky-50 text-neutral-400 hover:text-sky-600 text-xs font-semibold py-2 transition-all no-print salin-btn"
+            >
+              <i class="fa-solid fa-copy text-xs"></i> Salin Prompt AI
+            </button>
+            <a href="#" style="display:none"
+              class="mt-2 w-full flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white text-xs font-semibold py-2 transition-all no-print"
+            >
+              <i class="fa-solid fa-eye text-xs"></i> Lihat Demo
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 12 -->
+        <article class="card-app bg-white shadow-card flex flex-col">
+          <div class="h-1 bg-sky-500"></div>
+          <div class="p-5 flex flex-col flex-1">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 bg-sky-50 flex items-center justify-center">
+                <i class="fa-solid fa-microphone-lines text-sky-600"></i>
+              </div>
+              <span class="text-xs font-bold text-sky-500 bg-sky-50 px-2 py-0.5">Web + Mobile</span>
+            </div>
+            <h3 class="font-display font-bold text-neutral-900 text-base mb-2">SuaraAdat</h3>
+            <p class="text-neutral-500 text-sm leading-relaxed flex-1">
+              Platform pelaporan dan jurnalisme warga berbasis komunitas adat: unggah foto, video, dan tulisan dari pelosok Papua untuk menyuarakan isu lokal ke publik luas.
+            </p>
+            <div class="mt-4 pt-3 border-t border-neutral-100 flex flex-wrap gap-1">
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Jurnalisme Warga</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Foto & Video</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Moderasi</span>
+            </div>
+            <button
+              onclick="copyPrompt(`Buat desain prototype aplikasi SuaraAdat.
+
+Deskripsi Sistem:
+Platform pelaporan dan jurnalisme warga berbasis komunitas adat Papua. Memungkinkan warga mengunggah foto, video, dan tulisan untuk menyuarakan isu lokal ke publik luas.
+
+Kategori: Informasi & Jurnalisme Kampung
+Platform: Web + Mobile
+Pengguna: Warga adat Papua, jurnalis warga, aktivis komunitas
+
+Fitur Utama:
+- Form laporan warga (foto/video/teks)
+- Peta laporan berdasarkan lokasi
+- Sistem moderasi konten
+- Verifikasi laporan oleh editor
+- Kategori isu (lingkungan
+- hak adat
+- ekonomi)
+- Share ke media sosial
+- Dashboard redaksi
+- Statistik sebaran laporan
+
+Tampilkan semua fitur dalam satu halaman,
+gunakan sidebar mengambang di sisi kanan untuk navigasi semua fitur,
+fitur mulai dari halaman beranda/landing page, login, register, dashboard, dan fitur lainnya sesuai konteks system.
+
+Teknologi:
+HTML, CSS Tailwind, Alpine.js, Font Awesome Icons, chart.js (setup cdn)
+
+Tampilan Mobile:
+Logo dan title di tengah, icon menu navigasi di sisi kanan atas
+
+Gaya Desain:
+Kotak (tidak rounded), warna putih dominan, shadow md, clean, modern, minimalis
+
+Tailwind Config:
+Buat tema warna variabel custom agar mudah diubah
+
+Ketentuan:
+- Gunakan semantic HTML
+- Konten utama masuk di <main>
+- Gunakan <section> untuk setiap partisi konten
+- Gunakan <header>, <nav>, <footer> dan elemen lainnya sesuai fungsi
+- Klik navigasi scroll animasi smooth
+- Gunakan font Jakarta Sans ukuran minimal 14px
+
+Jika ada gambar, gunakan https://placehold.co/600x400/EEE/31343C tanpa teks pengganti
+
+Disclaimer:
+- Buat disclaimer bahwa ini merupakan draft desain penawaran yang dibuat berdasarkan hasil analisa tim pengembang
+- Powered by Nokensoft.com
+- Buat dalam bentuk topbar alert di paling atas website
+- Buat juga dalam bentuk modal setiap kali load halaman, modal muncul dengan tombol close`)"
+              class="mt-4 w-full flex items-center justify-center gap-2 border border-neutral-200 hover:border-sky-400 hover:bg-sky-50 text-neutral-400 hover:text-sky-600 text-xs font-semibold py-2 transition-all no-print salin-btn"
+            >
+              <i class="fa-solid fa-copy text-xs"></i> Salin Prompt AI
+            </button>
+            <a href="#" style="display:none"
+              class="mt-2 w-full flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white text-xs font-semibold py-2 transition-all no-print"
+            >
+              <i class="fa-solid fa-eye text-xs"></i> Lihat Demo
+            </a>
+          </div>
+        </article>
+
+        <div class="hidden lg:block"></div>
+        <div class="hidden lg:block"></div>
+
+      </div>
+    </div>
+
+    <!-- ════════════════════════ KATEGORI 5: MANAJEMEN LEMBAGA ════════════════════════ -->
+    <div x-show="filter === 'semua' || filter === 'manajemen'" x-transition class="mb-12">
+      <div class="flex items-center gap-3 mb-5">
+        <div class="w-8 h-8 bg-neutral-700 flex items-center justify-center">
+          <i class="fa-solid fa-building text-white text-xs"></i>
+        </div>
+        <div>
+          <h2 class="font-display font-bold text-neutral-900 text-xl">Manajemen Internal Lembaga</h2>
+          <p class="text-neutral-400 text-xs mt-0.5">Meningkatkan efisiensi operasional dan tata kelola YPMD Papua</p>
+        </div>
+        <span class="ml-auto bg-neutral-100 text-neutral-600 text-xs font-bold px-3 py-1">3 Aplikasi</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+        <!-- Card 13 -->
+        <article class="card-app bg-white shadow-card flex flex-col">
+          <div class="h-1 bg-neutral-700"></div>
+          <div class="p-5 flex flex-col flex-1">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 bg-neutral-100 flex items-center justify-center">
+                <i class="fa-solid fa-folder-open text-neutral-600"></i>
+              </div>
+              <span class="text-xs font-bold text-neutral-500 bg-neutral-100 px-2 py-0.5">Web</span>
+            </div>
+            <h3 class="font-display font-bold text-neutral-900 text-base mb-2">YPMDOffice</h3>
+            <p class="text-neutral-500 text-sm leading-relaxed flex-1">
+              Sistem manajemen internal yayasan: program kerja tahunan, pelaporan kegiatan, database mitra dan donatur, manajemen SDM, serta arsip dokumen digital lembaga.
+            </p>
+            <div class="mt-4 pt-3 border-t border-neutral-100 flex flex-wrap gap-1">
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Program Kerja</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Arsip Digital</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">SDM</span>
+            </div>
+            <button
+              onclick="copyPrompt(`Buat desain prototype aplikasi YPMDOffice.
+
+Deskripsi Sistem:
+Sistem manajemen internal YPMD Papua: program kerja tahunan, pelaporan kegiatan, database mitra dan donatur, manajemen SDM, serta arsip dokumen digital lembaga.
+
+Kategori: Manajemen Internal Lembaga
+Platform: Web
+Pengguna: Staf dan manajemen YPMD Papua
+
+Fitur Utama:
+- Dashboard ringkasan operasional lembaga
+- Manajemen program kerja tahunan
+- Database mitra dan donatur
+- Manajemen SDM dan absensi
+- Arsip dokumen digital
+- Pelaporan kegiatan berkala
+- Kalender kegiatan lembaga
+- Manajemen keuangan lembaga
+
+Tampilkan semua fitur dalam satu halaman,
+gunakan sidebar mengambang di sisi kanan untuk navigasi semua fitur,
+fitur mulai dari halaman beranda/landing page, login, register, dashboard, dan fitur lainnya sesuai konteks system.
+
+Teknologi:
+HTML, CSS Tailwind, Alpine.js, Font Awesome Icons, chart.js (setup cdn)
+
+Tampilan Mobile:
+Logo dan title di tengah, icon menu navigasi di sisi kanan atas
+
+Gaya Desain:
+Kotak (tidak rounded), warna putih dominan, shadow md, clean, modern, minimalis
+
+Tailwind Config:
+Buat tema warna variabel custom agar mudah diubah
+
+Ketentuan:
+- Gunakan semantic HTML
+- Konten utama masuk di <main>
+- Gunakan <section> untuk setiap partisi konten
+- Gunakan <header>, <nav>, <footer> dan elemen lainnya sesuai fungsi
+- Klik navigasi scroll animasi smooth
+- Gunakan font Jakarta Sans ukuran minimal 14px
+
+Jika ada gambar, gunakan https://placehold.co/600x400/EEE/31343C tanpa teks pengganti
+
+Disclaimer:
+- Buat disclaimer bahwa ini merupakan draft desain penawaran yang dibuat berdasarkan hasil analisa tim pengembang
+- Powered by Nokensoft.com
+- Buat dalam bentuk topbar alert di paling atas website
+- Buat juga dalam bentuk modal setiap kali load halaman, modal muncul dengan tombol close`)"
+              class="mt-4 w-full flex items-center justify-center gap-2 border border-neutral-200 hover:border-neutral-500 hover:bg-neutral-100 text-neutral-400 hover:text-neutral-700 text-xs font-semibold py-2 transition-all no-print salin-btn"
+            >
+              <i class="fa-solid fa-copy text-xs"></i> Salin Prompt AI
+            </button>
+            <a href="#" style="display:none"
+              class="mt-2 w-full flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white text-xs font-semibold py-2 transition-all no-print"
+            >
+              <i class="fa-solid fa-eye text-xs"></i> Lihat Demo
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 14 -->
+        <article class="card-app bg-white shadow-card flex flex-col">
+          <div class="h-1 bg-neutral-700"></div>
+          <div class="p-5 flex flex-col flex-1">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 bg-neutral-100 flex items-center justify-center">
+                <i class="fa-solid fa-chart-line text-neutral-600"></i>
+              </div>
+              <span class="text-xs font-bold text-neutral-500 bg-neutral-100 px-2 py-0.5">Web</span>
+            </div>
+            <h3 class="font-display font-bold text-neutral-900 text-base mb-2">ProgramKu</h3>
+            <p class="text-neutral-500 text-sm leading-relaxed flex-1">
+              Aplikasi monitoring dan evaluasi (monev) program YPMD: indikator capaian, laporan lapangan petugas, dan dashboard ringkasan untuk manajemen dan donor.
+            </p>
+            <div class="mt-4 pt-3 border-t border-neutral-100 flex flex-wrap gap-1">
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Monev</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Dashboard</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Laporan Donor</span>
+            </div>
+            <button
+              onclick="copyPrompt(`Buat desain prototype aplikasi ProgramKu.
+
+Deskripsi Sistem:
+Aplikasi monitoring dan evaluasi (monev) program YPMD Papua: indikator capaian, laporan lapangan petugas, dan dashboard ringkasan untuk manajemen dan donor.
+
+Kategori: Manajemen Internal Lembaga
+Platform: Web
+Pengguna: Manajemen YPMD, koordinator program, lembaga donor
+
+Fitur Utama:
+- Dashboard indikator capaian program
+- Input laporan lapangan petugas
+- Grafik progres per program
+- Perbandingan target vs realisasi
+- Laporan naratif program
+- Export laporan donor (PDF)
+- Timeline milestone program
+- Manajemen anggaran program
+
+Tampilkan semua fitur dalam satu halaman,
+gunakan sidebar mengambang di sisi kanan untuk navigasi semua fitur,
+fitur mulai dari halaman beranda/landing page, login, register, dashboard, dan fitur lainnya sesuai konteks system.
+
+Teknologi:
+HTML, CSS Tailwind, Alpine.js, Font Awesome Icons, chart.js (setup cdn)
+
+Tampilan Mobile:
+Logo dan title di tengah, icon menu navigasi di sisi kanan atas
+
+Gaya Desain:
+Kotak (tidak rounded), warna putih dominan, shadow md, clean, modern, minimalis
+
+Tailwind Config:
+Buat tema warna variabel custom agar mudah diubah
+
+Ketentuan:
+- Gunakan semantic HTML
+- Konten utama masuk di <main>
+- Gunakan <section> untuk setiap partisi konten
+- Gunakan <header>, <nav>, <footer> dan elemen lainnya sesuai fungsi
+- Klik navigasi scroll animasi smooth
+- Gunakan font Jakarta Sans ukuran minimal 14px
+
+Jika ada gambar, gunakan https://placehold.co/600x400/EEE/31343C tanpa teks pengganti
+
+Disclaimer:
+- Buat disclaimer bahwa ini merupakan draft desain penawaran yang dibuat berdasarkan hasil analisa tim pengembang
+- Powered by Nokensoft.com
+- Buat dalam bentuk topbar alert di paling atas website
+- Buat juga dalam bentuk modal setiap kali load halaman, modal muncul dengan tombol close`)"
+              class="mt-4 w-full flex items-center justify-center gap-2 border border-neutral-200 hover:border-neutral-500 hover:bg-neutral-100 text-neutral-400 hover:text-neutral-700 text-xs font-semibold py-2 transition-all no-print salin-btn"
+            >
+              <i class="fa-solid fa-copy text-xs"></i> Salin Prompt AI
+            </button>
+            <a href="#" style="display:none"
+              class="mt-2 w-full flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white text-xs font-semibold py-2 transition-all no-print"
+            >
+              <i class="fa-solid fa-eye text-xs"></i> Lihat Demo
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 15 -->
+        <article class="card-app bg-white shadow-card flex flex-col">
+          <div class="h-1 bg-neutral-600"></div>
+          <div class="p-5 flex flex-col flex-1">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 bg-neutral-100 flex items-center justify-center">
+                <i class="fa-solid fa-network-wired text-neutral-600"></i>
+              </div>
+              <span class="text-xs font-bold text-neutral-500 bg-neutral-100 px-2 py-0.5">Web</span>
+            </div>
+            <h3 class="font-display font-bold text-neutral-900 text-base mb-2">MitraNet</h3>
+            <p class="text-neutral-500 text-sm leading-relaxed flex-1">
+              Database dan manajemen hubungan jaringan mitra: LSM, lembaga donor internasional, konsumen Jepang (APF), FOKER LSM, dan pemerintah daerah Papua.
+            </p>
+            <div class="mt-4 pt-3 border-t border-neutral-100 flex flex-wrap gap-1">
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">CRM Mitra</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Jaringan LSM</span>
+              <span class="text-xs bg-neutral-100 text-neutral-500 px-2 py-0.5">Donor Tracking</span>
+            </div>
+            <button
+              onclick="copyPrompt(`Buat desain prototype aplikasi MitraNet.
+
+Deskripsi Sistem:
+Database dan sistem manajemen hubungan jaringan mitra YPMD Papua: LSM, lembaga donor internasional, konsumen Jepang (APF), FOKER LSM, dan pemerintah daerah.
+
+Kategori: Manajemen Internal Lembaga
+Platform: Web
+Pengguna: Direktur dan staf senior YPMD Papua
+
+Fitur Utama:
+- Database profil mitra dan donor
+- Riwayat komunikasi dan pertemuan
+- Manajemen MOU dan perjanjian
+- Kalender pertemuan dengan mitra
+- Laporan kontribusi donor
+- Peta jaringan mitra (visualisasi)
+- Notifikasi perpanjangan MOU
+- Export direktori mitra
+
+Tampilkan semua fitur dalam satu halaman,
+gunakan sidebar mengambang di sisi kanan untuk navigasi semua fitur,
+fitur mulai dari halaman beranda/landing page, login, register, dashboard, dan fitur lainnya sesuai konteks system.
+
+Teknologi:
+HTML, CSS Tailwind, Alpine.js, Font Awesome Icons, chart.js (setup cdn)
+
+Tampilan Mobile:
+Logo dan title di tengah, icon menu navigasi di sisi kanan atas
+
+Gaya Desain:
+Kotak (tidak rounded), warna putih dominan, shadow md, clean, modern, minimalis
+
+Tailwind Config:
+Buat tema warna variabel custom agar mudah diubah
+
+Ketentuan:
+- Gunakan semantic HTML
+- Konten utama masuk di <main>
+- Gunakan <section> untuk setiap partisi konten
+- Gunakan <header>, <nav>, <footer> dan elemen lainnya sesuai fungsi
+- Klik navigasi scroll animasi smooth
+- Gunakan font Jakarta Sans ukuran minimal 14px
+
+Jika ada gambar, gunakan https://placehold.co/600x400/EEE/31343C tanpa teks pengganti
+
+Disclaimer:
+- Buat disclaimer bahwa ini merupakan draft desain penawaran yang dibuat berdasarkan hasil analisa tim pengembang
+- Powered by Nokensoft.com
+- Buat dalam bentuk topbar alert di paling atas website
+- Buat juga dalam bentuk modal setiap kali load halaman, modal muncul dengan tombol close`)"
+              class="mt-4 w-full flex items-center justify-center gap-2 border border-neutral-200 hover:border-neutral-500 hover:bg-neutral-100 text-neutral-400 hover:text-neutral-700 text-xs font-semibold py-2 transition-all no-print salin-btn"
+            >
+              <i class="fa-solid fa-copy text-xs"></i> Salin Prompt AI
+            </button>
+            <a href="#" style="display:none"
+              class="mt-2 w-full flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white text-xs font-semibold py-2 transition-all no-print"
+            >
+              <i class="fa-solid fa-eye text-xs"></i> Lihat Demo
+            </a>
+          </div>
+        </article>
+
+        <div class="hidden lg:block"></div>
+
+      </div>
+    </div>
+
+    <!-- ── FOOTER NOTE ── -->
+    <div class="border-t border-neutral-200 pt-6 mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div>
+        <p class="text-xs text-neutral-400 leading-relaxed">
+          <i class="fa-solid fa-triangle-exclamation text-amber-400 mr-1"></i>
+          <strong class="text-neutral-500">Draft Penawaran</strong> — Dokumen ini merupakan usulan awal berdasarkan hasil analisa tim pengembang dan belum merupakan penawaran final.
+        </p>
+        <p class="text-xs text-neutral-400 mt-1">
+          Nama, fitur, dan spesifikasi aplikasi dapat disesuaikan dengan kebutuhan dan arahan YPMD Papua.
+        </p>
+      </div>
+      <a
+        href="https://nokensoft.com"
+        target="_blank"
+        rel="noopener"
+        class="flex items-center gap-2 text-primary-500 hover:text-primary-600 transition-colors flex-shrink-0 no-print"
+      >
+        <i class="fa-solid fa-code text-sm"></i>
+        <span class="text-sm font-semibold">Nokensoft.com</span>
+      </a>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════ FLOATING CONTACT ═══════════════════════════════ -->
+  <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2 no-print">
+
+    <!-- WhatsApp -->
+    <a
+      href="https://wa.me/6282199558191?text=Halo%20Nokensoft%2C%20saya%20tertarik%20dengan%20penawaran%20sistem%20aplikasi%20untuk%20YPMD%20Papua."
+      target="_blank"
+      rel="noopener"
+      class="flex items-center gap-3 group"
+    >
+      <span class="bg-white text-neutral-700 text-xs font-semibold px-3 py-1.5 shadow-card opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+        Chat WhatsApp
+      </span>
+      <div class="w-12 h-12 bg-green-500 hover:bg-green-600 flex items-center justify-center shadow-card transition-colors">
+        <i class="fa-brands fa-whatsapp text-white text-xl"></i>
+      </div>
+    </a>
+
+    <!-- Instagram -->
+    <a
+      href="https://instagram.com/nokensoft.com"
+      target="_blank"
+      rel="noopener"
+      class="flex items-center gap-3 group"
+    >
+      <span class="bg-white text-neutral-700 text-xs font-semibold px-3 py-1.5 shadow-card opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+        @nokensoft.com
+      </span>
+      <div class="w-12 h-12 flex items-center justify-center shadow-card hover:opacity-90 transition-opacity"
+        style="background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);">
+        <i class="fa-brands fa-instagram text-white text-xl"></i>
+      </div>
+    </a>
+
+    <!-- Website -->
+    <a
+      href="https://www.nokensoft.com"
+      target="_blank"
+      rel="noopener"
+      class="flex items-center gap-3 group"
+    >
+      <span class="bg-white text-neutral-700 text-xs font-semibold px-3 py-1.5 shadow-card opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+        www.nokensoft.com
+      </span>
+      <div class="w-12 h-12 bg-primary-500 hover:bg-primary-600 flex items-center justify-center shadow-card transition-colors">
+        <i class="fa-solid fa-globe text-white text-lg"></i>
+      </div>
+    </a>
+
+  </div>
+
+  <script>
+    // ── Developer mode: tampilkan tombol Salin Prompt AI jika URL mengandung ?salin=1 ──
+    if (new URLSearchParams(window.location.search).get('salin') === '1') {
+      document.body.classList.add('dev-mode');
+    }
+
+    function copyPrompt(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById('copy-toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+      });
+    }
+  </script>
+
+</body>
+</html>

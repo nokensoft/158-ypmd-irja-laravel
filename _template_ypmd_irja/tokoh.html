@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id" x-data="{ menuOpen: false, tentangOpen: false }">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="robots" content="noindex, nofollow"/>
+  <link rel="icon" href="./img/logo-ypmd-irja.png"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <script>tailwind.config={theme:{extend:{colors:{primary:{50:'#f0f7f2',100:'#d9ede0',200:'#b4dbc3',300:'#82c19e',400:'#4fa174',500:'#2d8057',600:'#1f6642',700:'#1a5236',800:'#163f2b',900:'#0f2b1d'},accent:{50:'#fdf8ee',100:'#f9eccc',200:'#f2d68d',300:'#e8bc4f',400:'#c9972a',500:'#a67820'},neutral:{50:'#fafafa',100:'#f4f4f4',200:'#e8e8e8',300:'#d0d0d0',400:'#a0a0a0',500:'#707070',600:'#505050',700:'#383838',800:'#242424',900:'#141414'}},fontFamily:{display:['Lora','Georgia','serif'],body:['"Plus Jakarta Sans"','sans-serif']},boxShadow:{'card':'0 2px 12px rgba(0,0,0,0.08)','card-hover':'0 6px 24px rgba(0,0,0,0.12)'}}}}</script>
+  <style>
+    html{scroll-behavior:smooth;font-size:15px}body{font-family:'Plus Jakarta Sans',sans-serif;font-size:15px}h1,h2,h3,.font-display{font-family:'Lora',Georgia,serif}
+    .nav-link{position:relative}.nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:#2d8057;transition:width .25s ease}.nav-link:hover::after,.nav-link.active::after{width:100%}
+    .fade-in{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}.fade-in.visible{opacity:1;transform:translateY(0)}
+    .card-hover{transition:box-shadow .2s ease,transform .2s ease}.card-hover:hover{box-shadow:0 6px 24px rgba(0,0,0,0.12);transform:translateY(-2px)}
+  </style>
+  <title>Tokoh Kunci — YPMD IRJA</title>
+</head>
+<body class="bg-white text-neutral-800">
+
+  <header class="sticky top-0 z-50 bg-white shadow-md border-b border-neutral-200">
+    <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="index.html" class="hidden md:flex items-center gap-3 flex-shrink-0"><img src="./img/logo-ypmd-irja.png" alt="" class="h-16"><div class="hidden sm:block"><span class="font-display font-bold text-primary-700 text-base leading-tight block">YPMD IRJA</span><span class="text-neutral-400 text-xs leading-none">Yayasan Pembangunan Masyarakat Desa Irian Jaya</span></div></a>
+      <ul class="hidden md:flex items-center gap-6">
+        <li><a href="index.html" class="nav-link text-sm font-medium text-neutral-600 hover:text-primary-600 transition-colors">Beranda</a></li>
+<li class="relative" x-data="{open:false}" @mouseenter="open=true" @mouseleave="open=false">
+          <button class="nav-link active text-sm font-medium text-primary-600 flex items-center gap-1">Tentang <i class="fa-solid fa-chevron-down text-[10px]"></i></button>
+          <div x-show="open" x-transition class="absolute top-full left-0 mt-1 w-48 bg-white shadow-lg border border-neutral-100 py-1 z-50" style="display:none;">
+            <a href="sejarah.html" class="block px-4 py-2.5 text-sm text-neutral-600 hover:bg-primary-50 hover:text-primary-600">Sejarah Singkat</a>
+<a href="profil.html" class="block px-4 py-2.5 text-sm text-neutral-600 hover:bg-primary-50 hover:text-primary-600">Profil Lembaga</a>
+<a href="tokoh.html" class="block px-4 py-2.5 text-sm font-semibold text-primary-600 bg-primary-50">Tokoh Kunci</a>
+
+          </div>
+        </li>
+<li><a href="program.html" class="nav-link text-sm font-medium text-neutral-600 hover:text-primary-600 transition-colors">Program</a></li>
+<li><a href="kdk.html" class="nav-link text-sm font-medium text-neutral-600 hover:text-primary-600 transition-colors">KDK</a></li>
+<li><a href="blog.html" class="nav-link text-sm font-medium text-neutral-600 hover:text-primary-600 transition-colors">Papua Today</a></li>
+<li><a href="donasi.html" class="nav-link text-sm font-medium text-neutral-600 hover:text-primary-600 transition-colors">Donasi</a></li>
+<li><a href="kontak.html" class="nav-link text-sm font-medium text-neutral-600 hover:text-primary-600 transition-colors">Kontak</a></li>
+
+      </ul>
+      <div class="md:hidden absolute left-1/2 -translate-x-1/2 flex items-center gap-2"><img src="./img/logo-ypmd-irja.png" alt="" class="h-7"><span class="font-display font-bold text-primary-700 text-sm">YPMD IRJA</span></div>
+      <button class="md:hidden ml-auto text-neutral-600" @click="menuOpen=!menuOpen"><i class="fa-solid text-lg" :class="menuOpen?'fa-xmark':'fa-bars'"></i></button>
+    </nav>
+    <div x-show="menuOpen" x-transition class="md:hidden bg-white border-t border-neutral-200 shadow-md" style="display:none;">
+      <ul class="flex flex-col py-2">
+        <li><a href="index.html" class="block px-6 py-3 text-sm text-neutral-700 hover:bg-neutral-50">Beranda</a></li>
+<li>
+          <button @click="tentangOpen=!tentangOpen" class="w-full flex items-center justify-between px-6 py-3 text-sm text-primary-600 font-semibold bg-primary-50">Tentang <i class="fa-solid fa-chevron-down text-[10px] transition-transform" :class="tentangOpen&&'rotate-180'"></i></button>
+          <div x-show="tentangOpen" x-transition class="bg-neutral-50" style="display:none;"><a href="sejarah.html" class="block px-10 py-2.5 text-sm text-neutral-600 hover:text-primary-600">Sejarah Singkat</a><a href="profil.html" class="block px-10 py-2.5 text-sm text-neutral-600 hover:text-primary-600">Profil Lembaga</a><a href="tokoh.html" class="block px-10 py-2.5 text-sm font-semibold text-primary-600">Tokoh Kunci</a></div>
+        </li>
+<li><a href="program.html" class="block px-6 py-3 text-sm text-neutral-700 hover:bg-neutral-50">Program</a></li>
+<li><a href="kdk.html" class="block px-6 py-3 text-sm text-neutral-700 hover:bg-neutral-50">KDK</a></li>
+<li><a href="blog.html" class="block px-6 py-3 text-sm text-neutral-700 hover:bg-neutral-50">Papua Today</a></li>
+<li><a href="donasi.html" class="block px-6 py-3 text-sm text-neutral-700 hover:bg-neutral-50">Donasi</a></li>
+<li><a href="kontak.html" class="block px-6 py-3 text-sm text-neutral-700 hover:bg-neutral-50">Kontak</a></li>
+
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="bg-primary-700 py-14">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="flex items-center gap-2 text-primary-200 text-xs mb-3"><a href="index.html" class="hover:text-white">Beranda</a><i class="fa-solid fa-chevron-right text-[8px]"></i><span>Tokoh Kunci</span></div>
+        <h1 class="text-3xl md:text-4xl font-display font-bold text-white"><i class="fa-solid fa-person-chalkboard mr-3 text-primary-300"></i>Tokoh Kunci YPMD IRJA</h1>
+        <p class="text-primary-200 text-lg mt-3 max-w-lg">Orang-orang di balik perjalanan panjang YPMD IRJA.</p>
+      </div>
+    </section>
+
+    <section class="py-20 bg-neutral-50">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <article class="bg-white shadow-card card-hover fade-in"><div class="relative w-full pt-[100%] overflow-hidden"><img src="./img/avatar-decky-rumaropen.png" alt="" class="absolute inset-0 w-full h-full object-cover"/></div><div class="p-6"><h3 class="font-display font-bold text-neutral-900 text-lg">Decky Rumaropen</h3><span class="text-xs font-semibold text-primary-500 uppercase tracking-wider">Direktur (1998 – 2022)</span><p class="text-neutral-500 text-lg leading-relaxed mt-3">Alumnus FISIP Universitas Cenderawasih, bergabung YPMD IRJA sejak 1988. Penggerak utama kakao organik Papua dan kemitraan dengan ATJ/Green Coop. Salah satu pendiri FOKER LSM Papua. Wafat 26 Juli 2022.</p></div></article>
+          <article class="bg-white shadow-card card-hover fade-in"><div class="relative w-full pt-[100%] overflow-hidden"><img src="./img/avatar-george-junus-aditjondro.png" alt="" class="absolute inset-0 w-full h-full object-cover"/></div><div class="p-6"><h3 class="font-display font-bold text-neutral-900 text-lg">George Junus Aditjondro</h3><span class="text-xs font-semibold text-accent-500 uppercase tracking-wider">Pendiri &amp; Direktur Pertama</span><p class="text-neutral-500 text-lg leading-relaxed mt-3">Mantan jurnalis majalah Tempo, pelopor jurnalisme kampung di Papua. Inisiator buletin <em>Kabar dari Kampung</em> (KDK) sejak 1982. Mendirikan YPMD IRJA bersama August Rumansara. Wafat 10 Desember 2016.</p></div></article>
+          <article class="bg-white shadow-card card-hover fade-in"><div class="relative w-full pt-[100%] overflow-hidden"><img src="https://placehold.co/600x600/EEE/31343C" alt="" class="absolute inset-0 w-full h-full object-cover"/></div><div class="p-6"><h3 class="font-display font-bold text-neutral-900 text-lg">Ir. August Rumansara</h3><span class="text-xs font-semibold text-neutral-400 uppercase tracking-wider">Ko-Pendiri</span><p class="text-neutral-500 text-lg leading-relaxed mt-3">Bersama George Aditjondro, membangun gerakan masyarakat sipil Papua sejak era 1980-an melalui KKO dan Irja DISC sebelum mendirikan YPMD IRJA pada 1984.</p></div></article>
+        </div>
+        <div class="mt-10 bg-white shadow-card p-6 fade-in">
+          <h3 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4"><i class="fa-solid fa-star text-accent-400 mr-2"></i>Tokoh yang Terlahir dari YPMD IRJA</h3>
+          <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+            <div class="border border-neutral-100 p-4"><div class="font-semibold text-neutral-800">Christian Warinussy</div><div class="text-neutral-400 text-xs mt-1">Pendiri LP3BH Manokwari</div></div>
+            <div class="border border-neutral-100 p-4"><div class="font-semibold text-neutral-800">Markus You</div><div class="text-neutral-400 text-xs mt-1">Redaktur Suara Papua.com</div></div>
+            <div class="border border-neutral-100 p-4"><div class="font-semibold text-neutral-800">Bambang Widjayanto</div><div class="text-neutral-400 text-xs mt-1">Direktur pertama LBH Papua</div></div>
+            <div class="border border-neutral-100 p-4"><div class="font-semibold text-neutral-800">Pastor Neles Tebay</div><div class="text-neutral-400 text-xs mt-1">Kontributor buletin KDK</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-neutral-900 text-neutral-300">
+    <div class="max-w-6xl mx-auto px-6 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+      <div><div class="flex items-center gap-3 mb-4"><span class="bg-white rounded p-1.5 inline-flex items-center justify-center"><img src="./img/logo-ypmd-irja.png" alt="" class="h-8"></span><span class="font-display font-bold text-white text-base">YPMD IRJA</span></div><p class="text-neutral-400 text-lg leading-relaxed">Pionir pemberdayaan dan advokasi masyarakat adat di Tanah Papua sejak 1984.</p></div>
+      <div><h4 class="text-white text-xs font-semibold uppercase tracking-widest mb-4">Navigasi</h4><ul class="space-y-2 text-sm"><li><a href="index.html" class="hover:text-white transition-colors">Beranda</a></li><li><a href="profil.html" class="hover:text-white transition-colors">Profil Lembaga</a></li><li><a href="sejarah.html" class="hover:text-white transition-colors">Sejarah</a></li><li><a href="program.html" class="hover:text-white transition-colors">Program</a></li><li><a href="kdk.html" class="hover:text-white transition-colors">Buletin KDK</a></li><li><a href="blog.html" class="hover:text-white transition-colors">Papua Today</a></li></ul></div>
+      <div><h4 class="text-white text-xs font-semibold uppercase tracking-widest mb-4">Lainnya</h4><ul class="space-y-2 text-sm"><li><a href="tokoh.html" class="hover:text-white transition-colors">Tokoh Kunci</a></li><li><a href="galeri.html" class="hover:text-white transition-colors">Galeri</a></li><li><a href="donasi.html" class="hover:text-white transition-colors">Donasi</a></li><li><a href="kontak.html" class="hover:text-white transition-colors">Kontak</a></li></ul></div>
+      <div><h4 class="text-white text-xs font-semibold uppercase tracking-widest mb-4">Kontak</h4><ul class="space-y-2 text-sm text-neutral-400"><li class="flex items-start gap-2"><i class="fa-solid fa-location-dot text-primary-400 mt-0.5 w-4"></i>Jl. Jeruk Nipis 117 Kotaraja, Jayapura 99225</li><li class="flex items-start gap-2"><i class="fa-solid fa-phone text-primary-400 mt-0.5 w-4"></i>0967-581071</li></ul></div>
+    </div>
+    <div class="border-t border-neutral-800"><div class="max-w-6xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3"><p class="text-neutral-600 text-xs">&copy; 2025 YPMD-IRJA. Seluruh hak cipta dilindungi.</p><div class="flex items-center gap-4"><div class="flex items-center gap-2"><a href="#" class="w-7 h-7 bg-neutral-800 hover:bg-primary-500 flex items-center justify-center rounded transition-colors"><i class="fa-brands fa-instagram text-xs"></i></a><a href="#" class="w-7 h-7 bg-neutral-800 hover:bg-primary-500 flex items-center justify-center rounded transition-colors"><i class="fa-brands fa-facebook-f text-xs"></i></a><a href="#" class="w-7 h-7 bg-neutral-800 hover:bg-primary-500 flex items-center justify-center rounded transition-colors"><i class="fa-brands fa-youtube text-xs"></i></a><a href="#" class="w-7 h-7 bg-neutral-800 hover:bg-primary-500 flex items-center justify-center rounded transition-colors"><i class="fa-brands fa-whatsapp text-xs"></i></a></div><div class="flex items-center gap-3 text-xs text-neutral-500"><a href="#" class="hover:text-white transition-colors">FAQ</a><span class="text-neutral-700">&middot;</span><a href="#" class="hover:text-white transition-colors">Disclaimer</a></div></div></div></div>
+  </footer>
+
+  <div class="fixed bottom-6 right-5 z-50 flex flex-col items-center gap-3">
+    <button id="btnTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="w-11 h-11 bg-neutral-700 hover:bg-neutral-900 text-white flex items-center justify-center shadow-lg transition-all duration-300 opacity-0 translate-y-4 pointer-events-none"><i class="fa-solid fa-chevron-up text-sm"></i></button>
+    <a href="https://wa.me/6282199558191" target="_blank" class="w-11 h-11 bg-[#25D366] hover:bg-[#1ebe5d] text-white flex items-center justify-center shadow-lg transition-colors"><i class="fa-brands fa-whatsapp text-xl"></i></a>
+  </div>
+  <script>
+    const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});},{threshold:0.12});
+    document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+    const btnTop=document.getElementById('btnTop');
+    window.addEventListener('scroll',()=>{if(window.scrollY>300){btnTop.classList.remove('opacity-0','translate-y-4','pointer-events-none');btnTop.classList.add('opacity-100','translate-y-0');}else{btnTop.classList.add('opacity-0','translate-y-4','pointer-events-none');btnTop.classList.remove('opacity-100','translate-y-0');}});
+  </script>
+
+</body>
+</html>

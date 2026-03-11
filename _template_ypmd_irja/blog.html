@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id" x-data="{ menuOpen: false, tentangOpen: false }">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="robots" content="noindex, nofollow"/>
+  <link rel="icon" href="./img/logo-ypmd-irja.png"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <script>tailwind.config={theme:{extend:{colors:{primary:{50:'#f0f7f2',100:'#d9ede0',200:'#b4dbc3',300:'#82c19e',400:'#4fa174',500:'#2d8057',600:'#1f6642',700:'#1a5236',800:'#163f2b',900:'#0f2b1d'},accent:{50:'#fdf8ee',100:'#f9eccc',200:'#f2d68d',300:'#e8bc4f',400:'#c9972a',500:'#a67820'},neutral:{50:'#fafafa',100:'#f4f4f4',200:'#e8e8e8',300:'#d0d0d0',400:'#a0a0a0',500:'#707070',600:'#505050',700:'#383838',800:'#242424',900:'#141414'}},fontFamily:{display:['Lora','Georgia','serif'],body:['"Plus Jakarta Sans"','sans-serif']},boxShadow:{'card':'0 2px 12px rgba(0,0,0,0.08)','card-hover':'0 6px 24px rgba(0,0,0,0.12)'}}}}</script>
+  <style>
+    html{scroll-behavior:smooth;font-size:15px}body{font-family:'Plus Jakarta Sans',sans-serif;font-size:15px}h1,h2,h3,.font-display{font-family:'Lora',Georgia,serif}
+    .nav-link{position:relative}.nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:#2d8057;transition:width .25s ease}.nav-link:hover::after,.nav-link.active::after{width:100%}
+    .fade-in{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}.fade-in.visible{opacity:1;transform:translateY(0)}
+    .card-hover{transition:box-shadow .2s ease,transform .2s ease}.card-hover:hover{box-shadow:0 6px 24px rgba(0,0,0,0.12);transform:translateY(-2px)}
+  </style>
+  <title>Papua Today — YPMD IRJA</title>
+</head>
+<body class="bg-white text-neutral-800">
+
+  <header class="sticky top-0 z-50 bg-white shadow-md border-b border-neutral-200">
+    <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="index.html" class="hidden md:flex items-center gap-3 flex-shrink-0"><img src="./img/logo-ypmd-irja.png" alt="" class="h-16"><div class="hidden sm:block"><span class="font-display font-bold text-primary-700 text-base leading-tight block">YPMD IRJA</span><span class="text-neutral-400 text-xs leading-none">Yayasan Pembangunan Masyarakat Desa Irian Jaya</span></div></a>
+      <ul class="hidden md:flex items-center gap-6">
+        <li><a href="index.html" class="nav-link text-sm font-medium text-neutral-600 hover:text-primary-600 transition-colors">Beranda</a></li>
+<li class="relative" x-data="{open:false}" @mouseenter="open=true" @mouseleave="open=false">
+          <button class="nav-link text-sm font-medium text-neutral-600 hover:text-primary-600 transition-colors flex items-center gap-1">Tentang <i class="fa-solid fa-chevron-down text-[10px]"></i></button>
+          <div x-show="open" x-transition class="absolute top-full left-0 mt-1 w-48 bg-white shadow-lg border border-neutral-100 py-1 z-50" style="display:none;">
+            <a href="sejarah.html" class="block px-4 py-2.5 text-sm text-neutral-600 hover:bg-primary-50 hover:text-primary-600">Sejarah Singkat</a>
+<a href="profil.html" class="block px-4 py-2.5 text-sm text-neutral-600 hover:bg-primary-50 hover:text-primary-600">Profil Lembaga</a>
+<a href="tokoh.html" class="block px-4 py-2.5 text-sm text-neutral-600 hover:bg-primary-50 hover:text-primary-600">Tokoh Kunci</a>
+
+          </div>
+        </li>
+<li><a href="program.html" class="nav-link text-sm font-medium text-neutral-600 hover:text-primary-600 transition-colors">Program</a></li>
+<li><a href="kdk.html" class="nav-link text-sm font-medium text-neutral-600 hover:text-primary-600 transition-colors">KDK</a></li>
+<li><a href="blog.html" class="nav-link active text-sm font-medium text-primary-600">Papua Today</a></li>
+<li><a href="donasi.html" class="nav-link text-sm font-medium text-neutral-600 hover:text-primary-600 transition-colors">Donasi</a></li>
+<li><a href="kontak.html" class="nav-link text-sm font-medium text-neutral-600 hover:text-primary-600 transition-colors">Kontak</a></li>
+
+      </ul>
+      <div class="md:hidden absolute left-1/2 -translate-x-1/2 flex items-center gap-2"><img src="./img/logo-ypmd-irja.png" alt="" class="h-7"><span class="font-display font-bold text-primary-700 text-sm">YPMD IRJA</span></div>
+      <button class="md:hidden ml-auto text-neutral-600" @click="menuOpen=!menuOpen"><i class="fa-solid text-lg" :class="menuOpen?'fa-xmark':'fa-bars'"></i></button>
+    </nav>
+    <div x-show="menuOpen" x-transition class="md:hidden bg-white border-t border-neutral-200 shadow-md" style="display:none;">
+      <ul class="flex flex-col py-2">
+        <li><a href="index.html" class="block px-6 py-3 text-sm text-neutral-700 hover:bg-neutral-50">Beranda</a></li>
+<li>
+          <button @click="tentangOpen=!tentangOpen" class="w-full flex items-center justify-between px-6 py-3 text-sm text-neutral-700 hover:bg-neutral-50">Tentang <i class="fa-solid fa-chevron-down text-[10px] transition-transform" :class="tentangOpen&&'rotate-180'"></i></button>
+          <div x-show="tentangOpen" x-transition class="bg-neutral-50" style="display:none;"><a href="sejarah.html" class="block px-10 py-2.5 text-sm text-neutral-600 hover:text-primary-600">Sejarah Singkat</a><a href="profil.html" class="block px-10 py-2.5 text-sm text-neutral-600 hover:text-primary-600">Profil Lembaga</a><a href="tokoh.html" class="block px-10 py-2.5 text-sm text-neutral-600 hover:text-primary-600">Tokoh Kunci</a></div>
+        </li>
+<li><a href="program.html" class="block px-6 py-3 text-sm text-neutral-700 hover:bg-neutral-50">Program</a></li>
+<li><a href="kdk.html" class="block px-6 py-3 text-sm text-neutral-700 hover:bg-neutral-50">KDK</a></li>
+<li><a href="blog.html" class="block px-6 py-3 text-sm font-semibold text-primary-600 bg-primary-50">Papua Today</a></li>
+<li><a href="donasi.html" class="block px-6 py-3 text-sm text-neutral-700 hover:bg-neutral-50">Donasi</a></li>
+<li><a href="kontak.html" class="block px-6 py-3 text-sm text-neutral-700 hover:bg-neutral-50">Kontak</a></li>
+
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="bg-primary-700 py-14">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="flex items-center gap-2 text-primary-200 text-xs mb-3"><a href="index.html" class="hover:text-white">Beranda</a><i class="fa-solid fa-chevron-right text-[8px]"></i><span>Papua Today</span></div>
+        <h1 class="text-3xl md:text-4xl font-display font-bold text-white"><i class="fa-solid fa-blog mr-3 text-primary-300"></i>Papua Today</h1>
+        <p class="text-primary-200 text-lg mt-3 max-w-lg">Berita dan artikel terkini seputar Papua dan program YPMD IRJA.</p>
+      </div>
+    </section>
+
+    <section class="py-20 bg-white">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="grid lg:grid-cols-4 gap-8">
+
+          <!-- Sidebar -->
+          <aside class="lg:col-span-1 order-2 lg:order-1 fade-in">
+            <div class="shadow-card p-5 mb-6">
+              <h3 class="text-xs font-semibold uppercase tracking-widest text-neutral-500 mb-3"><i class="fa-solid fa-magnifying-glass mr-2"></i>Pencarian</h3>
+              <div class="flex"><input type="text" placeholder="Cari artikel..." class="flex-1 border border-neutral-200 px-3 py-2 text-sm focus:outline-none focus:border-primary-400"/><button class="bg-primary-500 text-white px-3 py-2 text-sm hover:bg-primary-600"><i class="fa-solid fa-search"></i></button></div>
+            </div>
+            <div class="shadow-card p-5">
+              <h3 class="text-xs font-semibold uppercase tracking-widest text-neutral-500 mb-3"><i class="fa-solid fa-folder mr-2"></i>Kategori</h3>
+              <ul class="space-y-2 text-sm">
+                <li><a href="#" class="flex items-center justify-between text-neutral-600 hover:text-primary-600"><span>Ekonomi Papua</span><span class="bg-primary-50 text-primary-600 text-xs px-2 py-0.5 font-semibold">5</span></a></li>
+                <li><a href="#" class="flex items-center justify-between text-neutral-600 hover:text-primary-600"><span>Budaya &amp; Adat</span><span class="bg-primary-50 text-primary-600 text-xs px-2 py-0.5 font-semibold">3</span></a></li>
+                <li><a href="#" class="flex items-center justify-between text-neutral-600 hover:text-primary-600"><span>Lingkungan</span><span class="bg-primary-50 text-primary-600 text-xs px-2 py-0.5 font-semibold">4</span></a></li>
+                <li><a href="#" class="flex items-center justify-between text-neutral-600 hover:text-primary-600"><span>Pendidikan</span><span class="bg-primary-50 text-primary-600 text-xs px-2 py-0.5 font-semibold">2</span></a></li>
+                <li><a href="#" class="flex items-center justify-between text-neutral-600 hover:text-primary-600"><span>Kakao Organik</span><span class="bg-primary-50 text-primary-600 text-xs px-2 py-0.5 font-semibold">6</span></a></li>
+              </ul>
+            </div>
+          </aside>
+
+          <!-- Blog Posts -->
+          <div class="lg:col-span-3 order-1 lg:order-2 space-y-6">
+
+            <article class="shadow-card card-hover bg-white border border-neutral-100 flex flex-col sm:flex-row overflow-hidden fade-in">
+              <img src="https://placehold.co/400x300/f0f7f2/2d8057?text=Artikel+1" alt="" class="w-full sm:w-48 h-48 sm:h-auto object-cover flex-shrink-0"/>
+              <div class="p-5 flex flex-col justify-center">
+                <div class="flex items-center gap-3 text-xs text-neutral-400 mb-2"><span>Ekonomi Papua</span><span>•</span><span>10 Jan 2025</span></div>
+                <h3 class="font-display font-bold text-neutral-900 mb-2">Petani Kakao Lembah Grime Raih Pasar Jepang</h3>
+                <p class="text-neutral-500 text-lg leading-relaxed mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis voluptatum earum quo sapiente...</p>
+                <a href="#" class="text-primary-600 text-sm font-semibold hover:text-primary-700">Baca Selengkapnya <i class="fa-solid fa-arrow-right text-xs ml-1"></i></a>
+              </div>
+            </article>
+            <article class="shadow-card card-hover bg-white border border-neutral-100 flex flex-col sm:flex-row overflow-hidden fade-in">
+              <img src="https://placehold.co/400x300/f0f7f2/2d8057?text=Artikel+2" alt="" class="w-full sm:w-48 h-48 sm:h-auto object-cover flex-shrink-0"/>
+              <div class="p-5 flex flex-col justify-center">
+                <div class="flex items-center gap-3 text-xs text-neutral-400 mb-2"><span>Budaya & Adat</span><span>•</span><span>25 Feb 2025</span></div>
+                <h3 class="font-display font-bold text-neutral-900 mb-2">Tradisi Adat dalam Pengelolaan Sumber Daya</h3>
+                <p class="text-neutral-500 text-lg leading-relaxed mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis voluptatum earum quo sapiente...</p>
+                <a href="#" class="text-primary-600 text-sm font-semibold hover:text-primary-700">Baca Selengkapnya <i class="fa-solid fa-arrow-right text-xs ml-1"></i></a>
+              </div>
+            </article>
+            <article class="shadow-card card-hover bg-white border border-neutral-100 flex flex-col sm:flex-row overflow-hidden fade-in">
+              <img src="https://placehold.co/400x300/f0f7f2/2d8057?text=Artikel+3" alt="" class="w-full sm:w-48 h-48 sm:h-auto object-cover flex-shrink-0"/>
+              <div class="p-5 flex flex-col justify-center">
+                <div class="flex items-center gap-3 text-xs text-neutral-400 mb-2"><span>Lingkungan</span><span>•</span><span>12 Mar 2025</span></div>
+                <h3 class="font-display font-bold text-neutral-900 mb-2">Menjaga Hutan Papua untuk Generasi Mendatang</h3>
+                <p class="text-neutral-500 text-lg leading-relaxed mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis voluptatum earum quo sapiente...</p>
+                <a href="#" class="text-primary-600 text-sm font-semibold hover:text-primary-700">Baca Selengkapnya <i class="fa-solid fa-arrow-right text-xs ml-1"></i></a>
+              </div>
+            </article>
+            <article class="shadow-card card-hover bg-white border border-neutral-100 flex flex-col sm:flex-row overflow-hidden fade-in">
+              <img src="https://placehold.co/400x300/f0f7f2/2d8057?text=Artikel+4" alt="" class="w-full sm:w-48 h-48 sm:h-auto object-cover flex-shrink-0"/>
+              <div class="p-5 flex flex-col justify-center">
+                <div class="flex items-center gap-3 text-xs text-neutral-400 mb-2"><span>Kakao Organik</span><span>•</span><span>5 Apr 2025</span></div>
+                <h3 class="font-display font-bold text-neutral-900 mb-2">Kakao Kita Café: Dari Kebun ke Cangkir</h3>
+                <p class="text-neutral-500 text-lg leading-relaxed mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis voluptatum earum quo sapiente...</p>
+                <a href="#" class="text-primary-600 text-sm font-semibold hover:text-primary-700">Baca Selengkapnya <i class="fa-solid fa-arrow-right text-xs ml-1"></i></a>
+              </div>
+            </article>
+            <!-- Pagination -->
+            <nav class="mt-10 flex items-center justify-center gap-1 fade-in">
+              <a href="#" class="w-10 h-10 flex items-center justify-center border border-neutral-200 text-neutral-400 hover:border-primary-400 hover:text-primary-600 transition-colors"><i class="fa-solid fa-chevron-left text-xs"></i></a>
+              <a href="#" class="w-10 h-10 flex items-center justify-center bg-primary-500 text-white text-sm font-semibold">1</a>
+              <a href="#" class="w-10 h-10 flex items-center justify-center border border-neutral-200 text-neutral-600 text-sm font-medium hover:border-primary-400 hover:text-primary-600 transition-colors">2</a>
+              <a href="#" class="w-10 h-10 flex items-center justify-center border border-neutral-200 text-neutral-600 text-sm font-medium hover:border-primary-400 hover:text-primary-600 transition-colors">3</a>
+              <span class="w-10 h-10 flex items-center justify-center text-neutral-400 text-sm">...</span>
+              <a href="#" class="w-10 h-10 flex items-center justify-center border border-neutral-200 text-neutral-600 text-sm font-medium hover:border-primary-400 hover:text-primary-600 transition-colors">10</a>
+              <a href="#" class="w-10 h-10 flex items-center justify-center border border-neutral-200 text-neutral-400 hover:border-primary-400 hover:text-primary-600 transition-colors"><i class="fa-solid fa-chevron-right text-xs"></i></a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-neutral-900 text-neutral-300">
+    <div class="max-w-6xl mx-auto px-6 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+      <div><div class="flex items-center gap-3 mb-4"><span class="bg-white rounded p-1.5 inline-flex items-center justify-center"><img src="./img/logo-ypmd-irja.png" alt="" class="h-8"></span><span class="font-display font-bold text-white text-base">YPMD IRJA</span></div><p class="text-neutral-400 text-lg leading-relaxed">Pionir pemberdayaan dan advokasi masyarakat adat di Tanah Papua sejak 1984.</p></div>
+      <div><h4 class="text-white text-xs font-semibold uppercase tracking-widest mb-4">Navigasi</h4><ul class="space-y-2 text-sm"><li><a href="index.html" class="hover:text-white transition-colors">Beranda</a></li><li><a href="profil.html" class="hover:text-white transition-colors">Profil Lembaga</a></li><li><a href="sejarah.html" class="hover:text-white transition-colors">Sejarah</a></li><li><a href="program.html" class="hover:text-white transition-colors">Program</a></li><li><a href="kdk.html" class="hover:text-white transition-colors">Buletin KDK</a></li><li><a href="blog.html" class="hover:text-white transition-colors">Papua Today</a></li></ul></div>
+      <div><h4 class="text-white text-xs font-semibold uppercase tracking-widest mb-4">Lainnya</h4><ul class="space-y-2 text-sm"><li><a href="tokoh.html" class="hover:text-white transition-colors">Tokoh Kunci</a></li><li><a href="galeri.html" class="hover:text-white transition-colors">Galeri</a></li><li><a href="donasi.html" class="hover:text-white transition-colors">Donasi</a></li><li><a href="kontak.html" class="hover:text-white transition-colors">Kontak</a></li></ul></div>
+      <div><h4 class="text-white text-xs font-semibold uppercase tracking-widest mb-4">Kontak</h4><ul class="space-y-2 text-sm text-neutral-400"><li class="flex items-start gap-2"><i class="fa-solid fa-location-dot text-primary-400 mt-0.5 w-4"></i>Jl. Jeruk Nipis 117 Kotaraja, Jayapura 99225</li><li class="flex items-start gap-2"><i class="fa-solid fa-phone text-primary-400 mt-0.5 w-4"></i>0967-581071</li></ul></div>
+    </div>
+    <div class="border-t border-neutral-800"><div class="max-w-6xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3"><p class="text-neutral-600 text-xs">&copy; 2025 YPMD-IRJA. Seluruh hak cipta dilindungi.</p><div class="flex items-center gap-4"><div class="flex items-center gap-2"><a href="#" class="w-7 h-7 bg-neutral-800 hover:bg-primary-500 flex items-center justify-center rounded transition-colors"><i class="fa-brands fa-instagram text-xs"></i></a><a href="#" class="w-7 h-7 bg-neutral-800 hover:bg-primary-500 flex items-center justify-center rounded transition-colors"><i class="fa-brands fa-facebook-f text-xs"></i></a><a href="#" class="w-7 h-7 bg-neutral-800 hover:bg-primary-500 flex items-center justify-center rounded transition-colors"><i class="fa-brands fa-youtube text-xs"></i></a><a href="#" class="w-7 h-7 bg-neutral-800 hover:bg-primary-500 flex items-center justify-center rounded transition-colors"><i class="fa-brands fa-whatsapp text-xs"></i></a></div><div class="flex items-center gap-3 text-xs text-neutral-500"><a href="#" class="hover:text-white transition-colors">FAQ</a><span class="text-neutral-700">&middot;</span><a href="#" class="hover:text-white transition-colors">Disclaimer</a></div></div></div></div>
+  </footer>
+
+  <div class="fixed bottom-6 right-5 z-50 flex flex-col items-center gap-3">
+    <button id="btnTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="w-11 h-11 bg-neutral-700 hover:bg-neutral-900 text-white flex items-center justify-center shadow-lg transition-all duration-300 opacity-0 translate-y-4 pointer-events-none"><i class="fa-solid fa-chevron-up text-sm"></i></button>
+    <a href="https://wa.me/6282199558191" target="_blank" class="w-11 h-11 bg-[#25D366] hover:bg-[#1ebe5d] text-white flex items-center justify-center shadow-lg transition-colors"><i class="fa-brands fa-whatsapp text-xl"></i></a>
+  </div>
+  <script>
+    const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});},{threshold:0.12});
+    document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+    const btnTop=document.getElementById('btnTop');
+    window.addEventListener('scroll',()=>{if(window.scrollY>300){btnTop.classList.remove('opacity-0','translate-y-4','pointer-events-none');btnTop.classList.add('opacity-100','translate-y-0');}else{btnTop.classList.add('opacity-0','translate-y-4','pointer-events-none');btnTop.classList.remove('opacity-100','translate-y-0');}});
+  </script>
+
+</body>
+</html>
