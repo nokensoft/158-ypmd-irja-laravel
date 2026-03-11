@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Berita;
+use App\Models\Donasi;
 use App\Models\Galeri;
+use App\Models\Kdk;
 use App\Models\KategoriBerita;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class VisitorController extends Controller
 {
@@ -109,5 +113,49 @@ class VisitorController extends Controller
     public function kontak()
     {
         return view('visitor.kontak');
+    }
+
+    public function kdk()
+    {
+        $kdkList = Kdk::orderByDesc('tanggal_terbit')->get();
+
+        return view('visitor.kdk', compact('kdkList'));
+    }
+
+    public function donasi()
+    {
+        return view('visitor.donasi');
+    }
+
+    public function donasiStore(Request $request)
+    {
+        $request->validate([
+            'nama_donatur' => 'required|string|max:255',
+            'email'        => 'nullable|email|max:255',
+            'telepon'      => 'nullable|string|max:20',
+            'bank'         => 'required|string|max:100',
+            'jumlah'       => 'nullable|integer|min:0',
+            'pesan'        => 'nullable|string|max:1000',
+            'bukti_transfer' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:5120',
+        ]);
+
+        $buktiPath = null;
+        if ($request->hasFile('bukti_transfer')) {
+            $buktiPath = $request->file('bukti_transfer')->store('donasi', 'public');
+        }
+
+        Donasi::create([
+            'nama_donatur'   => $request->nama_donatur,
+            'email'          => $request->email,
+            'telepon'        => $request->telepon,
+            'bank'           => $request->bank,
+            'jumlah'         => $request->jumlah,
+            'pesan'          => $request->pesan,
+            'bukti_transfer' => $buktiPath,
+            'status'         => 'pending',
+            'tanggal'        => now()->toDateString(),
+        ]);
+
+        return redirect()->route('donasi')->with('success', 'Terima kasih! Konfirmasi donasi Anda telah kami terima dan sedang diproses.');
     }
 }

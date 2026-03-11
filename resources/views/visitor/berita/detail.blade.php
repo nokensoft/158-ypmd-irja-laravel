@@ -1,12 +1,25 @@
 @extends('layouts.visitor')
-@section('title', $berita->judul . ' - ' . ($situs['nama_situs'] ?? 'KONI Papua Pegunungan'))
+@section('title', $berita->judul . ' - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
 @section('seo-title', $berita->judul)
 @section('seo-description', Str::limit(strip_tags($berita->ringkasan ?? $berita->konten), 160))
 @section('seo-image', $berita->gambar)
 @section('og-type', 'article')
 
 @section('content')
-    @include('partials.page-banner', ['title' => 'Detail Berita', 'breadcrumb' => $berita->kategori?->nama ?? 'Berita'])
+    <div class="bg-primary-600 py-16">
+        <div class="max-w-6xl mx-auto px-6">
+            <span class="text-primary-200 text-xs uppercase tracking-widest">
+                <a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> ›
+                <a href="{{ route('berita') }}" class="hover:text-white">Papua Today</a>
+                @if ($berita->kategori) › {{ $berita->kategori->nama }} @endif
+            </span>
+            <h1 class="text-2xl md:text-3xl font-display font-bold text-white mt-3 leading-tight">{{ $berita->judul }}</h1>
+            <p class="text-primary-200 mt-2 text-sm">
+                {{ $berita->tanggal_terbit?->translatedFormat('d M Y') }}
+                @if ($berita->user) &middot; {{ $berita->user->name }} @endif
+            </p>
+        </div>
+    </div>
 
     <section class="py-20 bg-white">
         <div class="container mx-auto px-4">
@@ -16,15 +29,7 @@
                         @if ($berita->kategori)
                             <span class="text-sm bg-primary text-white px-3 py-1 font-bold uppercase">{{ $berita->kategori->nama }}</span>
                         @endif
-                        <p class="text-base text-gray-400 mt-4">
-                            <i class="far fa-calendar-alt mr-1"></i> {{ $berita->tanggal_terbit?->translatedFormat('d M Y') }}
-                            @if ($berita->user)
-                                <span class="mx-2">&middot;</span>
-                                <i class="far fa-user mr-1"></i> {{ $berita->user->name }}
-                            @endif
-                        </p>
                     </div>
-                    <h1 class="text-2xl lg:text-4xl font-extrabold mb-8 leading-tight">{{ $berita->judul }}</h1>
                     <div class="mb-8">
                         <img src="{{ $berita->gambar }}" alt="{{ $berita->judul }}" class="w-full max-h-[500px] object-cover">
                     </div>

@@ -69,6 +69,92 @@
         </div>
     </section>
 
+    {{-- Form Konfirmasi Donasi --}}
+    <section class="py-16 bg-neutral-50">
+        <div class="max-w-3xl mx-auto px-6">
+            @if (session('success'))
+                <div class="mb-8 p-4 bg-green-50 border border-green-200 text-green-800 text-sm font-semibold">
+                    <i class="fa-solid fa-check-circle mr-2"></i>{{ session('success') }}
+                </div>
+            @endif
+            <div class="text-center mb-10 fade-in">
+                <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2">Konfirmasi</p>
+                <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900">Sudah Transfer? Konfirmasi di Sini</h2>
+                <p class="text-neutral-500 mt-3">Isi formulir berikut setelah melakukan transfer, agar donasi Anda dapat segera kami verifikasi.</p>
+            </div>
+            <div class="bg-white shadow-card p-8 fade-in">
+                <form action="{{ route('donasi.store') }}" method="POST"
+                      enctype="multipart/form-data" class="space-y-5">
+                    @csrf
+                    <div class="grid sm:grid-cols-2 gap-5">
+                        <div>
+                            <label class="text-xs font-semibold uppercase text-neutral-500 block mb-1">Nama Donatur <span class="text-red-500">*</span></label>
+                            <input type="text" name="nama_donatur" required
+                                   value="{{ old('nama_donatur') }}"
+                                   class="w-full border border-neutral-300 p-3 text-sm focus:border-primary-500 focus:outline-none transition"
+                                   placeholder="Nama lengkap">
+                            @error('nama_donatur') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                        </div>
+                        <div>
+                            <label class="text-xs font-semibold uppercase text-neutral-500 block mb-1">Email</label>
+                            <input type="email" name="email"
+                                   value="{{ old('email') }}"
+                                   class="w-full border border-neutral-300 p-3 text-sm focus:border-primary-500 focus:outline-none transition"
+                                   placeholder="email@domain.com">
+                            @error('email') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                        </div>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-5">
+                        <div>
+                            <label class="text-xs font-semibold uppercase text-neutral-500 block mb-1">Telepon / WhatsApp</label>
+                            <input type="text" name="telepon"
+                                   value="{{ old('telepon') }}"
+                                   class="w-full border border-neutral-300 p-3 text-sm focus:border-primary-500 focus:outline-none transition"
+                                   placeholder="08xxxxxxxxxx">
+                            @error('telepon') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                        </div>
+                        <div>
+                            <label class="text-xs font-semibold uppercase text-neutral-500 block mb-1">Bank Tujuan <span class="text-red-500">*</span></label>
+                            <select name="bank" required
+                                    class="w-full border border-neutral-300 p-3 text-sm focus:border-primary-500 focus:outline-none transition bg-white">
+                                <option value="">-- Pilih Bank --</option>
+                                @foreach (['BRI', 'BNI', 'Mandiri'] as $bank)
+                                    <option value="{{ $bank }}" {{ old('bank') === $bank ? 'selected' : '' }}>{{ $bank }}</option>
+                                @endforeach
+                            </select>
+                            @error('bank') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-xs font-semibold uppercase text-neutral-500 block mb-1">Jumlah Donasi (Rp) <span class="text-red-500">*</span></label>
+                        <input type="number" name="jumlah" required min="1"
+                               value="{{ old('jumlah') }}"
+                               class="w-full border border-neutral-300 p-3 text-sm focus:border-primary-500 focus:outline-none transition"
+                               placeholder="Contoh: 500000">
+                        @error('jumlah') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                    </div>
+                    <div>
+                        <label class="text-xs font-semibold uppercase text-neutral-500 block mb-1">Pesan (opsional)</label>
+                        <textarea name="pesan" rows="3"
+                                  class="w-full border border-neutral-300 p-3 text-sm focus:border-primary-500 focus:outline-none transition resize-none"
+                                  placeholder="Pesan atau doa untuk YPMD IRJA...">{{ old('pesan') }}</textarea>
+                    </div>
+                    <div>
+                        <label class="text-xs font-semibold uppercase text-neutral-500 block mb-1">Bukti Transfer</label>
+                        <input type="file" name="bukti_transfer" accept="image/*,.pdf"
+                               class="w-full border border-neutral-300 p-3 text-sm">
+                        <p class="text-xs text-neutral-400 mt-1">Format: JPG, PNG, atau PDF. Maks 5 MB.</p>
+                        @error('bukti_transfer') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                    </div>
+                    <button type="submit"
+                            class="w-full bg-primary-500 text-white py-4 font-bold uppercase tracking-wide hover:bg-primary-600 transition-colors text-sm">
+                        <i class="fa-solid fa-paper-plane mr-2"></i>Kirim Konfirmasi Donasi
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <section class="bg-primary-600 py-16">
         <div class="max-w-4xl mx-auto px-6 text-center fade-in">
             <h2 class="text-2xl md:text-3xl font-display font-bold text-white mb-4">Terima Kasih atas Kepedulian Anda</h2>

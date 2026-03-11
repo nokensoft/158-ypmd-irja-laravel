@@ -9,7 +9,7 @@ class KategoriBeritaSeeder extends Seeder
 {
     public function run(): void
     {
-        $kategori = ['Organisasi', 'Prestasi', 'Pembinaan', 'Event'];
+        $kategori = ['Berita Papua', 'Program', 'Advokasi', 'Ekspor Kakao', 'KDK'];
 
         foreach ($kategori as $nama) {
             KategoriBerita::create(['nama' => $nama]);

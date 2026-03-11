@@ -69,6 +69,6 @@ class Berita extends Model
             return asset('storage/' . $this->gambar_url);
         }
 
-        return asset('img/logo-koni-papua-pegunungan-transparant.png');
+        return asset('img/logo-ypmd-irja.png');
     }
 }

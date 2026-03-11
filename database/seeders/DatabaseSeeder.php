@@ -12,9 +12,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             PengaturanSitusSeeder::class,
             KategoriBeritaSeeder::class,
-            CabangOlahragaSeeder::class,
             BeritaSeeder::class,
-            KegiatanSeeder::class,
+            KdkSeeder::class,
+            DonasiSeeder::class,
             GaleriSeeder::class,
         ]);
     }

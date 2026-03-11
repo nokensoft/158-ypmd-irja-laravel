@@ -8,11 +8,11 @@ use App\Http\Controllers\Admin\PengaturanSitusController;
 use App\Http\Controllers\Admin\AktivitasLoginController;
 use App\Http\Controllers\Admin\PenggunaController;
 use App\Http\Controllers\Admin\BackupDatabaseController;
+use App\Http\Controllers\Admin\DonasiController as AdminDonasiController;
 use App\Http\Controllers\Penulis\DashboardController as PenulisDashboardController;
 use App\Http\Controllers\Penulis\BeritaController;
 use App\Http\Controllers\Penulis\KategoriBeritaController;
-use App\Http\Controllers\Penulis\KegiatanController;
-use App\Http\Controllers\Penulis\CabangOlahragaController;
+use App\Http\Controllers\Penulis\KdkController;
 use App\Http\Controllers\Penulis\GaleriController;
 use App\Http\Controllers\Penulis\MediaController;
 use App\Http\Controllers\StatistikPengunjungController;
@@ -30,12 +30,15 @@ Route::middleware('track.visitor')->group(function () {
     Route::view('/profil', 'visitor.profil')->name('profil');
     Route::view('/tokoh', 'visitor.tokoh')->name('tokoh');
 
-    // Program & KDK (static)
+    // Program (static)
     Route::view('/program', 'visitor.program')->name('program');
-    Route::view('/kdk', 'visitor.kdk')->name('kdk');
 
-    // Donasi (static)
-    Route::view('/donasi', 'visitor.donasi')->name('donasi');
+    // KDK (dynamic)
+    Route::get('/kdk', [VisitorController::class, 'kdk'])->name('kdk');
+
+    // Donasi (dynamic GET + POST)
+    Route::get('/donasi', [VisitorController::class, 'donasi'])->name('donasi');
+    Route::post('/donasi', [VisitorController::class, 'donasiStore'])->name('donasi.store');
 
     // Berita / Papua Today (dynamic)
     Route::get('/berita', [VisitorController::class, 'berita'])->name('berita');
@@ -84,6 +87,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth.custom', 'role:admin_m
     // Statistik
     Route::get('/statistik-pengunjung', [StatistikPengunjungController::class, 'index'])->name('statistik-pengunjung');
 
+    // Donasi
+    Route::get('/donasi', [AdminDonasiController::class, 'index'])->name('donasi.index');
+    Route::get('/donasi/{id}', [AdminDonasiController::class, 'show'])->name('donasi.show');
+    Route::patch('/donasi/{id}/konfirmasi', [AdminDonasiController::class, 'konfirmasi'])->name('donasi.konfirmasi');
+    Route::patch('/donasi/{id}/tolak', [AdminDonasiController::class, 'tolak'])->name('donasi.tolak');
+    Route::delete('/donasi/{id}', [AdminDonasiController::class, 'destroy'])->name('donasi.destroy');
+
     // Dokumentasi
     Route::view('/dokumentasi', 'admin.dokumentasi')->name('dokumentasi');
 });
@@ -101,12 +111,9 @@ Route::prefix('penulis')->name('penulis.')->middleware(['auth.custom', 'role:pen
     Route::patch('/berita/{beritum}/restore', [BeritaController::class, 'restore'])->name('berita.restore');
     Route::resource('kategori-berita', KategoriBeritaController::class)->except(['show']);
     Route::patch('/kategori-berita/{kategori_beritum}/restore', [KategoriBeritaController::class, 'restore'])->name('kategori-berita.restore');
-    Route::resource('kegiatan', KegiatanController::class)->except(['show']);
-    Route::patch('/kegiatan/{kegiatan}/restore', [KegiatanController::class, 'restore'])->name('kegiatan.restore');
-
-    // Olahraga
-    Route::resource('cabang-olahraga', CabangOlahragaController::class)->except(['show']);
-    Route::patch('/cabang-olahraga/{cabang_olahraga}/restore', [CabangOlahragaController::class, 'restore'])->name('cabang-olahraga.restore');
+    // KDK
+    Route::resource('kdk', KdkController::class)->except(['show']);
+    Route::patch('/kdk/{kdk}/restore', [KdkController::class, 'restore'])->name('kdk.restore');
 
     // Media
     Route::get('/media/json', [MediaController::class, 'json'])->name('media.json');

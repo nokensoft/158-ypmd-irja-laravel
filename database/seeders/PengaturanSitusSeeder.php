@@ -11,22 +11,26 @@ class PengaturanSitusSeeder extends Seeder
     {
         $settings = [
             // Umum
-            'nama_situs' => 'KONI Provinsi Papua Pegunungan',
-            'deskripsi_situs' => 'Wadah pembinaan olahraga prestasi di Provinsi Papua Pegunungan',
-            'email' => 'info@konipapuapegunungan.id',
-            'telepon' => '(0969) 31000',
-            'alamat' => 'Jl. Trikora No. 1, Wamena, Jayawijaya',
-            'logo' => null,
+            'nama_situs'      => 'YPMD IRJA',
+            'deskripsi_situs' => 'Yayasan Pembangunan Masyarakat Desa Irian Jaya — Mendampingi masyarakat adat Papua sejak 1982',
+            'email'           => 'info@ypmdirja.org',
+            'telepon'         => '(0967) 123456',
+            'alamat'          => 'Jl. Ahmad Yani No. 12, Jayapura, Papua',
+            'logo'            => null,
             // Media Sosial
-            'sosmed_facebook' => 'https://facebook.com/konipapuapegunungan',
-            'sosmed_instagram' => 'https://instagram.com/konipapuapegunungan',
-            'sosmed_youtube' => 'https://youtube.com/@konipapuapegunungan',
-            'sosmed_twitter' => "https://x.com/konipapuapegunungan",
-            'sosmed_tiktok' => "https://tiktok.com/konipapuapegunungan",
+            'sosmed_facebook'  => 'https://facebook.com/ypmdirja',
+            'sosmed_instagram' => 'https://instagram.com/ypmdirja',
+            'sosmed_youtube'   => 'https://youtube.com/@ypmdirja',
+            'sosmed_twitter'   => 'https://x.com/ypmdirja',
+            'sosmed_tiktok'    => null,
+            // Rekening Donasi
+            'donasi_rek_bri'     => '1234-5678-9012-345 a.n. Yayasan Pembangunan Masyarakat Desa Irian Jaya',
+            'donasi_rek_bni'     => '9876-5432-1098-765 a.n. YPMD IRJA',
+            'donasi_rek_mandiri' => '1111-2222-3333-4444 a.n. YPMD IRJA',
             // SEO
-            'seo_meta_keywords' => 'KONI, Papua Pegunungan, olahraga, prestasi, atlet',
-            'seo_meta_description' => 'Website resmi KONI Provinsi Papua Pegunungan - Wadah pembinaan olahraga prestasi.',
-            'seo_og_image' => null,
+            'seo_meta_keywords'   => 'YPMD IRJA, Papua, masyarakat adat, pemberdayaan, kakao, KDK, Kabar Dari Kampung',
+            'seo_meta_description'=> 'Website resmi YPMD IRJA — Mendampingi masyarakat adat Papua dalam pemberdayaan ekonomi, hak tanah, dan ketahanan pangan sejak 1982.',
+            'seo_og_image'        => null,
         ];
 
         foreach ($settings as $key => $value) {

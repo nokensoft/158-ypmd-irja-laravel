@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Dashboard') - {{ $situs['nama_situs'] ?? 'KONI Papua Pegunungan' }}</title>
+    <title>@yield('title', 'Dashboard') - {{ $situs['nama_situs'] ?? 'YPMD IRJA' }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="robots" content="noindex, nofollow">
     @if (!empty($situs['logo']))
@@ -33,13 +33,13 @@
             {{-- Logo --}}
             <div class="px-6 py-5 border-b border-gray-800 flex items-center space-x-3">
                 @if (!empty($situs['logo']))
-                    <img src="{{ asset('storage/' . $situs['logo']) }}" alt="Logo {{ $situs['nama_situs'] ?? 'KONI' }}" class="h-10">
+                    <img src="{{ asset('storage/' . $situs['logo']) }}" alt="Logo {{ $situs['nama_situs'] ?? 'YPMD IRJA' }}" class="h-10">
                 @else
-                    <img src="{{ asset('img/logo-koni-papua-pegunungan.jpeg') }}" alt="Logo" class="h-10">
+                    <img src="{{ asset('img/logo-ypmd-irja.png') }}" alt="Logo" class="h-10 object-contain" onerror="this.style.display='none'">
                 @endif
                 <div>
-                    <span class="font-bold text-lg leading-none text-primary block">{{ Str::before($situs['nama_situs'] ?? 'KONI', ' ') }}</span>
-                    <span class="text-xs font-medium tracking-widest uppercase text-gray-400 block">{{ Str::after($situs['nama_situs'] ?? 'KONI Papua Pegunungan', ' ') }}</span>
+                    <span class="font-bold text-sm leading-tight text-primary block">YPMD IRJA</span>
+                    <span class="text-xs font-medium tracking-widest uppercase text-gray-400 block">{{ session('user.role') === 'admin_master' ? 'Admin' : 'Penulis' }}</span>
                 </div>
             </div>
 
@@ -84,6 +84,14 @@
                         </a>
                     </div>
                     <div>
+                        <p class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3 px-3">Donasi</p>
+                        <a href="{{ route('admin.donasi.index') }}"
+                           class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round {{ request()->routeIs('admin.donasi.*') ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
+                            <i class="fas fa-heart w-6 text-center"></i>
+                            <span>Kelola Donasi</span>
+                        </a>
+                    </div>
+                    <div>
                         <p class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3 px-3">Laporan</p>
                         <a href="{{ route('admin.statistik-pengunjung') }}"
                            class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round {{ request()->routeIs('admin.statistik-pengunjung') ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
@@ -112,29 +120,24 @@
                         </a>
                     </div>
                     <div>
-                        <p class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3 px-3">Konten</p>
+                        <p class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3 px-3">Papua Today</p>
                         <a href="{{ route('penulis.berita.index') }}"
                            class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round {{ request()->routeIs('penulis.berita.*') ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
                             <i class="fas fa-newspaper w-6 text-center"></i>
-                            <span>Berita</span>
+                            <span>Artikel</span>
                         </a>
                         <a href="{{ route('penulis.kategori-berita.index') }}"
                            class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round {{ request()->routeIs('penulis.kategori-berita.*') ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
                             <i class="fas fa-tags w-6 text-center"></i>
-                            <span>Kategori Berita</span>
-                        </a>
-                        <a href="{{ route('penulis.kegiatan.index') }}"
-                           class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round {{ request()->routeIs('penulis.kegiatan.*') ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
-                            <i class="fas fa-calendar-alt w-6 text-center"></i>
-                            <span>Kegiatan</span>
+                            <span>Kategori</span>
                         </a>
                     </div>
                     <div>
-                        <p class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3 px-3">Olahraga</p>
-                        <a href="{{ route('penulis.cabang-olahraga.index') }}"
-                           class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round {{ request()->routeIs('penulis.cabang-olahraga.*') ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
-                            <i class="fas fa-running w-6 text-center"></i>
-                            <span>Cabang Olahraga</span>
+                        <p class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3 px-3">KDK</p>
+                        <a href="{{ route('penulis.kdk.index') }}"
+                           class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round {{ request()->routeIs('penulis.kdk.*') ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
+                            <i class="fas fa-book-open w-6 text-center"></i>
+                            <span>Edisi KDK</span>
                         </a>
                     </div>
                     <div>
@@ -156,14 +159,6 @@
                            class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round {{ request()->routeIs('penulis.statistik-pengunjung') ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
                             <i class="fas fa-chart-bar w-6 text-center"></i>
                             <span>Statistik Pengunjung</span>
-                        </a>
-                    </div>
-                    <div>
-                        <p class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3 px-3">Lainnya</p>
-                        <a href="{{ route('penulis.dokumentasi') }}"
-                           class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round {{ request()->routeIs('penulis.dokumentasi') ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
-                            <i class="fas fa-book w-6 text-center"></i>
-                            <span>Dokumentasi</span>
                         </a>
                     </div>
                 @endif

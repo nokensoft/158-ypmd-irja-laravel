@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
-@section('title', 'Berita')
-@section('page-title', 'Berita')
+@section('title', 'Papua Today')
+@section('page-title', 'Papua Today')
 @section('content')
     @include('partials.crud-index', [
         'title' => 'Berita',
