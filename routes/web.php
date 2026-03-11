@@ -24,15 +24,29 @@ use App\Http\Controllers\StatistikPengunjungController;
 */
 Route::middleware('track.visitor')->group(function () {
     Route::get('/', [VisitorController::class, 'beranda'])->name('beranda');
-    Route::get('/tentang', [VisitorController::class, 'tentang'])->name('tentang');
-    Route::get('/pengurusan', [VisitorController::class, 'pengurusan'])->name('pengurusan');
-    Route::get('/cabor', [VisitorController::class, 'cabor'])->name('cabor');
-    Route::get('/event', [VisitorController::class, 'event'])->name('event');
+
+    // Tentang YPMD IRJA (static)
+    Route::view('/sejarah', 'visitor.sejarah')->name('sejarah');
+    Route::view('/profil', 'visitor.profil')->name('profil');
+    Route::view('/tokoh', 'visitor.tokoh')->name('tokoh');
+
+    // Program & KDK (static)
+    Route::view('/program', 'visitor.program')->name('program');
+    Route::view('/kdk', 'visitor.kdk')->name('kdk');
+
+    // Donasi (static)
+    Route::view('/donasi', 'visitor.donasi')->name('donasi');
+
+    // Berita / Papua Today (dynamic)
     Route::get('/berita', [VisitorController::class, 'berita'])->name('berita');
     Route::get('/berita/kategori/{slug}', [VisitorController::class, 'beritaKategori'])->name('berita.kategori');
     Route::get('/berita/{slug}', [VisitorController::class, 'beritaDetail'])->name('berita.detail');
+
+    // Galeri (dynamic)
     Route::get('/galeri', [VisitorController::class, 'galeri'])->name('galeri');
     Route::get('/galeri/{slug}', [VisitorController::class, 'galeriDetail'])->name('galeri.detail');
+
+    // Kontak
     Route::get('/kontak', [VisitorController::class, 'kontak'])->name('kontak');
 });
 

@@ -9,15 +9,144 @@
 @theme {
     --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
-    --color-primary: #C8102E;
-    --color-secondary: #0056b3;
-    --color-accent: #F1F5F9;
+    --font-display: 'Lora', Georgia, serif;
+
+    /* Primary — Hijau */
+    --color-primary:     #2d8057;
+    --color-primary-50:  #f0f7f2;
+    --color-primary-100: #d9ede0;
+    --color-primary-200: #b4dbc3;
+    --color-primary-300: #82c19e;
+    --color-primary-400: #4fa174;
+    --color-primary-500: #2d8057;
+    --color-primary-600: #1f6642;
+    --color-primary-700: #1a5236;
+    --color-primary-800: #163f2b;
+    --color-primary-900: #0f2b1d;
+
+    /* Accent — Emas */
+    --color-accent:     #fdf8ee;
+    --color-accent-50:  #fdf8ee;
+    --color-accent-100: #f9eccc;
+    --color-accent-200: #f2d68d;
+    --color-accent-300: #e8bc4f;
+    --color-accent-400: #c9972a;
+    --color-accent-500: #a67820;
+
+    /* Neutral */
+    --color-neutral-50:  #fafafa;
+    --color-neutral-100: #f4f4f4;
+    --color-neutral-200: #e8e8e8;
+    --color-neutral-300: #d0d0d0;
+    --color-neutral-400: #a0a0a0;
+    --color-neutral-500: #707070;
+    --color-neutral-600: #505050;
+    --color-neutral-700: #383838;
+    --color-neutral-800: #242424;
+    --color-neutral-900: #141414;
+
     --color-dark: #1A1A1A;
+
+    /* Shadows */
+    --shadow-card:      0 2px 12px rgba(0,0,0,0.08);
+    --shadow-card-hover: 0 6px 24px rgba(0,0,0,0.12);
+}
+
+/* ======================== */
+/* Global Font for Headings  */
+/* ======================== */
+h1, h2, h3, .font-display {
+    font-family: 'Lora', Georgia, serif;
 }
 
 /* Alpine.js cloak - prevents flash of unstyled content */
 [x-cloak] {
     display: none !important;
+}
+
+/* ======================== */
+/* Nav Link Underline Effect */
+/* ======================== */
+.nav-link {
+    position: relative;
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #2d8057;
+    transition: width .25s ease;
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* ======================== */
+/* Fade-in Animation         */
+/* ======================== */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .5s ease, transform .5s ease;
+}
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ======================== */
+/* Card Hover Effect         */
+/* ======================== */
+.card-hover {
+    transition: box-shadow .2s ease, transform .2s ease;
+}
+.card-hover:hover {
+    box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+    transform: translateY(-2px);
+}
+
+/* ======================== */
+/* Timeline (Sejarah page)   */
+/* ======================== */
+.timeline-wrap { position: relative; }
+.timeline-wrap::before {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 20px;
+    bottom: 20px;
+    width: 2px;
+    background: linear-gradient(to bottom, #2d8057 0%, #e8e8e8 100%);
+    z-index: 0;
+}
+.timeline-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    position: relative;
+    z-index: 1;
+}
+.timeline-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+.timeline-body {
+    flex: 1;
+    padding-bottom: 32px;
+    padding-top: 8px;
+}
+.timeline-item:last-child .timeline-body {
+    padding-bottom: 0;
 }
 
 /* No rounded corners override */
@@ -64,59 +193,6 @@ html {
     z-index: 1;
 }
 
-/* ======================== */
-/* Hero Slider Ken Burns     */
-/* ======================== */
-
-.hero-slide {
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-}
-
-.hero-slide.active {
-    opacity: 1;
-}
-
-.hero-slide .hero-slide-img {
-    animation: heroZoomOut 5s ease-in-out forwards;
-}
-
-.hero-slide.active .hero-slide-img {
-    animation: heroZoomIn 5s ease-in-out forwards;
-}
-
-@keyframes heroZoomIn {
-    0%   { transform: scale(1); }
-    100% { transform: scale(1.15); }
-}
-
-@keyframes heroZoomOut {
-    0%   { transform: scale(1.15); }
-    100% { transform: scale(1); }
-}
-
-/* Hero slider indicators */
-.hero-indicator {
-    width: 2.5rem;
-    height: 0.25rem;
-    background: rgba(255, 255, 255, 0.4);
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.hero-indicator.active {
-    background: #C8102E;
-    width: 3.5rem;
-}
-
-/* Stat counter animation */
-.stat-card:hover .stat-icon {
-    transform: scale(1.1);
-}
-
-.stat-icon {
-    transition: transform 0.3s ease;
-}
 
 /* ======================== */
 /* Visitor Prose Typography */
@@ -156,16 +232,16 @@ html {
 }
 
 .prose a {
-    color: #C8102E;
+    color: #2d8057;
     text-decoration: underline;
 }
 
 .prose a:hover {
-    color: #a00d24;
+    color: #1f6642;
 }
 
 .prose blockquote {
-    border-left: 4px solid #C8102E;
+    border-left: 4px solid #2d8057;
     padding-left: 1.25rem;
     margin: 1.5rem 0;
     color: #4b5563;
@@ -239,7 +315,7 @@ html {
 
 .ck.ck-button.ck-on,
 .ck.ck-button:hover {
-    background: #C8102E !important;
+    background: #2d8057 !important;
     color: #fff !important;
 }
 
@@ -256,7 +332,7 @@ html {
 
 /* Focus state */
 .ck.ck-editor__main > .ck-editor__editable.ck-focused {
-    border-color: #C8102E !important;
+    border-color: #2d8057 !important;
     box-shadow: none !important;
 }
 
@@ -287,12 +363,12 @@ html {
 }
 
 .ck-content a {
-    color: #C8102E;
+    color: #2d8057;
     text-decoration: underline;
 }
 
 .ck-content blockquote {
-    border-left: 4px solid #C8102E;
+    border-left: 4px solid #2d8057;
     padding-left: 1rem;
     margin: 1rem 0;
     color: #4b5563;
@@ -340,6 +416,6 @@ html {
 }
 
 .ck.ck-list__item .ck-button:hover {
-    background: #C8102E !important;
+    background: #2d8057 !important;
     color: #fff !important;
 }

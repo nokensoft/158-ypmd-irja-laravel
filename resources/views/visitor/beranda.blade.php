@@ -1,186 +1,174 @@
 @extends('layouts.visitor')
-@section('title', ($situs['nama_situs'] ?? 'KONI Provinsi Papua Pegunungan'))
-@section('seo-title', ($situs['nama_situs'] ?? 'KONI Provinsi Papua Pegunungan'))
-@section('seo-description', ($situs['seo_meta_description'] ?? 'Website resmi KONI Provinsi Papua Pegunungan'))
+@section('title', ($situs['nama_situs'] ?? 'YPMD IRJA'))
+@section('seo-title', ($situs['nama_situs'] ?? 'YPMD IRJA'))
+@section('seo-description', ($situs['seo_meta_description'] ?? 'LSM pertama di Tanah Papua yang lahir dari keresahan kelompok idealis Gereja dan Tokoh Masyarakat'))
 
 @section('content')
 
-    <!-- Hero Slider -->
-    <section x-data="heroSlider" class="relative h-[100vh] flex items-center bg-dark overflow-hidden">
-        {{-- Background Slides --}}
-        <template x-for="(slide, index) in slides" :key="index">
-            <div class="hero-slide absolute inset-0" :class="{ 'active': current === index }">
-                <img :src="'{{ asset('') }}' + slide" class="hero-slide-img w-full h-full object-cover opacity-50" alt="Hero Background">
+    {{-- HERO --}}
+    <section class="bg-white">
+        <div class="max-w-6xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center">
+            <div class="fade-in">
+                <span class="inline-block text-xs font-semibold tracking-widest uppercase text-primary-500 mb-4">
+                    <i class="fa-solid fa-leaf mr-2"></i>Pionir Pemberdayaan Masyarakat Adat &middot; Sejak 1984 &middot; Jayapura, Papua
+                </span>
+                <h1 class="text-3xl md:text-5xl font-display font-bold text-neutral-900 leading-tight mb-5">
+                    Yayasan Pembangunan<br/>
+                    <span class="text-primary-600">Masyarakat Desa</span><br/>
+                    Irian Jaya
+                </h1>
+                <p class="text-neutral-500 text-lg leading-relaxed mb-8 max-w-md">
+                    {{ $situs['deskripsi_situs'] ?? 'LSM pertama di Tanah Papua yang lahir dari keresahan kelompok idealis Gereja dan Tokoh Masyarakat, hadir sebagai jembatan informasi dan agen perubahan bagi masyarakat adat dalam mempertahankan hak-hak mereka atas tanah dan sumber daya alam.' }}
+                </p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="{{ route('program') }}" class="bg-primary-500 text-white px-6 py-2.5 text-sm font-semibold hover:bg-primary-600 transition-colors shadow-card">Lihat Program</a>
+                    <a href="{{ route('profil') }}" class="border border-neutral-300 text-neutral-700 px-6 py-2.5 text-sm font-semibold hover:border-primary-400 hover:text-primary-600 transition-colors">Tentang Kami</a>
+                </div>
             </div>
-        </template>
-
-        {{-- Gradient Overlay --}}
-        <div class="absolute inset-0 bg-gradient-to-r from-dark via-dark/70 to-transparent z-[1]"></div>
-
-        {{-- Content --}}
-        <div class="container mx-auto px-4 relative z-10 text-white">
-            <p class="text-primary font-bold uppercase tracking-widest mb-4 text-base">Komite Olahraga Nasional Indonesia</p>
-            <h2 class="text-4xl lg:text-6xl font-extrabold mb-4 uppercase leading-tight">Membangun Prestasi <br><span class="text-primary">Di Papua Pegunungan</span></h2>
-            <p class="max-w-xl mb-8 text-gray-300 leading-relaxed text-lg">{{ $situs['deskripsi_situs'] ?? 'Berkomitmen memajukan atlet daerah Papua Pegunungan menuju pentas nasional dan internasional melalui pembinaan olahraga yang profesional.' }}</p>
-            <div class="flex flex-wrap gap-4">
-                <a href="{{ route('tentang') }}" class="bg-primary px-8 py-4 font-bold no-round hover:bg-red-700 transition inline-block text-lg">Profil Organisasi</a>
-                <a href="{{ route('event') }}" class="border border-white px-8 py-4 font-bold no-round hover:bg-white hover:text-dark transition inline-block text-lg">Event Mendatang</a>
+            <div class="fade-in">
+                <img src="{{ asset('img/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD IRJA" class="w-full rounded-lg shadow-card object-cover"/>
             </div>
         </div>
-
-        {{-- Slide Indicators --}}
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-3">
-            <template x-for="(slide, index) in slides" :key="'ind-' + index">
-                <button @click="goTo(index)" class="hero-indicator" :class="{ 'active': current === index }"></button>
-            </template>
-        </div>
-    </section>
-
-
-
-
-    <!-- Berita & Event Preview -->
-    <section class="py-20 bg-accent">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                <!-- Berita -->
-                <div class="lg:col-span-2">
-                    <div class="flex justify-between items-center mb-8">
-                        <h3 class="text-2xl font-extrabold flex items-center">
-                            <span class="w-8 h-1 bg-primary mr-3"></span> Berita Terkini
-                        </h3>
-                        <a href="{{ route('berita') }}" class="text-primary text-base font-bold uppercase hover:underline">Semua <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    <div class="space-y-6">
-                        @forelse ($beritaTerbaru as $b)
-                            <a href="{{ route('berita.detail', $b->slug) }}" class="flex flex-col md:flex-row gap-6 bg-white shadow-md hover:shadow-lg transition block">
-                                <img src="{{ $b->gambar }}" class="md:w-60 h-44 object-cover" alt="{{ $b->judul }}">
-                                <div class="p-5 flex flex-col justify-center">
-                                    <span class="text-sm text-primary font-bold uppercase">{{ $b->kategori?->nama ?? '-' }}</span>
-                                    <h4 class="text-lg font-bold mt-1 mb-2">{{ $b->judul }}</h4>
-                                    <p class="mt-3 text-sm text-gray-400"><i class="far fa-calendar-alt mr-1"></i> {{ $b->tanggal_terbit?->translatedFormat('d M Y') }}</p>
-                                </div>
-                            </a>
-                        @empty
-                            <p class="text-gray-400 text-center py-8">Belum ada berita.</p>
-                        @endforelse
-                    </div>
-                </div>
-
-                <!-- Event Sidebar -->
-                <div>
-                    <div class="flex justify-between items-center mb-8">
-                        <h3 class="text-2xl font-extrabold flex items-center">
-                            <span class="w-8 h-1 bg-primary mr-3"></span> Event
-                        </h3>
-                        <a href="{{ route('event') }}" class="text-primary text-base font-bold uppercase hover:underline">Semua <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    <div class="space-y-4">
-                        @forelse ($kegiatanMendatang as $evt)
-                            <a href="{{ route('event') }}" class="bg-dark text-white p-5 border-l-4 border-primary block hover:border-white transition">
-                                <p class="text-primary font-bold text-sm uppercase tracking-wide">{{ $evt->tanggal_mulai->translatedFormat('M Y') }}</p>
-                                <h5 class="font-bold mt-1 text-lg">{{ $evt->judul }}</h5>
-                                <p class="text-sm text-gray-400 mt-2"><i class="fas fa-map-marker-alt mr-1"></i> {{ $evt->lokasi }}</p>
-                            </a>
-                        @empty
-                            <p class="text-gray-400 text-center py-8">Belum ada event.</p>
-                        @endforelse
-                    </div>
-                </div>
+        {{-- Stats Bar --}}
+        <div class="border-t border-neutral-200 bg-neutral-50">
+            <div class="max-w-6xl mx-auto px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="text-center fade-in"><div class="text-3xl font-display font-bold text-primary-600">1984</div><div class="text-xs text-neutral-500 mt-1 uppercase tracking-wider">Tahun Berdiri</div></div>
+                <div class="text-center fade-in"><div class="text-3xl font-display font-bold text-primary-600">40+</div><div class="text-xs text-neutral-500 mt-1 uppercase tracking-wider">Tahun Berkarya</div></div>
+                <div class="text-center fade-in"><div class="text-3xl font-display font-bold text-accent-400">10+</div><div class="text-xs text-neutral-500 mt-1 uppercase tracking-wider">Tahun Ekspor Kakao</div></div>
+                <div class="text-center fade-in"><div class="text-3xl font-display font-bold text-accent-400">4</div><div class="text-xs text-neutral-500 mt-1 uppercase tracking-wider">Wilayah Kerja</div></div>
             </div>
         </div>
     </section>
 
-
-    {{-- <!-- Tentang Preview -->
-    <section class="py-20 bg-accent">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <p class="text-primary font-bold uppercase tracking-widest text-base mb-2">Tentang Kami</p>
-                    <h3 class="text-3xl font-extrabold mb-6 leading-tight">KONI Provinsi<br>Papua Pegunungan</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4 text-lg">Komite Olahraga Nasional Indonesia (KONI) Provinsi Papua Pegunungan merupakan organisasi yang mengoordinasikan dan membina olahraga prestasi di wilayah Papua Pegunungan.</p>
-                    <p class="text-gray-600 leading-relaxed mb-8 text-lg">Berdiri sebagai wadah pemersatu seluruh cabang olahraga, KONI Papua Pegunungan berperan aktif dalam mencetak atlet-atlet berprestasi dari Tanah Papua.</p>
-                    <a href="{{ route('tentang') }}" class="bg-primary text-white px-8 py-4 font-bold no-round hover:bg-red-700 transition inline-block text-base uppercase tracking-wide">Selengkapnya <i class="fas fa-arrow-right ml-2"></i></a>
-                </div>
-                <div class="relative">
-                    <img src="{{ asset('img/bg/gubernur-papua-pegunungan.png') }}" alt="Tentang KONI" class="w-full shadow-lg">
-                    <div class="absolute -bottom-6 -left-6 bg-primary text-white p-6 shadow-lg hidden lg:block">
-                        <p class="text-3xl font-extrabold">2022</p>
-                        <p class="text-base uppercase tracking-wide">Tahun Berdiri</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-
-    <!-- Pencapaian Sejarah: PON XXI 2024 -->
+    {{-- Papua Today / Berita --}}
     <section class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <p class="text-primary font-bold uppercase tracking-widest text-base mb-2">Pencapaian Sejarah</p>
-                <h3 class="text-3xl font-extrabold">PON XXI Aceh-Sumut 2024</h3>
-                <p class="text-gray-500 mt-3 text-lg max-w-2xl mx-auto">Partisipasi pertama Papua Pegunungan dengan masa persiapan hanya satu tahun.</p>
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="mb-12 fade-in">
+                <span class="text-xs font-semibold tracking-widest uppercase text-primary-500"><i class="fa-solid fa-blog mr-2"></i>Berita</span>
+                <h2 class="text-2xl md:text-4xl font-display font-bold text-neutral-900 mt-2">Papua Today</h2>
+                <p class="text-neutral-500 text-lg mt-3 max-w-xl">Berita dan artikel terkini seputar Papua dan program YPMD IRJA.</p>
             </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="bg-white p-8 shadow-sm border-t-4 border-primary text-center">
-                    <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Peringkat Nasional</p>
-                    <p class="text-5xl font-extrabold text-primary">23</p>
-                    <p class="text-gray-500 text-base mt-2">Nasional</p>
-                </div>
-                <div class="bg-white p-8 shadow-sm border-t-4 border-primary text-center">
-                    <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Medali Emas</p>
-                    <p class="text-5xl font-extrabold text-yellow-500">6</p>
-                    <p class="text-gray-500 text-base mt-2">Medali Emas</p>
-                </div>
-                <div class="bg-white p-8 shadow-sm border-t-4 border-primary text-center">
-                    <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Medali Perunggu</p>
-                    <p class="text-5xl font-extrabold text-orange-400">3</p>
-                    <p class="text-gray-500 text-base mt-2">Medali Perunggu</p>
-                </div>
-            </div>
-
-            <div class="mt-10">
-                <h4 class="text-xl font-extrabold uppercase tracking-wide mb-5 text-center">Cabang Olahraga Unggulan (Peraih Emas)</h4>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                    @foreach (['Terbang Layang', 'Catur', 'Biliar', 'Sepak Bola', 'Dayung'] as $cabor)
-                        <div class="bg-white border border-gray-200 p-4 text-center shadow-sm">
-                            <p class="font-bold text-base text-dark">{{ $cabor }}</p>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                @forelse ($beritaTerbaru as $b)
+                    <article class="shadow-card card-hover bg-white border border-neutral-100 fade-in">
+                        <img src="{{ $b->gambar }}" alt="{{ $b->judul }}" class="w-full h-48 object-cover"/>
+                        <div class="p-5">
+                            <div class="flex items-center gap-3 text-xs text-neutral-400 mb-2">
+                                <span>{{ $b->kategori?->nama ?? 'Berita' }}</span>
+                                <span>&bull;</span>
+                                <span>{{ $b->tanggal_terbit?->translatedFormat('d M Y') }}</span>
+                            </div>
+                            <h3 class="font-display font-bold text-neutral-900 mb-2 line-clamp-2">{{ $b->judul }}</h3>
+                            <a href="{{ route('berita.detail', $b->slug) }}" class="text-primary-600 text-sm font-semibold hover:text-primary-700">
+                                Baca Selengkapnya <i class="fa-solid fa-arrow-right text-xs ml-1"></i>
+                            </a>
                         </div>
-                    @endforeach
-                </div>
+                    </article>
+                @empty
+                    <div class="col-span-full text-center py-12 text-neutral-400">
+                        <p>Belum ada berita.</p>
+                    </div>
+                @endforelse
+            </div>
+            <div class="text-center mt-10 fade-in">
+                <a href="{{ route('berita') }}" class="inline-flex items-center gap-2 bg-primary-500 text-white px-8 py-3 text-sm font-semibold hover:bg-primary-600 transition-colors shadow-card">
+                    Lihat Semua Artikel <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Galeri Preview -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-wrap justify-between items-end mb-12">
-                <div>
-                    <p class="text-primary font-bold uppercase tracking-widest text-base mb-2">Dokumentasi</p>
-                    <h3 class="text-3xl font-extrabold">Galeri Kegiatan</h3>
-                </div>
-                <a href="{{ route('galeri') }}" class="text-primary font-bold uppercase text-base hover:underline">Lihat Semua <i class="fas fa-arrow-right"></i></a>
+    {{-- KDK Terbaru --}}
+    <section class="py-20 bg-neutral-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="mb-12 fade-in">
+                <span class="text-xs font-semibold tracking-widest uppercase text-primary-500"><i class="fa-solid fa-newspaper mr-2"></i>Buletin</span>
+                <h2 class="text-2xl md:text-4xl font-display font-bold text-neutral-900 mt-2">KDK Terbaru</h2>
+                <p class="text-neutral-500 text-lg mt-3 max-w-xl">Edisi terbaru buletin <em>Kabar Dari Kampung</em> &mdash; media alternatif masyarakat adat Papua sejak 1982.</p>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                @foreach ($galeriTerbaru as $g)
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                @foreach ([['edisi'=>'6','terbit'=>'September 1992'],['edisi'=>'5','terbit'=>'April 1990'],['edisi'=>'4','terbit'=>'November 1988']] as $kdk)
+                <article class="shadow-card card-hover bg-white border border-neutral-100 fade-in">
+                    <img src="https://placehold.co/400x560/f0f7f2/2d8057?text=KDK+Edisi+{{ $kdk['edisi'] }}" alt="Cover KDK Edisi {{ $kdk['edisi'] }}" class="w-full h-56 object-cover"/>
+                    <div class="p-5">
+                        <span class="text-xs font-semibold text-primary-500 uppercase tracking-wider">Edisi {{ $kdk['edisi'] }}</span>
+                        <h3 class="font-display font-bold text-neutral-900 mt-1 mb-2">Kabar dari Kampung &mdash; Edisi {{ $kdk['edisi'] }}</h3>
+                        <p class="text-neutral-400 text-xs mb-4">Terbit {{ $kdk['terbit'] }}</p>
+                        <a href="{{ route('kdk') }}" class="inline-flex items-center gap-2 bg-primary-500 text-white px-4 py-2 text-xs font-semibold hover:bg-primary-600 transition-colors">
+                            <i class="fa-solid fa-file-pdf"></i>Unduh PDF
+                        </a>
+                    </div>
+                </article>
+                @endforeach
+            </div>
+            <div class="text-center mt-10 fade-in">
+                <a href="{{ route('kdk') }}" class="inline-flex items-center gap-2 bg-primary-500 text-white px-8 py-3 text-sm font-semibold hover:bg-primary-600 transition-colors shadow-card">
+                    Lihat Semua Buletin <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    {{-- Program Unggulan --}}
+    <section class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="mb-12 fade-in">
+                <span class="text-xs font-semibold tracking-widest uppercase text-primary-500"><i class="fa-solid fa-list-check mr-2"></i>Kegiatan</span>
+                <h2 class="text-2xl md:text-4xl font-display font-bold text-neutral-900 mt-2">Program Unggulan</h2>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <article class="shadow-card card-hover bg-white border border-neutral-100 fade-in"><div class="h-1.5 bg-primary-500"></div><div class="p-6"><div class="w-10 h-10 bg-primary-50 flex items-center justify-center mb-4"><i class="fa-solid fa-seedling text-primary-500"></i></div><h3 class="font-display font-bold text-neutral-900 mb-2">Ekonomi &amp; Ekspor Kakao Organik</h3><p class="text-neutral-500 text-sm leading-relaxed">Ekspor biji kakao organik dari Lembah Grime ke Jepang sejak 2010 melalui kemitraan dengan ATJ dan Green Coop.</p></div></article>
+                <article class="shadow-card card-hover bg-white border border-neutral-100 fade-in"><div class="h-1.5 bg-accent-400"></div><div class="p-6"><div class="w-10 h-10 bg-accent-50 flex items-center justify-center mb-4"><i class="fa-solid fa-users text-accent-400"></i></div><h3 class="font-display font-bold text-neutral-900 mb-2">Pendampingan Masyarakat Adat</h3><p class="text-neutral-500 text-sm leading-relaxed">Mendampingi dan mengorganisir masyarakat adat Papua sebagai subjek pembangunan.</p></div></article>
+                <article class="shadow-card card-hover bg-white border border-neutral-100 fade-in"><div class="h-1.5 bg-primary-400"></div><div class="p-6"><div class="w-10 h-10 bg-primary-50 flex items-center justify-center mb-4"><i class="fa-solid fa-piggy-bank text-primary-500"></i></div><h3 class="font-display font-bold text-neutral-900 mb-2">Keuangan Mikro</h3><p class="text-neutral-500 text-sm leading-relaxed">Mendirikan BPR Phidectama pada 1992 untuk membentuk kebiasaan menabung bagi masyarakat kampung.</p></div></article>
+            </div>
+            <div class="text-center mt-10 fade-in">
+                <a href="{{ route('program') }}" class="inline-flex items-center gap-2 bg-primary-500 text-white px-8 py-3 text-sm font-semibold hover:bg-primary-600 transition-colors shadow-card">
+                    Lihat Semua Program <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    {{-- Galeri --}}
+    <section class="py-20 bg-neutral-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="mb-12 fade-in">
+                <span class="text-xs font-semibold tracking-widest uppercase text-primary-500"><i class="fa-solid fa-images mr-2"></i>Dokumentasi</span>
+                <h2 class="text-2xl md:text-4xl font-display font-bold text-neutral-900 mt-2">Galeri Kegiatan</h2>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                @forelse ($galeriTerbaru as $g)
                     @php $cover = $g->media->first(); @endphp
                     @if ($cover)
-                        <a href="{{ route('galeri') }}" class="relative group overflow-hidden block">
-                            <img src="{{ asset('storage/' . $cover->file_path) }}" class="w-full h-75 object-cover group-hover:scale-110 transition duration-500" alt="{{ $g->judul }}">
-                            <div class="absolute inset-0 bg-dark/0 group-hover:bg-dark/50 transition flex items-center justify-center">
-                                <i class="fas fa-search-plus text-white text-xl opacity-0 group-hover:opacity-100 transition"></i>
-                            </div>
-                        </a>
+                        <div class="overflow-hidden rounded-lg shadow-card fade-in">
+                            <img src="{{ asset('storage/' . $cover->file_path) }}" alt="{{ $g->judul }}" class="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-300"/>
+                        </div>
                     @endif
-                @endforeach
-                <a href="{{ route('galeri') }}" class="relative group overflow-hidden bg-primary flex items-center justify-center h-75 text-white block">
-                    <div class="text-center">
-                        <i class="fas fa-images text-3xl mb-2"></i>
-                        <p class="font-bold uppercase text-base">Lihat Galeri</p>
-                    </div>
+                @empty
+                    <div class="overflow-hidden rounded-lg shadow-card fade-in"><img src="{{ asset('img/ypmd-irja-ulang-tahun-38-jubi.jpg') }}" alt="" class="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-300"/></div>
+                    <div class="overflow-hidden rounded-lg shadow-card fade-in"><img src="{{ asset('img/Kantor YPMD-IRJA.png') }}" alt="" class="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-300"/></div>
+                    <div class="overflow-hidden rounded-lg shadow-card fade-in"><img src="{{ asset('img/ypmd-irja-ulang-tahun-38-jubi.jpg') }}" alt="" class="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-300"/></div>
+                @endforelse
+            </div>
+            <div class="text-center mt-10 fade-in">
+                <a href="{{ route('galeri') }}" class="inline-flex items-center gap-2 bg-primary-500 text-white px-8 py-3 text-sm font-semibold hover:bg-primary-600 transition-colors shadow-card">
+                    Lihat Semua Galeri <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    {{-- CTA --}}
+    <section class="bg-primary-600 py-16">
+        <div class="max-w-6xl mx-auto px-6 text-center fade-in">
+            <h2 class="text-2xl md:text-3xl font-display font-bold text-white mb-4">Bersama Membangun Papua</h2>
+            <p class="text-primary-200 text-lg max-w-lg mx-auto mb-8">Dukung program pemberdayaan masyarakat adat Papua. Setiap kontribusi membantu mewujudkan kemandirian ekonomi dan keadilan sosial.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="{{ route('donasi') }}" class="bg-white text-primary-600 px-8 py-3 text-sm font-semibold hover:bg-neutral-100 transition-colors shadow-card">
+                    <i class="fa-solid fa-heart mr-2"></i>Donasi Sekarang
+                </a>
+                <a href="{{ route('kontak') }}" class="border border-white/40 text-white px-8 py-3 text-sm font-semibold hover:bg-white/10 transition-colors">
+                    <i class="fa-solid fa-envelope mr-2"></i>Hubungi Kami
                 </a>
             </div>
         </div>

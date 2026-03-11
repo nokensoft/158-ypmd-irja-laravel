@@ -3,52 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Berita;
-use App\Models\CabangOlahraga;
 use App\Models\Galeri;
-use App\Models\Kegiatan;
 use App\Models\KategoriBerita;
 
 class VisitorController extends Controller
 {
     public function beranda()
     {
-        $stats = [
-            ['icon' => 'fa-running', 'value' => CabangOlahraga::count(), 'label' => 'Cabang Olahraga'],
-            ['icon' => 'fa-users', 'value' => CabangOlahraga::sum('jumlah_atlet') ?: '0', 'label' => 'Atlet Binaan'],
-            ['icon' => 'fa-medal', 'value' => CabangOlahraga::sum('jumlah_medali') ?: '0', 'label' => 'Medali Diraih'],
-            ['icon' => 'fa-calendar-check', 'value' => Kegiatan::count(), 'label' => 'Event'],
-        ];
+        $beritaTerbaru = Berita::with('kategori', 'media')
+            ->where('status', 'terbit')
+            ->latest('tanggal_terbit')
+            ->take(3)
+            ->get();
 
-        $caborList = CabangOlahraga::take(6)->get();
-        $beritaTerbaru = Berita::with('kategori', 'media')->where('status', 'terbit')->latest('tanggal_terbit')->take(3)->get();
-        $kegiatanMendatang = Kegiatan::where('tanggal_mulai', '>=', now())->orderBy('tanggal_mulai')->take(3)->get();
-        $galeriTerbaru = Galeri::with('media')->latest()->take(3)->get();
+        $galeriTerbaru = Galeri::with('media')->latest()->take(6)->get();
 
-        return view('visitor.beranda', compact('stats', 'caborList', 'beritaTerbaru', 'kegiatanMendatang', 'galeriTerbaru'));
-    }
-
-    public function tentang()
-    {
-        return view('visitor.tentang');
-    }
-
-    public function pengurusan()
-    {
-        return view('visitor.pengurusan');
-    }
-
-    public function cabor()
-    {
-        $caborList = CabangOlahraga::orderBy('nama')->get();
-
-        return view('visitor.cabor', compact('caborList'));
-    }
-
-    public function event()
-    {
-        $kegiatanList = Kegiatan::orderBy('tanggal_mulai')->get();
-
-        return view('visitor.event', compact('kegiatanList'));
+        return view('visitor.beranda', compact('beritaTerbaru', 'galeriTerbaru'));
     }
 
     public function berita()

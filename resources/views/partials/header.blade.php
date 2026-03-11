@@ -1,83 +1,102 @@
-<header class="bg-white shadow-md sticky top-0 z-50">
-    <nav class="container mx-auto px-4 py-3 flex justify-between items-center lg:flex-row flex-col" x-data="{ mobileMenuOpen: false }">
-        <div class="flex items-center space-x-3 lg:w-auto w-full justify-center lg:justify-start relative">
-            <a href="{{ route('beranda') }}" class="flex items-center space-x-3">
-                @if (!empty($situs['logo']))
-                    <img src="{{ asset('storage/' . $situs['logo']) }}" alt="Logo {{ $situs['nama_situs'] ?? 'KONI' }}" class="h-12">
-                @else
-                    <img src="{{ asset('img/logo-koni-papua-pegunungan.jpeg') }}" alt="Logo KONI" class="h-12">
-                @endif
-                <div class="text-center lg:text-left">
-                    <span class="font-bold text-xl leading-none text-primary block">KONI</span>
-                    <span class="text-sm font-semibold tracking-widest uppercase block">Papua Pegunungan</span>
-                </div>
-            </a>
-            <button @click="mobileMenuOpen = !mobileMenuOpen" class="lg:hidden absolute right-0 text-2xl">
-                <i class="fas" :class="mobileMenuOpen ? 'fa-times' : 'fa-bars'"></i>
-            </button>
-        </div>
-        <div :class="mobileMenuOpen ? 'flex' : 'hidden'" class="lg:flex flex-col lg:flex-row lg:space-x-6 space-y-4 lg:space-y-0 mt-4 lg:mt-0 items-center text-base font-medium uppercase tracking-tight">
-            @php
-                $navItems = [
-                    ['label' => 'Beranda',    'route' => 'beranda'],
-                    ['label' => 'Tentang',    'route' => 'tentang'],
-                    [
-                        'label' => 'Pengurusan',
-                        'route' => 'pengurusan',
-                        'dropdown' => [
-                            ['label' => 'Semua Pengurus',  'hash' => ''],
-                            ['label' => 'Dewan',           'hash' => '#dewan'],
-                            ['label' => 'Pengurus Inti',   'hash' => '#pengurus-inti'],
-                            ['label' => 'Kesekretariatan', 'hash' => '#kesekretariatan'],
-                            ['label' => 'Bidang-Bidang',   'hash' => '#bidang-bidang'],
-                        ],
-                    ],
-                    ['label' => 'Cabor',   'route' => 'cabor'],
-                    ['label' => 'Event',   'route' => 'event'],
-                    ['label' => 'Berita',  'route' => 'berita'],
-                    ['label' => 'Galeri',  'route' => 'galeri'],
-                    ['label' => 'Kontak',  'route' => 'kontak'],
-                ];
-            @endphp
-            @foreach ($navItems as $item)
-                @if (!empty($item['dropdown']))
-                    <div x-data="{ open: false }"
-                         class="relative"
-                         @mouseenter="open = true"
-                         @mouseleave="open = false"
-                         @click.outside="open = false">
+<header class="sticky top-0 z-50 bg-white shadow-md border-b border-neutral-200" x-data="{ menuOpen: false, tentangOpen: false }">
+    <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
 
-                        <button @click="open = !open"
-                                class="flex items-center gap-1 hover:text-primary uppercase transition {{ request()->routeIs($item['route']) ? 'text-primary font-bold' : '' }}">
-                            {{ $item['label'] }}
-                            <i class="fas fa-chevron-down text-[10px] transition-transform duration-200"
-                               :class="open ? 'rotate-180' : ''"></i>
-                        </button>
+        {{-- Logo Desktop --}}
+        <a href="{{ route('beranda') }}" class="hidden md:flex items-center gap-3 flex-shrink-0">
+            @if (!empty($situs['logo']))
+                <img src="{{ asset('storage/' . $situs['logo']) }}" alt="{{ $situs['nama_situs'] ?? 'YPMD IRJA' }}" class="h-16">
+            @else
+                <img src="{{ asset('img/logo-ypmd-irja.png') }}" alt="YPMD IRJA" class="h-16">
+            @endif
+            <div class="hidden sm:block">
+                <span class="font-display font-bold text-primary-700 text-base leading-tight block">{{ $situs['nama_situs'] ?? 'YPMD IRJA' }}</span>
+                <span class="text-neutral-400 text-xs leading-none">Yayasan Pembangunan Masyarakat Desa Irian Jaya</span>
+            </div>
+        </a>
 
-                        <div x-show="open"
-                             x-transition:enter="transition ease-out duration-150"
-                             x-transition:enter-start="opacity-0 scale-95"
-                             x-transition:enter-end="opacity-100 scale-100"
-                             x-transition:leave="transition ease-in duration-100"
-                             x-transition:leave-start="opacity-100 scale-100"
-                             x-transition:leave-end="opacity-0 scale-95"
-                             class="absolute top-full left-0 mt-2 w-52 bg-white shadow-xl border-t-2 border-primary z-50 origin-top-left">
-                            @foreach ($item['dropdown'] as $sub)
-                                <a href="{{ route($item['route']) }}{{ $sub['hash'] }}"
-                                   class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-primary hover:text-white transition border-b border-gray-100 last:border-0 normal-case tracking-normal">
-                                    <i class="fas {{ $sub['hash'] === '' ? 'fa-list' : 'fa-angle-right' }} text-xs opacity-60"></i>
-                                    {{ $sub['label'] }}
-                                </a>
-                            @endforeach
-                        </div>
-                    </div>
-                @else
-                    <a href="{{ route($item['route']) }}"
-                       class="hover:text-primary transition {{ request()->routeIs($item['route']) ? 'text-primary font-bold' : '' }}">
-                        {{ $item['label'] }}
+        {{-- Nav Desktop --}}
+        <ul class="hidden md:flex items-center gap-6">
+            <li>
+                <a href="{{ route('beranda') }}"
+                   class="nav-link text-sm font-medium transition-colors {{ request()->routeIs('beranda') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">
+                    Beranda
+                </a>
+            </li>
+
+            {{-- Tentang Dropdown --}}
+            <li class="relative" x-data="{ open: false }" @mouseenter="open=true" @mouseleave="open=false">
+                <button class="nav-link text-sm font-medium flex items-center gap-1 transition-colors
+                    {{ request()->routeIs('sejarah') || request()->routeIs('profil') || request()->routeIs('tokoh') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">
+                    Tentang <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                </button>
+                <div x-show="open" x-transition style="display:none;"
+                     class="absolute top-full left-0 mt-1 w-48 bg-white shadow-lg border border-neutral-100 py-1 z-50">
+                    <a href="{{ route('sejarah') }}"
+                       class="block px-4 py-2.5 text-sm hover:bg-primary-50 hover:text-primary-600 {{ request()->routeIs('sejarah') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-600' }}">
+                        Sejarah Singkat
                     </a>
-                @endif
-            @endforeach
+                    <a href="{{ route('profil') }}"
+                       class="block px-4 py-2.5 text-sm hover:bg-primary-50 hover:text-primary-600 {{ request()->routeIs('profil') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-600' }}">
+                        Profil Lembaga
+                    </a>
+                    <a href="{{ route('tokoh') }}"
+                       class="block px-4 py-2.5 text-sm hover:bg-primary-50 hover:text-primary-600 {{ request()->routeIs('tokoh') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-600' }}">
+                        Tokoh Kunci
+                    </a>
+                </div>
+            </li>
+
+            <li><a href="{{ route('program') }}" class="nav-link text-sm font-medium transition-colors {{ request()->routeIs('program') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Program</a></li>
+            <li><a href="{{ route('kdk') }}" class="nav-link text-sm font-medium transition-colors {{ request()->routeIs('kdk') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">KDK</a></li>
+            <li><a href="{{ route('berita') }}" class="nav-link text-sm font-medium transition-colors {{ request()->routeIs('berita*') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Papua Today</a></li>
+            <li><a href="{{ route('donasi') }}" class="nav-link text-sm font-medium transition-colors {{ request()->routeIs('donasi') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Donasi</a></li>
+            <li><a href="{{ route('kontak') }}" class="nav-link text-sm font-medium transition-colors {{ request()->routeIs('kontak') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Kontak</a></li>
+        </ul>
+
+        {{-- Logo Mobile Center --}}
+        <div class="md:hidden absolute left-1/2 -translate-x-1/2 flex items-center gap-2">
+            @if (!empty($situs['logo']))
+                <img src="{{ asset('storage/' . $situs['logo']) }}" alt="" class="h-7">
+            @else
+                <img src="{{ asset('img/logo-ypmd-irja.png') }}" alt="" class="h-7">
+            @endif
+            <span class="font-display font-bold text-primary-700 text-sm">{{ $situs['nama_situs'] ?? 'YPMD IRJA' }}</span>
         </div>
+
+        {{-- Hamburger --}}
+        <button class="md:hidden ml-auto text-neutral-600" @click="menuOpen=!menuOpen">
+            <i class="fa-solid text-lg" :class="menuOpen ? 'fa-xmark' : 'fa-bars'"></i>
+        </button>
     </nav>
+
+    {{-- Mobile Menu --}}
+    <div x-show="menuOpen" x-transition style="display:none;"
+         class="md:hidden bg-white border-t border-neutral-200 shadow-md">
+        <ul class="flex flex-col py-2">
+            <li>
+                <a href="{{ route('beranda') }}"
+                   class="block px-6 py-3 text-sm {{ request()->routeIs('beranda') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">
+                    Beranda
+                </a>
+            </li>
+            <li>
+                <button @click="tentangOpen=!tentangOpen"
+                        class="w-full flex items-center justify-between px-6 py-3 text-sm
+                        {{ request()->routeIs('sejarah') || request()->routeIs('profil') || request()->routeIs('tokoh') ? 'text-primary-600 font-semibold bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">
+                    Tentang
+                    <i class="fa-solid fa-chevron-down text-[10px] transition-transform" :class="tentangOpen && 'rotate-180'"></i>
+                </button>
+                <div x-show="tentangOpen" x-transition style="display:none;" class="bg-neutral-50">
+                    <a href="{{ route('sejarah') }}" class="block px-10 py-2.5 text-sm {{ request()->routeIs('sejarah') ? 'font-semibold text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Sejarah Singkat</a>
+                    <a href="{{ route('profil') }}" class="block px-10 py-2.5 text-sm {{ request()->routeIs('profil') ? 'font-semibold text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Profil Lembaga</a>
+                    <a href="{{ route('tokoh') }}" class="block px-10 py-2.5 text-sm {{ request()->routeIs('tokoh') ? 'font-semibold text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Tokoh Kunci</a>
+                </div>
+            </li>
+            <li><a href="{{ route('program') }}" class="block px-6 py-3 text-sm {{ request()->routeIs('program') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">Program</a></li>
+            <li><a href="{{ route('kdk') }}" class="block px-6 py-3 text-sm {{ request()->routeIs('kdk') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">KDK</a></li>
+            <li><a href="{{ route('berita') }}" class="block px-6 py-3 text-sm {{ request()->routeIs('berita*') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">Papua Today</a></li>
+            <li><a href="{{ route('donasi') }}" class="block px-6 py-3 text-sm {{ request()->routeIs('donasi') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">Donasi</a></li>
+            <li><a href="{{ route('kontak') }}" class="block px-6 py-3 text-sm {{ request()->routeIs('kontak') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">Kontak</a></li>
+        </ul>
+    </div>
 </header>
