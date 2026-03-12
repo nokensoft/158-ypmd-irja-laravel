@@ -36,6 +36,19 @@
                     </dd>
                 </div>
                 <div class="flex gap-4">
+                    <dt class="w-36 font-semibold text-gray-500 uppercase text-xs flex-shrink-0">Anonim</dt>
+                    <dd>
+                        <form action="{{ route('penulis.donasi.toggle-anonim', $donasi->id) }}" method="POST" class="inline">
+                            @csrf @method('PATCH')
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" class="w-4 h-4" {{ $donasi->is_anonim ? 'checked' : '' }}
+                                       onchange="this.form.submit()">
+                                <span class="text-sm text-gray-600">Tampilkan sebagai Anonim di publik</span>
+                            </label>
+                        </form>
+                    </dd>
+                </div>
+                <div class="flex gap-4">
                     <dt class="w-36 font-semibold text-gray-500 uppercase text-xs flex-shrink-0">Email</dt>
                     <dd class="text-gray-700">{{ $donasi->email ?: '-' }}</dd>
                 </div>
@@ -57,13 +70,36 @@
                         {{ $donasi->tanggal ? \Carbon\Carbon::parse($donasi->tanggal)->translatedFormat('d M Y') : $donasi->created_at->translatedFormat('d M Y H:i') }}
                     </dd>
                 </div>
-                @if ($donasi->pesan)
                 <div class="flex gap-4">
                     <dt class="w-36 font-semibold text-gray-500 uppercase text-xs flex-shrink-0">Pesan</dt>
-                    <dd class="text-gray-700 italic">{{ $donasi->pesan }}</dd>
+                    <dd class="text-gray-700 italic">{{ $donasi->pesan ?: '-' }}</dd>
                 </div>
-                @endif
+                <div class="flex gap-4">
+                    <dt class="w-36 font-semibold text-gray-500 uppercase text-xs flex-shrink-0">Visibilitas</dt>
+                    <dd>
+                        <span class="inline-block px-3 py-1 text-xs font-bold uppercase
+                            {{ $donasi->is_publik ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500' }}">
+                            {{ $donasi->is_publik ? 'Tampil di Publik' : 'Disembunyikan' }}
+                        </span>
+                    </dd>
+                </div>
             </dl>
+
+            {{-- Edit Pesan --}}
+            <div class="mt-6 pt-5 border-t border-gray-100">
+                <form action="{{ route('penulis.donasi.update-pesan', $donasi->id) }}" method="POST">
+                    @csrf @method('PATCH')
+                    <label class="text-xs font-bold uppercase text-gray-400 block mb-2">Edit Pesan Donatur</label>
+                    <textarea name="pesan" rows="3"
+                              class="w-full border border-gray-300 p-3 text-sm focus:border-primary focus:outline-none transition no-round resize-none"
+                              placeholder="Pesan dari donatur...">{{ old('pesan', $donasi->pesan) }}</textarea>
+                    @error('pesan') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                    <button type="submit"
+                            class="mt-2 bg-primary text-white px-5 py-2 font-bold uppercase text-xs hover:bg-red-700 transition no-round">
+                        <i class="fas fa-save mr-1"></i>Simpan Pesan
+                    </button>
+                </form>
+            </div>
 
             {{-- Bukti Transfer --}}
             @if ($donasi->bukti_transfer)
@@ -136,7 +172,7 @@
             <h3 class="text-base font-bold uppercase text-gray-400 mb-5">Tindakan</h3>
             <div class="grid sm:grid-cols-2 gap-4">
                 {{-- Konfirmasi --}}
-                <form action="{{ route('penulis.donasi.konfirmasi', $donasi->id) }}" method="POST">
+                <form id="form-konfirmasi" action="{{ route('penulis.donasi.konfirmasi', $donasi->id) }}" method="POST">
                     @csrf @method('PATCH')
                     <div class="mb-3">
                         <label class="text-xs font-bold uppercase text-gray-400 block mb-1">Catatan (opsional)</label>
@@ -144,14 +180,14 @@
                                class="w-full border border-gray-300 p-3 text-sm focus:border-green-500 focus:outline-none transition no-round"
                                placeholder="Catatan konfirmasi...">
                     </div>
-                    <button type="submit"
+                    <button type="button"
                             class="w-full bg-green-600 text-white py-3 font-bold uppercase text-sm hover:bg-green-700 transition no-round"
-                            onclick="return confirm('Konfirmasi donasi ini?')">
+                            @click="$dispatch('confirm-action', { title: 'Konfirmasi Donasi', message: 'Donasi ini akan dikonfirmasi. Pastikan bukti transfer sudah diperiksa.', formId: 'form-konfirmasi', buttonText: 'Konfirmasi', buttonColor: 'green' })">
                         <i class="fas fa-check mr-2"></i>Konfirmasi Donasi
                     </button>
                 </form>
                 {{-- Tolak --}}
-                <form action="{{ route('penulis.donasi.tolak', $donasi->id) }}" method="POST">
+                <form id="form-tolak" action="{{ route('penulis.donasi.tolak', $donasi->id) }}" method="POST">
                     @csrf @method('PATCH')
                     <div class="mb-3">
                         <label class="text-xs font-bold uppercase text-gray-400 block mb-1">Alasan penolakan</label>
@@ -159,9 +195,9 @@
                                class="w-full border border-gray-300 p-3 text-sm focus:border-red-400 focus:outline-none transition no-round"
                                placeholder="Tuliskan alasan...">
                     </div>
-                    <button type="submit"
+                    <button type="button"
                             class="w-full bg-red-500 text-white py-3 font-bold uppercase text-sm hover:bg-red-600 transition no-round"
-                            onclick="return confirm('Tolak donasi ini?')">
+                            @click="$dispatch('confirm-action', { title: 'Tolak Donasi', message: 'Donasi ini akan ditolak. Tindakan ini tidak dapat dibatalkan.', formId: 'form-tolak', buttonText: 'Tolak', buttonColor: 'red' })">
                         <i class="fas fa-times mr-2"></i>Tolak Donasi
                     </button>
                 </form>
@@ -169,20 +205,24 @@
         </div>
         @endif
 
-        {{-- Delete + Kembali --}}
-        <div class="flex gap-3 mt-6">
+        {{-- Toggle Publik + Delete + Kembali --}}
+        <div class="flex flex-wrap gap-3 mt-6">
             <a href="{{ route('penulis.donasi.index') }}"
                class="bg-gray-200 text-gray-700 px-6 py-3 font-bold uppercase text-sm hover:bg-gray-300 transition no-round">
                 <i class="fas fa-arrow-left mr-2"></i>Kembali
             </a>
-            <form action="{{ route('penulis.donasi.destroy', $donasi->id) }}" method="POST"
-                  onsubmit="return confirm('Hapus data donasi ini permanen?')">
-                @csrf @method('DELETE')
+            <form action="{{ route('penulis.donasi.toggle-publik', $donasi->id) }}" method="POST">
+                @csrf @method('PATCH')
                 <button type="submit"
-                        class="bg-gray-700 text-white px-6 py-3 font-bold uppercase text-sm hover:bg-red-700 transition no-round">
-                    <i class="fas fa-trash mr-2"></i>Hapus
+                        class="{{ $donasi->is_publik ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-green-600 hover:bg-green-700' }} text-white px-6 py-3 font-bold uppercase text-sm transition no-round">
+                    <i class="fas {{ $donasi->is_publik ? 'fa-eye-slash' : 'fa-eye' }} mr-2"></i>{{ $donasi->is_publik ? 'Sembunyikan' : 'Tampilkan di Publik' }}
                 </button>
             </form>
+            <button type="button"
+                    @click="$dispatch('confirm-action', { title: 'Hapus Donasi', message: 'Data donasi ini akan dihapus dan dapat dipulihkan dari menu Terhapus.', action: '{{ route('penulis.donasi.destroy', $donasi->id) }}', method: 'DELETE' })"
+                    class="bg-gray-700 text-white px-6 py-3 font-bold uppercase text-sm hover:bg-red-700 transition no-round">
+                <i class="fas fa-trash mr-2"></i>Hapus
+            </button>
         </div>
     </div>
 

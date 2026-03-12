@@ -1,6 +1,6 @@
-# KONI Papua Pegunungan - Website Resmi
+# YPMD IRJA - Website Resmi
 
-Website resmi Komite Olahraga Nasional Indonesia (KONI) Kabupaten Papua Pegunungan. Menampilkan informasi cabang olahraga, berita, kegiatan/event, galeri, dan profil kepengurusan.
+Website resmi Yayasan Pembangunan Masyarakat Desa Irian Jaya (YPMD IRJA) — LSM pertama di Tanah Papua sejak 1984. Menampilkan informasi program pemberdayaan masyarakat adat, buletin Kabar Dari Kampung (KDK), berita Papua Today, galeri kegiatan, dan donasi.
 
 ---
 
@@ -9,7 +9,9 @@ Website resmi Komite Olahraga Nasional Indonesia (KONI) Kabupaten Papua Pegunung
 - **Backend:** PHP 8.2+, Laravel 12
 - **Frontend:** Tailwind CSS 4, Alpine.js 3, Vite 7
 - **Database:** MySQL
+- **Editor:** CKEditor 5 (WYSIWYG)
 - **Icon:** Font Awesome 7
+- **Font:** Lora (display), Plus Jakarta Sans (body)
 - **Autentikasi:** Custom auth middleware dengan role-based access (admin_master, penulis)
 - **Tracking:** Middleware pencatatan kunjungan situs otomatis
 
@@ -24,14 +26,19 @@ composer dev       # Jalankan server, queue, logs, dan vite secara bersamaan
 
 ## 2. Fitur Utama — Visitor (Publik)
 
-- **Beranda** — Statistik ringkasan (cabang olahraga, atlet binaan, medali, event), daftar cabor, berita terbaru, kegiatan mendatang, galeri terbaru
-- **Tentang** — Profil organisasi KONI
-- **Pengurusan** — Struktur kepengurusan
-- **Cabang Olahraga** — Daftar lengkap cabang olahraga binaan
-- **Event/Kegiatan** — Jadwal dan informasi kegiatan olahraga
-- **Berita** — Daftar berita dengan pencarian, filter kategori, pagination, dan halaman detail (penghitung jumlah dibaca)
-- **Galeri** — Album foto/video dengan filter kategori dan halaman detail
-- **Kontak** — Informasi kontak dan media sosial
+- **Beranda** — Statistik yayasan, berita terbaru, buletin KDK, program unggulan, galeri, mitra kerja
+- **Sejarah** — Sejarah pendirian YPMD IRJA sejak 1984 (halaman dinamis CMS)
+- **Profil** — Profil organisasi yayasan (halaman dinamis CMS)
+- **Mitra Kerja** — Daftar mitra dan sponsor YPMD IRJA (halaman dinamis CMS)
+- **Bidang Kerja** — Informasi bidang kerja yayasan (halaman dinamis CMS)
+- **Tokoh** — Tokoh-tokoh pendiri dan pengurus yayasan
+- **Program** — Program unggulan: Informasi, Ekonomi Kerakyatan, Clean Water, Promosi Usaha
+- **KDK** — Buletin Kabar Dari Kampung — media alternatif masyarakat adat Papua sejak 1982
+- **Papua Today** — Berita dan artikel dengan filter kategori, pencarian, dan detail pembaca
+- **Donasi** — Form donasi untuk mendukung program pemberdayaan masyarakat
+- **Galeri** — Album foto kegiatan dengan halaman detail
+- **Kontak** — Informasi kontak dan media sosial YPMD IRJA
+- **Peta Situs** — Halaman peta situs (HTML sitemap) untuk navigasi lengkap
 
 ---
 
@@ -39,20 +46,25 @@ composer dev       # Jalankan server, queue, logs, dan vite secara bersamaan
 
 ### Admin Master (`/admin`)
 
-- **Dashboard** — Ringkasan total pengguna, berita, kegiatan, cabang olahraga, aktivitas login terbaru, dan info sistem
-- **Pengaturan Situs** — Kelola nama situs, deskripsi, kontak, media sosial, logo, SEO (meta keywords, description, OG image)
-- **Manajemen Pengguna** — CRUD pengguna dengan soft delete dan restore
-- **Aktivitas Login** — Log riwayat login pengguna
+- **Dashboard** — Ringkasan data, aktivitas terbaru, info sistem
+- **Halaman (CMS)** — Kelola halaman dinamis: sejarah, profil, mitra, bidang kerja
+- **Pengaturan Situs** — Nama situs, deskripsi, kontak, media sosial, logo, SEO (meta keywords, description, OG image)
 - **Backup Database** — Buat backup SQL (mysqldump/fallback PHP), download, hapus, dan restore dari file SQL
-- **Statistik Pengunjung** — Data kunjungan situs: harian, mingguan, bulanan, tahunan, total pembaca berita
+- **Manajemen Pengguna** — CRUD pengguna dengan soft delete dan restore
+- **Aktivitas Login** — Log riwayat login seluruh pengguna
+- **Statistik Pengunjung** — Grafik harian, mingguan, bulanan, tahunan
+- **Dokumentasi** — Dokumentasi teknis proyek, download PDF, copy informasi
 
 ### Penulis (`/penulis`)
 
 - **Dashboard** — Ringkasan konten
-- **Berita** — CRUD berita (judul, slug, ringkasan, konten, status terbit/draft, tanggal terbit) dengan soft delete & restore
+- **Artikel / Papua Today** — CRUD berita dengan status terbit/draft, soft delete & restore
 - **Kategori Berita** — CRUD kategori berita dengan soft delete & restore
-- **Kegiatan** — CRUD kegiatan/event dengan soft delete & restore
-- **Cabang Olahraga** — CRUD data cabang olahraga (nama, jumlah atlet, medali) dengan soft delete & restore
-- **Media** — Upload dan kelola file media (gambar), upload via AJAX, endpoint JSON untuk integrasi editor
-- **Galeri** — CRUD album galeri (kategori, slug) dengan relasi media dan soft delete & restore
-- **Statistik Pengunjung** — Akses data statistik kunjungan situs
+- **Edisi KDK** — CRUD buletin Kabar Dari Kampung dengan soft delete & restore
+- **Media** — Upload dan kelola file media (gambar), mendukung AJAX upload, endpoint JSON untuk integrasi editor
+- **Galeri** — CRUD album galeri dengan relasi media dan soft delete & restore
+- **Program Donasi** — CRUD program donasi dengan soft delete & restore
+- **Kelola Donasi** — Lihat, konfirmasi, tolak, dan hapus donasi masuk
+- **Statistik Pengunjung** — Grafik kunjungan situs
+- **Aktivitas Login** — Log riwayat login penulis
+- **Dokumentasi** — Dokumentasi teknis proyek, download PDF, copy informasi

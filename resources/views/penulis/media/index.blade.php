@@ -14,9 +14,14 @@
                     '<img src="' . asset('storage/' . $m->file_path) . '" alt="' . e($m->judul) . '" class="w-16 h-12 object-cover border border-gray-200">'
                 );
             } elseif ($m->tipe === 'video') {
-                $ytId = $m->file_name;
+                $ytId = e($m->file_name);
                 $preview = new \Illuminate\Support\HtmlString(
-                    '<img src="https://img.youtube.com/vi/' . e($ytId) . '/default.jpg" alt="' . e($m->judul) . '" class="w-16 h-12 object-cover border border-gray-200" onerror="this.outerHTML=\'<span class=\\\"text-gray-400 text-xl\\\"><i class=\\\"fab fa-youtube\\\"></i></span>\'">'
+                    '<div class="relative w-16 h-12 border border-gray-200 bg-black flex-shrink-0">' .
+                        '<img src="https://img.youtube.com/vi/' . $ytId . '/default.jpg" alt="' . e($m->judul) . '" class="w-full h-full object-cover" onerror="this.style.display=&apos;none&apos;">' .
+                        '<div class="absolute inset-0 flex items-center justify-center">' .
+                            '<span class="text-red-500 text-lg"><i class="fab fa-youtube"></i></span>' .
+                        '</div>' .
+                    '</div>'
                 );
             } else {
                 $preview = new \Illuminate\Support\HtmlString(
@@ -31,9 +36,13 @@
                     $m->formatted_size,
                     $m->created_at->format('d M Y'),
                 ],
+                'copyUrl' => $m->tipe === 'video'
+                    ? 'https://www.youtube.com/watch?v=' . $m->file_name
+                    : ($m->file_path ? asset('storage/' . $m->file_path) : null),
                 'editRoute' => $m->trashed() ? null : route('penulis.media.edit', $m->id),
                 'deleteRoute' => $m->trashed() ? null : route('penulis.media.destroy', $m->id),
                 'restoreRoute' => $m->trashed() ? route('penulis.media.restore', $m->id) : null,
+                'forceDeleteRoute' => $m->trashed() ? route('penulis.media.force-delete', $m->id) : null,
                 'trashed' => $m->trashed(),
             ];
         })->toArray(),

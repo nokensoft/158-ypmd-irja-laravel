@@ -33,7 +33,7 @@ class PengaturanSitusSeeder extends Seeder
             // Umum
             'nama_situs'      => 'YPMD IRJA',
             'deskripsi_situs' => 'Yayasan Pembangunan Masyarakat Desa Irian Jaya — Mendampingi masyarakat adat Papua sejak 1982',
-            'email'           => 'info@ypmdirja.org',
+'email'           => 'info@ypmd-irja.org',
             'telepon'         => '(0967) 123456',
             'alamat'          => 'Jl. Ahmad Yani No. 12, Jayapura, Papua',
             'logo'            => $logoPath,

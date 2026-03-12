@@ -1,6 +1,7 @@
 {{-- Global Confirmation Modal --}}
-{{-- Usage: dispatch 'confirm-action' event with detail: { title, message, action, method, buttonText, buttonColor } --}}
-{{-- Example: $dispatch('confirm-action', { title: 'Hapus Data', message: 'Yakin?', action: '/url', method: 'DELETE' }) --}}
+{{-- Usage: dispatch 'confirm-action' event with detail: { title, message, action, method, buttonText, buttonColor, formId } --}}
+{{-- Example (internal form): $dispatch('confirm-action', { title: 'Hapus Data', message: 'Yakin?', action: '/url', method: 'DELETE' }) --}}
+{{-- Example (external form with extra inputs): $dispatch('confirm-action', { title: 'Konfirmasi', message: 'Yakin?', formId: 'my-form-id', buttonColor: 'green', buttonText: 'Konfirmasi' }) --}}
 
 <div x-data="confirmModal()" x-cloak
      @confirm-action.window="open($event.detail)"
@@ -41,15 +42,24 @@
                         class="bg-gray-200 text-gray-700 px-6 py-3 font-bold hover:bg-gray-300 transition uppercase text-sm no-round">
                     Batal
                 </button>
-                <form :action="action" method="POST" class="inline">
+                {{-- Internal form: dipakai jika tidak ada formId --}}
+                <form x-show="!formId" :action="action" method="POST" class="inline" x-ref="internalForm">
                     @csrf
                     <input type="hidden" name="_method" :value="method">
-                    <button type="submit"
+                    <button type="button"
+                            @click="show = false; $refs.internalForm.submit()"
                             :class="btnColor === 'green' ? 'bg-green-600 hover:bg-green-700' : 'bg-red-600 hover:bg-red-700'"
                             class="text-white px-6 py-3 font-bold transition uppercase text-sm no-round"
                             x-text="btnText">
                     </button>
                 </form>
+                {{-- External form: dipakai jika formId tersedia (form punya extra inputs) --}}
+                <button x-show="formId" type="button"
+                        @click="show = false; document.getElementById(formId).requestSubmit()"
+                        :class="btnColor === 'green' ? 'bg-green-600 hover:bg-green-700' : 'bg-red-600 hover:bg-red-700'"
+                        class="text-white px-6 py-3 font-bold transition uppercase text-sm no-round"
+                        x-text="btnText">
+                </button>
             </div>
         </div>
     </div>
@@ -65,6 +75,7 @@ function confirmModal() {
         method: 'DELETE',
         btnText: 'Hapus',
         btnColor: 'red',
+        formId: null,
 
         open(detail) {
             this.title = detail.title || 'Konfirmasi';
@@ -73,6 +84,7 @@ function confirmModal() {
             this.method = detail.method || 'DELETE';
             this.btnText = detail.buttonText || (detail.method === 'PATCH' ? 'Pulihkan' : 'Hapus');
             this.btnColor = detail.buttonColor || (detail.method === 'PATCH' ? 'green' : 'red');
+            this.formId = detail.formId || null;
             this.show = true;
         }
     }

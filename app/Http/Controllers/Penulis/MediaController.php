@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Penulis;
 
+use App\Helpers\ImageHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Media;
 use Illuminate\Http\Request;
@@ -61,14 +62,14 @@ class MediaController extends Controller
             ]);
         } else {
             $file = $request->file('file');
-            $path = $file->store('media', 'public');
+            $processed = ImageHelper::processAndStore($file, 'media');
 
             Media::create([
                 'judul' => $request->judul,
                 'tipe' => 'foto',
-                'file_path' => $path,
+                'file_path' => $processed['path'],
                 'file_name' => $file->getClientOriginalName(),
-                'file_size' => $file->getSize(),
+                'file_size' => $processed['size'],
                 'user_id' => session('user.id'),
             ]);
         }
@@ -114,9 +115,10 @@ class MediaController extends Controller
                 Storage::disk('public')->delete($media->file_path);
             }
             $file = $request->file('file');
-            $data['file_path'] = $file->store('media', 'public');
+            $processed = ImageHelper::processAndStore($file, 'media');
+            $data['file_path'] = $processed['path'];
             $data['file_name'] = $file->getClientOriginalName();
-            $data['file_size'] = $file->getSize();
+            $data['file_size'] = $processed['size'];
         }
 
         $media->update($data);
@@ -138,6 +140,19 @@ class MediaController extends Controller
         $media->restore();
 
         return redirect()->route('penulis.media.index')->with('success', 'Media berhasil dipulihkan.');
+    }
+
+    public function forceDelete(string $id)
+    {
+        $media = Media::onlyTrashed()->findOrFail($id);
+
+        if ($media->file_path && !str_starts_with($media->file_path, 'http')) {
+            Storage::disk('public')->delete($media->file_path);
+        }
+
+        $media->forceDelete();
+
+        return redirect()->route('penulis.media.index', ['status' => 'terhapus'])->with('success', 'Media berhasil dihapus permanen.');
     }
 
     /**
@@ -170,14 +185,14 @@ class MediaController extends Controller
         ]);
 
         $file = $request->file('file');
-        $path = $file->store('media', 'public');
+        $processed = ImageHelper::processAndStore($file, 'media');
 
         $media = Media::create([
             'judul' => $request->judul,
             'tipe' => 'foto',
-            'file_path' => $path,
+            'file_path' => $processed['path'],
             'file_name' => $file->getClientOriginalName(),
-            'file_size' => $file->getSize(),
+            'file_size' => $processed['size'],
             'user_id' => session('user.id'),
         ]);
 

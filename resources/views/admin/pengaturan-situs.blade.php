@@ -112,6 +112,12 @@
                     </div>
                     <input type="url" name="sosmed_tiktok" value="{{ $settings['sosmed_tiktok'] ?? '' }}" class="w-full border border-gray-300 p-4 text-base focus:border-primary focus:outline-none transition no-round" placeholder="https://tiktok.com/@namaakun">
                 </div>
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-[#25D366] text-white flex items-center justify-center shrink-0">
+                        <i class="fab fa-whatsapp text-xl"></i>
+                    </div>
+                    <input type="text" name="sosmed_whatsapp" value="{{ $settings['sosmed_whatsapp'] ?? '' }}" class="w-full border border-gray-300 p-4 text-base focus:border-primary focus:outline-none transition no-round" placeholder="6281234567890 (format internasional tanpa +)">
+                </div>
             </div>
         </div>
 

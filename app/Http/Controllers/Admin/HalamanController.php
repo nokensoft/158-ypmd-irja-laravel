@@ -101,4 +101,12 @@ class HalamanController extends Controller
 
         return redirect()->route('admin.halaman.index')->with('success', 'Halaman berhasil dipulihkan.');
     }
+
+    public function forceDelete(string $id)
+    {
+        $halaman = Halaman::onlyTrashed()->findOrFail($id);
+        $halaman->forceDelete();
+
+        return redirect()->route('admin.halaman.index', ['status' => 'terhapus'])->with('success', 'Halaman berhasil dihapus permanen.');
+    }
 }

@@ -6,10 +6,17 @@
         'title' => 'Edisi KDK',
         'createRoute' => route('penulis.kdk.create'),
         'trashedRoute' => route('penulis.kdk.index'),
-        'columns' => ['Edisi', 'Judul', 'Tanggal Terbit', 'File PDF'],
+        'columns' => ['Cover', 'Edisi', 'Judul', 'Tanggal Terbit', 'File PDF'],
         'paginator' => $kdk,
         'rows' => $kdk->map(fn ($k) => [
             'cells' => [
+                $k->media && $k->media->file_path
+                    ? new \Illuminate\Support\HtmlString(
+                        '<img src="' . asset('storage/' . $k->media->file_path) . '" alt="' . e($k->judul) . '" class="w-12 h-16 object-cover border border-gray-200">'
+                    )
+                    : new \Illuminate\Support\HtmlString(
+                        '<div class="w-12 h-16 bg-gray-100 border border-gray-200 flex items-center justify-center text-gray-300"><i class="fas fa-book text-lg"></i></div>'
+                    ),
                 new \Illuminate\Support\HtmlString(
                     '<span class="inline-block bg-primary text-white text-xs font-bold px-3 py-1">Edisi ' . e($k->nomor_edisi) . '</span>'
                 ),
@@ -24,10 +31,11 @@
                     )
                     : new \Illuminate\Support\HtmlString('<span class="text-gray-400 text-sm">—</span>'),
             ],
-            'editRoute'    => $k->trashed() ? null : route('penulis.kdk.edit', $k->id),
-            'deleteRoute'  => $k->trashed() ? null : route('penulis.kdk.destroy', $k->id),
-            'restoreRoute' => $k->trashed() ? route('penulis.kdk.restore', $k->id) : null,
-            'trashed'      => $k->trashed(),
+            'editRoute'       => $k->trashed() ? null : route('penulis.kdk.edit', $k->id),
+            'deleteRoute'     => $k->trashed() ? null : route('penulis.kdk.destroy', $k->id),
+            'restoreRoute'    => $k->trashed() ? route('penulis.kdk.restore', $k->id) : null,
+            'forceDeleteRoute'=> $k->trashed() ? route('penulis.kdk.force-delete', $k->id) : null,
+            'trashed'         => $k->trashed(),
         ])->toArray(),
     ])
 @endsection

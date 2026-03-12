@@ -5,12 +5,13 @@
             class="w-11 h-11 bg-neutral-700 hover:bg-neutral-900 text-white flex items-center justify-center shadow-lg transition-all duration-300 opacity-0 translate-y-4 pointer-events-none">
         <i class="fa-solid fa-chevron-up text-sm"></i>
     </button>
-    @php $wa = $situs['sosmed_whatsapp'] ?? $situs['whatsapp'] ?? null; @endphp
-    <a href="{{ $wa ? 'https://wa.me/' . preg_replace('/[^0-9]/', '', $wa) : 'https://wa.me/6282199558191' }}"
+    @if (!empty($situs['sosmed_whatsapp']))
+    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $situs['sosmed_whatsapp']) }}"
        target="_blank"
        class="w-11 h-11 bg-[#25D366] hover:bg-[#1ebe5d] text-white flex items-center justify-center shadow-lg transition-colors">
         <i class="fa-brands fa-whatsapp text-xl"></i>
     </a>
+    @endif
 </div>
 
 <footer class="bg-neutral-900 text-neutral-300">
@@ -106,20 +107,20 @@
             <div class="flex items-center gap-4">
                 {{-- Sosmed --}}
                 <div class="flex items-center gap-2">
-                    @if (!empty($situs['sosmed_instagram']))
-                        <a href="{{ $situs['sosmed_instagram'] }}" target="_blank" class="w-7 h-7 bg-neutral-800 hover:bg-primary-500 flex items-center justify-center rounded transition-colors"><i class="fa-brands fa-instagram text-xs"></i></a>
-                    @else
-                        <a href="#" class="w-7 h-7 bg-neutral-800 hover:bg-primary-500 flex items-center justify-center rounded transition-colors"><i class="fa-brands fa-instagram text-xs"></i></a>
-                    @endif
                     @if (!empty($situs['sosmed_facebook']))
                         <a href="{{ $situs['sosmed_facebook'] }}" target="_blank" class="w-7 h-7 bg-neutral-800 hover:bg-primary-500 flex items-center justify-center rounded transition-colors"><i class="fa-brands fa-facebook-f text-xs"></i></a>
-                    @else
-                        <a href="#" class="w-7 h-7 bg-neutral-800 hover:bg-primary-500 flex items-center justify-center rounded transition-colors"><i class="fa-brands fa-facebook-f text-xs"></i></a>
+                    @endif
+                    @if (!empty($situs['sosmed_instagram']))
+                        <a href="{{ $situs['sosmed_instagram'] }}" target="_blank" class="w-7 h-7 bg-neutral-800 hover:bg-primary-500 flex items-center justify-center rounded transition-colors"><i class="fa-brands fa-instagram text-xs"></i></a>
                     @endif
                     @if (!empty($situs['sosmed_youtube']))
                         <a href="{{ $situs['sosmed_youtube'] }}" target="_blank" class="w-7 h-7 bg-neutral-800 hover:bg-primary-500 flex items-center justify-center rounded transition-colors"><i class="fa-brands fa-youtube text-xs"></i></a>
-                    @else
-                        <a href="#" class="w-7 h-7 bg-neutral-800 hover:bg-primary-500 flex items-center justify-center rounded transition-colors"><i class="fa-brands fa-youtube text-xs"></i></a>
+                    @endif
+                    @if (!empty($situs['sosmed_twitter']))
+                        <a href="{{ $situs['sosmed_twitter'] }}" target="_blank" class="w-7 h-7 bg-neutral-800 hover:bg-primary-500 flex items-center justify-center rounded transition-colors"><i class="fa-brands fa-x-twitter text-xs"></i></a>
+                    @endif
+                    @if (!empty($situs['sosmed_tiktok']))
+                        <a href="{{ $situs['sosmed_tiktok'] }}" target="_blank" class="w-7 h-7 bg-neutral-800 hover:bg-primary-500 flex items-center justify-center rounded transition-colors"><i class="fa-brands fa-tiktok text-xs"></i></a>
                     @endif
                 </div>
                 @php
@@ -133,7 +134,9 @@
                     @endif
                     @if ($disclaimerPage)
                         <a href="{{ route('halaman.show', $disclaimerPage->slug) }}" class="hover:text-white transition-colors">{{ $disclaimerPage->judul }}</a>
+                        <span class="text-neutral-700">&middot;</span>
                     @endif
+                    <a href="{{ route('peta-situs') }}" class="hover:text-white transition-colors">Peta Situs</a>
                 </div>
             </div>
         </div>

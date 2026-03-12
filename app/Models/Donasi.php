@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Donasi extends Model
 {
+    use SoftDeletes;
     protected $table = 'donasi';
 
     protected $fillable = [
@@ -21,6 +23,7 @@ class Donasi extends Model
         'status',
         'catatan_admin',
         'tanggal',
+        'is_publik',
     ];
 
     protected function casts(): array
@@ -29,6 +32,7 @@ class Donasi extends Model
             'tanggal'   => 'date',
             'jumlah'    => 'integer',
             'is_anonim' => 'boolean',
+            'is_publik' => 'boolean',
         ];
     }
 

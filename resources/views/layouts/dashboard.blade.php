@@ -96,7 +96,7 @@
                     <img src="{{ asset('img/logo-ypmd-irja.png') }}" alt="Logo" class="h-10 object-contain" onerror="this.style.display='none'">
                 @endif
                 <div>
-                    <span class="font-bold text-sm leading-tight text-primary block">YPMD IRJA</span>
+                    <span class="font-bold text-sm leading-tight text-primary block">{{ $situs['nama_situs'] ?? 'YPMD IRJA' }}</span>
                     <span class="text-xs font-medium tracking-widest uppercase text-gray-400 block">{{ session('user.role') === 'admin_master' ? 'Admin' : 'Penulis' }}</span>
                 </div>
             </div>
@@ -113,6 +113,12 @@
                            class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round {{ request()->routeIs('admin.dashboard') ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
                             <i class="fas fa-tachometer-alt w-6 text-center"></i>
                             <span>Dasbor</span>
+                        </a>
+                        <a href="{{ route('beranda') }}" target="_blank"
+                           class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round text-gray-300 hover:bg-gray-800 hover:text-white">
+                            <i class="fas fa-globe w-6 text-center"></i>
+                            <span>Lihat Website</span>
+                            <i class="fas fa-external-link-alt text-xs ml-auto opacity-50"></i>
                         </a>
                     </div>
                     <div>
@@ -157,14 +163,6 @@
                             <span>Statistik Pengunjung</span>
                         </a>
                     </div>
-                    <div>
-                        <p class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3 px-3">Lainnya</p>
-                        <a href="{{ route('admin.dokumentasi') }}"
-                           class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round {{ request()->routeIs('admin.dokumentasi') ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
-                            <i class="fas fa-book w-6 text-center"></i>
-                            <span>Dokumentasi</span>
-                        </a>
-                    </div>
                 @endif
 
                 @if ($user && $user['role'] === 'penulis')
@@ -175,6 +173,12 @@
                            class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round {{ request()->routeIs('penulis.dashboard') ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
                             <i class="fas fa-tachometer-alt w-6 text-center"></i>
                             <span>Dasbor</span>
+                        </a>
+                        <a href="{{ route('beranda') }}" target="_blank"
+                           class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round text-gray-300 hover:bg-gray-800 hover:text-white">
+                            <i class="fas fa-globe w-6 text-center"></i>
+                            <span>Lihat Website</span>
+                            <i class="fas fa-external-link-alt text-xs ml-auto opacity-50"></i>
                         </a>
                     </div>
                     <div>
@@ -232,16 +236,17 @@
                             <span>Statistik Pengunjung</span>
                         </a>
                     </div>
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3 px-3">Pengguna</p>
+                        <a href="{{ route('penulis.aktivitas-login') }}"
+                           class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round {{ request()->routeIs('penulis.aktivitas-login') ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
+                            <i class="fas fa-history w-6 text-center"></i>
+                            <span>Aktivitas Login</span>
+                        </a>
+                    </div>
                 @endif
             </nav>
 
-            {{-- Sidebar Footer --}}
-            <div class="px-4 py-4 border-t border-gray-800">
-                <a href="{{ route('beranda') }}" class="flex items-center space-x-3 px-3 py-2 text-sm text-gray-400 hover:text-white transition">
-                    <i class="fas fa-globe w-6 text-center"></i>
-                    <span>Lihat Website</span>
-                </a>
-            </div>
         </aside>
 
         {{-- Main Area --}}
@@ -255,20 +260,39 @@
                     </button>
                     <h1 class="text-xl font-extrabold text-dark uppercase tracking-wide">@yield('page-title', 'Dashboard')</h1>
                 </div>
-                <div class="flex items-center space-x-4">
-                    <div class="text-right hidden sm:block">
-                        <p class="text-base font-bold text-dark">{{ session('user.name', 'User') }}</p>
-                        <p class="text-sm text-gray-400 capitalize">{{ str_replace('_', ' ', session('user.role', '')) }}</p>
-                    </div>
-                    <div class="w-10 h-10 bg-primary text-white flex items-center justify-center font-bold text-base">
-                        {{ strtoupper(substr(session('user.name', 'U'), 0, 1)) }}
-                    </div>
-                    <form action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="text-gray-400 hover:text-primary transition text-lg" title="Logout">
-                            <i class="fas fa-sign-out-alt"></i>
+                @php $dashPrefix = session('user.role') === 'admin_master' ? 'admin' : 'penulis'; @endphp
+                <div class="flex items-center space-x-4" x-data="{ profileOpen: false }">
+                    <div class="relative">
+                        <button @click="profileOpen = !profileOpen" class="flex items-center space-x-3 cursor-pointer select-none">
+                            <div class="text-right hidden sm:block">
+                                <p class="text-base font-bold text-dark">{{ session('user.name', 'User') }}</p>
+                                <p class="text-sm text-gray-400 capitalize">{{ str_replace('_', ' ', session('user.role', '')) }}</p>
+                            </div>
+                            <div class="w-10 h-10 bg-primary text-white flex items-center justify-center font-bold text-base">
+                                {{ strtoupper(substr(session('user.name', 'U'), 0, 1)) }}
+                            </div>
+                            <i class="fas fa-chevron-down text-xs text-gray-400 transition-transform duration-200" :class="profileOpen ? 'rotate-180' : ''"></i>
                         </button>
-                    </form>
+
+                        <div x-show="profileOpen" @click.outside="profileOpen = false" x-transition style="display:none;"
+                             class="absolute right-0 top-full mt-2 w-52 bg-white border border-gray-200 shadow-lg z-50 overflow-hidden">
+                            <div class="px-4 py-3 border-b border-gray-100">
+                                <p class="text-sm font-bold text-dark">{{ session('user.name', 'User') }}</p>
+                                <p class="text-xs text-gray-400">{{ session('user.email', '') }}</p>
+                            </div>
+                            <a href="{{ route("{$dashPrefix}.profil") }}"
+                               class="w-full flex items-center gap-2.5 px-4 py-3 hover:bg-gray-50 transition-colors text-left text-gray-600 text-sm">
+                                <i class="fas fa-user-pen w-5 text-center"></i> Edit Profil
+                            </a>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit"
+                                        class="w-full flex items-center gap-2.5 px-4 py-3 hover:bg-red-50 hover:text-red-600 transition-colors text-left text-gray-600 text-sm border-t border-gray-100">
+                                    <i class="fas fa-sign-out-alt w-5 text-center"></i> Logout
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </header>
 
@@ -279,11 +303,36 @@
                 @yield('content')
             </main>
 
+            {{-- Footer --}}
+            @php
+                $faqPage = $halamanFooter->firstWhere('slug', 'faq');
+                $disclaimerPage = $halamanFooter->firstWhere('slug', 'disclaimer');
+            @endphp
+            <footer class="bg-white border-t border-gray-200 px-6 py-4">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-2 text-sm text-gray-500">
+                    <p>&copy; {{ date('Y') }} {{ $situs['nama_situs'] ?? 'YPMD IRJA' }}</p>
+                    <div class="flex items-center gap-3">
+                        <a href="{{ route("{$dashPrefix}.dokumentasi") }}" class="hover:text-primary transition-colors">Dokumentasi</a>
+                        @if ($faqPage)
+                            <span class="text-gray-300">|</span>
+                            <a href="{{ route('halaman.show', $faqPage->slug) }}" target="_blank" class="hover:text-primary transition-colors">FAQ</a>
+                        @endif
+                        @if ($disclaimerPage)
+                            <span class="text-gray-300">|</span>
+                            <a href="{{ route('halaman.show', $disclaimerPage->slug) }}" target="_blank" class="hover:text-primary transition-colors">Disclaimer</a>
+                        @endif
+                        <span class="text-gray-300">|</span>
+                        <a href="{{ route('peta-situs') }}" target="_blank" class="hover:text-primary transition-colors">Site Map</a>
+                    </div>
+                </div>
+            </footer>
+
         </div>
 
     </div>
 
 <x-confirm-modal />
+<x-toast-notification />
 @stack('scripts')
 </body>
 </html>

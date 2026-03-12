@@ -27,7 +27,7 @@ class VisitorController extends Controller
             ->take(3)
             ->get();
 
-        $galeriTerbaru = Galeri::with('media')->latest()->take(6)->get();
+        $galeriTerbaru = Galeri::with('media')->where('is_publik', true)->latest()->take(6)->get();
 
         return view('visitor.beranda', compact('beritaTerbaru', 'kdkTerbaru', 'galeriTerbaru'));
     }
@@ -93,7 +93,7 @@ class VisitorController extends Controller
 
     public function galeri()
     {
-        $query = Galeri::withCount('media')->latest();
+        $query = Galeri::withCount('media')->where('is_publik', true)->latest();
 
         $kategoriAktif = request('kategori');
         if ($kategoriAktif && in_array($kategoriAktif, Galeri::KATEGORI_LIST)) {
@@ -102,17 +102,32 @@ class VisitorController extends Controller
             $kategoriAktif = null;
         }
 
+        if (request('cari')) {
+            $query->where(function ($q) {
+                $q->where('judul', 'like', '%' . request('cari') . '%')
+                  ->orWhere('deskripsi', 'like', '%' . request('cari') . '%');
+            });
+        }
+
         $galeriList = $query->paginate(12)->withQueryString();
 
         // Load first media for cover image
         $galeriList->load(['media' => fn ($q) => $q->limit(1)]);
 
-        return view('visitor.galeri', compact('galeriList', 'kategoriAktif'));
+        // Category list with counts (for sidebar)
+        $kategoriListSidebar = collect(Galeri::KATEGORI_LIST)->map(function ($kat) {
+            return [
+                'nama' => $kat,
+                'jumlah' => Galeri::where('is_publik', true)->where('kategori', $kat)->count(),
+            ];
+        });
+
+        return view('visitor.galeri', compact('galeriList', 'kategoriAktif', 'kategoriListSidebar'));
     }
 
     public function galeriDetail(string $slug)
     {
-        $galeri = Galeri::with('media')->where('slug', $slug)->firstOrFail();
+        $galeri = Galeri::with('media')->where('slug', $slug)->where('is_publik', true)->firstOrFail();
 
         return view('visitor.galeri-detail', compact('galeri'));
     }
@@ -138,6 +153,7 @@ class VisitorController extends Controller
 
         $testimoni = Donasi::with('programDonasi')
             ->where('status', 'dikonfirmasi')
+            ->where('is_publik', true)
             ->whereNotNull('pesan')
             ->where('pesan', '!=', '')
             ->latest()
@@ -162,7 +178,9 @@ class VisitorController extends Controller
 
         $buktiPath = null;
         if ($request->hasFile('bukti_transfer')) {
-            $buktiPath = $request->file('bukti_transfer')->store('donasi', 'public');
+            $file = $request->file('bukti_transfer');
+            $ext = $file->getClientOriginalExtension() ?: 'jpg';
+            $buktiPath = $file->storeAs('donasi', \App\Helpers\ImageHelper::generateFilename($ext), 'public');
         }
 
         Donasi::create([
@@ -225,5 +243,27 @@ class VisitorController extends Controller
             ->firstOrFail();
 
         return view('visitor.halaman', compact('halaman'));
+    }
+
+    public function petaSitus()
+    {
+        $halamanList = Halaman::where('is_active', true)->orderBy('urutan')->get();
+        $kategoriBeritaList = KategoriBerita::whereNotNull('slug')
+            ->withCount(['berita' => fn ($q) => $q->where('status', 'terbit')])
+            ->get();
+        $beritaTerbaru = Berita::where('status', 'terbit')
+            ->latest('tanggal_terbit')
+            ->take(20)
+            ->get();
+        $galeriTerbaru = Galeri::latest()->take(20)->get();
+        $kdkTerbaru = Kdk::orderByDesc('tanggal_terbit')->take(20)->get();
+
+        return view('visitor.peta-situs', compact(
+            'halamanList',
+            'kategoriBeritaList',
+            'beritaTerbaru',
+            'galeriTerbaru',
+            'kdkTerbaru'
+        ));
     }
 }

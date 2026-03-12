@@ -37,6 +37,7 @@
                 'editRoute' => $b->trashed() ? null : route('penulis.berita.edit', $b->id),
                 'deleteRoute' => $b->trashed() ? null : route('penulis.berita.destroy', $b->id),
                 'restoreRoute' => $b->trashed() ? route('penulis.berita.restore', $b->id) : null,
+                'forceDeleteRoute' => $b->trashed() ? route('penulis.berita.force-delete', $b->id) : null,
                 'trashed' => $b->trashed(),
             ];
         })->toArray(),

@@ -3,7 +3,7 @@
 @section('seo-title', $galeri->judul . ' - Galeri Foto')
 @section('seo-description', $galeri->deskripsi ?: 'Album galeri foto ' . $galeri->judul)
 @if ($galeri->media->first())
-    @section('seo-image', asset('storage/' . $galeri->media->first()->file_path))
+    @section('seo-image', $galeri->media->first()->tipe === 'video' ? 'https://img.youtube.com/vi/' . $galeri->media->first()->file_name . '/hqdefault.jpg' : asset('storage/' . $galeri->media->first()->file_path))
 @endif
 
 @section('json-ld')
@@ -37,32 +37,59 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
                     <h3 class="text-3xl font-extrabold text-dark">{{ $galeri->judul }}</h3>
                     <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full">{{ $galeri->kategori }}</span>
                 </div>
+                @php
+                    $fotoCount = $galeri->media->where('tipe', 'foto')->count();
+                    $videoCount = $galeri->media->where('tipe', 'video')->count();
+                @endphp
                 <p class="text-gray-400 text-sm my-2">
-                    <i class="fas fa-image mr-1"></i>{{ $galeri->media->count() }} Foto
-                    <span class="mx-2">&middot;</span>
-                    <i class="far fa-calendar-alt mr-1"></i>{{ $galeri->created_at->translatedFormat('d F Y') }}
+                    @if ($fotoCount > 0)
+                        <i class="fas fa-image mr-1"></i>{{ $fotoCount }} Foto
+                    @endif
+                    @if ($fotoCount > 0 && $videoCount > 0)
+                        <span class="mx-1">&middot;</span>
+                    @endif
+                    @if ($videoCount > 0)
+                        <i class="fab fa-youtube mr-1"></i>{{ $videoCount }} Video
+                    @endif
                 </p>
                 @if ($galeri->deskripsi)
                     <p class="text-gray-500">{{ $galeri->deskripsi }}</p>
                 @endif
             </div>
 
-            <!-- Photo Grid -->
+            <!-- Media Grid -->
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 @forelse ($galeri->media as $index => $m)
-                    <div @click="open({{ $index }})"
-                         class="relative group overflow-hidden rounded-lg cursor-pointer">
-                        <img src="{{ asset('storage/' . $m->file_path) }}"
-                             class="w-full h-52 object-cover group-hover:scale-110 transition duration-500"
-                             alt="{{ $galeri->judul }} - Foto {{ $index + 1 }}">
-                        <div class="absolute inset-0 bg-dark/0 group-hover:bg-dark/50 transition flex items-center justify-center">
-                            <i class="fas fa-search-plus text-white text-xl opacity-0 group-hover:opacity-100 transition"></i>
+                    @if ($m->tipe === 'video')
+                        <div @click="open({{ $index }})"
+                             class="relative group overflow-hidden rounded-lg cursor-pointer">
+                            <img src="https://img.youtube.com/vi/{{ $m->file_name }}/hqdefault.jpg"
+                                 class="w-full h-52 object-cover group-hover:scale-110 transition duration-500"
+                                 alt="{{ $galeri->judul }} - Video {{ $index + 1 }}">
+                            <div class="absolute inset-0 bg-dark/0 group-hover:bg-dark/50 transition flex items-center justify-center">
+                                <span class="bg-red-600/90 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg group-hover:scale-110 transition">
+                                    <i class="fas fa-play text-lg ml-0.5"></i>
+                                </span>
+                            </div>
+                            <span class="absolute bottom-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded">
+                                <i class="fab fa-youtube mr-1"></i>Video
+                            </span>
                         </div>
-                    </div>
+                    @else
+                        <div @click="open({{ $index }})"
+                             class="relative group overflow-hidden rounded-lg cursor-pointer">
+                            <img src="{{ asset('storage/' . $m->file_path) }}"
+                                 class="w-full h-52 object-cover group-hover:scale-110 transition duration-500"
+                                 alt="{{ $galeri->judul }} - Foto {{ $index + 1 }}">
+                            <div class="absolute inset-0 bg-dark/0 group-hover:bg-dark/50 transition flex items-center justify-center">
+                                <i class="fas fa-search-plus text-white text-xl opacity-0 group-hover:opacity-100 transition"></i>
+                            </div>
+                        </div>
+                    @endif
                 @empty
                     <div class="col-span-full text-center py-16 text-gray-400">
                         <i class="fas fa-image text-5xl mb-4 block"></i>
-                        <p class="text-lg">Belum ada foto di album ini.</p>
+                        <p class="text-lg">Belum ada media di album ini.</p>
                     </div>
                 @endforelse
             </div>
@@ -111,10 +138,22 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
                 <i class="fas fa-chevron-left"></i>
             </button>
 
-            <!-- Image -->
+            <!-- Content -->
             <div class="max-w-5xl w-full text-center px-16" @click.self="close()">
-                <img :src="images[currentIndex]" class="max-w-full max-h-[80vh] mx-auto shadow-2xl rounded" :alt="caption">
-                <p class="text-white/80 mt-4 text-sm font-medium" x-text="caption + ' — Foto ' + (currentIndex + 1)"></p>
+                <template x-if="items[currentIndex] && items[currentIndex].type === 'video'">
+                    <div>
+                        <div class="aspect-video max-w-4xl mx-auto">
+                            <iframe :src="isOpen ? 'https://www.youtube.com/embed/' + items[currentIndex].ytId + '?autoplay=1' : ''" class="w-full h-full rounded shadow-2xl" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                        <p class="text-white/80 mt-4 text-sm font-medium" x-text="caption + ' — Video ' + (currentIndex + 1)"></p>
+                    </div>
+                </template>
+                <template x-if="!items[currentIndex] || items[currentIndex].type === 'foto'">
+                    <div>
+                        <img :src="items[currentIndex] ? items[currentIndex].src : ''" class="max-w-full max-h-[80vh] mx-auto shadow-2xl rounded" :alt="caption">
+                        <p class="text-white/80 mt-4 text-sm font-medium" x-text="caption + ' — Foto ' + (currentIndex + 1)"></p>
+                    </div>
+                </template>
             </div>
 
             <!-- Next -->
@@ -131,7 +170,11 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
                 isOpen: false,
                 currentIndex: 0,
                 caption: @js($galeri->judul),
-                images: @js($galeri->media->map(fn ($m) => asset('storage/' . $m->file_path))->values()),
+                items: @js($galeri->media->map(fn ($m) => [
+                    'type' => $m->tipe,
+                    'src' => $m->tipe === 'video' ? 'https://img.youtube.com/vi/' . $m->file_name . '/hqdefault.jpg' : asset('storage/' . $m->file_path),
+                    'ytId' => $m->tipe === 'video' ? $m->file_name : null,
+                ])->values()),
                 open(index) {
                     this.currentIndex = index;
                     this.isOpen = true;
@@ -140,10 +183,10 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
                     this.isOpen = false;
                 },
                 next() {
-                    this.currentIndex = (this.currentIndex + 1) % this.images.length;
+                    this.currentIndex = (this.currentIndex + 1) % this.items.length;
                 },
                 prev() {
-                    this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+                    this.currentIndex = (this.currentIndex - 1 + this.items.length) % this.items.length;
                 }
             }
         }

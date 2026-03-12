@@ -2,7 +2,7 @@
 @section('title', $editMode ? 'Edit Edisi KDK' : 'Tambah Edisi KDK')
 @section('page-title', $editMode ? 'Edit Edisi KDK' : 'Tambah Edisi KDK')
 @section('content')
-    <div class="max-w-2xl">
+    <div class="max-w-2xl" x-data="kdkMediaPicker()">
         <div class="bg-white shadow-sm p-6">
             <form action="{{ $editMode ? route('penulis.kdk.update', $kdk->id) : route('penulis.kdk.store') }}"
                   method="POST" enctype="multipart/form-data" class="space-y-6">
@@ -49,6 +49,31 @@
                     @error('deskripsi') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
                 </div>
 
+                {{-- Cover Image (Media Picker) --}}
+                <div>
+                    <label class="text-base font-bold uppercase text-gray-500 block mb-2">Cover Buletin</label>
+                    <input type="hidden" name="media_id" :value="selectedMediaId">
+
+                    {{-- Preview (Portrait / Book Cover) --}}
+                    <div x-show="selectedMediaId" class="mb-3">
+                        <div class="relative inline-block">
+                            <img :src="selectedMediaUrl" class="w-32 h-44 object-cover border border-gray-200 shadow-sm" alt="Cover">
+                            <button type="button" @click="clearMedia()"
+                                    class="absolute top-1 right-1 bg-red-600 text-white w-6 h-6 flex items-center justify-center text-xs hover:bg-red-700 transition no-round">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1 truncate" x-text="selectedMediaJudul"></p>
+                    </div>
+
+                    <button type="button" @click="openModal()"
+                            class="bg-gray-100 text-gray-700 px-6 py-3 font-bold text-sm hover:bg-gray-200 transition no-round">
+                        <i class="fas fa-image mr-2"></i>Pilih dari Media
+                    </button>
+                    <p class="text-xs text-gray-400 mt-1">Gambar cover untuk buletin KDK (opsional).</p>
+                    @error('media_id') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
+                </div>
+
                 {{-- File PDF --}}
                 <div>
                     <label class="text-base font-bold uppercase text-gray-500 block mb-2">File PDF Buletin</label>
@@ -85,5 +110,83 @@
                 </div>
             </form>
         </div>
+
+        {{-- Media Picker Modal --}}
+        <div x-show="modalOpen" x-transition class="fixed inset-0 z-50 flex items-center justify-center bg-black/50" @click.self="modalOpen = false" style="display:none">
+            <div class="bg-white w-full max-w-3xl max-h-[80vh] flex flex-col shadow-xl">
+                <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+                    <h3 class="font-bold text-base uppercase text-gray-700">Pilih Cover dari Media</h3>
+                    <button type="button" @click="modalOpen = false" class="text-gray-400 hover:text-gray-700 text-xl"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="p-6 overflow-y-auto flex-1">
+                    <div x-show="loading" class="text-center py-8 text-gray-400">
+                        <i class="fas fa-spinner fa-spin text-2xl"></i>
+                        <p class="mt-2 text-sm">Memuat media...</p>
+                    </div>
+                    <div x-show="!loading" class="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                        <template x-for="m in mediaList" :key="m.id">
+                            <div @click="selectMedia(m)"
+                                 :class="selectedMediaId == m.id ? 'ring-2 ring-primary' : 'hover:ring-2 hover:ring-gray-300'"
+                                 class="cursor-pointer border border-gray-200 overflow-hidden transition">
+                                <img :src="m.file_path" :alt="m.judul" class="w-full h-24 object-cover">
+                                <p class="text-xs text-gray-600 p-2 truncate" x-text="m.judul"></p>
+                            </div>
+                        </template>
+                    </div>
+                    <p x-show="!loading && mediaList.length === 0" class="text-center text-gray-400 py-8 text-sm">
+                        Belum ada media foto. Upload melalui menu Media terlebih dahulu.
+                    </p>
+                </div>
+                <div class="px-6 py-3 border-t border-gray-200 text-right">
+                    <button type="button" @click="modalOpen = false" class="bg-primary text-white px-6 py-2 font-bold text-sm no-round hover:bg-red-700 transition">Tutup</button>
+                </div>
+            </div>
+        </div>
     </div>
+
+    @php
+        $initialMedia = $editMode && ($kdk->media ?? null) ? [
+            'id' => $kdk->media->id,
+            'judul' => $kdk->media->judul,
+            'file_path' => asset('storage/' . $kdk->media->file_path),
+        ] : null;
+    @endphp
+    <script>
+    function kdkMediaPicker() {
+        const initial = @json($initialMedia);
+
+        return {
+            modalOpen: false,
+            loading: false,
+            mediaList: [],
+            selectedMediaId: initial ? initial.id : '',
+            selectedMediaUrl: initial ? initial.file_path : '',
+            selectedMediaJudul: initial ? initial.judul : '',
+
+            openModal() {
+                this.modalOpen = true;
+                if (this.mediaList.length === 0) {
+                    this.loading = true;
+                    fetch('{{ route("penulis.media.json") }}')
+                        .then(r => r.json())
+                        .then(data => { this.mediaList = data; this.loading = false; })
+                        .catch(() => { this.loading = false; });
+                }
+            },
+
+            selectMedia(m) {
+                this.selectedMediaId = m.id;
+                this.selectedMediaUrl = m.file_path;
+                this.selectedMediaJudul = m.judul;
+                this.modalOpen = false;
+            },
+
+            clearMedia() {
+                this.selectedMediaId = '';
+                this.selectedMediaUrl = '';
+                this.selectedMediaJudul = '';
+            }
+        };
+    }
+    </script>
 @endsection

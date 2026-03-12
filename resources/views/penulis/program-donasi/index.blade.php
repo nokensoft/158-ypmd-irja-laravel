@@ -47,7 +47,7 @@
                     <th class="px-5 py-4">Target</th>
                     <th class="px-5 py-4">Donasi</th>
                     <th class="px-5 py-4">Status</th>
-                    <th class="px-5 py-4 text-right">Aksi</th>
+                    <th class="px-5 py-4 text-center w-16"></th>
                 </tr>
             </thead>
             <tbody>
@@ -76,27 +76,35 @@
                                 <span class="inline-block px-3 py-1 text-xs font-bold uppercase bg-gray-100 text-gray-500">Nonaktif</span>
                             @endif
                         </td>
-                        <td class="px-5 py-4 text-right">
-                            @if ($p->trashed())
-                                <form action="{{ route('penulis.program-donasi.restore', $p->id) }}" method="POST" class="inline">
-                                    @csrf @method('PATCH')
-                                    <button type="submit" class="bg-green-600 text-white px-4 py-2 text-xs font-bold uppercase hover:bg-green-700 transition no-round">
-                                        <i class="fas fa-undo mr-1"></i>Pulihkan
-                                    </button>
-                                </form>
-                            @else
-                                <a href="{{ route('penulis.program-donasi.edit', $p->id) }}"
-                                   class="inline-flex items-center gap-1 bg-primary text-white px-4 py-2 text-xs font-bold uppercase hover:bg-red-700 transition no-round">
-                                    <i class="fas fa-edit"></i> Edit
-                                </a>
-                                <form action="{{ route('penulis.program-donasi.destroy', $p->id) }}" method="POST" class="inline"
-                                      onsubmit="return confirm('Hapus program ini?')">
-                                    @csrf @method('DELETE')
-                                    <button type="submit" class="bg-gray-700 text-white px-4 py-2 text-xs font-bold uppercase hover:bg-red-700 transition no-round">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                            @endif
+                        <td class="px-5 py-4 text-center">
+                            <div class="relative" x-data="{ open: false }">
+                                <button @click="open = !open" @click.outside="open = false" type="button"
+                                        class="text-gray-500 hover:text-dark transition p-2">
+                                    <i class="fas fa-ellipsis-vertical text-lg"></i>
+                                </button>
+                                <div x-show="open" x-cloak x-transition:enter="transition ease-out duration-100" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
+                                     class="absolute right-0 mt-1 w-44 bg-white border border-gray-200 shadow-lg z-20 no-round">
+                                    @if ($p->trashed())
+                                        <button type="button" @click="open = false; $dispatch('confirm-action', { title: 'Pulihkan Program', message: 'Data akan dipulihkan ke daftar aktif.', action: '{{ route('penulis.program-donasi.restore', $p->id) }}', method: 'PATCH', buttonText: 'Pulihkan', buttonColor: 'green' })"
+                                                class="w-full flex items-center gap-3 px-4 py-3 text-sm text-green-600 hover:bg-green-50 transition">
+                                            <i class="fas fa-undo w-4 text-center"></i> Pulihkan
+                                        </button>
+                                        <button type="button" @click="open = false; $dispatch('confirm-action', { title: 'Hapus Permanen', message: 'Data akan dihapus permanen dan tidak dapat dipulihkan kembali!', action: '{{ route('penulis.program-donasi.force-delete', $p->id) }}', method: 'DELETE', buttonText: 'Hapus Permanen' })"
+                                                class="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition">
+                                            <i class="fas fa-trash-alt w-4 text-center"></i> Hapus Permanen
+                                        </button>
+                                    @else
+                                        <a href="{{ route('penulis.program-donasi.edit', $p->id) }}"
+                                           class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition">
+                                            <i class="fas fa-edit w-4 text-center text-secondary"></i> Edit
+                                        </a>
+                                        <button type="button" @click="open = false; $dispatch('confirm-action', { title: 'Hapus Program Donasi', message: 'Program ini akan dihapus. Data yang dihapus dapat dipulihkan.', action: '{{ route('penulis.program-donasi.destroy', $p->id) }}', method: 'DELETE' })"
+                                                class="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition">
+                                            <i class="fas fa-trash w-4 text-center"></i> Hapus
+                                        </button>
+                                    @endif
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @empty

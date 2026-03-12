@@ -40,6 +40,13 @@
                     <i class="fa-brands fa-tiktok"></i>
                 </a>
             @endif
+            @if (!empty($situs['email']))
+                <span class="text-neutral-700">|</span>
+                <a href="mailto:{{ $situs['email'] }}" class="hover:text-white transition-colors flex items-center gap-1.5" title="Email">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>{{ $situs['email'] }}</span>
+                </a>
+            @endif
         </div>
 
         {{-- Right: Clock + Language Switcher --}}
@@ -98,16 +105,53 @@
                     </button>
                 </div>
             </div>
+
+            @if(session('user'))
+                <span class="text-neutral-700">|</span>
+
+                {{-- User Dropdown --}}
+                @php $userPrefix = session('user.role') === 'admin_master' ? 'admin' : 'penulis'; @endphp
+                <div class="relative" x-data="{ userOpen: false }" @click.outside="userOpen = false">
+                    <button @click="userOpen = !userOpen"
+                            class="flex items-center gap-1.5 hover:text-white transition-colors cursor-pointer select-none">
+                        <i class="fa-regular fa-user text-[10px]"></i>
+                        <span>{{ session('user.name') }}</span>
+                        <i class="fa-solid fa-chevron-down text-[8px] transition-transform duration-200"
+                           :class="userOpen ? 'rotate-180' : ''"></i>
+                    </button>
+
+                    <div x-show="userOpen" x-transition style="display:none;"
+                         class="absolute right-0 top-full mt-1.5 w-48 bg-neutral-800 border border-neutral-700 shadow-lg z-50 overflow-hidden">
+                        <a href="{{ route("{$userPrefix}.dashboard") }}"
+                           class="w-full flex items-center gap-2.5 px-4 py-2.5 hover:bg-neutral-700 hover:text-white transition-colors text-left text-neutral-400">
+                            <i class="fa-solid fa-tachometer-alt w-4 text-center"></i> Dasbor
+                        </a>
+                        <a href="{{ route("{$userPrefix}.profil") }}"
+                           class="w-full flex items-center gap-2.5 px-4 py-2.5 hover:bg-neutral-700 hover:text-white transition-colors text-left text-neutral-400">
+                            <i class="fa-solid fa-user-pen w-4 text-center"></i> Edit Profil
+                        </a>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit"
+                                    class="w-full flex items-center gap-2.5 px-4 py-2.5 hover:bg-red-600 hover:text-white transition-colors text-left text-neutral-400 border-t border-neutral-700">
+                                <i class="fa-solid fa-right-from-bracket w-4 text-center"></i> Logout
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 </div>
 
 {{-- Hidden Google Translate container --}}
-<div id="google_translate_element" style="display:none;"></div>
+<div id="google_translate_element" style="height:0;overflow:hidden;position:absolute;left:-9999px;"></div>
 
 <style>
-    /* Sembunyikan toolbar Google Translate bawaan */
-    .goog-te-banner-frame, .goog-te-menu-value, .skiptranslate { display: none !important; }
+    /* Sembunyikan toolbar Google Translate bawaan (JANGAN sembunyikan semua .skiptranslate, karena iframe translate ikut tersembunyi) */
+    .goog-te-banner-frame.skiptranslate { display: none !important; }
+    body > .skiptranslate { display: none !important; }
+    .goog-te-menu-value { display: none !important; }
     body { top: 0px !important; }
     #goog-gt-tt, .goog-tooltip, .goog-tooltip-content { display: none !important; }
     .goog-text-highlight { background-color: transparent !important; box-shadow: none !important; }

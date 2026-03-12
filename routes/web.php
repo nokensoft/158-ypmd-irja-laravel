@@ -4,11 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\Admin\PengaturanSitusController;
 use App\Http\Controllers\Admin\AktivitasLoginController;
 use App\Http\Controllers\Admin\PenggunaController;
 use App\Http\Controllers\Admin\BackupDatabaseController;
 use App\Http\Controllers\Admin\HalamanController;
+use App\Http\Controllers\Penulis\AktivitasLoginController as PenulisAktivitasLoginController;
 use App\Http\Controllers\Penulis\DashboardController as PenulisDashboardController;
 use App\Http\Controllers\Penulis\DonasiController as PenulisDonasiController;
 use App\Http\Controllers\Penulis\ProgramDonasiController;
@@ -67,6 +69,9 @@ Route::middleware('track.visitor')->group(function () {
 
     // Kontak
     Route::get('/kontak', [VisitorController::class, 'kontak'])->name('kontak');
+
+    // Peta Situs (HTML Sitemap)
+    Route::get('/peta-situs', [VisitorController::class, 'petaSitus'])->name('peta-situs');
 });
 
 /*
@@ -99,13 +104,19 @@ Route::prefix('admin')->name('admin.')->middleware(['auth.custom', 'role:admin_m
     // Pengguna CRUD
     Route::resource('pengguna', PenggunaController::class)->except(['show']);
     Route::patch('/pengguna/{pengguna}/restore', [PenggunaController::class, 'restore'])->name('pengguna.restore');
+    Route::delete('/pengguna/{pengguna}/force-delete', [PenggunaController::class, 'forceDelete'])->name('pengguna.force-delete');
 
     // Halaman
     Route::resource('halaman', HalamanController::class)->except(['show']);
     Route::patch('/halaman/{halaman}/restore', [HalamanController::class, 'restore'])->name('halaman.restore');
+    Route::delete('/halaman/{halaman}/force-delete', [HalamanController::class, 'forceDelete'])->name('halaman.force-delete');
 
     // Statistik
     Route::get('/statistik-pengunjung', [StatistikPengunjungController::class, 'index'])->name('statistik-pengunjung');
+
+    // Profil
+    Route::get('/profil', [ProfilController::class, 'edit'])->name('profil');
+    Route::put('/profil', [ProfilController::class, 'update'])->name('profil.update');
 
     // Dokumentasi
     Route::view('/dokumentasi', 'admin.dokumentasi')->name('dokumentasi');
@@ -122,19 +133,25 @@ Route::prefix('penulis')->name('penulis.')->middleware(['auth.custom', 'role:pen
     // Konten
     Route::resource('berita', BeritaController::class)->except(['show']);
     Route::patch('/berita/{beritum}/restore', [BeritaController::class, 'restore'])->name('berita.restore');
+    Route::delete('/berita/{beritum}/force-delete', [BeritaController::class, 'forceDelete'])->name('berita.force-delete');
     Route::resource('kategori-berita', KategoriBeritaController::class)->except(['show']);
     Route::patch('/kategori-berita/{kategori_beritum}/restore', [KategoriBeritaController::class, 'restore'])->name('kategori-berita.restore');
+    Route::delete('/kategori-berita/{kategori_beritum}/force-delete', [KategoriBeritaController::class, 'forceDelete'])->name('kategori-berita.force-delete');
     // KDK
     Route::resource('kdk', KdkController::class)->except(['show']);
     Route::patch('/kdk/{kdk}/restore', [KdkController::class, 'restore'])->name('kdk.restore');
+    Route::delete('/kdk/{kdk}/force-delete', [KdkController::class, 'forceDelete'])->name('kdk.force-delete');
 
     // Media
     Route::get('/media/json', [MediaController::class, 'json'])->name('media.json');
     Route::post('/media/upload-ajax', [MediaController::class, 'uploadAjax'])->name('media.upload-ajax');
     Route::resource('media', MediaController::class)->except(['show']);
     Route::patch('/media/{medium}/restore', [MediaController::class, 'restore'])->name('media.restore');
+    Route::delete('/media/{medium}/force-delete', [MediaController::class, 'forceDelete'])->name('media.force-delete');
     Route::resource('galeri', GaleriController::class)->except(['show']);
+    Route::patch('/galeri/{galeri}/toggle-publik', [GaleriController::class, 'togglePublik'])->name('galeri.toggle-publik');
     Route::patch('/galeri/{galeri}/restore', [GaleriController::class, 'restore'])->name('galeri.restore');
+    Route::delete('/galeri/{galeri}/force-delete', [GaleriController::class, 'forceDelete'])->name('galeri.force-delete');
 
     // Donasi
     Route::get('/donasi', [PenulisDonasiController::class, 'index'])->name('donasi.index');
@@ -142,14 +159,27 @@ Route::prefix('penulis')->name('penulis.')->middleware(['auth.custom', 'role:pen
     Route::get('/donasi/{id}/bukti-transfer', [PenulisDonasiController::class, 'buktiTransfer'])->name('donasi.bukti-transfer');
     Route::patch('/donasi/{id}/konfirmasi', [PenulisDonasiController::class, 'konfirmasi'])->name('donasi.konfirmasi');
     Route::patch('/donasi/{id}/tolak', [PenulisDonasiController::class, 'tolak'])->name('donasi.tolak');
+    Route::patch('/donasi/{id}/update-pesan', [PenulisDonasiController::class, 'updatePesan'])->name('donasi.update-pesan');
+    Route::patch('/donasi/{id}/toggle-publik', [PenulisDonasiController::class, 'togglePublik'])->name('donasi.toggle-publik');
+    Route::patch('/donasi/{id}/toggle-anonim', [PenulisDonasiController::class, 'toggleAnonim'])->name('donasi.toggle-anonim');
     Route::delete('/donasi/{id}', [PenulisDonasiController::class, 'destroy'])->name('donasi.destroy');
+    Route::patch('/donasi/{id}/restore', [PenulisDonasiController::class, 'restore'])->name('donasi.restore');
+    Route::delete('/donasi/{id}/force-delete', [PenulisDonasiController::class, 'forceDelete'])->name('donasi.force-delete');
 
     // Program Donasi
     Route::resource('program-donasi', ProgramDonasiController::class)->except(['show']);
     Route::patch('/program-donasi/{program_donasi}/restore', [ProgramDonasiController::class, 'restore'])->name('program-donasi.restore');
+    Route::delete('/program-donasi/{program_donasi}/force-delete', [ProgramDonasiController::class, 'forceDelete'])->name('program-donasi.force-delete');
 
     // Statistik
     Route::get('/statistik-pengunjung', [StatistikPengunjungController::class, 'index'])->name('statistik-pengunjung');
+
+    // Aktivitas Login (hanya penulis)
+    Route::get('/aktivitas-login', [PenulisAktivitasLoginController::class, 'index'])->name('aktivitas-login');
+
+    // Profil
+    Route::get('/profil', [ProfilController::class, 'edit'])->name('profil');
+    Route::put('/profil', [ProfilController::class, 'update'])->name('profil.update');
 
     // Dokumentasi
     Route::view('/dokumentasi', 'admin.dokumentasi')->name('dokumentasi');

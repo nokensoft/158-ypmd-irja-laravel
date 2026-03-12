@@ -41,15 +41,15 @@
                           placeholder="Deskripsi album (opsional)">{{ old('deskripsi', $editMode ? $galeri->deskripsi : '') }}</textarea>
             </div>
 
-            {{-- Pilih Gambar dari Media --}}
+            {{-- Pilih Media (Foto & Video) --}}
             <div x-data="galeriMediaPicker()">
-                <label class="text-base font-bold uppercase text-gray-500 block mb-2">Pilih Gambar dari Media</label>
+                <label class="text-base font-bold uppercase text-gray-500 block mb-2">Pilih Media (Foto & Video)</label>
 
                 {{-- Counter + Search --}}
                 <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
                     <p class="text-sm text-gray-500">
                         <i class="fas fa-check-circle text-primary mr-1"></i>
-                        <span x-text="selectedCount"></span> gambar dipilih
+                        <span x-text="selectedCount"></span> media dipilih
                     </p>
                     <div class="relative w-full sm:w-72">
                         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"><i class="fas fa-search"></i></span>
@@ -59,18 +59,31 @@
                 </div>
 
                 @if ($media->count() > 0)
-                    {{-- Image Grid --}}
+                    {{-- Media Grid --}}
                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 max-h-[28rem] overflow-y-auto border border-gray-200 p-3 bg-gray-50">
                         @foreach ($media as $m)
                             <div x-show="matchSearch('{{ addslashes($m->judul) }}', '{{ addslashes($m->file_name) }}')"
                                  @click="toggle({{ $m->id }})"
                                  :class="isSelected({{ $m->id }}) ? 'ring-2 ring-primary ring-offset-1 bg-primary/5' : 'hover:ring-2 hover:ring-gray-300'"
                                  class="relative cursor-pointer border border-gray-200 bg-white group transition">
-                                <img src="{{ asset('storage/' . $m->file_path) }}" alt="{{ $m->judul }}"
-                                     class="w-full h-28 object-cover">
+                                @if ($m->tipe === 'video')
+                                    <div class="relative">
+                                        <img src="https://img.youtube.com/vi/{{ $m->file_name }}/mqdefault.jpg" alt="{{ $m->judul }}"
+                                             class="w-full h-28 object-cover"
+                                             onerror="this.src='https://img.youtube.com/vi/default/mqdefault.jpg'">
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <span class="bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center shadow">
+                                                <i class="fab fa-youtube text-sm"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                @else
+                                    <img src="{{ asset('storage/' . $m->file_path) }}" alt="{{ $m->judul }}"
+                                         class="w-full h-28 object-cover">
+                                @endif
                                 <div class="p-2">
                                     <p class="text-xs font-semibold text-gray-700 truncate">{{ $m->judul }}</p>
-                                    <p class="text-xs text-gray-400 truncate">{{ $m->file_name }}</p>
+                                    <p class="text-xs text-gray-400 truncate">{{ $m->tipe === 'video' ? '🎬 Video' : $m->file_name }}</p>
                                 </div>
                                 {{-- Checkbox indicator --}}
                                 <div :class="isSelected({{ $m->id }}) ? 'bg-primary' : 'bg-white border-2 border-gray-300'"
@@ -87,12 +100,12 @@
                     {{-- No search results --}}
                     <div x-show="search && !hasVisibleItems()" class="text-center py-8 text-gray-400 border border-gray-200 bg-gray-50 mt-3">
                         <i class="fas fa-search text-2xl mb-2"></i>
-                        <p class="text-sm">Tidak ditemukan gambar dengan kata kunci tersebut.</p>
+                        <p class="text-sm">Tidak ditemukan media dengan kata kunci tersebut.</p>
                     </div>
                 @else
                     <div class="bg-gray-50 border border-gray-300 p-8 text-center text-gray-400">
                         <i class="fas fa-images text-3xl mb-2 block"></i>
-                        Belum ada media foto. <a href="{{ route('penulis.media.create') }}" class="text-primary underline">Upload media</a> terlebih dahulu.
+                        Belum ada media. <a href="{{ route('penulis.media.create') }}" class="text-primary underline">Upload media</a> terlebih dahulu.
                     </div>
                 @endif
             </div>

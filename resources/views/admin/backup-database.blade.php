@@ -26,7 +26,7 @@
         </h3>
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
             <p class="text-base text-gray-500">Upload file SQL untuk me-restore database dari backup production.</p>
-            <button type="button" @click="showRestore = !showRestore" class="bg-secondary text-white px-6 py-3 font-bold text-base hover:opacity-80 transition no-round whitespace-nowrap">
+            <button type="button" @click="showRestore = !showRestore" class="bg-primary text-white px-6 py-3 font-bold text-base hover:bg-primary-700 transition no-round whitespace-nowrap">
                 <i class="fas fa-upload mr-2"></i> Upload File SQL
             </button>
         </div>

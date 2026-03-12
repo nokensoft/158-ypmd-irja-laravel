@@ -21,6 +21,10 @@
             <p class="text-xs font-bold uppercase text-gray-400 mb-1">Total Donasi</p>
             <p class="text-2xl font-bold text-primary">Rp {{ number_format($statsTotal, 0, ',', '.') }}</p>
         </div>
+        <div class="bg-white shadow-sm p-5 border-l-4 border-gray-400">
+            <p class="text-xs font-bold uppercase text-gray-400 mb-1">Terhapus</p>
+            <p class="text-3xl font-bold text-gray-500">{{ $statsTerhapus }}</p>
+        </div>
     </div>
 
     {{-- Filter Status & Program --}}
@@ -40,6 +44,7 @@
                 <option value="pending"       {{ request('status') === 'pending'       ? 'selected' : '' }}>Pending</option>
                 <option value="dikonfirmasi"  {{ request('status') === 'dikonfirmasi'  ? 'selected' : '' }}>Dikonfirmasi</option>
                 <option value="ditolak"       {{ request('status') === 'ditolak'       ? 'selected' : '' }}>Ditolak</option>
+                <option value="terhapus"      {{ request('status') === 'terhapus'      ? 'selected' : '' }}>Terhapus</option>
             </select>
         </div>
 
@@ -72,7 +77,8 @@
                     <th class="px-5 py-4">Tanggal</th>
                     <th class="px-5 py-4 text-center">Bukti</th>
                     <th class="px-5 py-4">Status</th>
-                    <th class="px-5 py-4 text-right">Aksi</th>
+                    <th class="px-5 py-4 text-center">Publik</th>
+                    <th class="px-5 py-4 text-center w-16"></th>
                 </tr>
             </thead>
             <tbody>
@@ -110,22 +116,60 @@
                             @endif
                         </td>
                         <td class="px-5 py-4">
-                            <span class="inline-block px-3 py-1 text-xs font-bold uppercase
-                                {{ $d->status === 'dikonfirmasi' ? 'bg-green-100 text-green-700' :
-                                   ($d->status === 'ditolak' ? 'bg-red-100 text-red-600' : 'bg-yellow-100 text-yellow-700') }}">
-                                {{ $d->status_label }}
-                            </span>
+                            @if ($d->trashed())
+                                <span class="inline-block px-3 py-1 text-xs font-bold uppercase bg-gray-100 text-gray-500">Terhapus</span>
+                            @else
+                                <span class="inline-block px-3 py-1 text-xs font-bold uppercase
+                                    {{ $d->status === 'dikonfirmasi' ? 'bg-green-100 text-green-700' :
+                                       ($d->status === 'ditolak' ? 'bg-red-100 text-red-600' : 'bg-yellow-100 text-yellow-700') }}">
+                                    {{ $d->status_label }}
+                                </span>
+                            @endif
                         </td>
-                        <td class="px-5 py-4 text-right">
-                            <a href="{{ route('penulis.donasi.show', $d->id) }}"
-                               class="inline-flex items-center gap-1 bg-primary text-white px-4 py-2 text-xs font-bold uppercase hover:bg-red-700 transition no-round">
-                                <i class="fas fa-eye"></i> Detail
-                            </a>
+                        <td class="px-5 py-4 text-center">
+                            @if (!$d->trashed())
+                                <form action="{{ route('penulis.donasi.toggle-publik', $d->id) }}" method="POST" class="inline">
+                                    @csrf @method('PATCH')
+                                    <button type="submit" title="{{ $d->is_publik ? 'Sembunyikan dari publik' : 'Tampilkan di publik' }}"
+                                            class="inline-flex items-center justify-center w-8 h-8 transition
+                                            {{ $d->is_publik ? 'bg-green-50 text-green-600 hover:bg-green-100' : 'bg-gray-100 text-gray-400 hover:bg-gray-200' }}">
+                                        <i class="fas {{ $d->is_publik ? 'fa-eye' : 'fa-eye-slash' }} text-sm"></i>
+                                    </button>
+                                </form>
+                            @else
+                                <span class="text-gray-300"><i class="fas fa-minus text-xs"></i></span>
+                            @endif
+                        </td>
+                        <td class="px-5 py-4 text-center">
+                            <div class="relative" x-data="{ open: false }">
+                                <button @click="open = !open" @click.outside="open = false" type="button"
+                                        class="text-gray-500 hover:text-dark transition p-2">
+                                    <i class="fas fa-ellipsis-vertical text-lg"></i>
+                                </button>
+                                <div x-show="open" x-cloak x-transition:enter="transition ease-out duration-100" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
+                                     class="absolute right-0 mt-1 w-44 bg-white border border-gray-200 shadow-lg z-20 no-round">
+                                    @if ($d->trashed())
+                                        <button type="button" @click="open = false; $dispatch('confirm-action', { title: 'Pulihkan Donasi', message: 'Data donasi ini akan dipulihkan ke daftar aktif.', action: '{{ route('penulis.donasi.restore', $d->id) }}', method: 'PATCH', buttonText: 'Pulihkan', buttonColor: 'green' })"
+                                                class="w-full flex items-center gap-3 px-4 py-3 text-sm text-green-600 hover:bg-green-50 transition">
+                                            <i class="fas fa-undo w-4 text-center"></i> Pulihkan
+                                        </button>
+                                        <button type="button" @click="open = false; $dispatch('confirm-action', { title: 'Hapus Permanen', message: 'Data akan dihapus permanen dan tidak dapat dipulihkan kembali!', action: '{{ route('penulis.donasi.force-delete', $d->id) }}', method: 'DELETE', buttonText: 'Hapus Permanen' })"
+                                                class="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition">
+                                            <i class="fas fa-trash-alt w-4 text-center"></i> Hapus Permanen
+                                        </button>
+                                    @else
+                                        <a href="{{ route('penulis.donasi.show', $d->id) }}"
+                                           class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition">
+                                            <i class="fas fa-eye w-4 text-center text-gray-400"></i> Detail
+                                        </a>
+                                    @endif
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="px-5 py-12 text-center text-gray-400 text-sm">
+                        <td colspan="8" class="px-5 py-12 text-center text-gray-400 text-sm">
                             <i class="fas fa-inbox text-3xl mb-3 block"></i>
                             Belum ada data donasi.
                         </td>

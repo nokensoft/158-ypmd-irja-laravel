@@ -13,6 +13,7 @@
             'editRoute' => $k->trashed() ? null : route('penulis.kategori-berita.edit', $k->id),
             'deleteRoute' => $k->trashed() ? null : route('penulis.kategori-berita.destroy', $k->id),
             'restoreRoute' => $k->trashed() ? route('penulis.kategori-berita.restore', $k->id) : null,
+            'forceDeleteRoute' => $k->trashed() ? route('penulis.kategori-berita.force-delete', $k->id) : null,
             'trashed' => $k->trashed(),
         ])->toArray(),
     ])

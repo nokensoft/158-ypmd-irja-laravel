@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Penulis;
 
+use App\Helpers\ImageHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Kdk;
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ class KdkController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Kdk::query();
+        $query = Kdk::with('media');
 
         if ($request->filled('cari')) {
             $query->where(function ($q) use ($request) {
@@ -42,11 +43,12 @@ class KdkController extends Controller
             'deskripsi'     => 'nullable|string',
             'tanggal_terbit'=> 'nullable|date',
             'file_pdf'      => 'nullable|file|mimes:pdf|max:20480', // max 20 MB
+            'media_id'      => 'nullable|exists:media,id',
         ]);
 
         $pdfPath = null;
         if ($request->hasFile('file_pdf')) {
-            $pdfPath = $request->file('file_pdf')->store('kdk', 'public');
+            $pdfPath = $request->file('file_pdf')->storeAs('kdk', ImageHelper::generateFilename('pdf'), 'public');
         }
 
         Kdk::create([
@@ -55,6 +57,7 @@ class KdkController extends Controller
             'deskripsi'      => $request->deskripsi,
             'tanggal_terbit' => $request->tanggal_terbit,
             'file_pdf'       => $pdfPath,
+            'media_id'       => $request->media_id,
             'user_id'        => session('user.id'),
         ]);
 
@@ -63,7 +66,7 @@ class KdkController extends Controller
 
     public function edit(string $id)
     {
-        $kdk = Kdk::findOrFail($id);
+        $kdk = Kdk::with('media')->findOrFail($id);
 
         return view('penulis.kdk.form', ['editMode' => true, 'kdk' => $kdk]);
     }
@@ -78,6 +81,7 @@ class KdkController extends Controller
             'deskripsi'      => 'nullable|string',
             'tanggal_terbit' => 'nullable|date',
             'file_pdf'       => 'nullable|file|mimes:pdf|max:20480',
+            'media_id'       => 'nullable|exists:media,id',
         ]);
 
         $pdfPath = $kdk->file_pdf;
@@ -86,7 +90,7 @@ class KdkController extends Controller
             if ($kdk->file_pdf) {
                 Storage::disk('public')->delete($kdk->file_pdf);
             }
-            $pdfPath = $request->file('file_pdf')->store('kdk', 'public');
+            $pdfPath = $request->file('file_pdf')->storeAs('kdk', ImageHelper::generateFilename('pdf'), 'public');
         }
 
         if ($request->boolean('hapus_pdf') && $kdk->file_pdf) {
@@ -100,6 +104,7 @@ class KdkController extends Controller
             'deskripsi'      => $request->deskripsi,
             'tanggal_terbit' => $request->tanggal_terbit,
             'file_pdf'       => $pdfPath,
+            'media_id'       => $request->media_id,
         ]);
 
         return redirect()->route('penulis.kdk.index')->with('success', 'Edisi KDK berhasil diperbarui.');
@@ -119,5 +124,18 @@ class KdkController extends Controller
         $kdk->restore();
 
         return redirect()->route('penulis.kdk.index')->with('success', 'Edisi KDK berhasil dipulihkan.');
+    }
+
+    public function forceDelete(string $id)
+    {
+        $kdk = Kdk::onlyTrashed()->findOrFail($id);
+
+        if ($kdk->file_pdf) {
+            Storage::disk('public')->delete($kdk->file_pdf);
+        }
+
+        $kdk->forceDelete();
+
+        return redirect()->route('penulis.kdk.index', ['status' => 'terhapus'])->with('success', 'Edisi KDK berhasil dihapus permanen.');
     }
 }

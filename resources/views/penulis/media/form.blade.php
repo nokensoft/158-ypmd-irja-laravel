@@ -39,8 +39,14 @@
                 <label class="text-base font-bold uppercase text-gray-500 block mb-2">Link YouTube</label>
                 <input type="url" name="youtube_url" value="{{ old('youtube_url', ($editMode && $media->tipe === 'video') ? $media->file_path : '') }}" class="w-full border border-gray-300 p-4 text-base focus:border-primary focus:outline-none transition no-round" placeholder="https://www.youtube.com/watch?v=...">
                 <p class="text-sm text-gray-400 mt-1">Masukkan link video YouTube (contoh: https://www.youtube.com/watch?v=xxxxx)</p>
-                @if ($editMode && $media->tipe === 'video')
-                    <p class="text-sm text-gray-500 mt-1">URL saat ini: {{ $media->file_path }}</p>
+                @if ($editMode && $media->tipe === 'video' && $media->file_name)
+                    <div class="mt-3">
+                        <p class="text-sm text-gray-500 mb-2">Preview video saat ini:</p>
+                        <div class="aspect-video max-w-md border border-gray-200">
+                            <iframe src="https://www.youtube.com/embed/{{ $media->file_name }}" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-1">URL: {{ $media->file_path }}</p>
+                    </div>
                 @endif
             </div>
 

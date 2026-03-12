@@ -11,14 +11,14 @@ class UserSeeder extends Seeder
     {
         User::create([
             'name' => 'Administrator',
-            'email' => 'admin@ypmdirja.org',
+            'email' => 'admin@ypmd-irja.org',
             'password' => 'admin123',
             'role' => 'admin_master',
         ]);
 
         User::create([
             'name' => 'Penulis YPMD',
-            'email' => 'penulis@ypmdirja.org',
+            'email' => 'penulis@ypmd-irja.org',
             'password' => 'penulis123',
             'role' => 'penulis',
         ]);

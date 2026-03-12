@@ -3,7 +3,10 @@
 @section('page-title', 'Dokumentasi')
 
 @section('content')
-<div x-data="dokumentasi()">
+<div class="flex gap-8" x-data="sectionNav()">
+
+    {{-- Main Content --}}
+    <div x-data="dokumentasi()" class="flex-1 min-w-0">
 
     {{-- Action Buttons --}}
     <div class="flex flex-wrap gap-3 mb-6">
@@ -22,13 +25,13 @@
     <div id="dokumentasi-content">
 
         {{-- Header --}}
-        <div class="bg-white shadow-sm p-6 mb-6">
+        <div id="sec-header" class="bg-white shadow-sm p-6 mb-6">
             <h2 class="text-2xl font-extrabold text-dark mb-1">YPMD IRJA</h2>
             <p class="text-gray-500">Website resmi Yayasan Pembangunan Masyarakat Desa Irian Jaya (YPMD IRJA) — LSM pertama di Tanah Papua sejak 1984. Menampilkan informasi program pemberdayaan masyarakat adat, buletin Kabar Dari Kampung (KDK), berita Papua Today, galeri kegiatan, dan donasi.</p>
         </div>
 
         {{-- Informasi Proyek (Copyable Table) --}}
-        <div class="bg-white shadow-sm p-6 mb-6">
+        <div id="sec-info" class="bg-white shadow-sm p-6 mb-6">
             <h3 class="text-lg font-bold uppercase mb-4 pb-3 border-b border-primary">
                 <i class="fas fa-info-circle mr-2 text-primary"></i>Informasi Proyek
             </h3>
@@ -40,13 +43,13 @@
                             ['Deskripsi', 'Website resmi Yayasan Pembangunan Masyarakat Desa Irian Jaya'],
                             ['Versi', '1.0.0'],
                             ['Framework', 'Laravel 12 (PHP 8.2+)'],
-                            ['Frontend', 'Tailwind CSS (CDN), Alpine.js 3'],
+                            ['Frontend', 'Tailwind CSS 4, Alpine.js 3, Vite 7'],
                             ['Database', 'MySQL'],
                             ['Editor', 'CKEditor 5 (WYSIWYG)'],
-                            ['Icon', 'Font Awesome 6'],
+                            ['Icon', 'Font Awesome 7'],
                             ['Font', 'Lora (display), Plus Jakarta Sans (body)'],
-                            ['Autentikasi', 'Custom middleware, role-based access'],
-                            ['Fitur Utama', 'CMS Halaman, Berita, KDK, Galeri, Donasi, Statistik Pengunjung'],
+                            ['Autentikasi', 'Custom middleware, role-based access (admin_master, penulis)'],
+                            ['Fitur Utama', 'CMS Halaman, Berita, KDK, Galeri, Donasi, Statistik Pengunjung, Aktivitas Login, Peta Situs'],
                             ['Developer', 'Nokensoft — PT Noken Inovasi Teknologi Informasi'],
                             ['Website Developer', 'www.nokensoft.com'],
                             ['Kontak Developer', 'info@nokensoft.com | 082199558191'],
@@ -63,7 +66,7 @@
         </div>
 
         {{-- Spesifikasi Teknologi --}}
-        <div class="bg-white shadow-sm p-6 mb-6">
+        <div id="sec-teknologi" class="bg-white shadow-sm p-6 mb-6">
             <h3 class="text-lg font-bold uppercase mb-4 pb-3 border-b border-primary">
                 <i class="fas fa-microchip mr-2 text-primary"></i>Spesifikasi Teknologi
             </h3>
@@ -74,7 +77,7 @@
                 </div>
                 <div class="flex items-start space-x-3 p-3 bg-gray-50">
                     <i class="fas fa-palette text-primary mt-1"></i>
-                    <div><p class="font-bold text-base">Frontend</p><p class="text-sm text-gray-500">Tailwind CSS (CDN), Alpine.js 3</p></div>
+                    <div><p class="font-bold text-base">Frontend</p><p class="text-sm text-gray-500">Tailwind CSS 4, Alpine.js 3, Vite 7</p></div>
                 </div>
                 <div class="flex items-start space-x-3 p-3 bg-gray-50">
                     <i class="fas fa-database text-primary mt-1"></i>
@@ -82,7 +85,7 @@
                 </div>
                 <div class="flex items-start space-x-3 p-3 bg-gray-50">
                     <i class="fas fa-icons text-primary mt-1"></i>
-                    <div><p class="font-bold text-base">Icon</p><p class="text-sm text-gray-500">Font Awesome 6</p></div>
+                    <div><p class="font-bold text-base">Icon</p><p class="text-sm text-gray-500">Font Awesome 7</p></div>
                 </div>
                 <div class="flex items-start space-x-3 p-3 bg-gray-50">
                     <i class="fas fa-pen-fancy text-primary mt-1"></i>
@@ -107,7 +110,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div id="sec-fitur" class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
             {{-- Fitur Visitor --}}
             <div class="bg-white shadow-sm p-6">
                 <h3 class="text-lg font-bold uppercase mb-4 pb-3 border-b border-primary">
@@ -128,6 +131,7 @@
                             ['icon' => 'fa-heart', 'title' => 'Donasi', 'desc' => 'Form donasi untuk mendukung program pemberdayaan masyarakat'],
                             ['icon' => 'fa-images', 'title' => 'Galeri', 'desc' => 'Album foto kegiatan dengan halaman detail'],
                             ['icon' => 'fa-envelope', 'title' => 'Kontak', 'desc' => 'Informasi kontak dan media sosial YPMD IRJA'],
+                            ['icon' => 'fa-sitemap', 'title' => 'Peta Situs', 'desc' => 'Halaman peta situs (HTML sitemap) untuk navigasi lengkap'],
                         ];
                     @endphp
                     @foreach ($fiturVisitor as $fitur)
@@ -185,6 +189,7 @@
                             ['icon' => 'fa-hand-holding-heart', 'title' => 'Program Donasi', 'desc' => 'CRUD program donasi dengan soft delete & restore'],
                             ['icon' => 'fa-heart', 'title' => 'Kelola Donasi', 'desc' => 'Lihat, konfirmasi, tolak, dan hapus donasi masuk'],
                             ['icon' => 'fa-chart-bar', 'title' => 'Statistik Pengunjung', 'desc' => 'Grafik kunjungan situs'],
+                            ['icon' => 'fa-history', 'title' => 'Aktivitas Login', 'desc' => 'Log riwayat login penulis'],
                         ];
                     @endphp
                     @foreach ($fiturPenulis as $fitur)
@@ -203,7 +208,7 @@
         </div>
 
         {{-- Developer / Author --}}
-        <div class="bg-white shadow-sm p-6">
+        <div id="sec-developer" class="bg-white shadow-sm p-6">
             <h3 class="text-lg font-bold uppercase mb-4 pb-3 border-b border-primary">
                 <i class="fas fa-code mr-2 text-primary"></i>Developer
             </h3>
@@ -242,12 +247,57 @@
 
     </div>{{-- /#dokumentasi-content --}}
 
-</div>
+    </div>{{-- /dokumentasi() --}}
+
+    {{-- Sidebar Navigation --}}
+    <aside class="hidden lg:block w-56 shrink-0">
+        <nav class="sticky top-24 bg-white shadow-sm p-4 space-y-1">
+            <p class="text-xs font-extrabold uppercase text-gray-400 tracking-wider mb-3 px-3">Navigasi</p>
+            <template x-for="item in sections" :key="item.id">
+                <a :href="'#' + item.id" @click.prevent="scrollTo(item.id)"
+                   class="flex items-center gap-2.5 px-3 py-2.5 text-sm font-semibold transition-all"
+                   :class="active === item.id ? 'text-primary bg-red-50 border-l-3 border-primary' : 'text-gray-500 hover:text-dark hover:bg-gray-50 border-l-3 border-transparent'">
+                    <i :class="item.icon" class="w-4 text-center text-xs"></i>
+                    <span x-text="item.label"></span>
+                </a>
+            </template>
+        </nav>
+    </aside>
+</div>{{-- /sectionNav() flex wrapper --}}
 @endsection
 
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
 <script>
+function sectionNav() {
+    return {
+        active: 'sec-header',
+        sections: [
+            { id: 'sec-header',     label: 'Tentang',               icon: 'fas fa-info-circle' },
+            { id: 'sec-info',       label: 'Informasi Proyek',       icon: 'fas fa-file-alt' },
+            { id: 'sec-teknologi',  label: 'Spesifikasi Teknologi',  icon: 'fas fa-microchip' },
+            { id: 'sec-fitur',      label: 'Fitur Website',          icon: 'fas fa-list-check' },
+            { id: 'sec-developer',  label: 'Developer',              icon: 'fas fa-code' },
+        ],
+        init() {
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) this.active = entry.target.id;
+                });
+            }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+            this.sections.forEach(s => {
+                const el = document.getElementById(s.id);
+                if (el) obs.observe(el);
+            });
+        },
+        scrollTo(id) {
+            const el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    };
+}
+
 function dokumentasi() {
     return {
         pdfLoading: false,

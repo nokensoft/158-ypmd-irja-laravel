@@ -75,4 +75,12 @@ class KategoriBeritaController extends Controller
 
         return redirect()->route('penulis.kategori-berita.index')->with('success', 'Kategori berhasil dipulihkan.');
     }
+
+    public function forceDelete(string $id)
+    {
+        $kategoriBerita = KategoriBerita::onlyTrashed()->findOrFail($id);
+        $kategoriBerita->forceDelete();
+
+        return redirect()->route('penulis.kategori-berita.index', ['status' => 'terhapus'])->with('success', 'Kategori berhasil dihapus permanen.');
+    }
 }

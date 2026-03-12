@@ -3,6 +3,16 @@
 @section('seo-title', ($situs['nama_situs'] ?? 'YPMD IRJA'))
 @section('seo-description', ($situs['seo_meta_description'] ?? 'LSM pertama di Tanah Papua yang lahir dari keresahan kelompok idealis Gereja dan Tokoh Masyarakat'))
 
+@section('json-ld')
+@php
+$_bcHome = ['@context'=>'https://schema.org','@type'=>'BreadcrumbList','itemListElement'=>[
+    ['@type'=>'ListItem','position'=>1,'name'=>'Beranda','item'=>route('beranda')],
+]];
+$_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
+@endphp
+<script type="application/ld+json">{!! json_encode($_bcHome, $_f) !!}</script>
+@endsection
+
 @section('content')
 
     {{-- HERO --}}

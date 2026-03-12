@@ -103,4 +103,12 @@ class PenggunaController extends Controller
 
         return redirect()->route('admin.pengguna.index')->with('success', 'Pengguna berhasil dipulihkan.');
     }
+
+    public function forceDelete(string $id)
+    {
+        $pengguna = User::onlyTrashed()->findOrFail($id);
+        $pengguna->forceDelete();
+
+        return redirect()->route('admin.pengguna.index', ['status' => 'terhapus'])->with('success', 'Pengguna berhasil dihapus permanen.');
+    }
 }

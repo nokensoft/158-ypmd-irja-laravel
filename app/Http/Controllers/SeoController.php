@@ -59,6 +59,7 @@ class SeoController extends Controller
             ['loc' => route('mitra'),       'priority' => '0.5', 'changefreq' => 'monthly'],
             ['loc' => route('bidang-kerja'),'priority' => '0.5', 'changefreq' => 'monthly'],
             ['loc' => route('tokoh'),       'priority' => '0.5', 'changefreq' => 'monthly'],
+            ['loc' => route('peta-situs'),  'priority' => '0.4', 'changefreq' => 'weekly'],
         ];
 
         foreach ($staticPages as $page) {

@@ -120,4 +120,12 @@ class BeritaController extends Controller
 
         return redirect()->route('penulis.berita.index')->with('success', 'Berita berhasil dipulihkan.');
     }
+
+    public function forceDelete(string $id)
+    {
+        $berita = Berita::onlyTrashed()->findOrFail($id);
+        $berita->forceDelete();
+
+        return redirect()->route('penulis.berita.index', ['status' => 'terhapus'])->with('success', 'Berita berhasil dihapus permanen.');
+    }
 }

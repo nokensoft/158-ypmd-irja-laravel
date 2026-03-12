@@ -12,7 +12,7 @@ class GaleriController extends Controller
     public function index(Request $request)
     {
         $query = Galeri::withCount('media')
-            ->with(['media' => fn ($q) => $q->where('tipe', 'foto')->limit(1)]);
+            ->with(['media' => fn ($q) => $q->limit(1)]);
 
         if ($request->filled('cari')) {
             $query->where('judul', 'like', "%{$request->cari}%");
@@ -29,9 +29,7 @@ class GaleriController extends Controller
 
     public function create()
     {
-        $media = Media::where('tipe', 'foto')
-            ->latest()
-            ->get();
+        $media = Media::latest()->get();
 
         return view('penulis.galeri.form', compact('media') + ['editMode' => false]);
     }
@@ -63,9 +61,7 @@ class GaleriController extends Controller
     public function edit(string $id)
     {
         $galeri = Galeri::with('media')->findOrFail($id);
-        $media = Media::where('tipe', 'foto')
-            ->latest()
-            ->get();
+        $media = Media::latest()->get();
 
         return view('penulis.galeri.form', compact('galeri', 'media') + ['editMode' => true]);
     }
@@ -107,5 +103,23 @@ class GaleriController extends Controller
         $galeri->restore();
 
         return redirect()->route('penulis.galeri.index')->with('success', 'Galeri berhasil dipulihkan.');
+    }
+
+    public function togglePublik(string $id)
+    {
+        $galeri = Galeri::findOrFail($id);
+        $galeri->update(['is_publik' => !$galeri->is_publik]);
+
+        $label = $galeri->is_publik ? 'ditampilkan di publik' : 'disembunyikan dari publik';
+
+        return redirect()->back()->with('success', "Galeri berhasil {$label}.");
+    }
+
+    public function forceDelete(string $id)
+    {
+        $galeri = Galeri::onlyTrashed()->findOrFail($id);
+        $galeri->forceDelete();
+
+        return redirect()->route('penulis.galeri.index', ['status' => 'terhapus'])->with('success', 'Galeri berhasil dihapus permanen.');
     }
 }

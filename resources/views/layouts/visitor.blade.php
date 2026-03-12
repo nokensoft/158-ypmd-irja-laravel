@@ -11,10 +11,11 @@
         $seoKeywords = $situs['seo_meta_keywords'] ?? '';
     @endphp
 
-    <title>@yield('title', $seoTitle) — YPMD IRJA</title>
+    <title>@yield('title', $seoTitle) — {{ $situs['nama_situs'] ?? 'YPMD IRJA' }}</title>
     <meta name="description" content="{{ $seoDesc }}">
     <meta name="keywords" content="{{ $seoKeywords }}">
     <link rel="canonical" href="{{ url()->current() }}">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
     {{-- Open Graph --}}
     <meta property="og:type" content="@yield('og-type', 'website')">

@@ -4,11 +4,26 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class BackupDatabaseController extends Controller
 {
     private string $backupPath = 'backups';
+
+    /**
+     * Tabel sistem/framework yang tidak perlu di-backup.
+     */
+    private array $excludedTables = [
+        'cache',
+        'cache_locks',
+        'failed_jobs',
+        'job_batches',
+        'jobs',
+        'migrations',
+        'password_reset_tokens',
+        'personal_access_tokens',
+        'sessions',
+    ];
 
     public function index()
     {
@@ -33,22 +48,28 @@ class BackupDatabaseController extends Controller
 
         $filePath = $storagePath . DIRECTORY_SEPARATOR . $filename;
 
+        $ignoreTables = '';
+        foreach ($this->excludedTables as $table) {
+            $ignoreTables .= ' --ignore-table=' . escapeshellarg("{$dbName}.{$table}");
+        }
+
         // Build mysqldump command
         $command = sprintf(
-            'mysqldump --host=%s --port=%s --user=%s --password=%s --single-transaction --routines --triggers --add-drop-table %s',
+            'mysqldump --host=%s --port=%s --user=%s --password=%s --default-character-set=utf8mb4 --single-transaction --quick --routines --triggers --events --add-drop-table --skip-lock-tables %s%s > %s',
             escapeshellarg($dbHost),
             escapeshellarg($dbPort),
             escapeshellarg($dbUser),
             escapeshellarg($dbPass),
-            escapeshellarg($dbName)
+            escapeshellarg($dbName),
+            $ignoreTables,
+            escapeshellarg($filePath)
         );
 
         $output = [];
         $resultCode = 0;
-
         exec($command . ' 2>&1', $output, $resultCode);
 
-        if ($resultCode !== 0) {
+        if ($resultCode !== 0 || !file_exists($filePath) || filesize($filePath) === 0) {
             // Fallback: pure PHP dump
             $sqlContent = $this->dumpWithPHP($dbName);
 
@@ -58,8 +79,6 @@ class BackupDatabaseController extends Controller
             }
 
             file_put_contents($filePath, $sqlContent);
-        } else {
-            file_put_contents($filePath, implode("\n", $output));
         }
 
         return redirect()->route('admin.backup-database')
@@ -98,17 +117,35 @@ class BackupDatabaseController extends Controller
         ]);
 
         $file = $request->file('sql_file');
-        $sql = file_get_contents($file->getRealPath());
+        $filePath = $file->getRealPath();
 
-        if (empty(trim($sql))) {
-            return redirect()->route('admin.backup-database')->with('error', 'File SQL kosong.');
+        if (empty($filePath) || !is_readable($filePath)) {
+            return redirect()->route('admin.backup-database')->with('error', 'File SQL tidak dapat dibaca.');
         }
 
+        // Coba restore via mysql CLI terlebih dahulu
+        $cliRestore = $this->restoreWithMysqlClient($filePath);
+
         try {
-            \Illuminate\Support\Facades\DB::unprepared($sql);
+            if (!$cliRestore['success']) {
+                // Fallback: restore via PHP/PDO
+                $sql = file_get_contents($filePath);
+                $sql = preg_replace('/^\xEF\xBB\xBF/', '', $sql ?? '');
+
+                if (empty(trim($sql ?? ''))) {
+                    return redirect()->route('admin.backup-database')->with('error', 'File SQL kosong.');
+                }
+
+                $this->executeSqlStatements($sql);
+            }
+
             return redirect()->route('admin.backup-database')->with('success', 'Database berhasil di-restore dari file SQL.');
-        } catch (\Exception $e) {
-            return redirect()->route('admin.backup-database')->with('error', 'Gagal restore: ' . $e->getMessage());
+        } catch (\Throwable $e) {
+            $errorMessage = trim(($cliRestore['error'] ?? '') . ' ' . $e->getMessage());
+            $errorMessage = preg_replace('/\s+/', ' ', $errorMessage ?? '');
+            $errorMessage = substr($errorMessage, 0, 300);
+
+            return redirect()->route('admin.backup-database')->with('error', 'Gagal restore: ' . $errorMessage);
         }
     }
 
@@ -148,13 +185,17 @@ class BackupDatabaseController extends Controller
     private function dumpWithPHP(string $dbName): string|false
     {
         try {
-            $pdo = \Illuminate\Support\Facades\DB::connection()->getPdo();
-            $output = "-- Database Backup\n";
+            $pdo = DB::connection()->getPdo();
+            $output = "-- =============================================\n";
+            $output .= "-- Database Backup (PHP Fallback)\n";
             $output .= "-- Generated: " . date('Y-m-d H:i:s') . "\n";
             $output .= "-- Database: {$dbName}\n";
+            $output .= "-- Format: schema + data (application tables)\n";
+            $output .= "-- =============================================\n\n";
+            $output .= "SET NAMES utf8mb4;\n";
             $output .= "SET FOREIGN_KEY_CHECKS=0;\n\n";
 
-            $tables = $pdo->query('SHOW TABLES')->fetchAll(\PDO::FETCH_COLUMN);
+            $tables = $this->getApplicationTables($pdo);
 
             foreach ($tables as $table) {
                 // Structure
@@ -171,7 +212,10 @@ class BackupDatabaseController extends Controller
 
                     foreach ($rows as $row) {
                         $values = array_map(function ($val) use ($pdo) {
-                            if ($val === null) return 'NULL';
+                            if ($val === null) {
+                                return 'NULL';
+                            }
+
                             return $pdo->quote($val);
                         }, array_values($row));
 
@@ -187,6 +231,116 @@ class BackupDatabaseController extends Controller
         } catch (\Exception $e) {
             return false;
         }
+    }
+
+    /**
+     * Restore SQL via mysql CLI client.
+     */
+    private function restoreWithMysqlClient(string $sqlFilePath): array
+    {
+        $dbHost = config('database.connections.mysql.host');
+        $dbPort = config('database.connections.mysql.port');
+        $dbName = config('database.connections.mysql.database');
+        $dbUser = config('database.connections.mysql.username');
+        $dbPass = config('database.connections.mysql.password');
+
+        $command = sprintf(
+            'mysql --host=%s --port=%s --user=%s --password=%s %s < %s',
+            escapeshellarg($dbHost),
+            escapeshellarg($dbPort),
+            escapeshellarg($dbUser),
+            escapeshellarg($dbPass),
+            escapeshellarg($dbName),
+            escapeshellarg($sqlFilePath)
+        );
+
+        $output = [];
+        $resultCode = 0;
+        exec($command . ' 2>&1', $output, $resultCode);
+
+        return [
+            'success' => $resultCode === 0,
+            'error' => trim(implode("\n", $output)),
+        ];
+    }
+
+    /**
+     * Execute SQL statements satu per satu dengan penanganan delimiter.
+     */
+    private function executeSqlStatements(string $sql): void
+    {
+        $lines = preg_split('/\r\n|\r|\n/', $sql);
+        $delimiter = ';';
+        $statement = '';
+
+        DB::unprepared('SET FOREIGN_KEY_CHECKS=0');
+
+        try {
+            foreach ($lines as $line) {
+                $trimmed = trim($line);
+
+                // Skip komentar dan baris kosong
+                if ($trimmed === '' || str_starts_with($trimmed, '--') || str_starts_with($trimmed, '#')) {
+                    continue;
+                }
+
+                // Handle DELIMITER statement
+                if (str_starts_with(strtoupper($trimmed), 'DELIMITER ')) {
+                    $newDelimiter = trim(substr($trimmed, 10));
+                    $delimiter = $newDelimiter !== '' ? $newDelimiter : ';';
+                    continue;
+                }
+
+                $statement .= $line . "\n";
+
+                if (!$this->statementEndsWithDelimiter($statement, $delimiter)) {
+                    continue;
+                }
+
+                $query = trim($this->removeTrailingDelimiter($statement, $delimiter));
+                if ($query !== '') {
+                    DB::unprepared($query);
+                }
+
+                $statement = '';
+            }
+
+            // Eksekusi sisa statement jika ada
+            $remaining = trim($statement);
+            if ($remaining !== '') {
+                DB::unprepared($remaining);
+            }
+        } finally {
+            DB::unprepared('SET FOREIGN_KEY_CHECKS=1');
+        }
+    }
+
+    private function statementEndsWithDelimiter(string $statement, string $delimiter): bool
+    {
+        return str_ends_with(rtrim($statement), $delimiter);
+    }
+
+    private function removeTrailingDelimiter(string $statement, string $delimiter): string
+    {
+        $trimmed = rtrim($statement);
+
+        if (!str_ends_with($trimmed, $delimiter)) {
+            return $trimmed;
+        }
+
+        return substr($trimmed, 0, -strlen($delimiter));
+    }
+
+    /**
+     * Get only application tables (exclude system/framework tables).
+     */
+    private function getApplicationTables(\PDO $pdo): array
+    {
+        $tables = $pdo->query('SHOW TABLES')->fetchAll(\PDO::FETCH_COLUMN);
+
+        return array_values(array_filter($tables, function ($table) {
+            return !in_array($table, $this->excludedTables, true);
+        }));
     }
 
     private function formatBytes(int $bytes): string

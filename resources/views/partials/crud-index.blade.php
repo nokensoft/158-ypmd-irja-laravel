@@ -35,7 +35,9 @@
                     @foreach ($columns as $col)
                         <th class="p-4 text-base font-bold uppercase text-gray-600">{{ $col }}</th>
                     @endforeach
+                    @if (!isset($hideActions) || !$hideActions)
                     <th class="p-4 text-base font-bold uppercase text-gray-600 text-center w-16"></th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -45,6 +47,7 @@
                         @foreach ($row['cells'] as $cell)
                             <td class="p-4 text-base">{!! $cell !!}</td>
                         @endforeach
+                        @if (!isset($hideActions) || !$hideActions)
                         <td class="p-4 text-center">
                             <div class="relative" x-data="{ open: false }">
                                 <button @click="open = !open" @click.outside="open = false" type="button"
@@ -53,6 +56,12 @@
                                 </button>
                                 <div x-show="open" x-cloak x-transition:enter="transition ease-out duration-100" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
                                      class="absolute right-0 mt-1 w-44 bg-white border border-gray-200 shadow-lg z-20 no-round">
+                                    @if (isset($row['copyUrl']) && $row['copyUrl'])
+                                        <button type="button" @click="navigator.clipboard.writeText('{{ $row['copyUrl'] }}'); open = false; $dispatch('notify', { message: 'Link berhasil disalin!' })"
+                                                class="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition">
+                                            <i class="fas fa-link w-4 text-center text-blue-500"></i> Copy Link
+                                        </button>
+                                    @endif
                                     @if (isset($row['editRoute']))
                                         <a href="{{ $row['editRoute'] }}" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition">
                                             <i class="fas fa-edit w-4 text-center text-secondary"></i> Edit
@@ -70,13 +79,20 @@
                                             <i class="fas fa-undo w-4 text-center"></i> Pulihkan
                                         </button>
                                     @endif
+                                    @if (isset($row['forceDeleteRoute']))
+                                        <button type="button" @click="open = false; $dispatch('confirm-action', { title: 'Hapus Permanen', message: 'Data akan dihapus permanen dan tidak dapat dipulihkan kembali!', action: '{{ $row['forceDeleteRoute'] }}', method: 'DELETE', buttonText: 'Hapus Permanen' })"
+                                                class="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition">
+                                            <i class="fas fa-trash-alt w-4 text-center"></i> Hapus Permanen
+                                        </button>
+                                    @endif
                                 </div>
                             </div>
                         </td>
+                        @endif
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="{{ count($columns) + 2 }}" class="p-8 text-center text-gray-400 text-base">
+                        <td colspan="{{ count($columns) + (isset($hideActions) && $hideActions ? 1 : 2) }}" class="p-8 text-center text-gray-400 text-base">
                             <i class="fas fa-inbox text-3xl mb-3 block"></i>
                             Belum ada data.
                         </td>

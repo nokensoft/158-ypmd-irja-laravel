@@ -122,13 +122,16 @@
         </div>
     </div>
 
-    <script>
-    function mediaPicker() {
-        const initial = @json($editMode && ($program->media ?? null) ? [
+    @php
+        $initialMedia = $editMode && ($program->media ?? null) ? [
             'id' => $program->media->id,
             'judul' => $program->media->judul,
             'file_path' => asset('storage/' . $program->media->file_path),
-        ] : null);
+        ] : null;
+    @endphp
+    <script>
+    function mediaPicker() {
+        const initial = @json($initialMedia);
 
         return {
             modalOpen: false,

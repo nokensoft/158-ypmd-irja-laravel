@@ -19,8 +19,16 @@ class Galeri extends Model
         'slug',
         'deskripsi',
         'kategori',
+        'is_publik',
         'user_id',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'is_publik' => 'boolean',
+        ];
+    }
 
     protected static function booted(): void
     {

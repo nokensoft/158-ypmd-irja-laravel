@@ -100,4 +100,12 @@ class ProgramDonasiController extends Controller
 
         return redirect()->route('penulis.program-donasi.index')->with('success', 'Program donasi berhasil dipulihkan.');
     }
+
+    public function forceDelete(string $id)
+    {
+        $program = ProgramDonasi::onlyTrashed()->findOrFail($id);
+        $program->forceDelete();
+
+        return redirect()->route('penulis.program-donasi.index', ['status' => 'terhapus'])->with('success', 'Program donasi berhasil dihapus permanen.');
+    }
 }

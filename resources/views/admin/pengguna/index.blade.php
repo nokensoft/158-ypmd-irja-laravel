@@ -20,6 +20,7 @@
             'editRoute' => $p->trashed() ? null : route('admin.pengguna.edit', $p->id),
             'deleteRoute' => $p->trashed() ? null : route('admin.pengguna.destroy', $p->id),
             'restoreRoute' => $p->trashed() ? route('admin.pengguna.restore', $p->id) : null,
+            'forceDeleteRoute' => $p->trashed() ? route('admin.pengguna.force-delete', $p->id) : null,
             'trashed' => $p->trashed(),
         ])->toArray(),
     ])

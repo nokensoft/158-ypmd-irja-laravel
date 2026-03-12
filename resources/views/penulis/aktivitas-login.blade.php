@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
-@section('title', 'Aktivitas Login')
-@section('page-title', 'Aktivitas Login')
+@section('title', 'Aktivitas Login Penulis')
+@section('page-title', 'Aktivitas Login Penulis')
 
 @section('content')
     @include('partials.crud-index', [
