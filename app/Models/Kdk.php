@@ -17,6 +17,8 @@ class Kdk extends Model
         'deskripsi',
         'tanggal_terbit',
         'file_pdf',
+        'jumlah_dibaca',
+        'jumlah_unduhan',
         'media_id',
         'user_id',
     ];

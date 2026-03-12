@@ -30,7 +30,7 @@ class KdkSeeder extends Seeder
             [
                 'nomor_edisi'    => '5',
                 'judul'          => 'Kabar Dari Kampung — Edisi 5: Tanah Adat & Hak Masyarakat',
-                'deskripsi'      => 'Mengulas perjuangan masyarakat adat Papua dalam mempertahankan hak atas tanah leluhur mereka di tengah arus investasi dan pembangunan.',
+                'deskripsi'      => 'Mengulas perjuangan masyarakat desa di Irian Jaya / Papua sekarang dalam mempertahankan hak atas tanah leluhur mereka di tengah arus investasi dan pembangunan.',
                 'tanggal_terbit' => '1990-03-15',
                 'file_pdf'       => null,
                 'media_id'       => $mediaId,

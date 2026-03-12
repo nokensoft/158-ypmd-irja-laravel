@@ -30,7 +30,7 @@
                 <span class="font-display font-bold text-white text-base">{{ $situs['nama_situs'] ?? 'YPMD IRJA' }}</span>
             </div>
             <p class="text-neutral-400 text-sm leading-relaxed">
-                {{ $situs['deskripsi_situs'] ?? 'Pionir pemberdayaan dan advokasi masyarakat adat di Tanah Papua sejak 1984.' }}
+                {{ $situs['deskripsi_situs'] ?? 'Pionir pemberdayaan dan advokasi masyarakat desa di Irian Jaya / Papua sekarang di Tanah Papua sejak 1984.' }}
             </p>
         </div>
 

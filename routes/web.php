@@ -53,6 +53,8 @@ Route::middleware('track.visitor')->group(function () {
 
     // KDK (dynamic)
     Route::get('/kdk', [VisitorController::class, 'kdk'])->name('kdk');
+    Route::get('/kdk/{id}', [VisitorController::class, 'kdkDetail'])->name('kdk.detail');
+    Route::get('/kdk/{id}/unduh', [VisitorController::class, 'kdkDownload'])->name('kdk.download');
 
     // Donasi (dynamic GET + POST)
     Route::get('/donasi', [VisitorController::class, 'donasi'])->name('donasi');

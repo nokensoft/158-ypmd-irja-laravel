@@ -17,7 +17,7 @@
                 <div class="fade-in">
                     <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2"><i class="fa-solid fa-building mr-2"></i>Organisasi</p>
                     <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900 mb-6">Tentang YPMD IRJA</h2>
-                    <p class="text-neutral-600 leading-relaxed mb-4">Yayasan Pembangunan Masyarakat Desa Irian Jaya (YPMD IRJA) adalah lembaga non-pemerintah nirlaba yang bergerak di bidang pemberdayaan masyarakat adat Papua. Berdiri sejak 1984, YPMD IRJA merupakan LSM pertama di Tanah Papua.</p>
+                    <p class="text-neutral-600 leading-relaxed mb-4">Yayasan Pembangunan Masyarakat Desa Irian Jaya (YPMD IRJA) adalah lembaga non-pemerintah nirlaba yang bergerak di bidang pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang. Berdiri sejak 1984, YPMD IRJA merupakan LSM pertama di Tanah Papua.</p>
                     <p class="text-neutral-600 leading-relaxed mb-6">Berbasis di Jayapura, lembaga ini bekerja di empat wilayah utama Papua dengan fokus pada pendampingan komunitas, ekonomi berbasis masyarakat, dan advokasi hak-hak adat.</p>
                     <img src="{{ asset('img/galeri/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD IRJA" class="w-full rounded-lg shadow-card"/>
                 </div>
@@ -27,7 +27,7 @@
                             <div class="w-8 h-8 bg-primary-50 flex items-center justify-center"><i class="fa-solid fa-eye text-primary-500"></i></div>
                             <h3 class="font-display font-bold text-neutral-900">Visi</h3>
                         </div>
-                        <p class="text-neutral-600 leading-relaxed pl-11">Terwujudnya masyarakat adat Papua yang mandiri, berdaulat, dan bermartabat dalam mengelola kehidupan dan sumber daya alamnya secara berkelanjutan.</p>
+                        <p class="text-neutral-600 leading-relaxed pl-11">Terwujudnya masyarakat desa di Irian Jaya / Papua sekarang yang mandiri, berdaulat, dan bermartabat dalam mengelola kehidupan dan sumber daya alamnya secara berkelanjutan.</p>
                     </div>
                     <div class="fade-in">
                         <div class="flex items-center gap-3 mb-3">
@@ -35,9 +35,9 @@
                             <h3 class="font-display font-bold text-neutral-900">Misi</h3>
                         </div>
                         <ul class="text-neutral-600 space-y-2 pl-11">
-                            <li class="flex gap-2"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>Mendampingi dan mengorganisir masyarakat adat sebagai subjek pembangunan</span></li>
+                            <li class="flex gap-2"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>Mendampingi dan mengorganisir masyarakat desa di Irian Jaya / Papua sekarang sebagai subjek pembangunan</span></li>
                             <li class="flex gap-2"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>Mengembangkan program ekonomi berbasis komunitas yang berkelanjutan</span></li>
-                            <li class="flex gap-2"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>Mengadvokasi hak-hak masyarakat adat atas tanah dan sumber daya alam</span></li>
+                            <li class="flex gap-2"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>Mengadvokasi hak-hak masyarakat desa di Irian Jaya / Papua sekarang atas tanah dan sumber daya alam</span></li>
                             <li class="flex gap-2"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>Membangun jaringan kemitraan lokal, nasional, dan internasional</span></li>
                         </ul>
                     </div>
@@ -122,7 +122,7 @@
                     ['label'=>'Tahun Berdiri','value'=>'1984'],
                     ['label'=>'Jenis Organisasi','value'=>'LSM / NGO Nirlaba'],
                     ['label'=>'Kantor Pusat','value'=>$situs['alamat'] ?? 'Jayapura, Papua'],
-                    ['label'=>'Bidang Fokus','value'=>'Pemberdayaan Masyarakat Adat Papua'],
+                    ['label'=>'Bidang Fokus','value'=>'Pemberdayaan Masyarakat Desa di Irian Jaya / Papua Sekarang'],
                 ] as $item)
                 <div class="bg-white p-6 shadow-card fade-in">
                     <p class="text-xs text-neutral-400 uppercase tracking-wider mb-1">{{ $item['label'] }}</p>

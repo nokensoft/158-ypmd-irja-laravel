@@ -24,7 +24,7 @@
             <div class="mb-14 fade-in">
                 <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2"><i class="fa-solid fa-user-tie mr-2"></i>Kepemimpinan</p>
                 <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900 mb-4">Estafet Kepemimpinan YPMD IRJA</h2>
-                <p class="text-neutral-600 leading-relaxed max-w-2xl">Selama lebih dari empat dekade, YPMD IRJA telah dipimpin oleh enam direktur yang masing-masing membawa dedikasi dan visi dalam memajukan pemberdayaan masyarakat adat Papua.</p>
+                <p class="text-neutral-600 leading-relaxed max-w-2xl">Selama lebih dari empat dekade, YPMD IRJA telah dipimpin oleh enam direktur yang masing-masing membawa dedikasi dan visi dalam memajukan pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang.</p>
             </div>
 
             @php

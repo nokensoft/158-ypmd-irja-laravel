@@ -49,7 +49,7 @@
                             ['Icon', 'Font Awesome 7'],
                             ['Font', 'Lora (display), Plus Jakarta Sans (body)'],
                             ['Autentikasi', 'Custom middleware, role-based access (admin_master, penulis)'],
-                            ['Fitur Utama', 'CMS Halaman, Berita, KDK, Galeri, Donasi, Statistik Pengunjung, Aktivitas Login, Peta Situs'],
+                            ['Fitur Utama', 'CMS Halaman, Berita, KDK, Galeri, Donasi, SEO, Profil, Statistik Pengunjung, Aktivitas Login, Peta Situs'],
                             ['Developer', 'Nokensoft — PT Noken Inovasi Teknologi Informasi'],
                             ['Website Developer', 'www.nokensoft.com'],
                             ['Kontak Developer', 'info@nokensoft.com | 082199558191'],
@@ -107,6 +107,18 @@
                     <i class="fas fa-recycle text-primary mt-1"></i>
                     <div><p class="font-bold text-base">Soft Delete</p><p class="text-sm text-gray-500">Data dihapus sementara, bisa di-restore</p></div>
                 </div>
+                <div class="flex items-start space-x-3 p-3 bg-gray-50">
+                    <i class="fas fa-search text-primary mt-1"></i>
+                    <div><p class="font-bold text-base">SEO</p><p class="text-sm text-gray-500">Dynamic robots.txt, XML sitemap, meta tags</p></div>
+                </div>
+                <div class="flex items-start space-x-3 p-3 bg-gray-50">
+                    <i class="fas fa-image text-primary mt-1"></i>
+                    <div><p class="font-bold text-base">Optimasi Gambar</p><p class="text-sm text-gray-500">Konversi otomatis ke WebP, resize max 720px</p></div>
+                </div>
+                <div class="flex items-start space-x-3 p-3 bg-gray-50">
+                    <i class="fas fa-bolt text-primary mt-1"></i>
+                    <div><p class="font-bold text-base">Caching</p><p class="text-sm text-gray-500">View Composer cache 5 menit untuk data situs global</p></div>
+                </div>
             </div>
         </div>
 
@@ -118,7 +130,7 @@
                 </h3>
                 <div class="space-y-0">
                     @php
-                        $fiturVisitor = [
+                    $fiturVisitor = [
                             ['icon' => 'fa-home', 'title' => 'Beranda', 'desc' => 'Statistik yayasan, berita terbaru, buletin KDK, program unggulan, galeri, mitra kerja'],
                             ['icon' => 'fa-landmark', 'title' => 'Sejarah', 'desc' => 'Sejarah pendirian YPMD IRJA sejak 1984 (halaman dinamis CMS)'],
                             ['icon' => 'fa-building', 'title' => 'Profil', 'desc' => 'Profil organisasi yayasan (halaman dinamis CMS)'],
@@ -126,12 +138,13 @@
                             ['icon' => 'fa-briefcase', 'title' => 'Bidang Kerja', 'desc' => 'Informasi bidang kerja yayasan (halaman dinamis CMS)'],
                             ['icon' => 'fa-users', 'title' => 'Tokoh', 'desc' => 'Tokoh-tokoh pendiri dan pengurus yayasan'],
                             ['icon' => 'fa-list-check', 'title' => 'Program', 'desc' => 'Program unggulan: Informasi, Ekonomi Kerakyatan, Clean Water, Promosi Usaha'],
-                            ['icon' => 'fa-book-open', 'title' => 'KDK', 'desc' => 'Buletin Kabar Dari Kampung — media alternatif masyarakat adat Papua sejak 1982'],
-                            ['icon' => 'fa-newspaper', 'title' => 'Papua Today', 'desc' => 'Berita dan artikel dengan filter kategori, pencarian, dan detail pembaca'],
-                            ['icon' => 'fa-heart', 'title' => 'Donasi', 'desc' => 'Form donasi untuk mendukung program pemberdayaan masyarakat'],
-                            ['icon' => 'fa-images', 'title' => 'Galeri', 'desc' => 'Album foto kegiatan dengan halaman detail'],
+                            ['icon' => 'fa-book-open', 'title' => 'KDK', 'desc' => 'Buletin Kabar Dari Kampung — detail edisi, pencarian, filter tahun, counter pembaca & unduhan, download PDF'],
+                            ['icon' => 'fa-newspaper', 'title' => 'Papua Today', 'desc' => 'Berita dan artikel dengan filter kategori, pencarian, counter pembaca, dan artikel terkait'],
+                            ['icon' => 'fa-heart', 'title' => 'Donasi', 'desc' => 'Form donasi dengan pilihan program, upload bukti transfer, opsi anonim, testimoni donatur publik'],
+                            ['icon' => 'fa-images', 'title' => 'Galeri', 'desc' => 'Album foto kegiatan dengan filter kategori, pencarian, dan halaman detail'],
                             ['icon' => 'fa-envelope', 'title' => 'Kontak', 'desc' => 'Informasi kontak dan media sosial YPMD IRJA'],
                             ['icon' => 'fa-sitemap', 'title' => 'Peta Situs', 'desc' => 'Halaman peta situs (HTML sitemap) untuk navigasi lengkap'],
+                            ['icon' => 'fa-robot', 'title' => 'SEO', 'desc' => 'Dynamic robots.txt dan XML sitemap otomatis untuk seluruh halaman publik'],
                         ];
                     @endphp
                     @foreach ($fiturVisitor as $fitur)
@@ -158,12 +171,13 @@
                     @php
                         $fiturAdmin = [
                             ['icon' => 'fa-tachometer-alt', 'title' => 'Dasbor', 'desc' => 'Ringkasan data, aktivitas terbaru, info sistem'],
-                            ['icon' => 'fa-file-alt', 'title' => 'Halaman (CMS)', 'desc' => 'Kelola halaman dinamis: sejarah, profil, mitra, bidang kerja'],
+                            ['icon' => 'fa-file-alt', 'title' => 'Halaman (CMS)', 'desc' => 'Kelola halaman dinamis: sejarah, profil, mitra, bidang kerja, soft delete & restore'],
                             ['icon' => 'fa-cog', 'title' => 'Pengaturan Situs', 'desc' => 'Nama, deskripsi, kontak, sosmed, logo, SEO'],
                             ['icon' => 'fa-database', 'title' => 'Backup Database', 'desc' => 'Buat, download, hapus, dan restore backup SQL'],
-                            ['icon' => 'fa-users', 'title' => 'Kelola Pengguna', 'desc' => 'CRUD pengguna dengan soft delete dan restore'],
+                            ['icon' => 'fa-users', 'title' => 'Kelola Pengguna', 'desc' => 'CRUD pengguna dengan soft delete, restore & force delete'],
                             ['icon' => 'fa-history', 'title' => 'Aktivitas Login', 'desc' => 'Log riwayat login seluruh pengguna'],
                             ['icon' => 'fa-chart-bar', 'title' => 'Statistik Pengunjung', 'desc' => 'Grafik harian, mingguan, bulanan, tahunan'],
+                            ['icon' => 'fa-user-edit', 'title' => 'Profil', 'desc' => 'Edit profil akun (nama, email, password, nomor HP, keterangan singkat)'],
                         ];
                     @endphp
                     @foreach ($fiturAdmin as $fitur)
@@ -181,15 +195,16 @@
                     <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mt-4 mb-2">Penulis</p>
                     @php
                         $fiturPenulis = [
-                            ['icon' => 'fa-newspaper', 'title' => 'Artikel / Papua Today', 'desc' => 'CRUD berita dengan status terbit/draft, soft delete & restore'],
-                            ['icon' => 'fa-tags', 'title' => 'Kategori Berita', 'desc' => 'CRUD kategori berita dengan soft delete & restore'],
-                            ['icon' => 'fa-book-open', 'title' => 'Edisi KDK', 'desc' => 'CRUD buletin Kabar Dari Kampung dengan soft delete & restore'],
-                            ['icon' => 'fa-photo-video', 'title' => 'Media', 'desc' => 'Upload dan kelola file media, mendukung AJAX upload'],
-                            ['icon' => 'fa-images', 'title' => 'Galeri', 'desc' => 'CRUD album galeri dengan relasi media'],
-                            ['icon' => 'fa-hand-holding-heart', 'title' => 'Program Donasi', 'desc' => 'CRUD program donasi dengan soft delete & restore'],
-                            ['icon' => 'fa-heart', 'title' => 'Kelola Donasi', 'desc' => 'Lihat, konfirmasi, tolak, dan hapus donasi masuk'],
+                            ['icon' => 'fa-newspaper', 'title' => 'Artikel / Papua Today', 'desc' => 'CRUD berita dengan status terbit/draft, soft delete, restore & force delete'],
+                            ['icon' => 'fa-tags', 'title' => 'Kategori Berita', 'desc' => 'CRUD kategori berita dengan soft delete, restore & force delete'],
+                            ['icon' => 'fa-book-open', 'title' => 'Edisi KDK', 'desc' => 'CRUD buletin KDK dengan cover image, file PDF, counter pembaca & unduhan, soft delete & restore'],
+                            ['icon' => 'fa-photo-video', 'title' => 'Media', 'desc' => 'Upload dan kelola file media, konversi otomatis ke WebP, AJAX upload, soft delete & restore'],
+                            ['icon' => 'fa-images', 'title' => 'Galeri', 'desc' => 'CRUD album galeri dengan relasi media, kategori, toggle publik, soft delete & restore'],
+                            ['icon' => 'fa-hand-holding-heart', 'title' => 'Program Donasi', 'desc' => 'CRUD program donasi dengan soft delete, restore & force delete'],
+                            ['icon' => 'fa-heart', 'title' => 'Kelola Donasi', 'desc' => 'Lihat detail, konfirmasi, tolak, edit pesan, toggle publik/anonim, bukti transfer, soft delete & restore'],
                             ['icon' => 'fa-chart-bar', 'title' => 'Statistik Pengunjung', 'desc' => 'Grafik kunjungan situs'],
                             ['icon' => 'fa-history', 'title' => 'Aktivitas Login', 'desc' => 'Log riwayat login penulis'],
+                            ['icon' => 'fa-user-edit', 'title' => 'Profil', 'desc' => 'Edit profil akun (nama, email, password, nomor HP, keterangan singkat)'],
                         ];
                     @endphp
                     @foreach ($fiturPenulis as $fitur)

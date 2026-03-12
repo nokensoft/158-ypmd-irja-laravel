@@ -24,7 +24,7 @@
                     <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2"><i class="fa-solid fa-leaf mr-2"></i>Sejak 1984</p>
                     <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900 mb-6">LSM Pertama di Tanah Papua</h2>
                     <p class="text-neutral-600 leading-relaxed mb-4">Yayasan Pembangunan Masyarakat Desa Irian Jaya (YPMD IRJA) adalah lembaga swadaya masyarakat pertama yang berdiri di Tanah Papua. Lahir pada <strong>1984</strong> dari keresahan kelompok idealis Gereja dan Tokoh Masyarakat, YPMD IRJA hadir sebagai jembatan informasi dan agen perubahan.</p>
-                    <p class="text-neutral-600 leading-relaxed mb-6">Selama lebih dari empat dekade, lembaga ini mendampingi masyarakat adat Papua agar mampu berdiri sebagai <em>subjek</em> — bukan objek — dalam proses pembangunan, serta mempertahankan hak-hak mereka atas tanah dan sumber daya alam.</p>
+                    <p class="text-neutral-600 leading-relaxed mb-6">Selama lebih dari empat dekade, lembaga ini mendampingi masyarakat desa di Irian Jaya / Papua sekarang agar mampu berdiri sebagai <em>subjek</em> — bukan objek — dalam proses pembangunan, serta mempertahankan hak-hak mereka atas tanah dan sumber daya alam.</p>
                     <div class="flex flex-wrap gap-3">
                         <a href="{{ route('sejarah') }}" class="bg-primary-500 text-white px-5 py-2.5 text-sm font-semibold hover:bg-primary-600 transition-colors">
                             <i class="fa-solid fa-clock-rotate-left mr-2"></i>Baca Sejarah
@@ -78,7 +78,7 @@
                         </div>
                         <h3 class="font-display font-bold text-xl">Visi</h3>
                     </div>
-                    <p class="text-primary-100 leading-relaxed">Terwujudnya masyarakat adat Papua yang mandiri, berdaulat, dan bermartabat dalam mengelola kehidupan dan sumber daya alamnya secara berkelanjutan.</p>
+                    <p class="text-primary-100 leading-relaxed">Terwujudnya masyarakat desa di Irian Jaya / Papua sekarang yang mandiri, berdaulat, dan bermartabat dalam mengelola kehidupan dan sumber daya alamnya secara berkelanjutan.</p>
                 </div>
                 <div class="bg-neutral-50 border border-neutral-100 p-10 fade-in">
                     <div class="flex items-center gap-3 mb-5">
@@ -88,9 +88,9 @@
                         <h3 class="font-display font-bold text-xl text-neutral-900">Misi</h3>
                     </div>
                     <ul class="space-y-2 text-neutral-600">
-                        <li class="flex gap-2"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>Mendampingi masyarakat adat sebagai subjek pembangunan</span></li>
+                        <li class="flex gap-2"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>Mendampingi masyarakat desa di Irian Jaya / Papua sekarang sebagai subjek pembangunan</span></li>
                         <li class="flex gap-2"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>Mengembangkan program ekonomi berbasis komunitas yang berkelanjutan</span></li>
-                        <li class="flex gap-2"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>Mengadvokasi hak-hak masyarakat adat atas tanah dan sumber daya alam</span></li>
+                        <li class="flex gap-2"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>Mengadvokasi hak-hak masyarakat desa di Irian Jaya / Papua sekarang atas tanah dan sumber daya alam</span></li>
                         <li class="flex gap-2"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>Membangun jaringan kemitraan lokal, nasional, dan internasional</span></li>
                     </ul>
                 </div>
@@ -142,7 +142,7 @@
     <section class="bg-primary-600 py-14">
         <div class="max-w-4xl mx-auto px-6 text-center fade-in">
             <h2 class="text-2xl md:text-3xl font-display font-bold text-white mb-3">Bersama Membangun Papua</h2>
-            <p class="text-primary-200 text-lg mb-8">Dukung program pemberdayaan masyarakat adat Papua. Setiap kontribusi membantu mewujudkan kemandirian ekonomi dan keadilan sosial.</p>
+            <p class="text-primary-200 text-lg mb-8">Dukung program pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang. Setiap kontribusi membantu mewujudkan kemandirian ekonomi dan keadilan sosial.</p>
             <div class="flex flex-wrap justify-center gap-4">
                 <a href="{{ route('donasi') }}" class="bg-white text-primary-600 px-8 py-3 text-sm font-semibold hover:bg-neutral-100 transition-colors shadow-card">
                     <i class="fa-solid fa-heart mr-2"></i>Donasi Sekarang

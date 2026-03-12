@@ -21,7 +21,7 @@ class DonasiSeeder extends Seeder
                 'telepon'           => '08123456789',
                 'bank'              => 'BNI',
                 'jumlah'            => 500000,
-                'pesan'             => 'Semoga YPMD IRJA terus berjuang untuk masyarakat adat Papua.',
+                'pesan'             => 'Semoga YPMD IRJA terus berjuang untuk masyarakat desa di Irian Jaya / Papua sekarang.',
                 'bukti_transfer'    => null,
                 'status'            => 'dikonfirmasi',
                 'catatan_admin'     => 'Telah diterima, terima kasih.',

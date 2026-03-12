@@ -24,7 +24,7 @@ class ProgramDonasiSeeder extends Seeder
             ],
             [
                 'judul'          => 'Ekonomi Kerakyatan',
-                'deskripsi'      => 'Pengembangan potensi ekonomi masyarakat adat, aksesibilitas pasar, dan sistem saving/simpanan keuangan komunitas. Program ini mendukung pengembangan koperasi dan kelompok simpan-pinjam di tingkat kampung agar masyarakat memiliki kemandirian finansial.',
+                'deskripsi'      => 'Pengembangan potensi ekonomi masyarakat desa di Irian Jaya / Papua sekarang, aksesibilitas pasar, dan sistem saving/simpanan keuangan komunitas. Program ini mendukung pengembangan koperasi dan kelompok simpan-pinjam di tingkat kampung agar masyarakat memiliki kemandirian finansial.',
                 'media_id'       => $mediaId,
                 'target_nominal' => 50000000,
                 'is_active'      => true,
@@ -32,7 +32,7 @@ class ProgramDonasiSeeder extends Seeder
             ],
             [
                 'judul'          => 'Pengembangan Program KDK',
-                'deskripsi'      => 'Digitalisasi dan pengembangan buletin Kabar Dari Kampung (KDK), media alternatif masyarakat adat Papua sejak 1982. Dana digunakan untuk digitalisasi arsip edisi lama, produksi edisi baru, dan distribusi ke kampung-kampung terpencil di seluruh Papua.',
+                'deskripsi'      => 'Digitalisasi dan pengembangan buletin Kabar Dari Kampung (KDK), media alternatif masyarakat desa di Irian Jaya / Papua sekarang sejak 1982. Dana digunakan untuk digitalisasi arsip edisi lama, produksi edisi baru, dan distribusi ke kampung-kampung terpencil di seluruh Papua.',
                 'media_id'       => $mediaId,
                 'target_nominal' => 15000000,
                 'is_active'      => true,

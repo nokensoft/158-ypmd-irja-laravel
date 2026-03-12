@@ -1,7 +1,7 @@
 @extends('layouts.visitor')
 @section('title', 'Mitra Kerja - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
 @section('seo-title', 'Mitra Kerja & Sponsor YPMD IRJA')
-@section('seo-description', 'Daftar mitra kerja dan sponsor yang telah mendukung program pemberdayaan masyarakat adat Papua bersama YPMD IRJA.')
+@section('seo-description', 'Daftar mitra kerja dan sponsor yang telah mendukung program pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang bersama YPMD IRJA.')
 
 @section('content')
     <div class="bg-primary-600 py-16">
@@ -20,7 +20,7 @@
             <div class="max-w-2xl mb-14 fade-in">
                 <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2"><i class="fa-solid fa-handshake mr-2"></i>Kemitraan</p>
                 <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900 mb-4">Bersama Membangun Papua</h2>
-                <p class="text-neutral-600 leading-relaxed">Selama lebih dari 40 tahun, YPMD IRJA telah menjalin kemitraan strategis dengan berbagai lembaga internasional, pemerintah, organisasi non-pemerintah, dan sektor korporasi. Kemitraan ini menjadi fondasi keberlanjutan program-program pemberdayaan masyarakat adat Papua.</p>
+                <p class="text-neutral-600 leading-relaxed">Selama lebih dari 40 tahun, YPMD IRJA telah menjalin kemitraan strategis dengan berbagai lembaga internasional, pemerintah, organisasi non-pemerintah, dan sektor korporasi. Kemitraan ini menjadi fondasi keberlanjutan program-program pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang.</p>
             </div>
 
             {{-- Organisasi Internasional / NGO --}}
@@ -48,7 +48,7 @@
                             'nama'    => 'PKN',
                             'negara'  => 'Belanda',
                             'flag'    => '🇳🇱',
-                            'desc'    => 'Perkumpulan Kristen Nederland — penerus ICCO yang terus mendukung program pemberdayaan masyarakat adat Papua.',
+                            'desc'    => 'Perkumpulan Kristen Nederland — penerus ICCO yang terus mendukung program pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang.',
                         ],
                         [
                             'nama'    => 'CEMOBE',
@@ -60,7 +60,7 @@
                             'nama'    => 'BFDBW',
                             'negara'  => 'Jerman',
                             'flag'    => '🇩🇪',
-                            'desc'    => 'Lembaga mitra dari Jerman yang memberikan dukungan program pemberdayaan masyarakat adat Papua.',
+                            'desc'    => 'Lembaga mitra dari Jerman yang memberikan dukungan program pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang.',
                         ],
                     ] as $m)
                     <div class="bg-neutral-50 border border-neutral-100 fade-in hover:border-primary-200 hover:shadow-card transition">
@@ -179,7 +179,7 @@
     <section class="bg-primary-600 py-14">
         <div class="max-w-7xl mx-auto px-6 text-center fade-in">
             <h2 class="text-2xl md:text-3xl font-display font-bold text-white mb-3">Tertarik Bermitra dengan YPMD IRJA?</h2>
-            <p class="text-primary-200 text-lg mb-8">Kami terbuka untuk kolaborasi dengan lembaga, pemerintah, dan sektor swasta yang memiliki komitmen terhadap pemberdayaan masyarakat adat Papua.</p>
+            <p class="text-primary-200 text-lg mb-8">Kami terbuka untuk kolaborasi dengan lembaga, pemerintah, dan sektor swasta yang memiliki komitmen terhadap pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang.</p>
             <a href="{{ route('kontak') }}"
                class="inline-flex items-center gap-2 bg-white text-primary-600 px-8 py-3 text-sm font-semibold hover:bg-neutral-100 transition-colors shadow-card">
                 <i class="fa-solid fa-envelope"></i> Hubungi Kami

@@ -1,7 +1,7 @@
 @extends('layouts.visitor')
 @section('title', 'Program - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
 @section('seo-title', 'Program YPMD IRJA')
-@section('seo-description', 'Program-program pemberdayaan masyarakat adat Papua yang dijalankan YPMD IRJA.')
+@section('seo-description', 'Program-program pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang yang dijalankan YPMD IRJA.')
 
 @section('json-ld')
 <script type="application/ld+json">{!! json_encode(['@context'=>'https://schema.org','@type'=>'BreadcrumbList','itemListElement'=>[['@type'=>'ListItem','position'=>1,'name'=>'Beranda','item'=>route('beranda')],['@type'=>'ListItem','position'=>2,'name'=>'Program']]], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}</script>
@@ -13,7 +13,7 @@
         <div class="max-w-7xl mx-auto px-6">
             <span class="text-primary-200 text-xs uppercase tracking-widest"><a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> › Program</span>
             <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">Program Kami</h1>
-            <p class="text-primary-200 mt-3 max-w-2xl">Empat pilar program utama YPMD IRJA dalam memberdayakan masyarakat kampung di Papua, didukung program pendampingan masyarakat adat dan keuangan mikro.</p>
+            <p class="text-primary-200 mt-3 max-w-2xl">Empat pilar program utama YPMD IRJA dalam memberdayakan masyarakat kampung di Papua, didukung program pendampingan masyarakat desa di Irian Jaya / Papua sekarang dan keuangan mikro.</p>
         </div>
     </div>
 
@@ -23,7 +23,7 @@
             <div class="mb-10 fade-in">
                 <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2"><i class="fa-solid fa-list-check mr-2"></i>Bidang Kerja</p>
                 <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900">Program Unggulan</h2>
-                <p class="text-neutral-500 text-lg mt-3 max-w-2xl">YPMD IRJA menjalankan berbagai program yang berakar pada kebutuhan nyata masyarakat adat Papua.</p>
+                <p class="text-neutral-500 text-lg mt-3 max-w-2xl">YPMD IRJA menjalankan berbagai program yang berakar pada kebutuhan nyata masyarakat desa di Irian Jaya / Papua sekarang.</p>
             </div>
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <a href="#informasi" class="shadow-card card-hover bg-white border border-neutral-100 fade-in group">
@@ -83,9 +83,9 @@
                             <span class="text-5xl font-display font-bold text-neutral-200">01</span>
                         </div>
                         <h3 class="text-xl font-display font-bold text-neutral-900 mb-3">Informasi — Media &amp; Komunikasi Alternatif</h3>
-                        <p class="text-neutral-600 leading-relaxed mb-4">Melalui buletin <em>Kabar Dari Kampung</em> (KDK) yang pertama kali terbit pada 1982, YPMD IRJA membangun media alternatif yang menyuarakan realita kehidupan masyarakat adat Papua. KDK menjadi jembatan informasi antara masyarakat kampung dengan dunia luar, menyampaikan isu-isu kritis seperti hak tanah ulayat, pembangunan, dan pelestarian budaya.</p>
+                        <p class="text-neutral-600 leading-relaxed mb-4">Melalui buletin <em>Kabar Dari Kampung</em> (KDK) yang pertama kali terbit pada 1982, YPMD IRJA membangun media alternatif yang menyuarakan realita kehidupan masyarakat desa di Irian Jaya / Papua sekarang. KDK menjadi jembatan informasi antara masyarakat kampung dengan dunia luar, menyampaikan isu-isu kritis seperti hak tanah ulayat, pembangunan, dan pelestarian budaya.</p>
                         <ul class="space-y-1.5 mb-6">
-                            @foreach (['Buletin KDK aktif sejak 1982 — media alternatif tertua di Papua','Dokumentasi gerakan dan perjuangan masyarakat adat','Arsip digital untuk pelestarian sejarah Papua','Jurnalisme komunitas oleh dan untuk masyarakat kampung','Distribusi ke jaringan advokasi nasional & internasional'] as $p)
+                            @foreach (['Buletin KDK aktif sejak 1982 — media alternatif tertua di Papua','Dokumentasi gerakan dan perjuangan masyarakat desa di Irian Jaya / Papua sekarang','Arsip digital untuk pelestarian sejarah Papua','Jurnalisme komunitas oleh dan untuk masyarakat kampung','Distribusi ke jaringan advokasi nasional & internasional'] as $p)
                             <li class="flex items-start gap-2 text-sm text-neutral-600"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>{{ $p }}</span></li>
                             @endforeach
                         </ul>
@@ -106,7 +106,7 @@
                     <div class="bg-white border border-neutral-100 p-6 shadow-card">
                         <div class="w-10 h-10 bg-primary-50 flex items-center justify-center mb-3"><i class="fa-solid fa-clock-rotate-left text-primary-500"></i></div>
                         <h4 class="font-display font-bold text-neutral-900 mb-1">40+ Tahun Publikasi</h4>
-                        <p class="text-neutral-500 text-sm leading-relaxed">KDK telah menjadi suara masyarakat adat Papua selama lebih dari empat dekade, mencatat perjalanan perjuangan dan pembangunan.</p>
+                        <p class="text-neutral-500 text-sm leading-relaxed">KDK telah menjadi suara masyarakat desa di Irian Jaya / Papua sekarang selama lebih dari empat dekade, mencatat perjalanan perjuangan dan pembangunan.</p>
                     </div>
                     <div class="bg-white border border-neutral-100 p-6 shadow-card">
                         <div class="w-10 h-10 bg-primary-50 flex items-center justify-center mb-3"><i class="fa-solid fa-globe text-primary-500"></i></div>
@@ -116,7 +116,7 @@
                     <div class="bg-white border border-neutral-100 p-6 shadow-card">
                         <div class="w-10 h-10 bg-primary-50 flex items-center justify-center mb-3"><i class="fa-solid fa-book-open text-primary-500"></i></div>
                         <h4 class="font-display font-bold text-neutral-900 mb-1">Arsip Sejarah</h4>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Edisi-edisi KDK kini didigitalisasi sebagai sumber referensi sejarah dan budaya masyarakat adat Papua yang tak ternilai.</p>
+                        <p class="text-neutral-500 text-sm leading-relaxed">Edisi-edisi KDK kini didigitalisasi sebagai sumber referensi sejarah dan budaya masyarakat desa di Irian Jaya / Papua sekarang yang tak ternilai.</p>
                     </div>
                 </div>
             </div>
@@ -291,7 +291,7 @@
 
             <hr class="border-neutral-200">
 
-            {{-- 05. Pendampingan Masyarakat Adat --}}
+            {{-- 05. Pendampingan Masyarakat Desa di Irian Jaya / Papua Sekarang --}}
             <div id="pendampingan" class="scroll-mt-24">
                 <div class="grid md:grid-cols-2 gap-10 items-center fade-in">
                     <div>
@@ -299,10 +299,10 @@
                             <div class="w-10 h-10 bg-accent-50 flex items-center justify-center"><i class="fa-solid fa-users text-accent-400"></i></div>
                             <span class="text-5xl font-display font-bold text-neutral-200">05</span>
                         </div>
-                        <h3 class="text-xl font-display font-bold text-neutral-900 mb-3">Pendampingan Masyarakat Adat</h3>
-                        <p class="text-neutral-600 leading-relaxed mb-4">Program inti YPMD IRJA adalah mendampingi dan mengorganisir masyarakat adat Papua agar mampu mengadvokasi hak-hak mereka atas tanah ulayat dan sumber daya alam. Melalui pendidikan hukum, penguatan organisasi komunitas, dan jaringan advokasi, masyarakat adat dibekali kemampuan untuk memperjuangkan hak-haknya secara mandiri.</p>
+                        <h3 class="text-xl font-display font-bold text-neutral-900 mb-3">Pendampingan Masyarakat Desa di Irian Jaya / Papua Sekarang</h3>
+                        <p class="text-neutral-600 leading-relaxed mb-4">Program inti YPMD IRJA adalah mendampingi dan mengorganisir masyarakat desa di Irian Jaya / Papua sekarang agar mampu mengadvokasi hak-hak mereka atas tanah ulayat dan sumber daya alam. Melalui pendidikan hukum, penguatan organisasi komunitas, dan jaringan advokasi, masyarakat desa di Irian Jaya / Papua sekarang dibekali kemampuan untuk memperjuangkan hak-haknya secara mandiri.</p>
                         <ul class="space-y-1.5 mb-6">
-                            @foreach (['Pendidikan hukum adat dan hak-hak masyarakat adat','Penguatan organisasi dan kelembagaan komunitas','Advokasi hak tanah ulayat dan sumber daya alam','Jaringan advokasi di tingkat nasional & internasional','Pendokumentasian kearifan lokal dan budaya adat Papua'] as $p)
+                            @foreach (['Pendidikan hukum adat dan hak-hak masyarakat desa di Irian Jaya / Papua sekarang','Penguatan organisasi dan kelembagaan komunitas','Advokasi hak tanah ulayat dan sumber daya alam','Jaringan advokasi di tingkat nasional & internasional','Pendokumentasian kearifan lokal dan budaya adat Papua'] as $p)
                             <li class="flex items-start gap-2 text-sm text-neutral-600"><i class="fa-solid fa-check text-accent-400 mt-0.5 text-xs"></i><span>{{ $p }}</span></li>
                             @endforeach
                         </ul>
@@ -310,7 +310,7 @@
                     <div class="h-72 bg-accent-50 rounded-lg shadow-card flex flex-col items-center justify-center gap-4">
                         <i class="fa-solid fa-users text-6xl text-accent-200"></i>
                         <div class="text-center">
-                            <p class="text-accent-500 font-display font-bold text-lg">Masyarakat Adat</p>
+                            <p class="text-accent-500 font-display font-bold text-lg">Masyarakat Desa di Irian Jaya / Papua Sekarang</p>
                             <p class="text-accent-300 text-sm">Advokasi &middot; Organisasi &middot; Hak Ulayat</p>
                         </div>
                     </div>
@@ -320,17 +320,17 @@
                     <div class="bg-white border border-neutral-100 p-6 shadow-card">
                         <div class="w-10 h-10 bg-accent-50 flex items-center justify-center mb-3"><i class="fa-solid fa-scale-balanced text-accent-400"></i></div>
                         <h4 class="font-display font-bold text-neutral-900 mb-1">Pendidikan Hukum</h4>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Edukasi tentang hak-hak hukum masyarakat adat, termasuk UU terkait tanah ulayat, sumber daya alam, dan hak asasi manusia.</p>
+                        <p class="text-neutral-500 text-sm leading-relaxed">Edukasi tentang hak-hak hukum masyarakat desa di Irian Jaya / Papua sekarang, termasuk UU terkait tanah ulayat, sumber daya alam, dan hak asasi manusia.</p>
                     </div>
                     <div class="bg-white border border-neutral-100 p-6 shadow-card">
                         <div class="w-10 h-10 bg-accent-50 flex items-center justify-center mb-3"><i class="fa-solid fa-sitemap text-accent-400"></i></div>
                         <h4 class="font-display font-bold text-neutral-900 mb-1">Penguatan Organisasi</h4>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Membantu masyarakat adat membentuk dan mengelola organisasi komunitas yang kuat sebagai wadah aspirasi dan perjuangan bersama.</p>
+                        <p class="text-neutral-500 text-sm leading-relaxed">Membantu masyarakat desa di Irian Jaya / Papua sekarang membentuk dan mengelola organisasi komunitas yang kuat sebagai wadah aspirasi dan perjuangan bersama.</p>
                     </div>
                     <div class="bg-white border border-neutral-100 p-6 shadow-card">
                         <div class="w-10 h-10 bg-accent-50 flex items-center justify-center mb-3"><i class="fa-solid fa-earth-asia text-accent-400"></i></div>
                         <h4 class="font-display font-bold text-neutral-900 mb-1">Jaringan Advokasi</h4>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Membangun kemitraan dengan lembaga advokasi lokal, nasional, dan internasional untuk memperkuat suara masyarakat adat Papua.</p>
+                        <p class="text-neutral-500 text-sm leading-relaxed">Membangun kemitraan dengan lembaga advokasi lokal, nasional, dan internasional untuk memperkuat suara masyarakat desa di Irian Jaya / Papua sekarang.</p>
                     </div>
                 </div>
             </div>
@@ -342,7 +342,7 @@
     <section class="bg-primary-600 py-16">
         <div class="max-w-7xl mx-auto px-6 text-center fade-in">
             <h2 class="text-2xl md:text-3xl font-display font-bold text-white mb-4">Dukung Program Kami</h2>
-            <p class="text-primary-200 text-lg max-w-lg mx-auto mb-8">Setiap kontribusi membantu mewujudkan kemandirian ekonomi dan keadilan sosial bagi masyarakat adat Papua.</p>
+            <p class="text-primary-200 text-lg max-w-lg mx-auto mb-8">Setiap kontribusi membantu mewujudkan kemandirian ekonomi dan keadilan sosial bagi masyarakat desa di Irian Jaya / Papua sekarang.</p>
             <div class="flex flex-wrap justify-center gap-4">
                 <a href="{{ route('donasi') }}" class="bg-white text-primary-600 px-8 py-3 text-sm font-semibold hover:bg-neutral-100 transition-colors shadow-card">
                     <i class="fa-solid fa-heart mr-2"></i>Donasi Sekarang

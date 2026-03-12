@@ -29,14 +29,14 @@
                                 <i class="fa-solid fa-microscope text-primary-500 mt-1 text-sm"></i>
                                 <div>
                                     <p class="font-semibold text-neutral-800">Penelitian</p>
-                                    <p class="text-neutral-500 text-sm">Riset partisipatif mengenai isu masyarakat adat, sumber daya alam, dan kebijakan pembangunan di Tanah Papua.</p>
+                                    <p class="text-neutral-500 text-sm">Riset partisipatif mengenai isu masyarakat desa di Irian Jaya / Papua sekarang, sumber daya alam, dan kebijakan pembangunan di Tanah Papua.</p>
                                 </div>
                             </li>
                             <li class="flex gap-3 items-start">
                                 <i class="fa-solid fa-newspaper text-primary-500 mt-1 text-sm"></i>
                                 <div>
                                     <p class="font-semibold text-neutral-800">Penerbitan Kabar Dari Kampung</p>
-                                    <p class="text-neutral-500 text-sm">Produksi dan distribusi buletin <em>Kabar Dari Kampung</em> (KDK) sebagai media alternatif masyarakat adat Papua sejak 1982.</p>
+                                    <p class="text-neutral-500 text-sm">Produksi dan distribusi buletin <em>Kabar Dari Kampung</em> (KDK) sebagai media alternatif masyarakat desa di Irian Jaya / Papua sekarang sejak 1982.</p>
                                 </div>
                             </li>
                             <li class="flex gap-3 items-start">

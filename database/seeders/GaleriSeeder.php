@@ -23,7 +23,7 @@ class GaleriSeeder extends Seeder
         $albums = [
             [
                 'judul'     => 'YPMD IRJA — 38 Tahun Berkarya',
-                'deskripsi' => 'Dokumentasi peringatan 38 tahun YPMD IRJA dalam mendampingi masyarakat adat Papua.',
+                'deskripsi' => 'Dokumentasi peringatan 38 tahun YPMD IRJA dalam mendampingi masyarakat desa di Irian Jaya / Papua sekarang.',
                 'kategori'  => 'Kegiatan',
                 'images'    => [
                     'ypmd-irja-ulang-tahun-38-jubi.jpg',
@@ -44,7 +44,7 @@ class GaleriSeeder extends Seeder
             ],
             [
                 'judul'     => 'Seni & Arsitektur Tradisional Papua',
-                'deskripsi' => 'Dokumentasi seni ukir, arsitektur tradisional, dan warisan budaya masyarakat adat Papua.',
+                'deskripsi' => 'Dokumentasi seni ukir, arsitektur tradisional, dan warisan budaya masyarakat desa di Irian Jaya / Papua sekarang.',
                 'kategori'  => 'Budaya',
                 'images'    => [
                     'honai.png',
@@ -53,7 +53,7 @@ class GaleriSeeder extends Seeder
                 ],
             ],
             [
-                'judul'     => 'Kehidupan Masyarakat Adat',
+                'judul'     => 'Kehidupan Masyarakat Desa di Irian Jaya / Papua Sekarang',
                 'deskripsi' => 'Kehidupan sehari-hari masyarakat kampung Papua yang menjadi sasaran program YPMD IRJA.',
                 'kategori'  => 'Komunitas',
                 'images'    => [

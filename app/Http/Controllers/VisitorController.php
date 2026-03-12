@@ -139,9 +139,59 @@ class VisitorController extends Controller
 
     public function kdk()
     {
-        $kdkList = Kdk::with('media')->orderByDesc('tanggal_terbit')->paginate(12);
+        $query = Kdk::with('media');
 
-        return view('visitor.kdk', compact('kdkList'));
+        if (request('cari')) {
+            $query->where(function ($q) {
+                $q->where('judul', 'like', '%' . request('cari') . '%')
+                  ->orWhere('deskripsi', 'like', '%' . request('cari') . '%')
+                  ->orWhere('nomor_edisi', 'like', '%' . request('cari') . '%');
+            });
+        }
+
+        $tahunAktif = request('tahun');
+        if ($tahunAktif) {
+            $query->whereYear('tanggal_terbit', $tahunAktif);
+        }
+
+        $kdkList = $query->orderByDesc('tanggal_terbit')->paginate(12)->withQueryString();
+
+        // Daftar tahun dengan jumlah buletin untuk sidebar
+        $tahunList = Kdk::selectRaw('YEAR(tanggal_terbit) as tahun, COUNT(*) as jumlah')
+            ->whereNotNull('tanggal_terbit')
+            ->groupByRaw('YEAR(tanggal_terbit)')
+            ->orderByDesc('tahun')
+            ->get();
+
+        return view('visitor.kdk', compact('kdkList', 'tahunList', 'tahunAktif'));
+    }
+
+    public function kdkDetail(string $id)
+    {
+        $kdk = Kdk::with('media')->findOrFail($id);
+
+        $kdk->increment('jumlah_dibaca');
+
+        $kdkLainnya = Kdk::with('media')
+            ->where('id', '!=', $kdk->id)
+            ->orderByDesc('tanggal_terbit')
+            ->take(6)
+            ->get();
+
+        return view('visitor.kdk-detail', compact('kdk', 'kdkLainnya'));
+    }
+
+    public function kdkDownload(string $id)
+    {
+        $kdk = Kdk::findOrFail($id);
+
+        if (!$kdk->file_pdf || !Storage::disk('public')->exists($kdk->file_pdf)) {
+            abort(404, 'File PDF tidak ditemukan.');
+        }
+
+        $kdk->increment('jumlah_unduhan');
+
+        return Storage::disk('public')->download($kdk->file_pdf, 'KDK-Edisi-' . $kdk->nomor_edisi . '.pdf');
     }
 
     public function donasi()

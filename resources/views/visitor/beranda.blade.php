@@ -20,7 +20,7 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
         <div class="max-w-7xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center">
             <div class="fade-in">
                 <span class="inline-block text-xs font-semibold tracking-widest uppercase text-primary-500 mb-4">
-                    <i class="fa-solid fa-leaf mr-2"></i>Pionir Pemberdayaan Masyarakat Adat &middot; Sejak 1984 &middot; Jayapura, Papua
+                    <i class="fa-solid fa-leaf mr-2"></i>Pionir Pemberdayaan Masyarakat Desa di Irian Jaya / Papua Sekarang &middot; Sejak 1984 &middot; Jayapura, Papua
                 </span>
                 <h1 class="text-3xl md:text-5xl font-display font-bold text-neutral-900 leading-tight mb-5">
                     Yayasan Pembangunan<br/>
@@ -28,7 +28,7 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
                     Irian Jaya
                 </h1>
                 <p class="text-neutral-500 text-lg leading-relaxed mb-8 max-w-md">
-                    {{ $situs['deskripsi_situs'] ?? 'LSM pertama di Tanah Papua yang lahir dari keresahan kelompok idealis Gereja dan Tokoh Masyarakat, hadir sebagai jembatan informasi dan agen perubahan bagi masyarakat adat dalam mempertahankan hak-hak mereka atas tanah dan sumber daya alam.' }}
+                    {{ $situs['deskripsi_situs'] ?? 'LSM pertama di Tanah Papua yang lahir dari keresahan kelompok idealis Gereja dan Tokoh Masyarakat, hadir sebagai jembatan informasi dan agen perubahan bagi masyarakat desa di Irian Jaya / Papua sekarang dalam mempertahankan hak-hak mereka atas tanah dan sumber daya alam.' }}
                 </p>
                 <div class="flex flex-wrap gap-3">
                     <a href="{{ route('program') }}" class="bg-primary-500 text-white px-6 py-2.5 text-sm font-semibold hover:bg-primary-600 transition-colors shadow-card">Lihat Program</a>
@@ -105,7 +105,7 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
             <div class="mb-12 fade-in">
                 <span class="text-xs font-semibold tracking-widest uppercase text-primary-500"><i class="fa-solid fa-newspaper mr-2"></i>Buletin</span>
                 <h2 class="text-2xl md:text-4xl font-display font-bold text-neutral-900 mt-2">KDK Terbaru</h2>
-                <p class="text-neutral-500 text-lg mt-3 max-w-xl">Edisi terbaru buletin <em>Kabar Dari Kampung</em> &mdash; media alternatif masyarakat adat Papua sejak 1982.</p>
+                <p class="text-neutral-500 text-lg mt-3 max-w-xl">Edisi terbaru buletin <em>Kabar Dari Kampung</em> &mdash; media alternatif masyarakat desa di Irian Jaya / Papua sekarang sejak 1982.</p>
             </div>
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse ($kdkTerbaru as $k)
@@ -263,7 +263,7 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
     <section class="bg-primary-600 py-16">
         <div class="max-w-7xl mx-auto px-6 text-center fade-in">
             <h2 class="text-2xl md:text-3xl font-display font-bold text-white mb-4">Bersama Membangun Papua</h2>
-            <p class="text-primary-200 text-lg max-w-lg mx-auto mb-8">Dukung program pemberdayaan masyarakat adat Papua. Setiap kontribusi membantu mewujudkan kemandirian ekonomi dan keadilan sosial.</p>
+            <p class="text-primary-200 text-lg max-w-lg mx-auto mb-8">Dukung program pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang. Setiap kontribusi membantu mewujudkan kemandirian ekonomi dan keadilan sosial.</p>
             <div class="flex flex-wrap justify-center gap-4">
                 <a href="{{ route('donasi') }}" class="bg-white text-primary-600 px-8 py-3 text-sm font-semibold hover:bg-neutral-100 transition-colors shadow-card">
                     <i class="fa-solid fa-heart mr-2"></i>Donasi Sekarang

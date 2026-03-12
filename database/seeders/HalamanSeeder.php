@@ -16,7 +16,7 @@ class HalamanSeeder extends Seeder
             [
                 'judul'     => 'Sejarah YPMD IRJA',
                 'slug'      => 'sejarah',
-                'keterangan'=> 'Perjalanan 40 tahun pengabdian mendampingi masyarakat adat Papua sejak 1982',
+                'keterangan'=> 'Perjalanan 40 tahun pengabdian mendampingi masyarakat desa di Irian Jaya / Papua sekarang sejak 1982',
                 'urutan'    => 1,
                 'konten'    => <<<'HTML'
 <section class="py-20 bg-white">
@@ -26,7 +26,7 @@ class HalamanSeeder extends Seeder
         <div class="space-y-5 text-neutral-600 leading-relaxed">
             <p>Yayasan Pembangunan Masyarakat Desa Irian Jaya (YPMD IRJA) merupakan Lembaga Swadaya Masyarakat (LSM) pertama di Tanah Papua. Yayasan ini lahir dari keresahan sekelompok idealis yang berasal dari kalangan Gereja dan Tokoh Masyarakat.</p>
             <p>Pada tahun 1982, kelompok ini mulai menerbitkan buletin <em>Kabar Dari Kampung</em> (KDK) sebagai media alternatif. Dua tahun kemudian, pada <strong>1984</strong>, kelompok ini secara resmi mendirikan YPMD IRJA sebagai lembaga formal.</p>
-            <p>Sejak awal berdirinya, YPMD IRJA berkomitmen menempatkan masyarakat adat Papua sebagai <em>subjek</em> — bukan objek — dalam proses pembangunan. Lembaga ini hadir sebagai jembatan informasi dan agen perubahan bagi masyarakat dalam mempertahankan hak-hak mereka atas tanah dan sumber daya alam.</p>
+            <p>Sejak awal berdirinya, YPMD IRJA berkomitmen menempatkan masyarakat desa di Irian Jaya / Papua sekarang sebagai <em>subjek</em> — bukan objek — dalam proses pembangunan. Lembaga ini hadir sebagai jembatan informasi dan agen perubahan bagi masyarakat dalam mempertahankan hak-hak mereka atas tanah dan sumber daya alam.</p>
             <p>Selama lebih dari empat dekade, YPMD IRJA telah mendampingi masyarakat di berbagai wilayah Papua, mengembangkan program ekonomi berbasis komunitas, dan membangun jaringan dengan lembaga internasional.</p>
         </div>
         <div class="mt-16">
@@ -60,7 +60,7 @@ class HalamanSeeder extends Seeder
                     <div class="absolute -left-10 w-4 h-4 rounded-full bg-primary-500 border-2 border-white shadow"></div>
                     <span class="inline-block text-xs font-bold bg-primary-50 text-primary-600 px-3 py-1 mb-2">2022</span>
                     <h4 class="font-display font-bold text-neutral-900">HUT ke-38</h4>
-                    <p class="text-neutral-500 text-sm mt-1">Merayakan 38 tahun pengabdian bersama masyarakat adat Papua.</p>
+                    <p class="text-neutral-500 text-sm mt-1">Merayakan 38 tahun pengabdian bersama masyarakat desa di Irian Jaya / Papua sekarang.</p>
                 </div>
             </div>
         </div>
@@ -85,7 +85,7 @@ HTML,
             <div class="fade-in">
                 <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2"><i class="fa-solid fa-building mr-2"></i>Organisasi</p>
                 <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900 mb-6">Tentang YPMD IRJA</h2>
-                <p class="text-neutral-600 leading-relaxed mb-4">Yayasan Pembangunan Masyarakat Desa Irian Jaya (YPMD IRJA) adalah lembaga non-pemerintah nirlaba yang bergerak di bidang pemberdayaan masyarakat adat Papua. Berdiri sejak 1984, YPMD IRJA merupakan LSM pertama di Tanah Papua.</p>
+                <p class="text-neutral-600 leading-relaxed mb-4">Yayasan Pembangunan Masyarakat Desa Irian Jaya (YPMD IRJA) adalah lembaga non-pemerintah nirlaba yang bergerak di bidang pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang. Berdiri sejak 1984, YPMD IRJA merupakan LSM pertama di Tanah Papua.</p>
                 <p class="text-neutral-600 leading-relaxed mb-6">Berbasis di Jayapura, lembaga ini bekerja di empat wilayah utama Papua dengan fokus pada pendampingan komunitas, ekonomi berbasis masyarakat, dan advokasi hak-hak adat.</p>
             </div>
             <div class="space-y-8">
@@ -94,7 +94,7 @@ HTML,
                         <div class="w-8 h-8 bg-primary-50 flex items-center justify-center"><i class="fa-solid fa-eye text-primary-500"></i></div>
                         <h3 class="font-display font-bold text-neutral-900">Visi</h3>
                     </div>
-                    <p class="text-neutral-600 leading-relaxed pl-11">Terwujudnya masyarakat adat Papua yang mandiri, berdaulat, dan bermartabat dalam mengelola kehidupan dan sumber daya alamnya secara berkelanjutan.</p>
+                    <p class="text-neutral-600 leading-relaxed pl-11">Terwujudnya masyarakat desa di Irian Jaya / Papua sekarang yang mandiri, berdaulat, dan bermartabat dalam mengelola kehidupan dan sumber daya alamnya secara berkelanjutan.</p>
                 </div>
                 <div class="fade-in">
                     <div class="flex items-center gap-3 mb-3">
@@ -102,9 +102,9 @@ HTML,
                         <h3 class="font-display font-bold text-neutral-900">Misi</h3>
                     </div>
                     <ul class="text-neutral-600 space-y-2 pl-11">
-                        <li class="flex gap-2"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>Mendampingi dan mengorganisir masyarakat adat sebagai subjek pembangunan</span></li>
+                        <li class="flex gap-2"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>Mendampingi dan mengorganisir masyarakat desa di Irian Jaya / Papua sekarang sebagai subjek pembangunan</span></li>
                         <li class="flex gap-2"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>Mengembangkan program ekonomi berbasis komunitas yang berkelanjutan</span></li>
-                        <li class="flex gap-2"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>Mengadvokasi hak-hak masyarakat adat atas tanah dan sumber daya alam</span></li>
+                        <li class="flex gap-2"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>Mengadvokasi hak-hak masyarakat desa di Irian Jaya / Papua sekarang atas tanah dan sumber daya alam</span></li>
                         <li class="flex gap-2"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>Membangun jaringan kemitraan lokal, nasional, dan internasional</span></li>
                     </ul>
                 </div>
@@ -266,7 +266,7 @@ HTML,
             </div>
             <div class="bg-white p-6 shadow-card fade-in">
                 <p class="text-xs text-neutral-400 uppercase tracking-wider mb-1">Bidang Fokus</p>
-                <p class="font-semibold text-neutral-900">Pemberdayaan Masyarakat Adat Papua</p>
+                <p class="font-semibold text-neutral-900">Pemberdayaan Masyarakat Desa di Irian Jaya / Papua Sekarang</p>
             </div>
         </div>
     </div>
@@ -299,14 +299,14 @@ HTML,
                             <i class="fa-solid fa-microscope text-primary-500 mt-1 text-sm"></i>
                             <div>
                                 <p class="font-semibold text-neutral-800">Penelitian</p>
-                                <p class="text-neutral-500 text-sm">Riset partisipatif mengenai isu masyarakat adat, sumber daya alam, dan kebijakan pembangunan di Tanah Papua.</p>
+                                <p class="text-neutral-500 text-sm">Riset partisipatif mengenai isu masyarakat desa di Irian Jaya / Papua sekarang, sumber daya alam, dan kebijakan pembangunan di Tanah Papua.</p>
                             </div>
                         </li>
                         <li class="flex gap-3 items-start">
                             <i class="fa-solid fa-newspaper text-primary-500 mt-1 text-sm"></i>
                             <div>
                                 <p class="font-semibold text-neutral-800">Penerbitan Kabar Dari Kampung</p>
-                                <p class="text-neutral-500 text-sm">Produksi dan distribusi buletin <em>Kabar Dari Kampung</em> (KDK) sebagai media alternatif masyarakat adat Papua sejak 1982.</p>
+                                <p class="text-neutral-500 text-sm">Produksi dan distribusi buletin <em>Kabar Dari Kampung</em> (KDK) sebagai media alternatif masyarakat desa di Irian Jaya / Papua sekarang sejak 1982.</p>
                             </div>
                         </li>
                         <li class="flex gap-3 items-start">
@@ -422,7 +422,7 @@ HTML,
         <div class="max-w-2xl mb-14 fade-in">
             <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2"><i class="fa-solid fa-handshake mr-2"></i>Kemitraan</p>
             <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900 mb-4">Bersama Membangun Papua</h2>
-            <p class="text-neutral-600 leading-relaxed">Selama lebih dari 40 tahun, YPMD IRJA telah menjalin kemitraan strategis dengan berbagai lembaga internasional, pemerintah, organisasi non-pemerintah, dan sektor korporasi. Kemitraan ini menjadi fondasi keberlanjutan program-program pemberdayaan masyarakat adat Papua.</p>
+            <p class="text-neutral-600 leading-relaxed">Selama lebih dari 40 tahun, YPMD IRJA telah menjalin kemitraan strategis dengan berbagai lembaga internasional, pemerintah, organisasi non-pemerintah, dan sektor korporasi. Kemitraan ini menjadi fondasi keberlanjutan program-program pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang.</p>
         </div>
 
         <div class="mb-14">
@@ -459,7 +459,7 @@ HTML,
                     <div class="p-5">
                         <h4 class="font-display font-bold text-neutral-900 text-sm leading-tight">PKN</h4>
                         <p class="text-xs text-primary-500 font-semibold uppercase tracking-wider mb-2">Belanda</p>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Perkumpulan Kristen Nederland — penerus ICCO yang terus mendukung program pemberdayaan masyarakat adat Papua.</p>
+                        <p class="text-neutral-500 text-sm leading-relaxed">Perkumpulan Kristen Nederland — penerus ICCO yang terus mendukung program pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang.</p>
                     </div>
                 </div>
                 <div class="bg-neutral-50 border border-neutral-100 fade-in hover:border-primary-200 hover:shadow-card transition">
@@ -479,7 +479,7 @@ HTML,
                     <div class="p-5">
                         <h4 class="font-display font-bold text-neutral-900 text-sm leading-tight">BFDBW</h4>
                         <p class="text-xs text-primary-500 font-semibold uppercase tracking-wider mb-2">Jerman</p>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Lembaga mitra dari Jerman yang memberikan dukungan program pemberdayaan masyarakat adat Papua.</p>
+                        <p class="text-neutral-500 text-sm leading-relaxed">Lembaga mitra dari Jerman yang memberikan dukungan program pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang.</p>
                     </div>
                 </div>
             </div>
@@ -560,7 +560,7 @@ HTML,
 <section class="bg-primary-600 py-14">
     <div class="max-w-7xl mx-auto px-6 text-center fade-in">
         <h2 class="text-2xl md:text-3xl font-display font-bold text-white mb-3">Tertarik Bermitra dengan YPMD IRJA?</h2>
-        <p class="text-primary-200 text-lg mb-8">Kami terbuka untuk kolaborasi dengan lembaga, pemerintah, dan sektor swasta yang memiliki komitmen terhadap pemberdayaan masyarakat adat Papua.</p>
+        <p class="text-primary-200 text-lg mb-8">Kami terbuka untuk kolaborasi dengan lembaga, pemerintah, dan sektor swasta yang memiliki komitmen terhadap pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang.</p>
         <a href="/kontak" class="inline-flex items-center gap-2 bg-white text-primary-600 px-8 py-3 text-sm font-semibold hover:bg-neutral-100 transition-colors shadow-card">
             <i class="fa-solid fa-envelope"></i> Hubungi Kami
         </a>
@@ -593,7 +593,7 @@ HTML,
                     </h3>
                 </div>
                 <div class="p-5">
-                    <p class="text-neutral-600 leading-relaxed">YPMD IRJA (Yayasan Pembangunan Masyarakat Desa Irian Jaya) adalah Lembaga Swadaya Masyarakat (LSM) pertama di Tanah Papua, didirikan pada tahun 1984. Lembaga ini bergerak di bidang pemberdayaan masyarakat adat Papua melalui program ekonomi berbasis komunitas, advokasi hak-hak tanah adat, dan penerbitan media alternatif.</p>
+                    <p class="text-neutral-600 leading-relaxed">YPMD IRJA (Yayasan Pembangunan Masyarakat Desa Irian Jaya) adalah Lembaga Swadaya Masyarakat (LSM) pertama di Tanah Papua, didirikan pada tahun 1984. Lembaga ini bergerak di bidang pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang melalui program ekonomi berbasis komunitas, advokasi hak-hak tanah adat, dan penerbitan media alternatif.</p>
                 </div>
             </div>
             <div class="border border-neutral-200 fade-in">
@@ -604,7 +604,7 @@ HTML,
                     </h3>
                 </div>
                 <div class="p-5">
-                    <p class="text-neutral-600 leading-relaxed">Kabar Dari Kampung (KDK) adalah buletin yang diterbitkan oleh YPMD IRJA sejak 1982. Buletin ini merupakan media alternatif yang menyuarakan realita kehidupan masyarakat adat Papua, meliputi isu tanah adat, pertanian, ekonomi komunitas, dan perkembangan kampung.</p>
+                    <p class="text-neutral-600 leading-relaxed">Kabar Dari Kampung (KDK) adalah buletin yang diterbitkan oleh YPMD IRJA sejak 1982. Buletin ini merupakan media alternatif yang menyuarakan realita kehidupan masyarakat desa di Irian Jaya / Papua sekarang, meliputi isu tanah adat, pertanian, ekonomi komunitas, dan perkembangan kampung.</p>
                 </div>
             </div>
             <div class="border border-neutral-200 fade-in">
