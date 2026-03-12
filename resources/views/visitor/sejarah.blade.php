@@ -4,14 +4,14 @@
 
 @section('content')
     <div class="bg-primary-600 py-16">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <span class="text-primary-200 text-xs uppercase tracking-widest"><a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> › Tentang › Sejarah</span>
             <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">Sejarah YPMD IRJA</h1>
         </div>
     </div>
 
     <section class="py-20 bg-white">
-        <div class="max-w-4xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2"><i class="fa-solid fa-leaf mr-2"></i>Tentang Kami</p>
             <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900 mb-6">Perjalanan 40 Tahun Pengabdian</h2>
             <img src="{{ asset('img/logo-ypmd-irja.png') }}" alt="Logo YPMD IRJA" class="w-full rounded-lg shadow-card mb-8 object-contain max-h-80 bg-white p-4"/>

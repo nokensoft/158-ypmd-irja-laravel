@@ -14,16 +14,16 @@
 </div>
 
 <footer class="bg-neutral-900 text-neutral-300">
-    <div class="max-w-6xl mx-auto px-6 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+    <div class="max-w-7xl mx-auto px-6 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
 
         {{-- Kolom 1: Logo + Deskripsi --}}
         <div>
             <div class="flex items-center gap-3 mb-4">
                 <span class="bg-white rounded p-1.5 inline-flex items-center justify-center">
                     @if (!empty($situs['logo']))
-                        <img src="{{ asset('storage/' . $situs['logo']) }}" alt="" class="h-8">
+                        <img src="{{ asset('storage/' . $situs['logo']) }}" alt="" class="h-16">
                     @else
-                        <img src="{{ asset('img/logo-ypmd-irja.png') }}" alt="" class="h-8">
+                        <img src="{{ asset('img/logo-ypmd-irja.png') }}" alt="" class="h-16">
                     @endif
                 </span>
                 <span class="font-display font-bold text-white text-base">{{ $situs['nama_situs'] ?? 'YPMD IRJA' }}</span>
@@ -35,31 +35,37 @@
 
         {{-- Kolom 2: Navigasi --}}
         <div>
-            <h4 class="text-white text-xs font-semibold uppercase tracking-widest mb-4">Navigasi</h4>
+            <h4 class="text-white text-xs font-semibold uppercase tracking-widest mb-4">{{ __('Navigasi') }}</h4>
             <ul class="space-y-2 text-sm">
-                <li><a href="{{ route('beranda') }}" class="hover:text-white transition-colors">Beranda</a></li>
-                <li><a href="{{ route('profil') }}" class="hover:text-white transition-colors">Profil Lembaga</a></li>
-                <li><a href="{{ route('sejarah') }}" class="hover:text-white transition-colors">Sejarah</a></li>
-                <li><a href="{{ route('program') }}" class="hover:text-white transition-colors">Program</a></li>
-                <li><a href="{{ route('kdk') }}" class="hover:text-white transition-colors">Buletin KDK</a></li>
-                <li><a href="{{ route('berita') }}" class="hover:text-white transition-colors">Papua Today</a></li>
+                <li><a href="{{ route('beranda') }}" class="hover:text-white transition-colors">{{ __('Beranda') }}</a></li>
+                <li><a href="{{ route('profil') }}" class="hover:text-white transition-colors">{{ __('Profil Lembaga') }}</a></li>
+                <li><a href="{{ route('sejarah') }}" class="hover:text-white transition-colors">{{ __('Sejarah Singkat') }}</a></li>
+                <li><a href="{{ route('program') }}" class="hover:text-white transition-colors">{{ __('Program') }}</a></li>
+                <li><a href="{{ route('kdk') }}" class="hover:text-white transition-colors">{{ __('Buletin KDK') }}</a></li>
+                <li><a href="{{ route('berita') }}" class="hover:text-white transition-colors">{{ __('Papua Today') }}</a></li>
             </ul>
         </div>
 
-        {{-- Kolom 3: Lainnya --}}
+        {{-- Kolom 3: Halaman (dinamis dari DB) --}}
         <div>
-            <h4 class="text-white text-xs font-semibold uppercase tracking-widest mb-4">Lainnya</h4>
+            <h4 class="text-white text-xs font-semibold uppercase tracking-widest mb-4">Halaman</h4>
             <ul class="space-y-2 text-sm">
-                <li><a href="{{ route('tokoh') }}" class="hover:text-white transition-colors">Tokoh Kunci</a></li>
                 <li><a href="{{ route('galeri') }}" class="hover:text-white transition-colors">Galeri</a></li>
                 <li><a href="{{ route('donasi') }}" class="hover:text-white transition-colors">Donasi</a></li>
                 <li><a href="{{ route('kontak') }}" class="hover:text-white transition-colors">Kontak</a></li>
+                @foreach ($halamanFooter->whereNotIn('slug', ['sejarah','profil','bidang-kerja','mitra']) as $hPage)
+                    <li>
+                        <a href="{{ route('halaman.show', $hPage->slug) }}" class="hover:text-white transition-colors">
+                            {{ $hPage->judul }}
+                        </a>
+                    </li>
+                @endforeach
             </ul>
         </div>
 
         {{-- Kolom 4: Kontak --}}
         <div>
-            <h4 class="text-white text-xs font-semibold uppercase tracking-widest mb-4">Kontak</h4>
+            <h4 class="text-white text-xs font-semibold uppercase tracking-widest mb-4">{{ __('Kontak') }}</h4>
             <ul class="space-y-2 text-sm text-neutral-400">
                 @if (!empty($situs['alamat']))
                     <li class="flex items-start gap-2">
@@ -95,8 +101,8 @@
 
     {{-- Copyright Bar --}}
     <div class="border-t border-neutral-800">
-        <div class="max-w-6xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p class="text-neutral-600 text-xs">&copy; {{ date('Y') }} {{ $situs['nama_situs'] ?? 'YPMD IRJA' }}. Seluruh hak cipta dilindungi.</p>
+        <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p class="text-neutral-600 text-xs">&copy; {{ date('Y') }} {{ $situs['nama_situs'] ?? 'YPMD IRJA' }}. {{ __('Seluruh hak cipta dilindungi.') }}</p>
             <div class="flex items-center gap-4">
                 {{-- Sosmed --}}
                 <div class="flex items-center gap-2">
@@ -116,10 +122,18 @@
                         <a href="#" class="w-7 h-7 bg-neutral-800 hover:bg-primary-500 flex items-center justify-center rounded transition-colors"><i class="fa-brands fa-youtube text-xs"></i></a>
                     @endif
                 </div>
+                @php
+                    $faqPage         = $halamanFooter->firstWhere('slug', 'faq');
+                    $disclaimerPage  = $halamanFooter->firstWhere('slug', 'disclaimer');
+                @endphp
                 <div class="flex items-center gap-3 text-xs text-neutral-500">
-                    <a href="#" class="hover:text-white transition-colors">FAQ</a>
-                    <span class="text-neutral-700">&middot;</span>
-                    <a href="#" class="hover:text-white transition-colors">Disclaimer</a>
+                    @if ($faqPage)
+                        <a href="{{ route('halaman.show', $faqPage->slug) }}" class="hover:text-white transition-colors">{{ $faqPage->judul }}</a>
+                        <span class="text-neutral-700">&middot;</span>
+                    @endif
+                    @if ($disclaimerPage)
+                        <a href="{{ route('halaman.show', $disclaimerPage->slug) }}" class="hover:text-white transition-colors">{{ $disclaimerPage->judul }}</a>
+                    @endif
                 </div>
             </div>
         </div>

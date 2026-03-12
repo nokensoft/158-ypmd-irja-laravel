@@ -1,10 +1,24 @@
 @extends('layouts.visitor')
-@section('title', $galeri->judul . ' - Galeri - ' . ($situs['nama_situs'] ?? 'KONI Papua Pegunungan'))
+@section('title', $galeri->judul . ' - Galeri - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
 @section('seo-title', $galeri->judul . ' - Galeri Foto')
 @section('seo-description', $galeri->deskripsi ?: 'Album galeri foto ' . $galeri->judul)
 @if ($galeri->media->first())
     @section('seo-image', asset('storage/' . $galeri->media->first()->file_path))
 @endif
+
+@section('json-ld')
+@php
+$_bc = ['@context'=>'https://schema.org','@type'=>'BreadcrumbList','itemListElement'=>[
+    ['@type'=>'ListItem','position'=>1,'name'=>'Beranda','item'=>route('beranda')],
+    ['@type'=>'ListItem','position'=>2,'name'=>'Galeri','item'=>route('galeri')],
+    ['@type'=>'ListItem','position'=>3,'name'=>$galeri->judul],
+]];
+$_ig = ['@context'=>'https://schema.org','@type'=>'ImageGallery','name'=>$galeri->judul,'description'=>$galeri->deskripsi ?? 'Album galeri foto '.$galeri->judul,'url'=>route('galeri.detail',$galeri->slug),'numberOfItems'=>$galeri->media->count()];
+$_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
+@endphp
+<script type="application/ld+json">{!! json_encode($_bc, $_f) !!}</script>
+<script type="application/ld+json">{!! json_encode($_ig, $_f) !!}</script>
+@endsection
 
 @section('content')
     @include('partials.page-banner', [

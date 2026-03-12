@@ -1,7 +1,7 @@
 @extends('layouts.visitor')
-@section('title', 'Struktur Pengurusan - ' . ($situs['nama_situs'] ?? 'KONI Papua Pegunungan'))
-@section('seo-title', 'Struktur Pengurusan - ' . ($situs['nama_situs'] ?? 'KONI Papua Pegunungan'))
-@section('seo-description', 'Struktur kepengurusan KONI Provinsi Papua Pegunungan masa bakti 2025–2029 berdasarkan SK KONI Pusat Nomor /69 Tahun 2025')
+@section('title', 'Struktur Pengurusan - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
+@section('seo-title', 'Struktur Pengurusan - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
+@section('seo-description', 'Struktur pengurusan ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
 
 @section('content')
     @include('partials.page-banner', ['title' => 'Struktur Pengurusan', 'breadcrumb' => 'Pengurusan'])

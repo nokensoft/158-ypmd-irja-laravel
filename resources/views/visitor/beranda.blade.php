@@ -7,7 +7,7 @@
 
     {{-- HERO --}}
     <section class="bg-white">
-        <div class="max-w-6xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center">
+        <div class="max-w-7xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center">
             <div class="fade-in">
                 <span class="inline-block text-xs font-semibold tracking-widest uppercase text-primary-500 mb-4">
                     <i class="fa-solid fa-leaf mr-2"></i>Pionir Pemberdayaan Masyarakat Adat &middot; Sejak 1984 &middot; Jayapura, Papua
@@ -25,13 +25,21 @@
                     <a href="{{ route('profil') }}" class="border border-neutral-300 text-neutral-700 px-6 py-2.5 text-sm font-semibold hover:border-primary-400 hover:text-primary-600 transition-colors">Tentang Kami</a>
                 </div>
             </div>
-            <div class="fade-in">
+            <div class="fade-in relative">
                 <img src="{{ asset('img/galeri/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD IRJA" class="w-full rounded-lg shadow-card object-cover"/>
+                {{-- Logo mengambang --}}
+                <div class="absolute bottom-0 right-6 translate-y-1/2 bg-white/95 backdrop-blur-sm shadow-xl rounded-xl px-4 py-3 flex items-center gap-3 border border-neutral-100">
+                    <img src="{{ asset('img/logo-ypmd-irja.png') }}" alt="YPMD IRJA" class="h-16 w-auto">
+                    <div class="leading-tight">
+                        <p class="text-sm font-bold text-primary-700">YPMD IRJA</p>
+                        <p class="text-xs text-neutral-400">Sejak 1984</p>
+                    </div>
+                </div>
             </div>
         </div>
         {{-- Stats Bar --}}
         <div class="border-t border-neutral-200 bg-neutral-50">
-            <div class="max-w-6xl mx-auto px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="max-w-7xl mx-auto px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-6">
                 <div class="text-center fade-in"><div class="text-3xl font-display font-bold text-primary-600">1984</div><div class="text-xs text-neutral-500 mt-1 uppercase tracking-wider">Tahun Berdiri</div></div>
                 <div class="text-center fade-in"><div class="text-3xl font-display font-bold text-primary-600">40+</div><div class="text-xs text-neutral-500 mt-1 uppercase tracking-wider">Tahun Berkarya</div></div>
                 <div class="text-center fade-in"><div class="text-3xl font-display font-bold text-accent-400">10+</div><div class="text-xs text-neutral-500 mt-1 uppercase tracking-wider">Tahun Ekspor Kakao</div></div>
@@ -42,7 +50,7 @@
 
     {{-- Papua Today / Berita --}}
     <section class="py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <div class="mb-12 fade-in">
                 <span class="text-xs font-semibold tracking-widest uppercase text-primary-500"><i class="fa-solid fa-blog mr-2"></i>Berita</span>
                 <h2 class="text-2xl md:text-4xl font-display font-bold text-neutral-900 mt-2">Papua Today</h2>
@@ -59,6 +67,9 @@
                                 <span>{{ $b->tanggal_terbit?->translatedFormat('d M Y') }}</span>
                             </div>
                             <h3 class="font-display font-bold text-neutral-900 mb-2 line-clamp-2">{{ $b->judul }}</h3>
+                            @if ($b->ringkasan)
+                                <p class="text-neutral-500 text-sm leading-relaxed mb-3 line-clamp-2">{{ $b->ringkasan }}</p>
+                            @endif
                             <a href="{{ route('berita.detail', $b->slug) }}" class="text-primary-600 text-sm font-semibold hover:text-primary-700">
                                 Baca Selengkapnya <i class="fa-solid fa-arrow-right text-xs ml-1"></i>
                             </a>
@@ -80,26 +91,21 @@
 
     {{-- KDK Terbaru --}}
     <section class="py-20 bg-neutral-50">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <div class="mb-12 fade-in">
                 <span class="text-xs font-semibold tracking-widest uppercase text-primary-500"><i class="fa-solid fa-newspaper mr-2"></i>Buletin</span>
                 <h2 class="text-2xl md:text-4xl font-display font-bold text-neutral-900 mt-2">KDK Terbaru</h2>
                 <p class="text-neutral-500 text-lg mt-3 max-w-xl">Edisi terbaru buletin <em>Kabar Dari Kampung</em> &mdash; media alternatif masyarakat adat Papua sejak 1982.</p>
             </div>
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                @foreach ([['edisi'=>'6','terbit'=>'September 1992'],['edisi'=>'5','terbit'=>'April 1990'],['edisi'=>'4','terbit'=>'November 1988']] as $kdk)
-                <article class="shadow-card card-hover bg-white border border-neutral-100 fade-in">
-                    <img src="https://placehold.co/400x560/f0f7f2/2d8057?text=KDK+Edisi+{{ $kdk['edisi'] }}" alt="Cover KDK Edisi {{ $kdk['edisi'] }}" class="w-full h-56 object-cover"/>
-                    <div class="p-5">
-                        <span class="text-xs font-semibold text-primary-500 uppercase tracking-wider">Edisi {{ $kdk['edisi'] }}</span>
-                        <h3 class="font-display font-bold text-neutral-900 mt-1 mb-2">Kabar dari Kampung &mdash; Edisi {{ $kdk['edisi'] }}</h3>
-                        <p class="text-neutral-400 text-xs mb-4">Terbit {{ $kdk['terbit'] }}</p>
-                        <a href="{{ route('kdk') }}" class="inline-flex items-center gap-2 bg-primary-500 text-white px-4 py-2 text-xs font-semibold hover:bg-primary-600 transition-colors">
-                            <i class="fa-solid fa-file-pdf"></i>Unduh PDF
-                        </a>
+                @forelse ($kdkTerbaru as $k)
+                    <x-kdk-card :kdk="$k" />
+                @empty
+                    <div class="col-span-full text-center py-12 text-neutral-400">
+                        <i class="fa-solid fa-book-open text-4xl mb-4 block"></i>
+                        <p>Belum ada edisi KDK yang dipublikasikan.</p>
                     </div>
-                </article>
-                @endforeach
+                @endforelse
             </div>
             <div class="text-center mt-10 fade-in">
                 <a href="{{ route('kdk') }}" class="inline-flex items-center gap-2 bg-primary-500 text-white px-8 py-3 text-sm font-semibold hover:bg-primary-600 transition-colors shadow-card">
@@ -111,44 +117,74 @@
 
     {{-- Program Unggulan --}}
     <section class="py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <div class="mb-12 fade-in">
                 <span class="text-xs font-semibold tracking-widest uppercase text-primary-500"><i class="fa-solid fa-list-check mr-2"></i>Kegiatan</span>
                 <h2 class="text-2xl md:text-4xl font-display font-bold text-neutral-900 mt-2">Program Unggulan</h2>
+                <p class="text-neutral-500 text-lg mt-3 max-w-2xl">Empat pilar program utama YPMD IRJA dalam memberdayakan masyarakat kampung di Papua.</p>
             </div>
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                {{-- 1. Informasi --}}
                 <article class="shadow-card card-hover bg-white border border-neutral-100 fade-in">
                     <div class="h-1.5 bg-primary-500"></div>
                     <div class="p-6">
-                        <div class="w-10 h-10 bg-primary-50 flex items-center justify-center mb-4"><i class="fa-solid fa-circle-info text-primary-500"></i></div>
+                        <div class="w-12 h-12 bg-primary-50 flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-newspaper text-xl text-primary-500"></i>
+                        </div>
                         <h3 class="font-display font-bold text-neutral-900 mb-2">Informasi</h3>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Penelitian, penerbitan buletin Kabar Dari Kampung (KDK), serta pengelolaan dokumentasi dan perpustakaan.</p>
+                        <p class="text-neutral-500 text-sm leading-relaxed">Penyebaran informasi pembangunan masyarakat melalui Buletin <em>Kabar Dari Kampung</em> (KDK) sebagai media alternatif warga Papua.</p>
+                        <a href="{{ route('kdk') }}" class="inline-flex items-center gap-1 mt-4 text-primary-600 text-xs font-semibold hover:text-primary-700">
+                            Buletin KDK <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
                     </div>
                 </article>
+
+                {{-- 2. Ekonomi Kerakyatan --}}
                 <article class="shadow-card card-hover bg-white border border-neutral-100 fade-in">
                     <div class="h-1.5 bg-accent-400"></div>
                     <div class="p-6">
-                        <div class="w-10 h-10 bg-accent-50 flex items-center justify-center mb-4"><i class="fa-solid fa-hand-holding-dollar text-accent-400"></i></div>
+                        <div class="w-12 h-12 bg-accent-50 flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-chart-line text-xl text-accent-500"></i>
+                        </div>
                         <h3 class="font-display font-bold text-neutral-900 mb-2">Ekonomi Kerakyatan</h3>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Pengembangan potensi ekonomi masyarakat, aksesibilitas pasar, serta program saving/simpanan keuangan berbasis komunitas.</p>
+                        <p class="text-neutral-500 text-sm leading-relaxed">Pengembangan potensi lokal, aksesibilitas pasar, dan penguatan simpanan/tabungan keuangan masyarakat kampung.</p>
+                        <a href="{{ route('program') }}" class="inline-flex items-center gap-1 mt-4 text-accent-600 text-xs font-semibold hover:text-accent-700">
+                            Selengkapnya <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
                     </div>
                 </article>
+
+                {{-- 3. Clean Water Supply --}}
                 <article class="shadow-card card-hover bg-white border border-neutral-100 fade-in">
-                    <div class="h-1.5 bg-primary-400"></div>
+                    <div class="h-1.5 bg-sky-400"></div>
                     <div class="p-6">
-                        <div class="w-10 h-10 bg-primary-50 flex items-center justify-center mb-4"><i class="fa-solid fa-droplet text-primary-500"></i></div>
+                        <div class="w-12 h-12 bg-sky-50 flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-droplet text-xl text-sky-500"></i>
+                        </div>
                         <h3 class="font-display font-bold text-neutral-900 mb-2">Clean Water Supply</h3>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Penyediaan air bersih bagi masyarakat kampung di wilayah pedalaman Papua untuk meningkatkan kualitas hidup.</p>
+                        <p class="text-neutral-500 text-sm leading-relaxed">Pembangunan dan pengelolaan instalasi air bersih di kampung-kampung terpencil untuk kebutuhan dasar warga.</p>
+                        <a href="{{ route('program') }}" class="inline-flex items-center gap-1 mt-4 text-sky-600 text-xs font-semibold hover:text-sky-700">
+                            Selengkapnya <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
                     </div>
                 </article>
+
+                {{-- 4. Promosi Usaha --}}
                 <article class="shadow-card card-hover bg-white border border-neutral-100 fade-in">
-                    <div class="h-1.5 bg-accent-400"></div>
+                    <div class="h-1.5 bg-amber-400"></div>
                     <div class="p-6">
-                        <div class="w-10 h-10 bg-accent-50 flex items-center justify-center mb-4"><i class="fa-solid fa-bullhorn text-accent-400"></i></div>
+                        <div class="w-12 h-12 bg-amber-50 flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-store text-xl text-amber-500"></i>
+                        </div>
                         <h3 class="font-display font-bold text-neutral-900 mb-2">Promosi Usaha</h3>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Promosi dan pemasaran produk usaha masyarakat adat Papua untuk memperluas jangkauan pasar lokal maupun internasional.</p>
+                        <p class="text-neutral-500 text-sm leading-relaxed">Peningkatan kapasitas bisnis usaha kecil menengah (UKM) masyarakat Papua agar mampu bersaing di pasar yang lebih luas.</p>
+                        <a href="{{ route('program') }}" class="inline-flex items-center gap-1 mt-4 text-amber-600 text-xs font-semibold hover:text-amber-700">
+                            Selengkapnya <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
                     </div>
                 </article>
+
             </div>
             <div class="text-center mt-10 fade-in">
                 <a href="{{ route('program') }}" class="inline-flex items-center gap-2 bg-primary-500 text-white px-8 py-3 text-sm font-semibold hover:bg-primary-600 transition-colors shadow-card">
@@ -160,7 +196,7 @@
 
     {{-- Galeri --}}
     <section class="py-20 bg-neutral-50">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <div class="mb-12 fade-in">
                 <span class="text-xs font-semibold tracking-widest uppercase text-primary-500"><i class="fa-solid fa-images mr-2"></i>Dokumentasi</span>
                 <h2 class="text-2xl md:text-4xl font-display font-bold text-neutral-900 mt-2">Galeri Kegiatan</h2>
@@ -189,7 +225,7 @@
 
     {{-- Mitra Kerja --}}
     <section class="py-16 bg-white border-t border-neutral-100">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-10 fade-in">
                 <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2"><i class="fa-solid fa-handshake mr-2"></i>Kemitraan</p>
                 <h2 class="text-xl md:text-2xl font-display font-bold text-neutral-900">Mitra Kerja & Sponsor</h2>
@@ -215,7 +251,7 @@
 
     {{-- CTA --}}
     <section class="bg-primary-600 py-16">
-        <div class="max-w-6xl mx-auto px-6 text-center fade-in">
+        <div class="max-w-7xl mx-auto px-6 text-center fade-in">
             <h2 class="text-2xl md:text-3xl font-display font-bold text-white mb-4">Bersama Membangun Papua</h2>
             <p class="text-primary-200 text-lg max-w-lg mx-auto mb-8">Dukung program pemberdayaan masyarakat adat Papua. Setiap kontribusi membantu mewujudkan kemandirian ekonomi dan keadilan sosial.</p>
             <div class="flex flex-wrap justify-center gap-4">

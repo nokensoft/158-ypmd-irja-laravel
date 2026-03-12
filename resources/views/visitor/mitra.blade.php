@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="bg-primary-600 py-16">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <span class="text-primary-200 text-xs uppercase tracking-widest">
                 <a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> ›
                 <a href="{{ route('profil') }}" class="hover:text-white">Tentang</a> › Mitra Kerja
@@ -16,7 +16,7 @@
     </div>
 
     <section class="py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <div class="max-w-2xl mb-14 fade-in">
                 <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2"><i class="fa-solid fa-handshake mr-2"></i>Kemitraan</p>
                 <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900 mb-4">Bersama Membangun Papua</h2>
@@ -177,7 +177,7 @@
 
     {{-- CTA --}}
     <section class="bg-primary-600 py-14">
-        <div class="max-w-4xl mx-auto px-6 text-center fade-in">
+        <div class="max-w-7xl mx-auto px-6 text-center fade-in">
             <h2 class="text-2xl md:text-3xl font-display font-bold text-white mb-3">Tertarik Bermitra dengan YPMD IRJA?</h2>
             <p class="text-primary-200 text-lg mb-8">Kami terbuka untuk kolaborasi dengan lembaga, pemerintah, dan sektor swasta yang memiliki komitmen terhadap pemberdayaan masyarakat adat Papua.</p>
             <a href="{{ route('kontak') }}"

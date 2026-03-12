@@ -5,31 +5,21 @@ namespace Database\Seeders;
 use App\Models\Galeri;
 use App\Models\Media;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 
 class GaleriSeeder extends Seeder
 {
     public function run(): void
     {
-        $sourceDir = public_path('img/galeri');
+        // Media sudah di-seed oleh MediaSeeder, cukup lookup by file_name
+        $mediaMap = Media::pluck('id', 'file_name');
 
-        if (!File::isDirectory($sourceDir)) {
-            $this->command->warn('Direktori public/img/galeri/ tidak ditemukan.');
+        if ($mediaMap->isEmpty()) {
+            $this->command->warn('Belum ada media. Jalankan MediaSeeder terlebih dahulu.');
             return;
         }
 
-        $files = File::files($sourceDir);
-
-        if (empty($files)) {
-            $this->command->warn('Tidak ada file gambar di public/img/galeri/.');
-            return;
-        }
-
-        // Default user_id (penulis)
         $userId = 2;
 
-        // Buat album galeri YPMD IRJA
         $albums = [
             [
                 'judul'     => 'YPMD IRJA — 38 Tahun Berkarya',
@@ -38,6 +28,7 @@ class GaleriSeeder extends Seeder
                 'images'    => [
                     'ypmd-irja-ulang-tahun-38-jubi.jpg',
                     'Kantor YPMD-IRJA.png',
+                    'logo-ypmd-irja.png',
                 ],
             ],
             [
@@ -69,6 +60,15 @@ class GaleriSeeder extends Seeder
                     'anak-anak-mendayung.png',
                 ],
             ],
+            [
+                'judul'     => 'Tokoh & Penggerak YPMD IRJA',
+                'deskripsi' => 'Profil tokoh-tokoh yang berperan penting dalam perjalanan YPMD IRJA.',
+                'kategori'  => 'Komunitas',
+                'images'    => [
+                    'avatar-decky-rumaropen.png',
+                    'avatar-george-junus-aditjondro.png',
+                ],
+            ],
         ];
 
         foreach ($albums as $albumData) {
@@ -79,31 +79,21 @@ class GaleriSeeder extends Seeder
                 'user_id'   => $userId,
             ]);
 
-            foreach ($albumData['images'] as $fileName) {
-                $sourcePath = $sourceDir . DIRECTORY_SEPARATOR . $fileName;
+            $attachedCount = 0;
 
-                if (!File::exists($sourcePath)) {
-                    $this->command->warn("File tidak ditemukan: {$fileName}");
+            foreach ($albumData['images'] as $fileName) {
+                $mediaId = $mediaMap[$fileName] ?? null;
+
+                if (!$mediaId) {
+                    $this->command->warn("Media tidak ditemukan untuk: {$fileName}");
                     continue;
                 }
 
-                // Copy ke storage
-                $storagePath = 'media/' . $fileName;
-                Storage::disk('public')->put($storagePath, File::get($sourcePath));
-
-                $media = Media::create([
-                    'judul'     => pathinfo($fileName, PATHINFO_FILENAME),
-                    'tipe'      => 'foto',
-                    'file_path' => $storagePath,
-                    'file_name' => $fileName,
-                    'file_size' => File::size($sourcePath),
-                    'user_id'   => $userId,
-                ]);
-
-                $galeri->media()->attach($media->id);
+                $galeri->media()->attach($mediaId);
+                $attachedCount++;
             }
 
-            $this->command->info("Album \"{$galeri->judul}\" berhasil dibuat dengan " . count($albumData['images']) . " foto.");
+            $this->command->info("Album \"{$galeri->judul}\" berhasil dibuat dengan {$attachedCount} foto.");
         }
     }
 }

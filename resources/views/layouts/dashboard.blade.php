@@ -11,9 +11,67 @@
     @else
         <link rel="icon" type="image/png" href="{{ asset('img/logo-ypmd-irja.png') }}">
     @endif
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- Tailwind CSS CDN --}}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: { extend: {
+                colors: {
+                    primary: { 50:'#f0f7f2',100:'#d9ede0',200:'#b4dbc3',300:'#82c19e',400:'#4fa174',500:'#2d8057',600:'#1f6642',700:'#1a5236',800:'#163f2b',900:'#0f2b1d',DEFAULT:'#2d8057' },
+                    accent:  { 50:'#fdf8ee',100:'#f9eccc',200:'#f2d68d',300:'#e8bc4f',400:'#c9972a',500:'#a67820',DEFAULT:'#c9972a' },
+                    neutral: { 50:'#fafafa',100:'#f4f4f4',200:'#e8e8e8',300:'#d0d0d0',400:'#a0a0a0',500:'#707070',600:'#505050',700:'#383838',800:'#242424',900:'#141414' },
+                    dark: '#1A1A1A'
+                },
+                fontFamily: {
+                    display: ['Lora','Georgia','serif'],
+                    sans: ['"Plus Jakarta Sans"','ui-sans-serif','system-ui','sans-serif']
+                },
+                boxShadow: {
+                    'card': '0 2px 12px rgba(0,0,0,0.08)',
+                    'card-hover': '0 6px 24px rgba(0,0,0,0.12)'
+                }
+            }}
+        }
+    </script>
+    {{-- Google Fonts --}}
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    {{-- Font Awesome 6 --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    {{-- Alpine.js --}}
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        h1, h2, h3, .font-display { font-family: 'Lora', Georgia, serif; }
+        [x-cloak] { display: none !important; }
+        /* No rounded corners */
+        .no-round { border-radius: 0 !important; }
+        /* Line clamp */
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        /* CKEditor 5 overrides */
+        .ck.ck-editor__main > .ck-editor__editable, .ck.ck-toolbar, .ck.ck-editor { border-radius: 0 !important; }
+        .ck.ck-toolbar { background: #f9fafb !important; border-color: #d1d5db !important; padding: 6px 8px !important; }
+        .ck.ck-button, .ck.ck-dropdown .ck-button { border-radius: 0 !important; }
+        .ck.ck-button.ck-on, .ck.ck-button:hover { background: #2d8057 !important; color: #fff !important; }
+        .ck.ck-editor__main > .ck-editor__editable { border-color: #d1d5db !important; min-height: 360px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; line-height: 1.75; color: #1A1A1A; padding: 1.25rem !important; }
+        .ck.ck-editor__main > .ck-editor__editable.ck-focused { border-color: #2d8057 !important; box-shadow: none !important; }
+        .ck.ck-dropdown .ck-dropdown__panel { border-radius: 0 !important; }
+        .ck.ck-list__item .ck-button:hover { background: #2d8057 !important; color: #fff !important; }
+        .ck-content h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; color: #1A1A1A; }
+        .ck-content h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #1A1A1A; }
+        .ck-content h4 { font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem; color: #374151; }
+        .ck-content p { margin-bottom: 0.75rem; }
+        .ck-content a { color: #2d8057; text-decoration: underline; }
+        .ck-content blockquote { border-left: 4px solid #2d8057; padding-left: 1rem; margin: 1rem 0; color: #4b5563; font-style: italic; }
+        .ck-content ul, .ck-content ol { padding-left: 1.5rem; margin-bottom: 0.75rem; }
+        .ck-content ul { list-style-type: disc; }
+        .ck-content ol { list-style-type: decimal; }
+        .ck-content li { margin-bottom: 0.25rem; }
+        .ck-content table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        .ck-content table td, .ck-content table th { border: 1px solid #d1d5db; padding: 0.5rem 0.75rem; }
+        .ck-content table th { background: #f3f4f6; font-weight: 700; }
+    </style>
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans text-lg" x-data="{ sidebarOpen: true, mobileSidebar: false }">
 
@@ -58,6 +116,14 @@
                         </a>
                     </div>
                     <div>
+                        <p class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3 px-3">Konten</p>
+                        <a href="{{ route('admin.halaman.index') }}"
+                           class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round {{ request()->routeIs('admin.halaman.*') ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
+                            <i class="fas fa-file-alt w-6 text-center"></i>
+                            <span>Halaman</span>
+                        </a>
+                    </div>
+                    <div>
                         <p class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3 px-3">Pengaturan</p>
                         <a href="{{ route('admin.pengaturan-situs') }}"
                            class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round {{ request()->routeIs('admin.pengaturan-situs') ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
@@ -81,14 +147,6 @@
                            class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round {{ request()->routeIs('admin.aktivitas-login') ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
                             <i class="fas fa-history w-6 text-center"></i>
                             <span>Aktivitas Login</span>
-                        </a>
-                    </div>
-                    <div>
-                        <p class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3 px-3">Donasi</p>
-                        <a href="{{ route('admin.donasi.index') }}"
-                           class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round {{ request()->routeIs('admin.donasi.*') ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
-                            <i class="fas fa-heart w-6 text-center"></i>
-                            <span>Kelola Donasi</span>
                         </a>
                     </div>
                     <div>
@@ -151,6 +209,19 @@
                            class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round {{ request()->routeIs('penulis.galeri.*') ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
                             <i class="fas fa-images w-6 text-center"></i>
                             <span>Galeri</span>
+                        </a>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3 px-3">Donasi</p>
+                        <a href="{{ route('penulis.program-donasi.index') }}"
+                           class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round {{ request()->routeIs('penulis.program-donasi.*') ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
+                            <i class="fas fa-hand-holding-heart w-6 text-center"></i>
+                            <span>Program Donasi</span>
+                        </a>
+                        <a href="{{ route('penulis.donasi.index') }}"
+                           class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round {{ request()->routeIs('penulis.donasi.*') ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
+                            <i class="fas fa-heart w-6 text-center"></i>
+                            <span>Kelola Donasi</span>
                         </a>
                     </div>
                     <div>

@@ -3,16 +3,20 @@
 @section('seo-title', 'Hubungi Kami - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
 @section('seo-description', 'Informasi kontak dan alamat ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
 
+@section('json-ld')
+<script type="application/ld+json">{!! json_encode(['@context'=>'https://schema.org','@type'=>'BreadcrumbList','itemListElement'=>[['@type'=>'ListItem','position'=>1,'name'=>'Beranda','item'=>route('beranda')],['@type'=>'ListItem','position'=>2,'name'=>'Kontak']]], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}</script>
+@endsection
+
 @section('content')
     <div class="bg-primary-600 py-16">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <span class="text-primary-200 text-xs uppercase tracking-widest"><a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> › Kontak</span>
             <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">Hubungi Kami</h1>
         </div>
     </div>
 
     <section class="py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
                 @foreach ([
                     ['icon' => 'fa-map-marker-alt', 'title' => 'Alamat', 'lines' => [$situs['alamat'] ?? 'Belum diatur']],

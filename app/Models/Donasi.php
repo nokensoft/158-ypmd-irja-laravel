@@ -9,7 +9,9 @@ class Donasi extends Model
     protected $table = 'donasi';
 
     protected $fillable = [
+        'program_donasi_id',
         'nama_donatur',
+        'is_anonim',
         'email',
         'telepon',
         'bank',
@@ -24,9 +26,20 @@ class Donasi extends Model
     protected function casts(): array
     {
         return [
-            'tanggal' => 'date',
-            'jumlah'  => 'integer',
+            'tanggal'   => 'date',
+            'jumlah'    => 'integer',
+            'is_anonim' => 'boolean',
         ];
+    }
+
+    public function programDonasi()
+    {
+        return $this->belongsTo(ProgramDonasi::class);
+    }
+
+    public function getNamaTampilAttribute(): string
+    {
+        return $this->is_anonim ? 'Anonim' : $this->nama_donatur;
     }
 
     public function getJumlahFormatAttribute(): string

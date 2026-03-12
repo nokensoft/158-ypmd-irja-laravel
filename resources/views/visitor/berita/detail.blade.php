@@ -5,9 +5,35 @@
 @section('seo-image', $berita->gambar)
 @section('og-type', 'article')
 
+@section('json-ld')
+@php
+$_article = [
+    '@context' => 'https://schema.org',
+    '@type' => 'NewsArticle',
+    'headline' => $berita->judul,
+    'description' => Str::limit(strip_tags($berita->ringkasan ?? $berita->konten), 160),
+    'image' => $berita->gambar,
+    'datePublished' => $berita->tanggal_terbit?->toW3cString(),
+    'dateModified' => $berita->updated_at?->toW3cString(),
+    'author' => ['@type' => 'Person', 'name' => $berita->user?->name ?? ($situs['nama_situs'] ?? 'YPMD IRJA')],
+    'publisher' => ['@type' => 'Organization', 'name' => $situs['nama_situs'] ?? 'YPMD IRJA', 'logo' => ['@type' => 'ImageObject', 'url' => !empty($situs['logo']) ? asset('storage/'.$situs['logo']) : asset('img/logo-ypmd-irja.png')]],
+    'mainEntityOfPage' => ['@type' => 'WebPage', '@id' => route('berita.detail', $berita->slug)],
+    'articleSection' => $berita->kategori?->nama ?? 'Berita',
+];
+$_bc = ['@context'=>'https://schema.org','@type'=>'BreadcrumbList','itemListElement'=>[
+    ['@type'=>'ListItem','position'=>1,'name'=>'Beranda','item'=>route('beranda')],
+    ['@type'=>'ListItem','position'=>2,'name'=>'Papua Today','item'=>route('berita')],
+    ['@type'=>'ListItem','position'=>3,'name'=>$berita->judul],
+]];
+$_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
+@endphp
+<script type="application/ld+json">{!! json_encode($_article, $_f) !!}</script>
+<script type="application/ld+json">{!! json_encode($_bc, $_f) !!}</script>
+@endsection
+
 @section('content')
     <div class="bg-primary-600 py-16">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <span class="text-primary-200 text-xs uppercase tracking-widest">
                 <a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> ›
                 <a href="{{ route('berita') }}" class="hover:text-white">Papua Today</a>

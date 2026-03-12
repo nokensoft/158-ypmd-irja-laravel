@@ -18,11 +18,22 @@
 
         {{-- Detail Card --}}
         <div class="bg-white shadow-sm p-6 mb-6">
+            @if ($donasi->programDonasi)
+            <div class="mb-5 pb-5 border-b border-gray-100">
+                <p class="text-xs font-bold uppercase text-gray-400 mb-2">Program Donasi</p>
+                <p class="font-bold text-gray-800">{{ $donasi->programDonasi->judul }}</p>
+            </div>
+            @endif
             <h3 class="text-base font-bold uppercase text-gray-400 mb-5 pb-3 border-b border-gray-100">Informasi Donatur</h3>
             <dl class="space-y-3 text-sm">
                 <div class="flex gap-4">
                     <dt class="w-36 font-semibold text-gray-500 uppercase text-xs flex-shrink-0">Nama</dt>
-                    <dd class="text-gray-800 font-semibold">{{ $donasi->nama_donatur }}</dd>
+                    <dd class="text-gray-800 font-semibold">
+                        {{ $donasi->nama_donatur }}
+                        @if ($donasi->is_anonim)
+                            <span class="ml-2 px-2 py-0.5 text-xs bg-gray-100 text-gray-500 font-bold uppercase">Anonim</span>
+                        @endif
+                    </dd>
                 </div>
                 <div class="flex gap-4">
                     <dt class="w-36 font-semibold text-gray-500 uppercase text-xs flex-shrink-0">Email</dt>
@@ -56,21 +67,65 @@
 
             {{-- Bukti Transfer --}}
             @if ($donasi->bukti_transfer)
+                @php $ext = strtolower(pathinfo($donasi->bukti_transfer, PATHINFO_EXTENSION)); @endphp
                 <div class="mt-6 pt-5 border-t border-gray-100">
                     <p class="text-xs font-bold uppercase text-gray-400 mb-3">Bukti Transfer</p>
-                    @php $ext = strtolower(pathinfo($donasi->bukti_transfer, PATHINFO_EXTENSION)); @endphp
                     @if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp']))
-                        <a href="{{ asset('storage/' . $donasi->bukti_transfer) }}" target="_blank">
-                            <img src="{{ asset('storage/' . $donasi->bukti_transfer) }}"
+                        {{-- Thumbnail klik untuk modal --}}
+                        <button type="button" onclick="openBuktiModal()"
+                                class="block border border-gray-200 hover:border-primary transition focus:outline-none">
+                            <img src="{{ route('penulis.donasi.bukti-transfer', $donasi->id) }}"
                                  alt="Bukti Transfer"
-                                 class="max-w-sm border border-gray-200 hover:opacity-90 transition">
-                        </a>
+                                 class="max-w-xs object-cover hover:opacity-90 transition">
+                        </button>
+                        <p class="text-xs text-gray-400 mt-2"><i class="fas fa-search-plus mr-1"></i>Klik gambar untuk perbesar</p>
                     @else
-                        <a href="{{ asset('storage/' . $donasi->bukti_transfer) }}" target="_blank"
-                           class="inline-flex items-center gap-2 bg-gray-100 px-5 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-200 transition no-round">
-                            <i class="fas fa-file-pdf text-red-500"></i> Lihat Bukti Transfer
-                        </a>
+                        {{-- PDF / file lain --}}
+                        <div class="flex items-center gap-3">
+                            <a href="{{ route('penulis.donasi.bukti-transfer', $donasi->id) }}" target="_blank"
+                               class="inline-flex items-center gap-2 bg-gray-100 px-5 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-200 transition no-round">
+                                <i class="fas fa-file-pdf text-red-500"></i> Buka / Lihat PDF
+                            </a>
+                            <a href="{{ route('penulis.donasi.bukti-transfer', $donasi->id) }}" download
+                               class="inline-flex items-center gap-2 bg-gray-100 px-5 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-200 transition no-round">
+                                <i class="fas fa-download text-gray-500"></i> Unduh
+                            </a>
+                        </div>
                     @endif
+                </div>
+
+                {{-- Modal Lightbox --}}
+                @if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp']))
+                <div id="buktiModal"
+                     class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-80 p-4"
+                     onclick="closeBuktiModal()">
+                    <div class="relative max-w-3xl w-full" onclick="event.stopPropagation()">
+                        <button onclick="closeBuktiModal()"
+                                class="absolute -top-10 right-0 text-white text-2xl font-bold hover:text-gray-300 focus:outline-none">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <img src="{{ route('penulis.donasi.bukti-transfer', $donasi->id) }}"
+                             alt="Bukti Transfer"
+                             class="w-full object-contain max-h-screen">
+                        <div class="mt-3 flex justify-end">
+                            <a href="{{ route('penulis.donasi.bukti-transfer', $donasi->id) }}" download
+                               class="inline-flex items-center gap-2 bg-white text-gray-800 px-4 py-2 text-xs font-bold uppercase hover:bg-gray-100 transition no-round"
+                               onclick="event.stopPropagation()">
+                                <i class="fas fa-download"></i> Unduh
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    function openBuktiModal()  { document.getElementById('buktiModal').classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
+                    function closeBuktiModal() { document.getElementById('buktiModal').classList.add('hidden'); document.body.style.overflow = ''; }
+                    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeBuktiModal(); });
+                </script>
+                @endif
+            @else
+                <div class="mt-6 pt-5 border-t border-gray-100">
+                    <p class="text-xs font-bold uppercase text-gray-400 mb-3">Bukti Transfer</p>
+                    <p class="text-sm text-gray-400 italic">Tidak ada file bukti transfer.</p>
                 </div>
             @endif
         </div>
@@ -78,10 +133,10 @@
         {{-- Aksi: Konfirmasi / Tolak --}}
         @if ($donasi->status === 'pending')
         <div class="bg-white shadow-sm p-6">
-            <h3 class="text-base font-bold uppercase text-gray-400 mb-5">Tindakan Admin</h3>
+            <h3 class="text-base font-bold uppercase text-gray-400 mb-5">Tindakan</h3>
             <div class="grid sm:grid-cols-2 gap-4">
                 {{-- Konfirmasi --}}
-                <form action="{{ route('admin.donasi.konfirmasi', $donasi->id) }}" method="POST">
+                <form action="{{ route('penulis.donasi.konfirmasi', $donasi->id) }}" method="POST">
                     @csrf @method('PATCH')
                     <div class="mb-3">
                         <label class="text-xs font-bold uppercase text-gray-400 block mb-1">Catatan (opsional)</label>
@@ -96,7 +151,7 @@
                     </button>
                 </form>
                 {{-- Tolak --}}
-                <form action="{{ route('admin.donasi.tolak', $donasi->id) }}" method="POST">
+                <form action="{{ route('penulis.donasi.tolak', $donasi->id) }}" method="POST">
                     @csrf @method('PATCH')
                     <div class="mb-3">
                         <label class="text-xs font-bold uppercase text-gray-400 block mb-1">Alasan penolakan</label>
@@ -116,11 +171,11 @@
 
         {{-- Delete + Kembali --}}
         <div class="flex gap-3 mt-6">
-            <a href="{{ route('admin.donasi.index') }}"
+            <a href="{{ route('penulis.donasi.index') }}"
                class="bg-gray-200 text-gray-700 px-6 py-3 font-bold uppercase text-sm hover:bg-gray-300 transition no-round">
                 <i class="fas fa-arrow-left mr-2"></i>Kembali
             </a>
-            <form action="{{ route('admin.donasi.destroy', $donasi->id) }}" method="POST"
+            <form action="{{ route('penulis.donasi.destroy', $donasi->id) }}" method="POST"
                   onsubmit="return confirm('Hapus data donasi ini permanen?')">
                 @csrf @method('DELETE')
                 <button type="submit"

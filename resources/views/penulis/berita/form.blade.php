@@ -238,7 +238,7 @@
 @endsection
 
 @push('scripts')
-<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+<script src="{{ asset('vendor/ckeditor5/ckeditor.js') }}"></script>
 <script>
 let editorInstance = null;
 

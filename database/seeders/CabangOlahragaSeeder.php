@@ -9,22 +9,18 @@ class CabangOlahragaSeeder extends Seeder
 {
     public function run(): void
     {
-        $cabor = [
-            ['nama' => 'Atletik', 'icon' => 'fa-person-running', 'jumlah_atlet' => 45, 'jumlah_medali' => 18, 'deskripsi' => 'Cabang olahraga atletik meliputi lari, lompat, dan lempar.'],
-            ['nama' => 'Sepak Bola', 'icon' => 'fa-futbol', 'jumlah_atlet' => 30, 'jumlah_medali' => 5, 'deskripsi' => 'Olahraga beregu paling populer di Papua Pegunungan.'],
-            ['nama' => 'Bola Basket', 'icon' => 'fa-basketball', 'jumlah_atlet' => 24, 'jumlah_medali' => 3, 'deskripsi' => 'Olahraga beregu dengan popularitas tinggi di kalangan muda.'],
-            ['nama' => 'Bola Voli', 'icon' => 'fa-volleyball', 'jumlah_atlet' => 24, 'jumlah_medali' => 6, 'deskripsi' => 'Olahraga beregu yang dimainkan di berbagai pelosok Papua Pegunungan.'],
-            ['nama' => 'Tinju', 'icon' => 'fa-hand-fist', 'jumlah_atlet' => 20, 'jumlah_medali' => 15, 'deskripsi' => 'Cabang olahraga bela diri unggulan Papua Pegunungan.'],
-            ['nama' => 'Pencak Silat', 'icon' => 'fa-yin-yang', 'jumlah_atlet' => 18, 'jumlah_medali' => 12, 'deskripsi' => 'Seni bela diri tradisional Indonesia.'],
-            ['nama' => 'Renang', 'icon' => 'fa-person-swimming', 'jumlah_atlet' => 15, 'jumlah_medali' => 8, 'deskripsi' => 'Olahraga air yang menjanjikan potensi medali.'],
-            ['nama' => 'Panahan', 'icon' => 'fa-bullseye', 'jumlah_atlet' => 12, 'jumlah_medali' => 10, 'deskripsi' => 'Cabang olahraga ketepatan yang semakin berkembang.'],
-            ['nama' => 'Badminton', 'icon' => 'fa-shuttlecock', 'jumlah_atlet' => 16, 'jumlah_medali' => 7, 'deskripsi' => 'Olahraga raket yang populer di seluruh Indonesia.'],
-            ['nama' => 'Tenis Meja', 'icon' => 'fa-table-tennis-paddle-ball', 'jumlah_atlet' => 10, 'jumlah_medali' => 9, 'deskripsi' => 'Olahraga indoor dengan pertumbuhan atlet yang pesat.'],
-            ['nama' => 'Karate', 'icon' => 'fa-hand-back-fist', 'jumlah_atlet' => 14, 'jumlah_medali' => 11, 'deskripsi' => 'Seni bela diri asal Jepang yang populer di kalangan pemuda.'],
-            ['nama' => 'Dayung', 'icon' => 'fa-ship', 'jumlah_atlet' => 12, 'jumlah_medali' => 4, 'deskripsi' => 'Cabang olahraga air yang menjadi potensi unggulan daerah.'],
+        $bidang = [
+            ['nama' => 'Pemberdayaan Ekonomi', 'icon' => 'fa-hand-holding-dollar', 'jumlah_atlet' => 120, 'jumlah_medali' => 15, 'deskripsi' => 'Pengembangan ekonomi kerakyatan melalui koperasi kampung, simpan-pinjam, dan akses pasar bagi masyarakat adat Papua.'],
+            ['nama' => 'Budidaya Kakao', 'icon' => 'fa-seedling', 'jumlah_atlet' => 85, 'jumlah_medali' => 10, 'deskripsi' => 'Pendampingan petani kakao organik di Papua mulai dari budidaya, pasca panen, hingga ekspor ke pasar internasional.'],
+            ['nama' => 'Advokasi Hak Tanah Adat', 'icon' => 'fa-scale-balanced', 'jumlah_atlet' => 50, 'jumlah_medali' => 8, 'deskripsi' => 'Pendampingan hukum dan advokasi hak-hak tanah adat bagi komunitas masyarakat adat Papua.'],
+            ['nama' => 'Pemetaan Wilayah Adat', 'icon' => 'fa-map-location-dot', 'jumlah_atlet' => 35, 'jumlah_medali' => 12, 'deskripsi' => 'Pemetaan partisipatif wilayah kelola dan hutan adat menggunakan teknologi GPS bersama komunitas adat.'],
+            ['nama' => 'Ketahanan Pangan', 'icon' => 'fa-wheat-awn', 'jumlah_atlet' => 90, 'jumlah_medali' => 7, 'deskripsi' => 'Program pertanian berkelanjutan dan ketahanan pangan lokal untuk masyarakat kampung di Papua.'],
+            ['nama' => 'Pendidikan & Literasi', 'icon' => 'fa-graduation-cap', 'jumlah_atlet' => 60, 'jumlah_medali' => 5, 'deskripsi' => 'Program pendidikan alternatif dan peningkatan literasi bagi masyarakat kampung Papua.'],
+            ['nama' => 'Media Komunitas (KDK)', 'icon' => 'fa-newspaper', 'jumlah_atlet' => 25, 'jumlah_medali' => 6, 'deskripsi' => 'Penerbitan buletin Kabar Dari Kampung (KDK) sebagai media alternatif masyarakat adat Papua sejak 1982.'],
+            ['nama' => 'Penguatan Kelembagaan', 'icon' => 'fa-building-columns', 'jumlah_atlet' => 40, 'jumlah_medali' => 9, 'deskripsi' => 'Penguatan kapasitas organisasi masyarakat sipil dan kelembagaan adat di tingkat kampung.'],
         ];
 
-        foreach ($cabor as $data) {
+        foreach ($bidang as $data) {
             CabangOlahraga::updateOrCreate(['nama' => $data['nama']], $data);
         }
     }

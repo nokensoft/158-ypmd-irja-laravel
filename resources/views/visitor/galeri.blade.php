@@ -3,16 +3,20 @@
 @section('seo-title', 'Galeri Foto - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
 @section('seo-description', 'Dokumentasi kegiatan dan galeri foto ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
 
+@section('json-ld')
+<script type="application/ld+json">{!! json_encode(['@context'=>'https://schema.org','@type'=>'BreadcrumbList','itemListElement'=>[['@type'=>'ListItem','position'=>1,'name'=>'Beranda','item'=>route('beranda')],['@type'=>'ListItem','position'=>2,'name'=>'Galeri']]], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}</script>
+@endsection
+
 @section('content')
     <div class="bg-primary-600 py-16">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <span class="text-primary-200 text-xs uppercase tracking-widest"><a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> › Galeri</span>
             <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">Galeri Kegiatan</h1>
         </div>
     </div>
 
     <section class="py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <div class="mb-10 fade-in">
                 <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2"><i class="fa-solid fa-images mr-2"></i>Dokumentasi</p>
                 <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900">Album Galeri</h2>

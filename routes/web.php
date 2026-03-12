@@ -8,14 +8,25 @@ use App\Http\Controllers\Admin\PengaturanSitusController;
 use App\Http\Controllers\Admin\AktivitasLoginController;
 use App\Http\Controllers\Admin\PenggunaController;
 use App\Http\Controllers\Admin\BackupDatabaseController;
-use App\Http\Controllers\Admin\DonasiController as AdminDonasiController;
+use App\Http\Controllers\Admin\HalamanController;
 use App\Http\Controllers\Penulis\DashboardController as PenulisDashboardController;
+use App\Http\Controllers\Penulis\DonasiController as PenulisDonasiController;
+use App\Http\Controllers\Penulis\ProgramDonasiController;
 use App\Http\Controllers\Penulis\BeritaController;
 use App\Http\Controllers\Penulis\KategoriBeritaController;
 use App\Http\Controllers\Penulis\KdkController;
 use App\Http\Controllers\Penulis\GaleriController;
 use App\Http\Controllers\Penulis\MediaController;
+use App\Http\Controllers\SeoController;
 use App\Http\Controllers\StatistikPengunjungController;
+
+/*
+|--------------------------------------------------------------------------
+| SEO Routes (robots.txt & sitemap.xml)
+|--------------------------------------------------------------------------
+*/
+Route::get('/robots.txt', [SeoController::class, 'robots']);
+Route::get('/sitemap.xml', [SeoController::class, 'sitemap']);
 
 /*
 |--------------------------------------------------------------------------
@@ -25,12 +36,15 @@ use App\Http\Controllers\StatistikPengunjungController;
 Route::middleware('track.visitor')->group(function () {
     Route::get('/', [VisitorController::class, 'beranda'])->name('beranda');
 
-    // Tentang YPMD IRJA (static)
-    Route::view('/sejarah', 'visitor.sejarah')->name('sejarah');
-    Route::view('/profil', 'visitor.profil')->name('profil');
+    // Halaman dinamis (CMS)
+    Route::get('/halaman/{slug}', [VisitorController::class, 'halaman'])->name('halaman.show');
+
+    // Tentang YPMD IRJA (dinamis dari DB via Halaman)
+    Route::get('/sejarah', [VisitorController::class, 'sejarah'])->name('sejarah');
+    Route::get('/profil', [VisitorController::class, 'profil'])->name('profil');
+    Route::get('/mitra', [VisitorController::class, 'mitra'])->name('mitra');
+    Route::get('/bidang-kerja', [VisitorController::class, 'bidangKerja'])->name('bidang-kerja');
     Route::view('/tokoh', 'visitor.tokoh')->name('tokoh');
-    Route::view('/mitra', 'visitor.mitra')->name('mitra');
-    Route::view('/bidang-kerja', 'visitor.bidang-kerja')->name('bidang-kerja');
 
     // Program (static)
     Route::view('/program', 'visitor.program')->name('program');
@@ -86,15 +100,12 @@ Route::prefix('admin')->name('admin.')->middleware(['auth.custom', 'role:admin_m
     Route::resource('pengguna', PenggunaController::class)->except(['show']);
     Route::patch('/pengguna/{pengguna}/restore', [PenggunaController::class, 'restore'])->name('pengguna.restore');
 
+    // Halaman
+    Route::resource('halaman', HalamanController::class)->except(['show']);
+    Route::patch('/halaman/{halaman}/restore', [HalamanController::class, 'restore'])->name('halaman.restore');
+
     // Statistik
     Route::get('/statistik-pengunjung', [StatistikPengunjungController::class, 'index'])->name('statistik-pengunjung');
-
-    // Donasi
-    Route::get('/donasi', [AdminDonasiController::class, 'index'])->name('donasi.index');
-    Route::get('/donasi/{id}', [AdminDonasiController::class, 'show'])->name('donasi.show');
-    Route::patch('/donasi/{id}/konfirmasi', [AdminDonasiController::class, 'konfirmasi'])->name('donasi.konfirmasi');
-    Route::patch('/donasi/{id}/tolak', [AdminDonasiController::class, 'tolak'])->name('donasi.tolak');
-    Route::delete('/donasi/{id}', [AdminDonasiController::class, 'destroy'])->name('donasi.destroy');
 
     // Dokumentasi
     Route::view('/dokumentasi', 'admin.dokumentasi')->name('dokumentasi');
@@ -124,6 +135,18 @@ Route::prefix('penulis')->name('penulis.')->middleware(['auth.custom', 'role:pen
     Route::patch('/media/{medium}/restore', [MediaController::class, 'restore'])->name('media.restore');
     Route::resource('galeri', GaleriController::class)->except(['show']);
     Route::patch('/galeri/{galeri}/restore', [GaleriController::class, 'restore'])->name('galeri.restore');
+
+    // Donasi
+    Route::get('/donasi', [PenulisDonasiController::class, 'index'])->name('donasi.index');
+    Route::get('/donasi/{id}', [PenulisDonasiController::class, 'show'])->name('donasi.show');
+    Route::get('/donasi/{id}/bukti-transfer', [PenulisDonasiController::class, 'buktiTransfer'])->name('donasi.bukti-transfer');
+    Route::patch('/donasi/{id}/konfirmasi', [PenulisDonasiController::class, 'konfirmasi'])->name('donasi.konfirmasi');
+    Route::patch('/donasi/{id}/tolak', [PenulisDonasiController::class, 'tolak'])->name('donasi.tolak');
+    Route::delete('/donasi/{id}', [PenulisDonasiController::class, 'destroy'])->name('donasi.destroy');
+
+    // Program Donasi
+    Route::resource('program-donasi', ProgramDonasiController::class)->except(['show']);
+    Route::patch('/program-donasi/{program_donasi}/restore', [ProgramDonasiController::class, 'restore'])->name('program-donasi.restore');
 
     // Statistik
     Route::get('/statistik-pengunjung', [StatistikPengunjungController::class, 'index'])->name('statistik-pengunjung');

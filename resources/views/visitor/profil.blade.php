@@ -5,14 +5,14 @@
 
 @section('content')
     <div class="bg-primary-600 py-16">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <span class="text-primary-200 text-xs uppercase tracking-widest"><a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> › Tentang › Profil</span>
             <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">Profil Organisasi</h1>
         </div>
     </div>
 
     <section class="py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <div class="grid md:grid-cols-2 gap-16 items-start">
                 <div class="fade-in">
                     <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2"><i class="fa-solid fa-building mr-2"></i>Organisasi</p>
@@ -59,7 +59,7 @@
     </section>
 
     <section class="py-20 bg-neutral-50">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
 
             {{-- Direktur dari Masa ke Masa --}}
             <div class="mb-16">

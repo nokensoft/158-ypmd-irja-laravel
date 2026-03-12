@@ -3,9 +3,13 @@
 @section('seo-title', 'Direktur YPMD IRJA dari Masa ke Masa')
 @section('seo-description', 'Daftar direktur YPMD IRJA dari tahun 1984 hingga sekarang.')
 
+@section('json-ld')
+<script type="application/ld+json">{!! json_encode(['@context'=>'https://schema.org','@type'=>'BreadcrumbList','itemListElement'=>[['@type'=>'ListItem','position'=>1,'name'=>'Beranda','item'=>route('beranda')],['@type'=>'ListItem','position'=>2,'name'=>'Tentang','item'=>route('profil')],['@type'=>'ListItem','position'=>3,'name'=>'Direktur']]], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}</script>
+@endsection
+
 @section('content')
     <div class="bg-primary-600 py-16">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <span class="text-primary-200 text-xs uppercase tracking-widest">
                 <a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> ›
                 <a href="{{ route('profil') }}" class="hover:text-white">Tentang</a> › Direktur

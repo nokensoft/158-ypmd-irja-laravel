@@ -1,21 +1,21 @@
 @extends('layouts.visitor')
-@section('title', 'Cabang Olahraga - ' . ($situs['nama_situs'] ?? 'KONI Papua Pegunungan'))
-@section('seo-title', 'Cabang Olahraga - ' . ($situs['nama_situs'] ?? 'KONI Papua Pegunungan'))
-@section('seo-description', 'Daftar cabang olahraga binaan ' . ($situs['nama_situs'] ?? 'KONI Papua Pegunungan'))
+@section('title', 'Cabang Olahraga - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
+@section('seo-title', 'Cabang Olahraga - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
+@section('seo-description', 'Daftar cabang olahraga binaan ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
 
 @section('content')
     @include('partials.page-banner', ['title' => 'Cabang Olahraga', 'breadcrumb' => 'Cabor'])
 
     <section class="py-16 bg-white">
-        <div class="container mx-auto px-4 text-center max-w-3xl">
+        <div class="max-w-7xl mx-auto px-4 text-center">
             <p class="text-primary font-bold uppercase tracking-widest text-base mb-2">Daftar Lengkap</p>
             <h3 class="text-3xl font-extrabold mb-4">Cabang Olahraga Binaan</h3>
-            <p class="text-gray-600 leading-relaxed text-lg">Berikut adalah daftar cabang olahraga yang berada di bawah pembinaan {{ $situs['nama_situs'] ?? 'KONI Provinsi Papua Pegunungan' }}.</p>
+            <p class="text-gray-600 leading-relaxed text-lg">Berikut adalah daftar cabang olahraga yang berada di bawah pembinaan {{ $situs['nama_situs'] ?? 'YPMD IRJA' }}.</p>
         </div>
     </section>
 
     <section class="py-20 bg-accent">
-        <div class="container mx-auto px-4">
+        <div class="max-w-7xl mx-auto px-4">
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 @forelse ($caborList as $item)
                     <div class="bg-white p-6 text-center shadow-sm hover:shadow-lg hover:border-primary border-b-4 border-transparent transition group">

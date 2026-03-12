@@ -2,6 +2,7 @@
 
 namespace App\View\Composers;
 
+use App\Models\Halaman;
 use App\Models\PengaturanSitus;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
@@ -14,6 +15,13 @@ class SitusComposer
             return PengaturanSitus::pluck('value', 'key')->toArray();
         });
 
-        $view->with('situs', $situs);
+        $halamanFooter = Cache::remember('halaman_footer', 300, function () {
+            return Halaman::where('is_active', true)
+                ->orderBy('urutan')
+                ->get(['judul', 'slug']);
+        });
+
+        $view->with('situs', $situs)
+             ->with('halamanFooter', $halamanFooter);
     }
 }

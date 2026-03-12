@@ -3,9 +3,13 @@
 @section('seo-title', 'Kabar Dari Kampung (KDK) — Buletin YPMD IRJA')
 @section('seo-description', 'Arsip buletin Kabar Dari Kampung, media alternatif masyarakat adat Papua sejak 1982.')
 
+@section('json-ld')
+<script type="application/ld+json">{!! json_encode(['@context'=>'https://schema.org','@type'=>'BreadcrumbList','itemListElement'=>[['@type'=>'ListItem','position'=>1,'name'=>'Beranda','item'=>route('beranda')],['@type'=>'ListItem','position'=>2,'name'=>'Kabar Dari Kampung']]], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}</script>
+@endsection
+
 @section('content')
     <div class="bg-primary-600 py-16">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <span class="text-primary-200 text-xs uppercase tracking-widest"><a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> › KDK</span>
             <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">Kabar Dari Kampung</h1>
             <p class="text-primary-200 mt-2 text-lg">Buletin — Media Alternatif Masyarakat Adat Papua</p>
@@ -13,7 +17,7 @@
     </div>
 
     <section class="py-16 bg-neutral-50">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <div class="bg-white shadow-card p-8 md:p-12 mb-12 fade-in">
                 <div class="grid md:grid-cols-2 gap-8 items-center">
                     <div>
@@ -44,39 +48,12 @@
             </div>
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse ($kdkList as $k)
-                <div class="bg-white shadow-card card-hover border border-neutral-100 fade-in">
-                    <div class="h-48 bg-primary-50 flex items-center justify-center">
-                        <div class="text-center">
-                            <div class="text-4xl font-display font-bold text-primary-200">KDK</div>
-                            <div class="text-lg font-bold text-primary-500 mt-1">Edisi {{ $k->nomor_edisi }}</div>
-                        </div>
-                    </div>
-                    <div class="p-5">
-                        <span class="text-xs font-semibold text-neutral-400 uppercase">
-                            Edisi {{ $k->nomor_edisi }}
-                            @if ($k->tanggal_terbit) &bull; {{ $k->tanggal_terbit->format('Y') }} @endif
-                        </span>
-                        <h4 class="font-display font-bold text-neutral-900 mt-1 mb-3 line-clamp-2">{{ $k->judul }}</h4>
-                        @if ($k->deskripsi)
-                            <p class="text-xs text-neutral-500 mb-3 line-clamp-2">{{ $k->deskripsi }}</p>
-                        @endif
-                        @if ($k->file_pdf)
-                            <a href="{{ $k->pdf_url }}" target="_blank"
-                               class="inline-flex items-center gap-2 bg-primary-500 text-white px-4 py-2 text-xs font-semibold hover:bg-primary-600 transition-colors">
-                                <i class="fa-solid fa-file-pdf"></i>Unduh PDF
-                            </a>
-                        @else
-                            <span class="inline-flex items-center gap-2 bg-neutral-100 text-neutral-400 px-4 py-2 text-xs font-semibold cursor-not-allowed">
-                                <i class="fa-solid fa-clock"></i>PDF Belum Tersedia
-                            </span>
-                        @endif
-                    </div>
-                </div>
+                    <x-kdk-card :kdk="$k" />
                 @empty
-                <div class="col-span-3 py-12 text-center text-neutral-400">
-                    <i class="fa-solid fa-book-open text-4xl mb-4 block"></i>
-                    <p>Belum ada edisi KDK yang dipublikasikan.</p>
-                </div>
+                    <div class="col-span-full text-center py-12 text-neutral-400">
+                        <i class="fa-solid fa-book-open text-4xl mb-4 block"></i>
+                        <p>Belum ada edisi KDK yang dipublikasikan.</p>
+                    </div>
                 @endforelse
             </div>
 

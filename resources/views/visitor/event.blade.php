@@ -1,7 +1,7 @@
 @extends('layouts.visitor')
-@section('title', 'Event & Kegiatan - ' . ($situs['nama_situs'] ?? 'KONI Papua Pegunungan'))
-@section('seo-title', 'Event & Kegiatan - ' . ($situs['nama_situs'] ?? 'KONI Papua Pegunungan'))
-@section('seo-description', 'Jadwal event dan kegiatan olahraga ' . ($situs['nama_situs'] ?? 'KONI Papua Pegunungan'))
+@section('title', 'Kegiatan - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
+@section('seo-title', 'Kegiatan - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
+@section('seo-description', 'Jadwal kegiatan dan program ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
 
 @section('content')
     @include('partials.page-banner', ['title' => 'Event & Kegiatan', 'breadcrumb' => 'Event'])

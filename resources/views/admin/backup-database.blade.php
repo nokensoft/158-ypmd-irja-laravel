@@ -38,7 +38,10 @@
                 <div class="flex flex-col sm:flex-row items-end gap-4">
                     <div class="flex-1 w-full">
                         <label class="text-base font-bold uppercase text-gray-500 block mb-2">File SQL (.sql)</label>
-                        <input type="file" name="sql_file" accept=".sql,.txt" required class="w-full border border-gray-300 p-3 text-base no-round">
+                        <input type="file" name="sql_file" accept=".sql,.txt" required
+                               class="w-full border border-gray-300 p-3 text-base no-round cursor-pointer
+                                      file:mr-4 file:py-2 file:px-4 file:border-0 file:font-bold file:text-sm
+                                      file:bg-primary file:text-white file:cursor-pointer hover:file:bg-red-700 file:transition">
                     </div>
                     <button type="submit" class="bg-red-600 text-white px-6 py-3 font-bold text-base hover:bg-red-700 transition no-round whitespace-nowrap"
                             x-text="confirmed ? 'Klik Sekali Lagi untuk Konfirmasi' : 'Restore Sekarang'">

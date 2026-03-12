@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="bg-primary-600 py-16">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <span class="text-primary-200 text-xs uppercase tracking-widest"><a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> › Tentang › Bidang Kerja</span>
             <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">Bidang Kerja</h1>
             <p class="text-primary-200 text-lg mt-3 max-w-xl">Struktur bidang kerja yang menopang seluruh program dan kegiatan YPMD IRJA.</p>
@@ -13,7 +13,7 @@
     </div>
 
     <section class="py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <div class="grid md:grid-cols-3 gap-8">
 
                 {{-- Bidang Informasi --}}
@@ -58,7 +58,7 @@
                             <i class="fa-solid fa-users text-accent-400 text-xl"></i>
                         </div>
                         <h2 class="font-display font-bold text-neutral-900 text-lg mb-4">Bidang CBO &amp; CBA</h2>
-                        <p class="text-neutral-400 text-xs uppercase tracking-wider mb-4">Community Based Organization &amp; Community Based Advocacy</p>
+                        <p class="text-neutral-400 text-xs uppercase tracking-wider mb-4">Organisasi Berbasis Komunitas &amp; Advokasi Berbasis Komunitas</p>
                         <ul class="space-y-3">
                             <li class="flex gap-3 items-start">
                                 <i class="fa-solid fa-fish text-accent-400 mt-1 text-sm"></i>
@@ -70,14 +70,14 @@
                             <li class="flex gap-3 items-start">
                                 <i class="fa-solid fa-seedling text-accent-400 mt-1 text-sm"></i>
                                 <div>
-                                    <p class="font-semibold text-neutral-800">Agriculture</p>
+                                    <p class="font-semibold text-neutral-800">Pertanian &amp; Perkebunan</p>
                                     <p class="text-neutral-500 text-sm">Pengembangan pertanian berbasis komunitas, termasuk budidaya kakao organik dan tanaman pangan lokal.</p>
                                 </div>
                             </li>
                             <li class="flex gap-3 items-start">
                                 <i class="fa-solid fa-droplet text-accent-400 mt-1 text-sm"></i>
                                 <div>
-                                    <p class="font-semibold text-neutral-800">Clean Water Supply</p>
+                                    <p class="font-semibold text-neutral-800">Penyediaan Air Bersih</p>
                                     <p class="text-neutral-500 text-sm">Program penyediaan air bersih bagi masyarakat kampung di wilayah pedalaman Papua.</p>
                                 </div>
                             </li>
@@ -99,7 +99,7 @@
                         <div class="w-12 h-12 bg-primary-50 flex items-center justify-center mb-4">
                             <i class="fa-solid fa-briefcase text-primary-500 text-xl"></i>
                         </div>
-                        <h2 class="font-display font-bold text-neutral-900 text-lg mb-4">Bidang Administrasi &amp; Financial</h2>
+                        <h2 class="font-display font-bold text-neutral-900 text-lg mb-4">Bidang Administrasi &amp; Keuangan</h2>
                         <ul class="space-y-3">
                             <li class="flex gap-3 items-start">
                                 <i class="fa-solid fa-user-gear text-primary-400 mt-1 text-sm"></i>
@@ -111,7 +111,7 @@
                             <li class="flex gap-3 items-start">
                                 <i class="fa-solid fa-coins text-primary-400 mt-1 text-sm"></i>
                                 <div>
-                                    <p class="font-semibold text-neutral-800">Financial</p>
+                                    <p class="font-semibold text-neutral-800">Keuangan</p>
                                     <p class="text-neutral-500 text-sm">Pengelolaan keuangan lembaga, pelaporan keuangan, serta akuntabilitas penggunaan dana program dan donasi.</p>
                                 </div>
                             </li>
@@ -125,7 +125,7 @@
 
     {{-- CTA --}}
     <section class="py-16 bg-neutral-50 border-t border-neutral-100">
-        <div class="max-w-6xl mx-auto px-6 text-center fade-in">
+        <div class="max-w-7xl mx-auto px-6 text-center fade-in">
             <h2 class="text-xl md:text-2xl font-display font-bold text-neutral-900 mb-3">Ingin Tahu Lebih Lanjut?</h2>
             <p class="text-neutral-500 max-w-lg mx-auto mb-6">Pelajari program-program yang dijalankan oleh setiap bidang kerja YPMD IRJA.</p>
             <div class="flex flex-wrap justify-center gap-4">

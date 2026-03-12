@@ -3,9 +3,22 @@
 @section('seo-title', ($kategoriAktif ? 'Berita ' . $kategoriAktif->nama : 'Papua Today — Berita & Artikel'))
 @section('seo-description', ($kategoriAktif ? 'Berita kategori ' . $kategoriAktif->nama : 'Kumpulan berita dan artikel terbaru') . ' dari ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
 
+@section('json-ld')
+@php
+$breadcrumb = [['@type'=>'ListItem','position'=>1,'name'=>'Beranda','item'=>route('beranda')]];
+if ($kategoriAktif) {
+    $breadcrumb[] = ['@type'=>'ListItem','position'=>2,'name'=>'Papua Today','item'=>route('berita')];
+    $breadcrumb[] = ['@type'=>'ListItem','position'=>3,'name'=>$kategoriAktif->nama];
+} else {
+    $breadcrumb[] = ['@type'=>'ListItem','position'=>2,'name'=>'Papua Today'];
+}
+@endphp
+<script type="application/ld+json">{!! json_encode(['@context'=>'https://schema.org','@type'=>'BreadcrumbList','itemListElement'=>$breadcrumb], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}</script>
+@endsection
+
 @section('content')
     <div class="bg-primary-600 py-16">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <span class="text-primary-200 text-xs uppercase tracking-widest">
                 <a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a>
                 &rsaquo;
@@ -22,7 +35,7 @@
     </div>
 
     <section class="py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-12">
                 {{-- Main Content --}}
                 <div class="lg:col-span-3">

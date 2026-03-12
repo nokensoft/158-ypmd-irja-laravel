@@ -1,5 +1,5 @@
 <header class="sticky top-0 z-50 bg-white shadow-md border-b border-neutral-200" x-data="{ menuOpen: false, tentangOpen: false }">
-    <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <nav class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
 
         {{-- Logo Desktop --}}
         <a href="{{ route('beranda') }}" class="hidden md:flex items-center gap-3 flex-shrink-0">
@@ -18,14 +18,14 @@
         <ul class="hidden md:flex items-center gap-6">
             <li>
                 <a href="{{ route('beranda') }}"
-                   class="nav-link text-sm font-medium transition-colors {{ request()->routeIs('beranda') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">
+                   class="nav-link text-lg font-medium transition-colors {{ request()->routeIs('beranda') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">
                     Beranda
                 </a>
             </li>
 
             {{-- Tentang Dropdown --}}
             <li class="relative" x-data="{ open: false }" @mouseenter="open=true" @mouseleave="open=false">
-                <button class="nav-link text-sm font-medium flex items-center gap-1 transition-colors
+                <button class="nav-link text-lg font-medium flex items-center gap-1 transition-colors
                     {{ request()->routeIs('sejarah') || request()->routeIs('profil') || request()->routeIs('tokoh') || request()->routeIs('mitra') || request()->routeIs('bidang-kerja') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">
                     Tentang <i class="fa-solid fa-chevron-down text-[10px]"></i>
                 </button>
@@ -55,11 +55,11 @@
                 </div>
             </li>
 
-            <li><a href="{{ route('program') }}" class="nav-link text-sm font-medium transition-colors {{ request()->routeIs('program') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Program</a></li>
-            <li><a href="{{ route('kdk') }}" class="nav-link text-sm font-medium transition-colors {{ request()->routeIs('kdk') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">KDK</a></li>
-            <li><a href="{{ route('berita') }}" class="nav-link text-sm font-medium transition-colors {{ request()->routeIs('berita*') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Papua Today</a></li>
-            <li><a href="{{ route('donasi') }}" class="nav-link text-sm font-medium transition-colors {{ request()->routeIs('donasi') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Donasi</a></li>
-            <li><a href="{{ route('kontak') }}" class="nav-link text-sm font-medium transition-colors {{ request()->routeIs('kontak') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Kontak</a></li>
+            <li><a href="{{ route('program') }}" class="nav-link text-lg font-medium transition-colors {{ request()->routeIs('program') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Program</a></li>
+            <li><a href="{{ route('kdk') }}" class="nav-link text-lg font-medium transition-colors {{ request()->routeIs('kdk') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Buletin KDK</a></li>
+            <li><a href="{{ route('berita') }}" class="nav-link text-lg font-medium transition-colors {{ request()->routeIs('berita*') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Papua Terkini</a></li>
+            <li><a href="{{ route('donasi') }}" class="nav-link text-lg font-medium transition-colors {{ request()->routeIs('donasi') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Donasi</a></li>
+            <li><a href="{{ route('kontak') }}" class="nav-link text-lg font-medium transition-colors {{ request()->routeIs('kontak') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Kontak</a></li>
         </ul>
 
         {{-- Logo Mobile Center --}}
@@ -84,30 +84,30 @@
         <ul class="flex flex-col py-2">
             <li>
                 <a href="{{ route('beranda') }}"
-                   class="block px-6 py-3 text-sm {{ request()->routeIs('beranda') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">
+                   class="block px-6 py-3 text-lg {{ request()->routeIs('beranda') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">
                     Beranda
                 </a>
             </li>
             <li>
                 <button @click="tentangOpen=!tentangOpen"
-                        class="w-full flex items-center justify-between px-6 py-3 text-sm
+                        class="w-full flex items-center justify-between px-6 py-3 text-lg
                         {{ request()->routeIs('sejarah') || request()->routeIs('profil') || request()->routeIs('tokoh') || request()->routeIs('mitra') || request()->routeIs('bidang-kerja') ? 'text-primary-600 font-semibold bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">
                     Tentang
                     <i class="fa-solid fa-chevron-down text-[10px] transition-transform" :class="tentangOpen && 'rotate-180'"></i>
                 </button>
                 <div x-show="tentangOpen" x-transition style="display:none;" class="bg-neutral-50">
-                    <a href="{{ route('sejarah') }}" class="block px-10 py-2.5 text-sm {{ request()->routeIs('sejarah') ? 'font-semibold text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Sejarah Singkat</a>
-                    <a href="{{ route('profil') }}" class="block px-10 py-2.5 text-sm {{ request()->routeIs('profil') ? 'font-semibold text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Profil Lembaga</a>
-                    <a href="{{ route('tokoh') }}" class="block px-10 py-2.5 text-sm {{ request()->routeIs('tokoh') ? 'font-semibold text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Direktur</a>
-                    <a href="{{ route('bidang-kerja') }}" class="block px-10 py-2.5 text-sm {{ request()->routeIs('bidang-kerja') ? 'font-semibold text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Bidang Kerja</a>
-                    <a href="{{ route('mitra') }}" class="block px-10 py-2.5 text-sm {{ request()->routeIs('mitra') ? 'font-semibold text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}"><i class="fa-solid fa-handshake mr-1.5 text-xs"></i>Mitra Kerja</a>
+                    <a href="{{ route('sejarah') }}" class="block px-10 py-2.5 text-base {{ request()->routeIs('sejarah') ? 'font-semibold text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Sejarah Singkat</a>
+                    <a href="{{ route('profil') }}" class="block px-10 py-2.5 text-base {{ request()->routeIs('profil') ? 'font-semibold text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Profil Lembaga</a>
+                    <a href="{{ route('tokoh') }}" class="block px-10 py-2.5 text-base {{ request()->routeIs('tokoh') ? 'font-semibold text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Direktur</a>
+                    <a href="{{ route('bidang-kerja') }}" class="block px-10 py-2.5 text-base {{ request()->routeIs('bidang-kerja') ? 'font-semibold text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Bidang Kerja</a>
+                    <a href="{{ route('mitra') }}" class="block px-10 py-2.5 text-base {{ request()->routeIs('mitra') ? 'font-semibold text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}"><i class="fa-solid fa-handshake mr-1.5 text-xs"></i>Mitra Kerja</a>
                 </div>
             </li>
-            <li><a href="{{ route('program') }}" class="block px-6 py-3 text-sm {{ request()->routeIs('program') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">Program</a></li>
-            <li><a href="{{ route('kdk') }}" class="block px-6 py-3 text-sm {{ request()->routeIs('kdk') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">KDK</a></li>
-            <li><a href="{{ route('berita') }}" class="block px-6 py-3 text-sm {{ request()->routeIs('berita*') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">Papua Today</a></li>
-            <li><a href="{{ route('donasi') }}" class="block px-6 py-3 text-sm {{ request()->routeIs('donasi') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">Donasi</a></li>
-            <li><a href="{{ route('kontak') }}" class="block px-6 py-3 text-sm {{ request()->routeIs('kontak') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">Kontak</a></li>
+            <li><a href="{{ route('program') }}" class="block px-6 py-3 text-lg {{ request()->routeIs('program') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">Program</a></li>
+            <li><a href="{{ route('kdk') }}" class="block px-6 py-3 text-lg {{ request()->routeIs('kdk') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">Buletin KDK</a></li>
+            <li><a href="{{ route('berita') }}" class="block px-6 py-3 text-lg {{ request()->routeIs('berita*') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">Papua Terkini</a></li>
+            <li><a href="{{ route('donasi') }}" class="block px-6 py-3 text-lg {{ request()->routeIs('donasi') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">Donasi</a></li>
+            <li><a href="{{ route('kontak') }}" class="block px-6 py-3 text-lg {{ request()->routeIs('kontak') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">Kontak</a></li>
         </ul>
     </div>
 </header>

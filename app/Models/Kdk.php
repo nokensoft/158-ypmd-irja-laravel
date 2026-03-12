@@ -17,6 +17,7 @@ class Kdk extends Model
         'deskripsi',
         'tanggal_terbit',
         'file_pdf',
+        'media_id',
         'user_id',
     ];
 
@@ -30,6 +31,20 @@ class Kdk extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function media()
+    {
+        return $this->belongsTo(Media::class);
+    }
+
+    public function getGambarAttribute(): string
+    {
+        if ($this->media && $this->media->file_path) {
+            return asset('storage/' . $this->media->file_path);
+        }
+
+        return asset('img/logo-ypmd-irja.png');
     }
 
     public function getPdfUrlAttribute(): ?string

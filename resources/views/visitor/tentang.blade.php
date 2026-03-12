@@ -1,121 +1,156 @@
 @extends('layouts.visitor')
-@section('title', 'Tentang Kami - ' . ($situs['nama_situs'] ?? 'KONI Papua Pegunungan'))
-@section('seo-title', 'Tentang Kami - ' . ($situs['nama_situs'] ?? 'KONI Papua Pegunungan'))
-@section('seo-description', 'Profil KONI Provinsi Papua Pegunungan, data organisasi, capaian PON XXI 2024, dan target strategis menuju PON XXII 2028.')
+@section('title', 'Tentang Kami - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
+@section('seo-title', 'Tentang YPMD IRJA — Yayasan Pembangunan Masyarakat Desa Irian Jaya')
+@section('seo-description', 'Profil, visi, misi, dan program YPMD IRJA — LSM pertama di Tanah Papua yang berdiri sejak 1984.')
 
 @section('content')
-    @include('partials.page-banner', ['title' => 'Tentang Kami', 'breadcrumb' => 'Tentang'])
-    {{-- Profil --}}
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div>
-                    <p class="text-primary font-bold uppercase tracking-widest text-base mb-2">Profil Organisasi</p>
-                    <h3 class="text-3xl font-extrabold mb-6">KONI Provinsi Papua Pegunungan</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4 text-lg">
-                        Kami adalah induk organisasi olahraga di Daerah Otonom Baru (DOB) Papua Pegunungan yang memiliki tanggung jawab besar dalam mengoordinasikan, membina, dan mengembangkan olahraga prestasi di seluruh wilayah provinsi. Sebagai lembaga yang lahir dari semangat pemekaran, kami hadir untuk memastikan bahwa potensi luar biasa para atlet di bumi pegunungan ini mendapat wadah pembinaan yang profesional dan berkelanjutan.
-                    </p>
-                    <p class="text-gray-600 leading-relaxed mb-4 text-lg">
-                        Meskipun berstatus sebagai provinsi baru, kami telah menunjukkan taji di kancah nasional dengan prestasi yang impresif pada debut perdana di PON XXI Aceh-Sumut 2024. Pencapaian ini menjadi bukti nyata bahwa dengan tekad kuat, dukungan pemerintah daerah, dan kerja keras seluruh elemen keolahragaan, Papua Pegunungan mampu bersaing dan mengukir sejarah di pentas olahraga nasional.
-                    </p>
-                </div>
-                <div class="relative">
-                    <img src="{{ asset('img/Gubernur Jhon Tabo, KONI Papua Pegunungan.jpeg') }}" alt="Profil KONI" class="w-full h-full shadow-lg">
-                    <div class="absolute -bottom-6 -right-6 bg-primary text-white p-8 shadow-lg hidden lg:block">
-                        <p class="text-4xl font-extrabold">Dr. Hc. Jhon Tabo, SE, M.BA.</p>
-                        <p class="text-base uppercase tracking-wide mt-1">Ketua Umum KONI Papua Pegunungan masa bakti 2025-2029, dilantik pada 8 Desember 2025.</p>
-                    </div>
-                </div>
-            </div>
+
+    {{-- Hero Banner --}}
+    <div class="bg-primary-600 py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <span class="text-primary-200 text-xs uppercase tracking-widest">
+                <a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> › Tentang Kami
+            </span>
+            <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">Tentang YPMD IRJA</h1>
+            <p class="text-primary-200 mt-2 text-lg">Mengenal lebih dekat Yayasan Pembangunan Masyarakat Desa Irian Jaya</p>
         </div>
-    </section>
-    {{-- Data Organisasi --}}
-    <section class="py-20 bg-accent">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <p class="text-primary font-bold uppercase tracking-widest text-base mb-2">Informasi Resmi</p>
-                <h3 class="text-3xl font-extrabold">Data Organisasi</h3>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white p-8 shadow-lg border-t-4 border-primary">
-                    <div class="flex items-start gap-4">
-                        <div class="w-12 h-12 bg-primary text-white flex items-center justify-center shrink-0"><i class="fas fa-user-tie"></i></div>
-                        <div>
-                            <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Ketua Umum (2025-2029)</p>
-                            <p class="text-lg font-extrabold text-dark">Dr. Hc. Jhon Tabo, SE, M.BA.</p>
-                            <p class="text-sm text-gray-500 mt-1">Dilantik 8 Desember 2025</p>
-                        </div>
+    </div>
+
+    {{-- Intro --}}
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="fade-in">
+                    <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2"><i class="fa-solid fa-leaf mr-2"></i>Sejak 1984</p>
+                    <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900 mb-6">LSM Pertama di Tanah Papua</h2>
+                    <p class="text-neutral-600 leading-relaxed mb-4">Yayasan Pembangunan Masyarakat Desa Irian Jaya (YPMD IRJA) adalah lembaga swadaya masyarakat pertama yang berdiri di Tanah Papua. Lahir pada <strong>1984</strong> dari keresahan kelompok idealis Gereja dan Tokoh Masyarakat, YPMD IRJA hadir sebagai jembatan informasi dan agen perubahan.</p>
+                    <p class="text-neutral-600 leading-relaxed mb-6">Selama lebih dari empat dekade, lembaga ini mendampingi masyarakat adat Papua agar mampu berdiri sebagai <em>subjek</em> — bukan objek — dalam proses pembangunan, serta mempertahankan hak-hak mereka atas tanah dan sumber daya alam.</p>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="{{ route('sejarah') }}" class="bg-primary-500 text-white px-5 py-2.5 text-sm font-semibold hover:bg-primary-600 transition-colors">
+                            <i class="fa-solid fa-clock-rotate-left mr-2"></i>Baca Sejarah
+                        </a>
+                        <a href="{{ route('profil') }}" class="border border-neutral-300 text-neutral-700 px-5 py-2.5 text-sm font-semibold hover:border-primary-400 hover:text-primary-600 transition-colors">
+                            <i class="fa-solid fa-building mr-2"></i>Profil Lembaga
+                        </a>
                     </div>
                 </div>
-                <div class="bg-white p-8 shadow-lg border-t-4 border-primary">
-                    <div class="flex items-start gap-4">
-                        <div class="w-12 h-12 bg-primary text-white flex items-center justify-center shrink-0"><i class="fas fa-landmark"></i></div>
-                        <div>
-                            <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Status Kepemimpinan</p>
-                            <p class="text-lg font-extrabold text-dark">Dipimpin langsung oleh Gubernur</p>
-                            <p class="text-sm text-gray-500 mt-1">Menjamin dukungan optimal dari pemerintah daerah dan SDM</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white p-8 shadow-lg border-t-4 border-primary">
-                    <div class="flex items-start gap-4">
-                        <div class="w-12 h-12 bg-primary text-white flex items-center justify-center shrink-0"><i class="fas fa-calendar-check"></i></div>
-                        <div>
-                            <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Tahun Pembentukan</p>
-                            <p class="text-lg font-extrabold text-dark">Resmi dibentuk tahun 2023</p>
-                            <p class="text-sm text-gray-500 mt-1">Sebagai KONI persiapan pasca pemekaran wilayah</p>
-                        </div>
-                    </div>
+                <div class="fade-in">
+                    <img src="{{ asset('img/galeri/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD IRJA" class="w-full rounded-lg shadow-card object-cover">
                 </div>
             </div>
         </div>
     </section>
 
-    {{-- Visi dan Target --}}
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <p class="text-primary font-bold uppercase tracking-widest text-base mb-2">Arah Kebijakan</p>
-                <h3 class="text-3xl font-extrabold">Visi dan Target Masa Depan</h3>
+    {{-- Stats --}}
+    <div class="border-t border-neutral-200 bg-neutral-50">
+        <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="text-center fade-in">
+                <div class="text-3xl font-display font-bold text-primary-600">1984</div>
+                <div class="text-xs text-neutral-500 mt-1 uppercase tracking-wider">Tahun Berdiri</div>
             </div>
+            <div class="text-center fade-in">
+                <div class="text-3xl font-display font-bold text-primary-600">40+</div>
+                <div class="text-xs text-neutral-500 mt-1 uppercase tracking-wider">Tahun Berkarya</div>
+            </div>
+            <div class="text-center fade-in">
+                <div class="text-3xl font-display font-bold text-accent-400">10+</div>
+                <div class="text-xs text-neutral-500 mt-1 uppercase tracking-wider">Tahun Ekspor Kakao</div>
+            </div>
+            <div class="text-center fade-in">
+                <div class="text-3xl font-display font-bold text-accent-400">4</div>
+                <div class="text-xs text-neutral-500 mt-1 uppercase tracking-wider">Wilayah Kerja</div>
+            </div>
+        </div>
+    </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <div class="bg-dark text-white p-10 shadow-lg">
-                    <div class="flex items-center mb-6">
-                        <div class="w-14 h-14 bg-primary flex items-center justify-center mr-4"><i class="fas fa-eye text-xl"></i></div>
-                        <h4 class="text-2xl font-extrabold uppercase">Visi</h4>
+    {{-- Visi Misi --}}
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-12 fade-in text-center">
+                <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2"><i class="fa-solid fa-compass mr-2"></i>Arah Organisasi</p>
+                <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900">Visi &amp; Misi</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-primary-600 text-white p-10 fade-in">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-10 bg-white/20 flex items-center justify-center">
+                            <i class="fa-solid fa-eye text-white"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-xl">Visi</h3>
                     </div>
-                    <p class="text-gray-300 leading-relaxed text-xl">Membawa atlet lokal ke puncak prestasi dunia dengan karakter khas wilayah pegunungan.</p>
+                    <p class="text-primary-100 leading-relaxed">Terwujudnya masyarakat adat Papua yang mandiri, berdaulat, dan bermartabat dalam mengelola kehidupan dan sumber daya alamnya secara berkelanjutan.</p>
                 </div>
-
-                <div class="bg-accent p-10 shadow-lg border-t-4 border-primary">
-                    <div class="flex items-center mb-6">
-                        <div class="w-14 h-14 bg-primary text-white flex items-center justify-center mr-4"><i class="fas fa-bullseye text-xl"></i></div>
-                        <h4 class="text-2xl font-extrabold uppercase">Fokus Strategis</h4>
+                <div class="bg-neutral-50 border border-neutral-100 p-10 fade-in">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-10 bg-primary-50 flex items-center justify-center">
+                            <i class="fa-solid fa-bullseye text-primary-500"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-neutral-900">Misi</h3>
                     </div>
-                    <ul class="space-y-4">
-                        @foreach ([
-                            'Target utama: peningkatan prestasi pada PON XXII 2028 NTT-NTB.',
-                            'Melanjutkan program pembinaan atlet pada cabang olahraga unggulan hingga level nasional, internasional, dan Olimpiade.',
-                            'Penguatan organisasi melalui dukungan Pemda dan bimbingan dari KONI Pusat untuk mengembangkan potensi SDM atlet di wilayah baru.',
-                        ] as $i => $item)
-                            <li class="flex items-start">
-                                <span class="w-7 h-7 bg-primary text-white flex items-center justify-center text-sm font-bold mr-3 mt-0.5 shrink-0">{{ $i + 1 }}</span>
-                                <span class="text-gray-700 text-lg">{{ $item }}</span>
-                            </li>
-                        @endforeach
+                    <ul class="space-y-2 text-neutral-600">
+                        <li class="flex gap-2"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>Mendampingi masyarakat adat sebagai subjek pembangunan</span></li>
+                        <li class="flex gap-2"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>Mengembangkan program ekonomi berbasis komunitas yang berkelanjutan</span></li>
+                        <li class="flex gap-2"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>Mengadvokasi hak-hak masyarakat adat atas tanah dan sumber daya alam</span></li>
+                        <li class="flex gap-2"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>Membangun jaringan kemitraan lokal, nasional, dan internasional</span></li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    {{-- Kutipan --}}
-    <section class="py-16 bg-primary text-white">
-        <div class="container mx-auto px-4 text-center max-w-5xl">
-            <i class="fas fa-quote-left text-4xl opacity-40 mb-6 block"></i>
-            <p class="text-2xl lg:text-3xl font-extrabold leading-relaxed">"Bendera KONI Provinsi Papua Pegunungan nantinya akan kami kibarkan setinggi-tingginya... hingga mencapai puncak prestasi dunia."</p>
-            <p class="text-base uppercase tracking-widest mt-6 text-white/90">— Dr. Hc. Jhon Tabo, SE, M.BA.</p>
+    {{-- Sub-halaman Navigation --}}
+    <section class="py-16 bg-neutral-50 border-t border-neutral-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-10 text-center fade-in">
+                <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2"><i class="fa-solid fa-sitemap mr-2"></i>Jelajahi Lebih Lanjut</p>
+                <h2 class="text-2xl font-display font-bold text-neutral-900">Informasi Organisasi</h2>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <a href="{{ route('sejarah') }}" class="bg-white shadow-card card-hover border border-neutral-100 p-6 fade-in group">
+                    <div class="w-10 h-10 bg-primary-50 flex items-center justify-center mb-4 group-hover:bg-primary-500 transition-colors">
+                        <i class="fa-solid fa-clock-rotate-left text-primary-500 group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-neutral-900 mb-1">Sejarah Singkat</h3>
+                    <p class="text-neutral-500 text-sm">Perjalanan 40 tahun pengabdian YPMD IRJA sejak 1984.</p>
+                </a>
+                <a href="{{ route('profil') }}" class="bg-white shadow-card card-hover border border-neutral-100 p-6 fade-in group">
+                    <div class="w-10 h-10 bg-primary-50 flex items-center justify-center mb-4 group-hover:bg-primary-500 transition-colors">
+                        <i class="fa-solid fa-building text-primary-500 group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-neutral-900 mb-1">Profil Lembaga</h3>
+                    <p class="text-neutral-500 text-sm">Visi, misi, wilayah kerja, dan identitas organisasi.</p>
+                </a>
+                <a href="{{ route('tokoh') }}" class="bg-white shadow-card card-hover border border-neutral-100 p-6 fade-in group">
+                    <div class="w-10 h-10 bg-primary-50 flex items-center justify-center mb-4 group-hover:bg-primary-500 transition-colors">
+                        <i class="fa-solid fa-user-tie text-primary-500 group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-neutral-900 mb-1">Direktur</h3>
+                    <p class="text-neutral-500 text-sm">Direktur YPMD IRJA dari masa ke masa sejak 1984.</p>
+                </a>
+                <a href="{{ route('bidang-kerja') }}" class="bg-white shadow-card card-hover border border-neutral-100 p-6 fade-in group">
+                    <div class="w-10 h-10 bg-accent-50 flex items-center justify-center mb-4 group-hover:bg-accent-400 transition-colors">
+                        <i class="fa-solid fa-list-check text-accent-400 group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-neutral-900 mb-1">Bidang Kerja</h3>
+                    <p class="text-neutral-500 text-sm">Struktur bidang kerja yang menopang program YPMD IRJA.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    {{-- CTA --}}
+    <section class="bg-primary-600 py-14">
+        <div class="max-w-4xl mx-auto px-6 text-center fade-in">
+            <h2 class="text-2xl md:text-3xl font-display font-bold text-white mb-3">Bersama Membangun Papua</h2>
+            <p class="text-primary-200 text-lg mb-8">Dukung program pemberdayaan masyarakat adat Papua. Setiap kontribusi membantu mewujudkan kemandirian ekonomi dan keadilan sosial.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="{{ route('donasi') }}" class="bg-white text-primary-600 px-8 py-3 text-sm font-semibold hover:bg-neutral-100 transition-colors shadow-card">
+                    <i class="fa-solid fa-heart mr-2"></i>Donasi Sekarang
+                </a>
+                <a href="{{ route('kontak') }}" class="border border-white/40 text-white px-8 py-3 text-sm font-semibold hover:bg-white/10 transition-colors">
+                    <i class="fa-solid fa-envelope mr-2"></i>Hubungi Kami
+                </a>
+            </div>
         </div>
     </section>
 @endsection
