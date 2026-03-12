@@ -26,7 +26,7 @@
             </div>
             <div>
                 <label class="text-base font-bold uppercase text-gray-500 block mb-2">Keterangan Singkat</label>
-                <input type="text" name="keterangan_singkat" value="{{ old('keterangan_singkat', $editMode ? $pengguna->keterangan_singkat : '') }}" class="w-full border border-gray-300 p-4 text-base focus:border-primary focus:outline-none transition no-round" placeholder="Contoh: Staf Humas KONI" maxlength="255">
+                <input type="text" name="keterangan_singkat" value="{{ old('keterangan_singkat', $editMode ? $pengguna->keterangan_singkat : '') }}" class="w-full border border-gray-300 p-4 text-base focus:border-primary focus:outline-none transition no-round" placeholder="Contoh: Staf Humas" maxlength="255">
             </div>
             <div>
                 <label class="text-base font-bold uppercase text-gray-500 block mb-2">Role</label>

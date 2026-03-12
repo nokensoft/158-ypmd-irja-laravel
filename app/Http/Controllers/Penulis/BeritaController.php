@@ -12,7 +12,7 @@ class BeritaController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Berita::with(['kategori', 'media'])->where('user_id', session('user.id'));
+        $query = Berita::with(['kategori', 'media']);
 
         if ($request->filled('cari')) {
             $query->where('judul', 'like', "%{$request->cari}%");
@@ -30,7 +30,7 @@ class BeritaController extends Controller
     public function create()
     {
         $kategori = KategoriBerita::orderBy('nama')->get();
-        $media = Media::where('user_id', session('user.id'))->where('tipe', 'foto')->orderBy('judul')->get();
+        $media = Media::where('tipe', 'foto')->orderBy('judul')->get();
 
         return view('penulis.berita.form', compact('kategori', 'media') + ['editMode' => false]);
     }
@@ -67,16 +67,16 @@ class BeritaController extends Controller
 
     public function edit(string $id)
     {
-        $berita = Berita::where('user_id', session('user.id'))->findOrFail($id);
+        $berita = Berita::findOrFail($id);
         $kategori = KategoriBerita::orderBy('nama')->get();
-        $media = Media::where('user_id', session('user.id'))->where('tipe', 'foto')->orderBy('judul')->get();
+        $media = Media::where('tipe', 'foto')->orderBy('judul')->get();
 
         return view('penulis.berita.form', compact('berita', 'kategori', 'media') + ['editMode' => true]);
     }
 
     public function update(Request $request, string $id)
     {
-        $berita = Berita::where('user_id', session('user.id'))->findOrFail($id);
+        $berita = Berita::findOrFail($id);
 
         $request->validate([
             'judul' => 'required|string|max:255',
@@ -107,7 +107,7 @@ class BeritaController extends Controller
 
     public function destroy(string $id)
     {
-        $berita = Berita::where('user_id', session('user.id'))->findOrFail($id);
+        $berita = Berita::findOrFail($id);
         $berita->delete();
 
         return redirect()->route('penulis.berita.index')->with('success', 'Berita berhasil dihapus.');
@@ -115,7 +115,7 @@ class BeritaController extends Controller
 
     public function restore(string $id)
     {
-        $berita = Berita::onlyTrashed()->where('user_id', session('user.id'))->findOrFail($id);
+        $berita = Berita::onlyTrashed()->findOrFail($id);
         $berita->restore();
 
         return redirect()->route('penulis.berita.index')->with('success', 'Berita berhasil dipulihkan.');

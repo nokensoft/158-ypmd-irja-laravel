@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - {{ $situs['nama_situs'] ?? 'KONI Papua Pegunungan' }}</title>
+    <title>Login - {{ $situs['nama_situs'] ?? 'YPMD IRJA' }}</title>
     <meta name="robots" content="noindex, nofollow">
     @if (!empty($situs['logo']))
         <link rel="icon" type="image/png" href="{{ asset('storage/' . $situs['logo']) }}">
@@ -41,11 +41,11 @@
         {{-- Logo --}}
         <div class="text-center mb-8">
             @if (!empty($situs['logo']))
-                <img src="{{ asset('storage/' . $situs['logo']) }}" alt="Logo {{ $situs['nama_situs'] ?? 'KONI' }}" class="h-20 mx-auto mb-4 brightness-200">
+                <img src="{{ asset('storage/' . $situs['logo']) }}" alt="Logo {{ $situs['nama_situs'] ?? 'YPMD IRJA' }}" class="h-20 mx-auto mb-4 brightness-200">
             @else
-                <img src="{{ asset('img/logo-koni-papua-pegunungan.jpeg') }}" alt="Logo KONI" class="h-20 mx-auto mb-4">
+                <img src="{{ asset('img/logo-ypmd-irja.png') }}" alt="Logo YPMD IRJA" class="h-20 mx-auto mb-4">
             @endif
-            <h1 class="text-2xl font-extrabold text-white uppercase tracking-wide">{{ $situs['nama_situs'] ?? 'KONI Papua Pegunungan' }}</h1>
+            <h1 class="text-2xl font-extrabold text-white uppercase tracking-wide">{{ $situs['nama_situs'] ?? 'YPMD IRJA' }}</h1>
             <p class="text-gray-400 text-base mt-1">Masuk ke Dashboard</p>
         </div>
 
@@ -70,7 +70,7 @@
                         <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"><i class="fas fa-envelope"></i></span>
                         <input type="email" name="email" value="{{ old('email') }}" required
                                class="w-full border border-gray-300 p-4 pl-12 text-base focus:border-primary focus:outline-none transition no-round"
-                               placeholder="admin@konipapuapegunungan.id">
+                               placeholder="Masukkan email">
                     </div>
                     @error('email')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -103,7 +103,7 @@
             </div>
         </div>
 
-        <p class="text-center text-sm text-gray-600 mt-6">&copy; {{ date('Y') }} KONI Provinsi Papua Pegunungan</p>
+        <p class="text-center text-sm text-gray-600 mt-6">&copy; {{ date('Y') }} {{ $situs['nama_situs'] ?? 'YPMD IRJA' }}</p>
     </div>
 
 </body>

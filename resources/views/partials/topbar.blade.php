@@ -1,3 +1,14 @@
+{{-- Alert: Website dalam pengembangan --}}
+<div class="bg-amber-500 text-amber-950 text-xs font-semibold relative z-[61]" x-data="{ showAlert: true }" x-show="showAlert" x-transition>
+    <div class="max-w-7xl mx-auto px-6 py-2 flex items-center justify-center gap-2">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span>Website ini masih dalam tahap pengembangan. Konten teks, gambar, dan link yang ditampilkan belum valid dan masih dalam proses pengerjaan.</span>
+        <button @click="showAlert = false" class="ml-3 hover:text-amber-800 transition-colors" title="Tutup">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+</div>
+
 {{-- Topbar: Social Media | Clock | Language Switcher --}}
 <div class="bg-neutral-900 text-neutral-400 text-xs hidden md:block relative z-[60]" id="topbar">
     <div class="max-w-7xl mx-auto px-6 py-2.5 flex items-center justify-between">

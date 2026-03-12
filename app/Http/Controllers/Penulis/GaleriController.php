@@ -12,8 +12,7 @@ class GaleriController extends Controller
     public function index(Request $request)
     {
         $query = Galeri::withCount('media')
-            ->with(['media' => fn ($q) => $q->where('tipe', 'foto')->limit(1)])
-            ->where('user_id', session('user.id'));
+            ->with(['media' => fn ($q) => $q->where('tipe', 'foto')->limit(1)]);
 
         if ($request->filled('cari')) {
             $query->where('judul', 'like', "%{$request->cari}%");
@@ -30,8 +29,7 @@ class GaleriController extends Controller
 
     public function create()
     {
-        $media = Media::where('user_id', session('user.id'))
-            ->where('tipe', 'foto')
+        $media = Media::where('tipe', 'foto')
             ->latest()
             ->get();
 
@@ -64,9 +62,8 @@ class GaleriController extends Controller
 
     public function edit(string $id)
     {
-        $galeri = Galeri::with('media')->where('user_id', session('user.id'))->findOrFail($id);
-        $media = Media::where('user_id', session('user.id'))
-            ->where('tipe', 'foto')
+        $galeri = Galeri::with('media')->findOrFail($id);
+        $media = Media::where('tipe', 'foto')
             ->latest()
             ->get();
 
@@ -75,7 +72,7 @@ class GaleriController extends Controller
 
     public function update(Request $request, string $id)
     {
-        $galeri = Galeri::where('user_id', session('user.id'))->findOrFail($id);
+        $galeri = Galeri::findOrFail($id);
 
         $request->validate([
             'judul' => 'required|string|max:255',
@@ -98,7 +95,7 @@ class GaleriController extends Controller
 
     public function destroy(string $id)
     {
-        $galeri = Galeri::where('user_id', session('user.id'))->findOrFail($id);
+        $galeri = Galeri::findOrFail($id);
         $galeri->delete();
 
         return redirect()->route('penulis.galeri.index')->with('success', 'Galeri berhasil dihapus.');
@@ -106,7 +103,7 @@ class GaleriController extends Controller
 
     public function restore(string $id)
     {
-        $galeri = Galeri::onlyTrashed()->where('user_id', session('user.id'))->findOrFail($id);
+        $galeri = Galeri::onlyTrashed()->findOrFail($id);
         $galeri->restore();
 
         return redirect()->route('penulis.galeri.index')->with('success', 'Galeri berhasil dipulihkan.');

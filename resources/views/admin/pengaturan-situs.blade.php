@@ -86,31 +86,31 @@
                     <div class="w-12 h-12 bg-blue-600 text-white flex items-center justify-center shrink-0">
                         <i class="fab fa-facebook-f text-xl"></i>
                     </div>
-                    <input type="url" name="sosmed_facebook" value="{{ $settings['sosmed_facebook'] ?? '' }}" class="w-full border border-gray-300 p-4 text-base focus:border-primary focus:outline-none transition no-round" placeholder="https://facebook.com/konipapuapegunungan">
+                    <input type="url" name="sosmed_facebook" value="{{ $settings['sosmed_facebook'] ?? '' }}" class="w-full border border-gray-300 p-4 text-base focus:border-primary focus:outline-none transition no-round" placeholder="https://facebook.com/namaakun">
                 </div>
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-500 text-white flex items-center justify-center shrink-0">
                         <i class="fab fa-instagram text-xl"></i>
                     </div>
-                    <input type="url" name="sosmed_instagram" value="{{ $settings['sosmed_instagram'] ?? '' }}" class="w-full border border-gray-300 p-4 text-base focus:border-primary focus:outline-none transition no-round" placeholder="https://instagram.com/konipapuapegunungan">
+                    <input type="url" name="sosmed_instagram" value="{{ $settings['sosmed_instagram'] ?? '' }}" class="w-full border border-gray-300 p-4 text-base focus:border-primary focus:outline-none transition no-round" placeholder="https://instagram.com/namaakun">
                 </div>
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-12 bg-red-600 text-white flex items-center justify-center shrink-0">
                         <i class="fab fa-youtube text-xl"></i>
                     </div>
-                    <input type="url" name="sosmed_youtube" value="{{ $settings['sosmed_youtube'] ?? '' }}" class="w-full border border-gray-300 p-4 text-base focus:border-primary focus:outline-none transition no-round" placeholder="https://youtube.com/@konipapuapegunungan">
+                    <input type="url" name="sosmed_youtube" value="{{ $settings['sosmed_youtube'] ?? '' }}" class="w-full border border-gray-300 p-4 text-base focus:border-primary focus:outline-none transition no-round" placeholder="https://youtube.com/@namaakun">
                 </div>
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-12 bg-sky-500 text-white flex items-center justify-center shrink-0">
                         <i class="fab fa-twitter text-xl"></i>
                     </div>
-                    <input type="url" name="sosmed_twitter" value="{{ $settings['sosmed_twitter'] ?? '' }}" class="w-full border border-gray-300 p-4 text-base focus:border-primary focus:outline-none transition no-round" placeholder="https://x.com/konipapuapeg">
+                    <input type="url" name="sosmed_twitter" value="{{ $settings['sosmed_twitter'] ?? '' }}" class="w-full border border-gray-300 p-4 text-base focus:border-primary focus:outline-none transition no-round" placeholder="https://x.com/namaakun">
                 </div>
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-12 bg-black text-white flex items-center justify-center shrink-0">
                         <i class="fab fa-tiktok text-xl"></i>
                     </div>
-                    <input type="url" name="sosmed_tiktok" value="{{ $settings['sosmed_tiktok'] ?? '' }}" class="w-full border border-gray-300 p-4 text-base focus:border-primary focus:outline-none transition no-round" placeholder="https://tiktok.com/@konipapuapegunungan">
+                    <input type="url" name="sosmed_tiktok" value="{{ $settings['sosmed_tiktok'] ?? '' }}" class="w-full border border-gray-300 p-4 text-base focus:border-primary focus:outline-none transition no-round" placeholder="https://tiktok.com/@namaakun">
                 </div>
             </div>
         </div>
@@ -123,7 +123,7 @@
             <div class="space-y-6 max-w-2xl">
                 <div>
                     <label class="text-base font-bold uppercase text-gray-500 block mb-2">Meta Keywords</label>
-                    <input type="text" name="seo_meta_keywords" value="{{ $settings['seo_meta_keywords'] ?? '' }}" class="w-full border border-gray-300 p-4 text-base focus:border-primary focus:outline-none transition no-round" placeholder="KONI, Papua Pegunungan, olahraga, prestasi">
+                    <input type="text" name="seo_meta_keywords" value="{{ $settings['seo_meta_keywords'] ?? '' }}" class="w-full border border-gray-300 p-4 text-base focus:border-primary focus:outline-none transition no-round" placeholder="YPMD, IRJA, Papua, pemberdayaan">
                     <p class="text-sm text-gray-400 mt-1">Pisahkan dengan koma.</p>
                 </div>
                 <div>

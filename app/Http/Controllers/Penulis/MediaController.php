@@ -11,7 +11,7 @@ class MediaController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Media::where('user_id', session('user.id'));
+        $query = Media::query();
 
         if ($request->filled('cari')) {
             $query->where('judul', 'like', "%{$request->cari}%");
@@ -78,13 +78,13 @@ class MediaController extends Controller
 
     public function edit(string $id)
     {
-        $media = Media::where('user_id', session('user.id'))->findOrFail($id);
+        $media = Media::findOrFail($id);
         return view('penulis.media.form', ['editMode' => true, 'media' => $media]);
     }
 
     public function update(Request $request, string $id)
     {
-        $media = Media::where('user_id', session('user.id'))->findOrFail($id);
+        $media = Media::findOrFail($id);
 
         $rules = [
             'judul' => 'required|string|max:255',
@@ -126,7 +126,7 @@ class MediaController extends Controller
 
     public function destroy(string $id)
     {
-        $media = Media::where('user_id', session('user.id'))->findOrFail($id);
+        $media = Media::findOrFail($id);
         $media->delete();
 
         return redirect()->route('penulis.media.index')->with('success', 'Media berhasil dihapus.');
@@ -134,7 +134,7 @@ class MediaController extends Controller
 
     public function restore(string $id)
     {
-        $media = Media::onlyTrashed()->where('user_id', session('user.id'))->findOrFail($id);
+        $media = Media::onlyTrashed()->findOrFail($id);
         $media->restore();
 
         return redirect()->route('penulis.media.index')->with('success', 'Media berhasil dipulihkan.');
@@ -145,8 +145,7 @@ class MediaController extends Controller
      */
     public function json(Request $request)
     {
-        $media = Media::where('user_id', session('user.id'))
-            ->where('tipe', 'foto')
+        $media = Media::where('tipe', 'foto')
             ->latest()
             ->get()
             ->map(fn ($m) => [
