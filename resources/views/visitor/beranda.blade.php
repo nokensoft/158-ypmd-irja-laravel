@@ -69,7 +69,7 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse ($beritaTerbaru as $b)
                     <article class="shadow-card card-hover bg-white border border-neutral-100 fade-in">
-                        <img src="{{ $b->gambar }}" alt="{{ $b->judul }}" class="w-full h-48 object-cover"/>
+                        <img src="{{ $b->gambar }}" alt="{{ $b->judul }}" class="w-full aspect-[5/4] object-cover"/>
                         <div class="p-5">
                             <div class="flex items-center gap-3 text-xs text-neutral-400 mb-2">
                                 <span>{{ $b->kategori?->nama ?? 'Berita' }}</span>
