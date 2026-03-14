@@ -57,7 +57,7 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
                         @endif
                     </div>
                     <div class="mb-8">
-                        <img src="{{ $berita->gambar }}" alt="{{ $berita->judul }}" class="w-full max-h-[500px] object-cover">
+                        <img src="{{ $berita->gambar }}" alt="{{ $berita->judul }}" class="w-full aspect-[5/4] object-cover">
                     </div>
                     <div class="prose max-w-none text-lg leading-relaxed">
                         {!! $berita->konten !!}
