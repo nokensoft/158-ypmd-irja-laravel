@@ -233,31 +233,49 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
         </div>
     </section>
 
-    {{-- Mitra Kerja --}}
+
+    {{-- Mitra Kerja & Sponsor --}}
     <section class="py-16 bg-white border-t border-neutral-100">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-10 fade-in">
-                <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2"><i class="fa-solid fa-handshake mr-2"></i>Kemitraan</p>
+            <div class="text-center mb-12 fade-in">
+                <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2">
+                    <i class="fa-solid fa-handshake mr-2"></i>Kemitraan
+                </p>
                 <h2 class="text-xl md:text-2xl font-display font-bold text-neutral-900">Mitra Kerja & Sponsor</h2>
             </div>
-            <div class="flex flex-wrap justify-center items-center gap-6">
+            
+            <div class="flex flex-wrap justify-center items-center gap-x-8 gap-y-6">
                 @foreach ([
-                    'THD Asia Foundation', 'Pemerintah Canada', 'ICCO', 'PKN',
-                    'CEMOBE', 'BFDBW', 'Pemerintah Jepang', 'BP Bintuni', 'PT Freeport Indonesia',
+                    'The Asia Foundation', 'Pemerintah Canada', 'Block Grant Canada Fund', 'ICCO Cooperation',
+                    'CEBEMO', 'Hivos', 'PKN Belanda', 'Brot für die Welt',
+                    'USAID', 'SoFEI', 'Konsulat Jepang', 'Kantor Pos Jepang',
+                    'Alter Trade Japan', 'PT Freeport Indonesia', 'BP Bintuni', 'UNCEN',
+                    'UNIPA', 'Pemkab Jayapura', 'Pemprov Papua', 'STFT Fajar Timur',
+                    'STT GKI', 'UGM Jogjakarta', 'WALHI Jakarta', 'SKH Sinar Harapan',
+                    'INFID', 'FOKER LSM Papua', 'WALHI Papua', 'AMAN',
+                    'Yayasan SATUNAMA', 'CEA Regio Papua', 'Tong Belajar Bersama', 'UNDP'
                 ] as $nama)
-                <div class="fade-in">
-                    <img src="https://placehold.co/120x48/f5f5f5/aaaaaa?text={{ urlencode($nama) }}"
-                         alt="{{ $nama }}" class="h-10 object-contain grayscale hover:grayscale-0 transition">
+                <div class="fade-in group">
+                    {{-- 
+                        - Text color diubah ke 000000 (Hitam) agar kontras maksimal
+                        - BG diubah ke f9f9f9 (Abu-abu sangat muda) agar terlihat bersih
+                        - Grayscale dikurangi (opacity-80) agar teks tetap terbaca sebelum hover 
+                    --}}
+                    <img src="https://placehold.co/160x60/f9f9f9/000000?text={{ urlencode($nama) }}&font=roboto"
+                         alt="{{ $nama }}" 
+                         class="h-9 md:h-11 object-contain opacity-80 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-105 border border-neutral-50 rounded">
                 </div>
                 @endforeach
             </div>
-            <div class="text-center mt-8">
-                <a href="{{ route('mitra') }}" class="text-primary-600 text-sm font-semibold hover:underline">
-                    Lihat semua mitra kerja <i class="fa-solid fa-arrow-right text-xs ml-1"></i>
+
+            <div class="text-center mt-14">
+                <a href="{{ route('mitra') }}" class="inline-flex items-center gap-2 bg-neutral-50 border border-neutral-200 text-neutral-700 px-6 py-2.5 text-sm font-semibold hover:bg-primary-50 hover:text-primary-600 hover:border-primary-200 transition-all">
+                    Tampilkan selengkapnya di sini <i class="fa-solid fa-arrow-right text-xs"></i>
                 </a>
             </div>
         </div>
     </section>
+
 
     {{-- CTA --}}
     <section class="bg-primary-600 py-16">
