@@ -118,11 +118,12 @@
                         </a>
                     </div>
                     <div class="h-72 bg-primary-50 rounded-lg shadow-card flex flex-col items-center justify-center gap-4">
-                        <i class="fa-solid fa-newspaper text-6xl text-primary-200"></i>
+                        {{-- <i class="fa-solid fa-newspaper text-6xl text-primary-200"></i>
                         <div class="text-center">
                             <p class="text-primary-700 font-display font-bold text-lg">Buletin KDK</p>
                             <p class="text-primary-400 text-sm">Sejak 1982 &middot; 6+ Edisi</p>
-                        </div>
+                        </div> --}}
+                        <img src="{{ asset('img/bidang-kerja/YPMD-IRJA, Kabar Dari Kampung.png') }}" />
                     </div>
                 </div>
                 {{-- Sub-detail: Dampak --}}
@@ -164,11 +165,14 @@
                         </ul>
                     </div>
                     <div class="h-72 bg-accent-50 rounded-lg shadow-card flex flex-col items-center justify-center gap-4 md:order-1">
-                        <i class="fa-solid fa-chart-line text-6xl text-accent-200"></i>
+                        {{-- <i class="fa-solid fa-chart-line text-6xl text-accent-200"></i>
                         <div class="text-center">
                             <p class="text-accent-500 font-display font-bold text-lg">Ekonomi Kerakyatan</p>
                             <p class="text-accent-300 text-sm">Kakao Organik &middot; BPR Phidectama</p>
-                        </div>
+                        </div> --}}
+                        
+                        <img src="{{ asset('img/bidang-kerja/YPMD-IRJA, Akses Pasar.png') }}" />
+
                     </div>
                 </div>
 
@@ -240,11 +244,14 @@
                         </ul>
                     </div>
                     <div class="h-72 bg-sky-50 rounded-lg shadow-card flex flex-col items-center justify-center gap-4">
-                        <i class="fa-solid fa-droplet text-6xl text-sky-200"></i>
+                        {{-- <i class="fa-solid fa-droplet text-6xl text-sky-200"></i>
                         <div class="text-center">
                             <p class="text-sky-600 font-display font-bold text-lg">Air Bersih</p>
                             <p class="text-sky-400 text-sm">Hak Dasar Masyarakat Kampung</p>
-                        </div>
+                        </div> --}}
+                        
+                        <img src="{{ asset('img/bidang-kerja/YPMD-IRJA, Kesehatan Lingkungan, Clean Water Supply.png') }}" />
+
                     </div>
                 </div>
                 {{-- Sub-detail --}}
@@ -286,11 +293,14 @@
                         </ul>
                     </div>
                     <div class="h-72 bg-amber-50 rounded-lg shadow-card flex flex-col items-center justify-center gap-4 md:order-1">
-                        <i class="fa-solid fa-store text-6xl text-amber-200"></i>
+                        {{-- <i class="fa-solid fa-store text-6xl text-amber-200"></i>
                         <div class="text-center">
                             <p class="text-amber-600 font-display font-bold text-lg">Promosi Usaha</p>
                             <p class="text-amber-400 text-sm">Memajukan UKM Papua</p>
-                        </div>
+                        </div> --}}
+
+                        <img src="{{ asset('img/bidang-kerja/YPMD-IRJA, Penguatan Usaha & Pelatihan.png') }}" />
+
                     </div>
                 </div>
                 {{-- Sub-detail --}}
@@ -332,11 +342,14 @@
                         </ul>
                     </div>
                     <div class="h-72 bg-accent-50 rounded-lg shadow-card flex flex-col items-center justify-center gap-4">
-                        <i class="fa-solid fa-users text-6xl text-accent-200"></i>
+                        {{-- <i class="fa-solid fa-users text-6xl text-accent-200"></i>
                         <div class="text-center">
                             <p class="text-accent-500 font-display font-bold text-lg">Masyarakat Desa di Irian Jaya / Papua Sekarang</p>
                             <p class="text-accent-300 text-sm">Advokasi &middot; Organisasi &middot; Hak Ulayat</p>
-                        </div>
+                        </div> --}}
+                        
+                        <img src="{{ asset('img/bidang-kerja/Kantor YPMD-IRJA.png') }}" />
+
                     </div>
                 </div>
                 {{-- Sub-detail --}}
