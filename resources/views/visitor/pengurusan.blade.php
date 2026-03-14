@@ -1,7 +1,7 @@
 @extends('layouts.visitor')
-@section('title', 'Struktur Pengurusan - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
-@section('seo-title', 'Struktur Pengurusan - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
-@section('seo-description', 'Struktur pengurusan ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
+@section('title', 'Struktur Pengurusan - ' . ($situs['nama_situs'] ?? 'YPMD-IRJA'))
+@section('seo-title', 'Struktur Pengurusan - ' . ($situs['nama_situs'] ?? 'YPMD-IRJA'))
+@section('seo-description', 'Struktur pengurusan ' . ($situs['nama_situs'] ?? 'YPMD-IRJA'))
 
 @section('content')
     @include('partials.page-banner', ['title' => 'Struktur Pengurusan', 'breadcrumb' => 'Pengurusan'])

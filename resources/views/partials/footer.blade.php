@@ -27,7 +27,7 @@
                         <img src="{{ asset('img/logo-ypmd-irja.png') }}" alt="" class="h-16">
                     @endif
                 </span>
-                <span class="font-display font-bold text-white text-base">{{ $situs['nama_situs'] ?? 'YPMD IRJA' }}</span>
+                <span class="font-display font-bold text-white text-base">{{ $situs['nama_situs'] ?? 'YPMD-IRJA' }}</span>
             </div>
             <p class="text-neutral-400 text-sm leading-relaxed">
                 {{ $situs['deskripsi_situs'] ?? 'Pionir pemberdayaan dan advokasi masyarakat desa di Irian Jaya / Papua sekarang di Tanah Papua sejak 1984.' }}
@@ -103,7 +103,7 @@
     {{-- Copyright Bar --}}
     <div class="border-t border-neutral-800">
         <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p class="text-neutral-600 text-xs">&copy; {{ date('Y') }} {{ $situs['nama_situs'] ?? 'YPMD IRJA' }}. {{ __('Seluruh hak cipta dilindungi.') }}</p>
+            <p class="text-neutral-600 text-xs">&copy; {{ date('Y') }} {{ $situs['nama_situs'] ?? 'YPMD-IRJA' }}. {{ __('Seluruh hak cipta dilindungi.') }}</p>
             <div class="flex items-center gap-4">
                 {{-- Sosmed --}}
                 <div class="flex items-center gap-2">

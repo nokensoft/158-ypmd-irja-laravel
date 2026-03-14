@@ -41,7 +41,7 @@ Route::middleware('track.visitor')->group(function () {
     // Halaman dinamis (CMS)
     Route::get('/halaman/{slug}', [VisitorController::class, 'halaman'])->name('halaman.show');
 
-    // Tentang YPMD IRJA (dinamis dari DB via Halaman)
+    // Tentang YPMD-IRJA (dinamis dari DB via Halaman)
     Route::get('/sejarah', [VisitorController::class, 'sejarah'])->name('sejarah');
     Route::get('/profil', [VisitorController::class, 'profil'])->name('profil');
     Route::get('/mitra', [VisitorController::class, 'mitra'])->name('mitra');

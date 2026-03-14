@@ -1,5 +1,5 @@
 @extends('layouts.visitor')
-@section('title', $halaman->judul . ' - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
+@section('title', $halaman->judul)
 @section('seo-title', $halaman->judul)
 @section('seo-description', $halaman->keterangan ?? '')
 @php

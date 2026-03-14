@@ -1,5 +1,5 @@
 @extends('layouts.visitor')
-@section('title', $berita->judul . ' - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
+@section('title', $berita->judul)
 @section('seo-title', $berita->judul)
 @section('seo-description', Str::limit(strip_tags($berita->ringkasan ?? $berita->konten), 160))
 @section('seo-image', $berita->gambar)
@@ -15,8 +15,8 @@ $_article = [
     'image' => $berita->gambar,
     'datePublished' => $berita->tanggal_terbit?->toW3cString(),
     'dateModified' => $berita->updated_at?->toW3cString(),
-    'author' => ['@type' => 'Person', 'name' => $berita->user?->name ?? ($situs['nama_situs'] ?? 'YPMD IRJA')],
-    'publisher' => ['@type' => 'Organization', 'name' => $situs['nama_situs'] ?? 'YPMD IRJA', 'logo' => ['@type' => 'ImageObject', 'url' => !empty($situs['logo']) ? asset('storage/'.$situs['logo']) : asset('img/logo-ypmd-irja.png')]],
+    'author' => ['@type' => 'Person', 'name' => $berita->user?->name ?? ($situs['nama_situs'] ?? 'YPMD-IRJA')],
+    'publisher' => ['@type' => 'Organization', 'name' => $situs['nama_situs'] ?? 'YPMD-IRJA', 'logo' => ['@type' => 'ImageObject', 'url' => !empty($situs['logo']) ? asset('storage/'.$situs['logo']) : asset('img/logo-ypmd-irja.png')]],
     'mainEntityOfPage' => ['@type' => 'WebPage', '@id' => route('berita.detail', $berita->slug)],
     'articleSection' => $berita->kategori?->nama ?? 'Berita',
 ];

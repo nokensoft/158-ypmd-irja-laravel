@@ -1,7 +1,7 @@
 @extends('layouts.visitor')
-@section('title', 'Direktur dari Masa ke Masa - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
-@section('seo-title', 'Direktur YPMD IRJA dari Masa ke Masa')
-@section('seo-description', 'Daftar direktur YPMD IRJA dari tahun 1984 hingga sekarang.')
+@section('title', 'Direktur dari Masa ke Masa - ' . ($situs['nama_situs'] ?? 'YPMD-IRJA'))
+@section('seo-title', 'Direktur YPMD-IRJA dari Masa ke Masa')
+@section('seo-description', 'Daftar direktur YPMD-IRJA dari tahun 1984 hingga sekarang.')
 
 @section('json-ld')
 <script type="application/ld+json">{!! json_encode(['@context'=>'https://schema.org','@type'=>'BreadcrumbList','itemListElement'=>[['@type'=>'ListItem','position'=>1,'name'=>'Beranda','item'=>route('beranda')],['@type'=>'ListItem','position'=>2,'name'=>'Tentang','item'=>route('profil')],['@type'=>'ListItem','position'=>3,'name'=>'Direktur']]], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}</script>
@@ -15,7 +15,7 @@
                 <a href="{{ route('profil') }}" class="hover:text-white">Tentang</a> › Direktur
             </span>
             <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">Direktur dari Masa ke Masa</h1>
-            <p class="text-primary-200 mt-2 text-lg">Pemimpin yang menggerakkan YPMD IRJA sejak 1984</p>
+            <p class="text-primary-200 mt-2 text-lg">Pemimpin yang menggerakkan YPMD-IRJA sejak 1984</p>
         </div>
     </div>
 
@@ -23,8 +23,8 @@
         <div class="max-w-5xl mx-auto px-6">
             <div class="mb-14 fade-in">
                 <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2"><i class="fa-solid fa-user-tie mr-2"></i>Kepemimpinan</p>
-                <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900 mb-4">Estafet Kepemimpinan YPMD IRJA</h2>
-                <p class="text-neutral-600 leading-relaxed max-w-2xl">Selama lebih dari empat dekade, YPMD IRJA telah dipimpin oleh enam direktur yang masing-masing membawa dedikasi dan visi dalam memajukan pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang.</p>
+                <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900 mb-4">Estafet Kepemimpinan YPMD-IRJA</h2>
+                <p class="text-neutral-600 leading-relaxed max-w-2xl">Selama lebih dari empat dekade, YPMD-IRJA telah dipimpin oleh enam direktur yang masing-masing membawa dedikasi dan visi dalam memajukan pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang.</p>
             </div>
 
             @php

@@ -1,7 +1,7 @@
 @extends('layouts.visitor')
-@section('title', 'Mitra Kerja - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
-@section('seo-title', 'Mitra Kerja & Sponsor YPMD IRJA')
-@section('seo-description', 'Daftar mitra kerja dan sponsor yang telah mendukung program pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang bersama YPMD IRJA.')
+@section('title', 'Mitra Kerja - ' . ($situs['nama_situs'] ?? 'YPMD-IRJA'))
+@section('seo-title', 'Mitra Kerja & Sponsor YPMD-IRJA')
+@section('seo-description', 'Daftar mitra kerja dan sponsor yang telah mendukung program pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang bersama YPMD-IRJA.')
 
 @section('content')
     <div class="bg-primary-600 py-16">
@@ -11,7 +11,7 @@
                 <a href="{{ route('profil') }}" class="hover:text-white">Tentang</a> › Mitra Kerja
             </span>
             <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">Mitra Kerja & Sponsor</h1>
-            <p class="text-primary-200 mt-2 text-lg">Lembaga dan organisasi yang telah bermitra bersama YPMD IRJA</p>
+            <p class="text-primary-200 mt-2 text-lg">Lembaga dan organisasi yang telah bermitra bersama YPMD-IRJA</p>
         </div>
     </div>
 
@@ -33,7 +33,7 @@
                 </p>
                 <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900 mb-4">Bersama Membangun Papua</h2>
                 <p class="text-neutral-600 leading-relaxed">
-                    Selama lebih dari 40 tahun, YPMD IRJA telah menjalin kemitraan strategis dengan berbagai lembaga internasional, pemerintah, organisasi non-pemerintah, dan sektor korporasi. Kemitraan ini menjadi fondasi keberlanjutan program-program pemberdayaan masyarakat di Papua.
+                    Selama lebih dari 40 tahun, YPMD-IRJA telah menjalin kemitraan strategis dengan berbagai lembaga internasional, pemerintah, organisasi non-pemerintah, dan sektor korporasi. Kemitraan ini menjadi fondasi keberlanjutan program-program pemberdayaan masyarakat di Papua.
                 </p>
             </div>
 
@@ -98,7 +98,7 @@
     {{-- CTA --}}
     <section class="bg-primary-600 py-14">
         <div class="max-w-7xl mx-auto px-6 text-center fade-in">
-            <h2 class="text-2xl md:text-3xl font-display font-bold text-white mb-3">Tertarik Bermitra dengan YPMD IRJA?</h2>
+            <h2 class="text-2xl md:text-3xl font-display font-bold text-white mb-3">Tertarik Bermitra dengan YPMD-IRJA?</h2>
             <p class="text-primary-200 text-lg mb-8">Kami terbuka untuk kolaborasi dengan lembaga, pemerintah, dan sektor swasta yang memiliki komitmen terhadap pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang.</p>
             <a href="{{ route('kontak') }}"
                class="inline-flex items-center gap-2 bg-white text-primary-600 px-8 py-3 text-sm font-semibold hover:bg-neutral-100 transition-colors shadow-card">

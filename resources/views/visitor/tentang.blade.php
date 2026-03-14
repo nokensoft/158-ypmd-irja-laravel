@@ -1,7 +1,7 @@
 @extends('layouts.visitor')
-@section('title', 'Tentang Kami - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
-@section('seo-title', 'Tentang YPMD IRJA — Yayasan Pembangunan Masyarakat Desa Irian Jaya')
-@section('seo-description', 'Profil, visi, misi, dan program YPMD IRJA — LSM pertama di Tanah Papua yang berdiri sejak 1984.')
+@section('title', 'Tentang Kami - ' . ($situs['nama_situs'] ?? 'YPMD-IRJA'))
+@section('seo-title', 'Tentang YPMD-IRJA — Yayasan Pembangunan Masyarakat Desa Irian Jaya')
+@section('seo-description', 'Profil, visi, misi, dan program YPMD-IRJA — LSM pertama di Tanah Papua yang berdiri sejak 1984.')
 
 @section('content')
 
@@ -11,7 +11,7 @@
             <span class="text-primary-200 text-xs uppercase tracking-widest">
                 <a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> › Tentang Kami
             </span>
-            <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">Tentang YPMD IRJA</h1>
+            <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">Tentang YPMD-IRJA</h1>
             <p class="text-primary-200 mt-2 text-lg">Mengenal lebih dekat Yayasan Pembangunan Masyarakat Desa Irian Jaya</p>
         </div>
     </div>
@@ -23,7 +23,7 @@
                 <div class="fade-in">
                     <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2"><i class="fa-solid fa-leaf mr-2"></i>Sejak 1984</p>
                     <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900 mb-6">LSM Pertama di Tanah Papua</h2>
-                    <p class="text-neutral-600 leading-relaxed mb-4">Yayasan Pembangunan Masyarakat Desa Irian Jaya (YPMD IRJA) adalah lembaga swadaya masyarakat pertama yang berdiri di Tanah Papua. Lahir pada <strong>1984</strong> dari keresahan kelompok idealis Gereja dan Tokoh Masyarakat, YPMD IRJA hadir sebagai jembatan informasi dan agen perubahan.</p>
+                    <p class="text-neutral-600 leading-relaxed mb-4">Yayasan Pembangunan Masyarakat Desa Irian Jaya (YPMD-IRJA) adalah lembaga swadaya masyarakat pertama yang berdiri di Tanah Papua. Lahir pada <strong>1984</strong> dari keresahan kelompok idealis Gereja dan Tokoh Masyarakat, YPMD-IRJA hadir sebagai jembatan informasi dan agen perubahan.</p>
                     <p class="text-neutral-600 leading-relaxed mb-6">Selama lebih dari empat dekade, lembaga ini mendampingi masyarakat desa di Irian Jaya / Papua sekarang agar mampu berdiri sebagai <em>subjek</em> — bukan objek — dalam proses pembangunan, serta mempertahankan hak-hak mereka atas tanah dan sumber daya alam.</p>
                     <div class="flex flex-wrap gap-3">
                         <a href="{{ route('sejarah') }}" class="bg-primary-500 text-white px-5 py-2.5 text-sm font-semibold hover:bg-primary-600 transition-colors">
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="fade-in">
-                    <img src="{{ asset('img/galeri/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD IRJA" class="w-full rounded-lg shadow-card object-cover">
+                    <img src="{{ asset('img/galeri/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD-IRJA" class="w-full rounded-lg shadow-card object-cover">
                 </div>
             </div>
         </div>
@@ -111,7 +111,7 @@
                         <i class="fa-solid fa-clock-rotate-left text-primary-500 group-hover:text-white transition-colors"></i>
                     </div>
                     <h3 class="font-display font-bold text-neutral-900 mb-1">Sejarah Singkat</h3>
-                    <p class="text-neutral-500 text-sm">Perjalanan 40 tahun pengabdian YPMD IRJA sejak 1984.</p>
+                    <p class="text-neutral-500 text-sm">Perjalanan 40 tahun pengabdian YPMD-IRJA sejak 1984.</p>
                 </a>
                 <a href="{{ route('profil') }}" class="bg-white shadow-card card-hover border border-neutral-100 p-6 fade-in group">
                     <div class="w-10 h-10 bg-primary-50 flex items-center justify-center mb-4 group-hover:bg-primary-500 transition-colors">
@@ -125,14 +125,14 @@
                         <i class="fa-solid fa-user-tie text-primary-500 group-hover:text-white transition-colors"></i>
                     </div>
                     <h3 class="font-display font-bold text-neutral-900 mb-1">Direktur</h3>
-                    <p class="text-neutral-500 text-sm">Direktur YPMD IRJA dari masa ke masa sejak 1984.</p>
+                    <p class="text-neutral-500 text-sm">Direktur YPMD-IRJA dari masa ke masa sejak 1984.</p>
                 </a>
                 <a href="{{ route('bidang-kerja') }}" class="bg-white shadow-card card-hover border border-neutral-100 p-6 fade-in group">
                     <div class="w-10 h-10 bg-accent-50 flex items-center justify-center mb-4 group-hover:bg-accent-400 transition-colors">
                         <i class="fa-solid fa-list-check text-accent-400 group-hover:text-white transition-colors"></i>
                     </div>
                     <h3 class="font-display font-bold text-neutral-900 mb-1">Bidang Kerja</h3>
-                    <p class="text-neutral-500 text-sm">Struktur bidang kerja yang menopang program YPMD IRJA.</p>
+                    <p class="text-neutral-500 text-sm">Struktur bidang kerja yang menopang program YPMD-IRJA.</p>
                 </a>
             </div>
         </div>

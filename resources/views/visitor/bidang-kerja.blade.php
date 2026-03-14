@@ -1,14 +1,14 @@
 @extends('layouts.visitor')
-@section('title', 'Bidang Kerja - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
-@section('seo-title', 'Bidang Kerja YPMD IRJA')
-@section('seo-description', 'Struktur bidang kerja YPMD IRJA: Bidang Informasi, Bidang CBO & CBA, serta Bidang Administrasi dan Financial.')
+@section('title', 'Bidang Kerja - ' . ($situs['nama_situs'] ?? 'YPMD-IRJA'))
+@section('seo-title', 'Bidang Kerja YPMD-IRJA')
+@section('seo-description', 'Struktur bidang kerja YPMD-IRJA: Bidang Informasi, Bidang CBO & CBA, serta Bidang Administrasi dan Financial.')
 
 @section('content')
     <div class="bg-primary-600 py-16">
         <div class="max-w-7xl mx-auto px-6">
             <span class="text-primary-200 text-xs uppercase tracking-widest"><a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> › Tentang › Bidang Kerja</span>
             <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">Bidang Kerja</h1>
-            <p class="text-primary-200 text-lg mt-3 max-w-xl">Struktur bidang kerja yang menopang seluruh program dan kegiatan YPMD IRJA.</p>
+            <p class="text-primary-200 text-lg mt-3 max-w-xl">Struktur bidang kerja yang menopang seluruh program dan kegiatan YPMD-IRJA.</p>
         </div>
     </div>
 
@@ -127,7 +127,7 @@
     <section class="py-16 bg-neutral-50 border-t border-neutral-100">
         <div class="max-w-7xl mx-auto px-6 text-center fade-in">
             <h2 class="text-xl md:text-2xl font-display font-bold text-neutral-900 mb-3">Ingin Tahu Lebih Lanjut?</h2>
-            <p class="text-neutral-500 max-w-lg mx-auto mb-6">Pelajari program-program yang dijalankan oleh setiap bidang kerja YPMD IRJA.</p>
+            <p class="text-neutral-500 max-w-lg mx-auto mb-6">Pelajari program-program yang dijalankan oleh setiap bidang kerja YPMD-IRJA.</p>
             <div class="flex flex-wrap justify-center gap-4">
                 <a href="{{ route('program') }}" class="bg-primary-500 text-white px-8 py-3 text-sm font-semibold hover:bg-primary-600 transition-colors shadow-card">
                     <i class="fa-solid fa-list-check mr-2"></i>Lihat Program

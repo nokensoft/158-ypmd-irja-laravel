@@ -1,7 +1,7 @@
 @extends('layouts.visitor')
-@section('title', 'Galeri - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
-@section('seo-title', 'Galeri Foto - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
-@section('seo-description', 'Dokumentasi kegiatan dan galeri foto ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
+@section('title', 'Galeri - ' . ($situs['nama_situs'] ?? 'YPMD-IRJA'))
+@section('seo-title', 'Galeri Foto - ' . ($situs['nama_situs'] ?? 'YPMD-IRJA'))
+@section('seo-description', 'Dokumentasi kegiatan dan galeri foto ' . ($situs['nama_situs'] ?? 'YPMD-IRJA'))
 
 @section('json-ld')
 <script type="application/ld+json">{!! json_encode(['@context'=>'https://schema.org','@type'=>'BreadcrumbList','itemListElement'=>[['@type'=>'ListItem','position'=>1,'name'=>'Beranda','item'=>route('beranda')],['@type'=>'ListItem','position'=>2,'name'=>'Galeri']]], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}</script>

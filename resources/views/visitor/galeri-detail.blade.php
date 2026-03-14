@@ -1,5 +1,5 @@
 @extends('layouts.visitor')
-@section('title', $galeri->judul . ' - Galeri - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
+@section('title', $galeri->judul . ' - Galeri - ' . ($situs['nama_situs'] ?? 'YPMD-IRJA'))
 @section('seo-title', $galeri->judul . ' - Galeri Foto')
 @section('seo-description', $galeri->deskripsi ?: 'Album galeri foto ' . $galeri->judul)
 @if ($galeri->media->first())

@@ -1,7 +1,7 @@
 @extends('layouts.visitor')
-@section('title', 'Profil - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
-@section('seo-title', 'Profil Organisasi YPMD IRJA')
-@section('seo-description', 'Profil, visi, misi, dan struktur organisasi YPMD IRJA.')
+@section('title', 'Profil - ' . ($situs['nama_situs'] ?? 'YPMD-IRJA'))
+@section('seo-title', 'Profil Organisasi YPMD-IRJA')
+@section('seo-description', 'Profil, visi, misi, dan struktur organisasi YPMD-IRJA.')
 
 @section('content')
     <div class="bg-primary-600 py-16">
@@ -16,10 +16,10 @@
             <div class="grid md:grid-cols-2 gap-16 items-start">
                 <div class="fade-in">
                     <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2"><i class="fa-solid fa-building mr-2"></i>Organisasi</p>
-                    <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900 mb-6">Tentang YPMD IRJA</h2>
-                    <p class="text-neutral-600 leading-relaxed mb-4">Yayasan Pembangunan Masyarakat Desa Irian Jaya (YPMD IRJA) adalah lembaga non-pemerintah nirlaba yang bergerak di bidang pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang. Berdiri sejak 1984, YPMD IRJA merupakan LSM pertama di Tanah Papua.</p>
+                    <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900 mb-6">Tentang YPMD-IRJA</h2>
+                    <p class="text-neutral-600 leading-relaxed mb-4">Yayasan Pembangunan Masyarakat Desa Irian Jaya (YPMD-IRJA) adalah lembaga non-pemerintah nirlaba yang bergerak di bidang pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang. Berdiri sejak 1984, YPMD-IRJA merupakan LSM pertama di Tanah Papua.</p>
                     <p class="text-neutral-600 leading-relaxed mb-6">Berbasis di Jayapura, lembaga ini bekerja di empat wilayah utama Papua dengan fokus pada pendampingan komunitas, ekonomi berbasis masyarakat, dan advokasi hak-hak adat.</p>
-                    <img src="{{ asset('img/galeri/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD IRJA" class="w-full rounded-lg shadow-card"/>
+                    <img src="{{ asset('img/galeri/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD-IRJA" class="w-full rounded-lg shadow-card"/>
                 </div>
                 <div class="space-y-8">
                     <div class="fade-in">
@@ -119,7 +119,7 @@
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ([
                     ['label'=>'Nama Resmi','value'=>'Yayasan Pembangunan Masyarakat Desa Irian Jaya'],
-                    ['label'=>'Singkatan','value'=>'YPMD IRJA'],
+                    ['label'=>'Singkatan','value'=>'YPMD-IRJA'],
                     ['label'=>'Tahun Berdiri','value'=>'1984'],
                     ['label'=>'Jenis Organisasi','value'=>'LSM / NGO Nirlaba'],
                     ['label'=>'Kantor Pusat','value'=>$situs['alamat'] ?? 'Jayapura, Papua'],

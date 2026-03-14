@@ -1,6 +1,6 @@
 @extends('layouts.visitor')
-@section('title', 'KDK - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
-@section('seo-title', 'Kabar Dari Kampung (KDK) — Buletin YPMD IRJA')
+@section('title', 'KDK')
+@section('seo-title', 'Kabar Dari Kampung (KDK) — Buletin YPMD-IRJA')
 @section('seo-description', 'Arsip buletin Kabar Dari Kampung, media alternatif masyarakat desa di Irian Jaya / Papua sekarang sejak 1982.')
 
 @section('json-ld')
@@ -23,7 +23,7 @@
                     <div>
                         <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2"><i class="fa-solid fa-book-open mr-2"></i>Tentang KDK</p>
                         <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900 mb-4">Apa itu KDK?</h2>
-                        <p class="text-neutral-600 leading-relaxed mb-3"><em>Kabar Dari Kampung</em> (KDK) adalah buletin yang pertama kali diterbitkan pada tahun 1982 oleh kelompok idealis yang kemudian mendirikan YPMD IRJA. Buletin ini hadir sebagai media alternatif yang menyuarakan realita kehidupan masyarakat desa di Irian Jaya / Papua sekarang.</p>
+                        <p class="text-neutral-600 leading-relaxed mb-3"><em>Kabar Dari Kampung</em> (KDK) adalah buletin yang pertama kali diterbitkan pada tahun 1982 oleh kelompok idealis yang kemudian mendirikan YPMD-IRJA. Buletin ini hadir sebagai media alternatif yang menyuarakan realita kehidupan masyarakat desa di Irian Jaya / Papua sekarang.</p>
                         <p class="text-neutral-600 leading-relaxed">KDK mendokumentasikan berbagai isu penting: hak tanah adat, pengorganisasian komunitas, perkembangan program pemberdayaan, serta berbagai cerita dari kampung-kampung di seluruh Papua.</p>
                     </div>
             <div class="grid grid-cols-2 gap-4">

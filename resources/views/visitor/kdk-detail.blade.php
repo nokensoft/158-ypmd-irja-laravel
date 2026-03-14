@@ -1,5 +1,5 @@
 @extends('layouts.visitor')
-@section('title', $kdk->judul . ' - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
+@section('title', $kdk->judul)
 @section('seo-title', $kdk->judul . ' — Kabar Dari Kampung Edisi ' . $kdk->nomor_edisi)
 @section('seo-description', Str::limit(strip_tags($kdk->deskripsi ?? 'Buletin Kabar Dari Kampung Edisi ' . $kdk->nomor_edisi), 160))
 
@@ -44,7 +44,7 @@ $_bc = ['@context'=>'https://schema.org','@type'=>'BreadcrumbList','itemListElem
                                 <div class="w-full h-full bg-gradient-to-b from-neutral-600 to-neutral-800 flex flex-col items-center justify-center relative">
                                     <div class="absolute inset-0 opacity-10" style="background:radial-gradient(circle at 70% 20%, white, transparent)"></div>
                                     <div class="absolute inset-x-0 top-0 h-1 bg-accent-400"></div>
-                                    <img src="{{ asset('img/logo-ypmd-irja.png') }}" alt="YPMD IRJA" class="h-16 w-auto mb-4 opacity-75 relative z-10">
+                                    <img src="{{ asset('img/logo-ypmd-irja.png') }}" alt="YPMD-IRJA" class="h-16 w-auto mb-4 opacity-75 relative z-10">
                                     <p class="text-white font-display font-extrabold text-3xl tracking-wider relative z-10">KDK</p>
                                     <p class="text-neutral-300 text-sm font-semibold uppercase tracking-widest mt-1 relative z-10">Edisi {{ $kdk->nomor_edisi }}</p>
                                 </div>

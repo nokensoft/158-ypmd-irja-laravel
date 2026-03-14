@@ -1,6 +1,6 @@
 @extends('layouts.visitor')
-@section('title', ($situs['nama_situs'] ?? 'YPMD IRJA'))
-@section('seo-title', ($situs['nama_situs'] ?? 'YPMD IRJA'))
+@section('title', ($situs['nama_situs'] ?? 'YPMD-IRJA'))
+@section('seo-title', ($situs['nama_situs'] ?? 'YPMD-IRJA'))
 @section('seo-description', ($situs['seo_meta_description'] ?? 'LSM pertama di Tanah Papua yang lahir dari keresahan kelompok idealis Gereja dan Tokoh Masyarakat'))
 
 @section('json-ld')
@@ -36,12 +36,12 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
                 </div>
             </div>
             <div class="fade-in relative">
-                <img src="{{ asset('img/galeri/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD IRJA" class="w-full rounded-lg shadow-card object-cover"/>
+                <img src="{{ asset('img/galeri/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD-IRJA" class="w-full rounded-lg shadow-card object-cover"/>
                 {{-- Logo mengambang --}}
                 <div class="absolute bottom-0 right-6 translate-y-1/2 bg-white/95 backdrop-blur-sm shadow-xl rounded-xl px-4 py-3 flex items-center gap-3 border border-neutral-100">
-                    <img src="{{ asset('img/logo-ypmd-irja.png') }}" alt="YPMD IRJA" class="h-16 w-auto">
+                    <img src="{{ asset('img/logo-ypmd-irja.png') }}" alt="YPMD-IRJA" class="h-16 w-auto">
                     <div class="leading-tight">
-                        <p class="text-sm font-bold text-primary-700">YPMD IRJA</p>
+                        <p class="text-sm font-bold text-primary-700">YPMD-IRJA</p>
                         <p class="text-xs text-neutral-400">Sejak 1984</p>
                     </div>
                 </div>
@@ -64,7 +64,7 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
             <div class="mb-12 fade-in">
                 <span class="text-xs font-semibold tracking-widest uppercase text-primary-500"><i class="fa-solid fa-blog mr-2"></i>Berita</span>
                 <h2 class="text-2xl md:text-4xl font-display font-bold text-neutral-900 mt-2">Papua Today</h2>
-                <p class="text-neutral-500 text-lg mt-3 max-w-xl">Berita dan artikel terkini seputar Papua dan program YPMD IRJA.</p>
+                <p class="text-neutral-500 text-lg mt-3 max-w-xl">Berita dan artikel terkini seputar Papua dan program YPMD-IRJA.</p>
             </div>
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse ($beritaTerbaru as $b)
@@ -104,8 +104,8 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
         <div class="max-w-7xl mx-auto px-6">
             <div class="mb-12 fade-in">
                 <span class="text-xs font-semibold tracking-widest uppercase text-primary-500"><i class="fa-solid fa-newspaper mr-2"></i>Buletin</span>
-                <h2 class="text-2xl md:text-4xl font-display font-bold text-neutral-900 mt-2">KDK Terbaru</h2>
-                <p class="text-neutral-500 text-lg mt-3 max-w-xl">Edisi terbaru buletin <em>Kabar Dari Kampung</em> &mdash; media alternatif masyarakat desa di Irian Jaya / Papua sekarang sejak 1982.</p>
+                <h2 class="text-2xl md:text-4xl font-display font-bold text-neutral-900 mt-2">Arsip KDK</h2>
+                <p class="text-neutral-500 text-lg mt-3 max-w-xl">Dokumentasi berbagai seri buletin <em>Kabar Dari Kampung</em> &mdash; media alternatif masyarakat desa di Irian Jaya / Papua sekarang sejak 1982.</p>
             </div>
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse ($kdkTerbaru as $k)
@@ -119,7 +119,7 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
             </div>
             <div class="text-center mt-10 fade-in">
                 <a href="{{ route('kdk') }}" class="inline-flex items-center gap-2 bg-primary-500 text-white px-8 py-3 text-sm font-semibold hover:bg-primary-600 transition-colors shadow-card">
-                    Lihat Semua Buletin <i class="fa-solid fa-arrow-right text-xs"></i>
+                    Tmapilkan Arsip KDK Lebih Lengkap <i class="fa-solid fa-arrow-right text-xs"></i>
                 </a>
             </div>
         </div>
@@ -131,7 +131,7 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
             <div class="mb-12 fade-in">
                 <span class="text-xs font-semibold tracking-widest uppercase text-primary-500"><i class="fa-solid fa-list-check mr-2"></i>Kegiatan</span>
                 <h2 class="text-2xl md:text-4xl font-display font-bold text-neutral-900 mt-2">Program Unggulan</h2>
-                <p class="text-neutral-500 text-lg mt-3 max-w-2xl">Empat pilar program utama YPMD IRJA dalam memberdayakan masyarakat kampung di Papua.</p>
+                <p class="text-neutral-500 text-lg mt-3 max-w-2xl">Empat pilar program utama YPMD-IRJA dalam memberdayakan masyarakat kampung di Papua.</p>
             </div>
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
@@ -143,7 +143,7 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
                             <i class="fa-solid fa-newspaper text-xl text-primary-500"></i>
                         </div>
                         <h3 class="font-display font-bold text-neutral-900 mb-2">Informasi</h3>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Penyebaran informasi pembangunan masyarakat melalui Buletin Kabar Dari Kampung (KDK) sejak tahun 1982 (edisi cetak sampai tahun 2000), sebagai media alternatif, advokasi, dan promosi usaha rakyat.</p>
+                        <p class="text-neutral-500 text-sm leading-relaxed">Penyebaran informasi pembangunan masyarakat melalui Buletin Kabar Dari Kampung (KDK) sejak tahun 1984 (edisi cetak sampai tahun 2000), sebagai media alternatif, advokasi, dan promosi usaha rakyat.</p>
                         <a href="{{ route('kdk') }}" class="inline-flex items-center gap-1 mt-4 text-primary-600 text-xs font-semibold hover:text-primary-700">
                             Buletin KDK <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </a>
@@ -216,13 +216,13 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
                     @php $cover = $g->media->first(); @endphp
                     @if ($cover)
                         <div class="overflow-hidden rounded-lg shadow-card fade-in">
-                            <img src="{{ asset('storage/' . $cover->file_path) }}" alt="{{ $g->judul }}" class="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-300"/>
+                            <img src="{{ asset('storage/' . $cover->file_path) }}" alt="{{ $g->judul }}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"/>
                         </div>
                     @endif
                 @empty
-                    <div class="overflow-hidden rounded-lg shadow-card fade-in"><img src="{{ asset('img/galeri/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD IRJA" class="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-300"/></div>
-                    <div class="overflow-hidden rounded-lg shadow-card fade-in"><img src="{{ asset('img/galeri/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD IRJA" class="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-300"/></div>
-                    <div class="overflow-hidden rounded-lg shadow-card fade-in"><img src="{{ asset('img/galeri/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD IRJA" class="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-300"/></div>
+                    <div class="overflow-hidden rounded-lg shadow-card fade-in"><img src="{{ asset('img/galeri/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD-IRJA" class="w-full object-cover hover:scale-105 transition-transform duration-300"/></div>
+                    <div class="overflow-hidden rounded-lg shadow-card fade-in"><img src="{{ asset('img/galeri/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD-IRJA" class="w-full object-cover hover:scale-105 transition-transform duration-300"/></div>
+                    <div class="overflow-hidden rounded-lg shadow-card fade-in"><img src="{{ asset('img/galeri/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD-IRJA" class="w-full object-cover hover:scale-105 transition-transform duration-300"/></div>
                 @endforelse
             </div>
             <div class="text-center mt-10 fade-in">

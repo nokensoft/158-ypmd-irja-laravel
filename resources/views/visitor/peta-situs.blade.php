@@ -1,7 +1,7 @@
 @extends('layouts.visitor')
-@section('title', 'Peta Situs - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
-@section('seo-title', 'Peta Situs - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
-@section('seo-description', 'Daftar lengkap seluruh halaman publik pada situs ' . ($situs['nama_situs'] ?? 'YPMD IRJA') . ' untuk memudahkan navigasi pengunjung dan mesin pencari.')
+@section('title', 'Peta Situs - ' . ($situs['nama_situs'] ?? 'YPMD-IRJA'))
+@section('seo-title', 'Peta Situs - ' . ($situs['nama_situs'] ?? 'YPMD-IRJA'))
+@section('seo-description', 'Daftar lengkap seluruh halaman publik pada situs ' . ($situs['nama_situs'] ?? 'YPMD-IRJA') . ' untuk memudahkan navigasi pengunjung dan mesin pencari.')
 
 @section('json-ld')
 @php

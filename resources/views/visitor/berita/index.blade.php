@@ -1,7 +1,7 @@
 @extends('layouts.visitor')
-@section('title', ($kategoriAktif ? $kategoriAktif->nama . ' - Berita' : 'Papua Today') . ' - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
+@section('title', ($kategoriAktif ? $kategoriAktif->nama . ' - Berita' : 'Papua Today'))
 @section('seo-title', ($kategoriAktif ? 'Berita ' . $kategoriAktif->nama : 'Papua Today — Berita & Artikel'))
-@section('seo-description', ($kategoriAktif ? 'Berita kategori ' . $kategoriAktif->nama : 'Kumpulan berita dan artikel terbaru') . ' dari ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
+@section('seo-description', ($kategoriAktif ? 'Berita kategori ' . $kategoriAktif->nama : 'Kumpulan berita dan artikel terbaru') . ' dari ' . ($situs['nama_situs'] ?? 'YPMD-IRJA'))
 
 @section('json-ld')
 @php

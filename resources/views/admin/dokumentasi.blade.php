@@ -26,8 +26,8 @@
 
         {{-- Header --}}
         <div id="sec-header" class="bg-white shadow-sm p-6 mb-6">
-            <h2 class="text-2xl font-extrabold text-dark mb-1">YPMD IRJA</h2>
-            <p class="text-gray-500">Website resmi Yayasan Pembangunan Masyarakat Desa Irian Jaya (YPMD IRJA) — LSM pertama di Tanah Papua sejak 1984. Menampilkan informasi program pemberdayaan masyarakat adat, buletin Kabar Dari Kampung (KDK), berita Papua Today, galeri kegiatan, dan donasi.</p>
+            <h2 class="text-2xl font-extrabold text-dark mb-1">YPMD-IRJA</h2>
+            <p class="text-gray-500">Website resmi Yayasan Pembangunan Masyarakat Desa Irian Jaya (YPMD-IRJA) — LSM pertama di Tanah Papua sejak 1984. Menampilkan informasi program pemberdayaan masyarakat adat, buletin Kabar Dari Kampung (KDK), berita Papua Today, galeri kegiatan, dan donasi.</p>
         </div>
 
         {{-- Informasi Proyek (Copyable Table) --}}
@@ -39,7 +39,7 @@
                 <tbody>
                     @php
                         $infoProyek = [
-                            ['Nama Proyek', 'Website YPMD IRJA'],
+                            ['Nama Proyek', 'Website YPMD-IRJA'],
                             ['Deskripsi', 'Website resmi Yayasan Pembangunan Masyarakat Desa Irian Jaya'],
                             ['Versi', '1.0.0'],
                             ['Framework', 'Laravel 12 (PHP 8.2+)'],
@@ -132,9 +132,9 @@
                     @php
                     $fiturVisitor = [
                             ['icon' => 'fa-home', 'title' => 'Beranda', 'desc' => 'Statistik yayasan, berita terbaru, buletin KDK, program unggulan, galeri, mitra kerja'],
-                            ['icon' => 'fa-landmark', 'title' => 'Sejarah', 'desc' => 'Sejarah pendirian YPMD IRJA sejak 1984 (halaman dinamis CMS)'],
+                            ['icon' => 'fa-landmark', 'title' => 'Sejarah', 'desc' => 'Sejarah pendirian YPMD-IRJA sejak 1984 (halaman dinamis CMS)'],
                             ['icon' => 'fa-building', 'title' => 'Profil', 'desc' => 'Profil organisasi yayasan (halaman dinamis CMS)'],
-                            ['icon' => 'fa-handshake', 'title' => 'Mitra Kerja', 'desc' => 'Daftar mitra dan sponsor YPMD IRJA (halaman dinamis CMS)'],
+                            ['icon' => 'fa-handshake', 'title' => 'Mitra Kerja', 'desc' => 'Daftar mitra dan sponsor YPMD-IRJA (halaman dinamis CMS)'],
                             ['icon' => 'fa-briefcase', 'title' => 'Bidang Kerja', 'desc' => 'Informasi bidang kerja yayasan (halaman dinamis CMS)'],
                             ['icon' => 'fa-users', 'title' => 'Tokoh', 'desc' => 'Tokoh-tokoh pendiri dan pengurus yayasan'],
                             ['icon' => 'fa-list-check', 'title' => 'Program', 'desc' => 'Program unggulan: Informasi, Ekonomi Kerakyatan, Clean Water, Promosi Usaha'],
@@ -142,7 +142,7 @@
                             ['icon' => 'fa-newspaper', 'title' => 'Papua Today', 'desc' => 'Berita dan artikel dengan filter kategori, pencarian, counter pembaca, dan artikel terkait'],
                             ['icon' => 'fa-heart', 'title' => 'Donasi', 'desc' => 'Form donasi dengan pilihan program, upload bukti transfer, opsi anonim, testimoni donatur publik'],
                             ['icon' => 'fa-images', 'title' => 'Galeri', 'desc' => 'Album foto kegiatan dengan filter kategori, pencarian, dan halaman detail'],
-                            ['icon' => 'fa-envelope', 'title' => 'Kontak', 'desc' => 'Informasi kontak dan media sosial YPMD IRJA'],
+                            ['icon' => 'fa-envelope', 'title' => 'Kontak', 'desc' => 'Informasi kontak dan media sosial YPMD-IRJA'],
                             ['icon' => 'fa-sitemap', 'title' => 'Peta Situs', 'desc' => 'Halaman peta situs (HTML sitemap) untuk navigasi lengkap'],
                             ['icon' => 'fa-robot', 'title' => 'SEO', 'desc' => 'Dynamic robots.txt dan XML sitemap otomatis untuk seluruh halaman publik'],
                         ];
@@ -330,7 +330,7 @@ function dokumentasi() {
                         <div style="display:flex;align-items:center;gap:12px;">
                             <img src="{{ !empty($situs['logo']) ? asset('storage/' . $situs['logo']) : asset('img/logo-ypmd-irja.png') }}" style="height:48px;" />
                             <div>
-                                <div style="font-size:18px;font-weight:800;color:#1A1A1A;">{{ $situs['nama_situs'] ?? 'YPMD IRJA' }}</div>
+                                <div style="font-size:18px;font-weight:800;color:#1A1A1A;">{{ $situs['nama_situs'] ?? 'YPMD-IRJA' }}</div>
                                 <div style="font-size:12px;color:#707070;">Dokumentasi Teknis Website</div>
                             </div>
                         </div>
@@ -345,7 +345,7 @@ function dokumentasi() {
                 const footer = document.createElement('div');
                 footer.innerHTML = `
                     <div style="border-top:2px solid #2d8057;padding-top:12px;margin-top:32px;display:flex;justify-content:space-between;font-size:10px;color:#707070;">
-                        <span>Dokumentasi Website {{ $situs['nama_situs'] ?? 'YPMD IRJA' }} — Nokensoft &copy; {{ date('Y') }}</span>
+                        <span>Dokumentasi Website {{ $situs['nama_situs'] ?? 'YPMD-IRJA' }} — Nokensoft &copy; {{ date('Y') }}</span>
                         <span>www.nokensoft.com | info@nokensoft.com</span>
                     </div>
                 `;

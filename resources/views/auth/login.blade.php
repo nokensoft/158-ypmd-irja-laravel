@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - {{ $situs['nama_situs'] ?? 'YPMD IRJA' }}</title>
+    <title>Login - {{ $situs['nama_situs'] ?? 'YPMD-IRJA' }}</title>
     <meta name="robots" content="noindex, nofollow">
     @if (!empty($situs['logo']))
         <link rel="icon" type="image/png" href="{{ asset('storage/' . $situs['logo']) }}">
@@ -41,11 +41,11 @@
         {{-- Logo --}}
         <div class="text-center mb-8">
             @if (!empty($situs['logo']))
-                <img src="{{ asset('storage/' . $situs['logo']) }}" alt="Logo {{ $situs['nama_situs'] ?? 'YPMD IRJA' }}" class="h-20 mx-auto mb-4 brightness-200">
+                <img src="{{ asset('storage/' . $situs['logo']) }}" alt="Logo {{ $situs['nama_situs'] ?? 'YPMD-IRJA' }}" class="h-20 mx-auto mb-4 brightness-200">
             @else
-                <img src="{{ asset('img/logo-ypmd-irja.png') }}" alt="Logo YPMD IRJA" class="h-20 mx-auto mb-4">
+                <img src="{{ asset('img/logo-ypmd-irja.png') }}" alt="Logo YPMD-IRJA" class="h-20 mx-auto mb-4">
             @endif
-            <h1 class="text-2xl font-extrabold text-white uppercase tracking-wide">{{ $situs['nama_situs'] ?? 'YPMD IRJA' }}</h1>
+            <h1 class="text-2xl font-extrabold text-white uppercase tracking-wide">{{ $situs['nama_situs'] ?? 'YPMD-IRJA' }}</h1>
             <p class="text-gray-400 text-base mt-1">Masuk ke Dashboard</p>
         </div>
 
@@ -103,7 +103,7 @@
             </div>
         </div>
 
-        <p class="text-center text-sm text-gray-600 mt-6">&copy; {{ date('Y') }} {{ $situs['nama_situs'] ?? 'YPMD IRJA' }}</p>
+        <p class="text-center text-sm text-gray-600 mt-6">&copy; {{ date('Y') }} {{ $situs['nama_situs'] ?? 'YPMD-IRJA' }}</p>
     </div>
 
 </body>

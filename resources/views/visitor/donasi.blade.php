@@ -1,7 +1,7 @@
 @extends('layouts.visitor')
-@section('title', 'Donasi - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
-@section('seo-title', 'Donasi untuk ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
-@section('seo-description', 'Dukung program pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang melalui donasi kepada ' . ($situs['nama_situs'] ?? 'YPMD IRJA') . '.')
+@section('title', 'Donasi - ' . ($situs['nama_situs'] ?? 'YPMD-IRJA'))
+@section('seo-title', 'Donasi untuk ' . ($situs['nama_situs'] ?? 'YPMD-IRJA'))
+@section('seo-description', 'Dukung program pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang melalui donasi kepada ' . ($situs['nama_situs'] ?? 'YPMD-IRJA') . '.')
 
 @section('json-ld')
 <script type="application/ld+json">{!! json_encode(['@context'=>'https://schema.org','@type'=>'BreadcrumbList','itemListElement'=>[['@type'=>'ListItem','position'=>1,'name'=>'Beranda','item'=>route('beranda')],['@type'=>'ListItem','position'=>2,'name'=>'Donasi']]], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}</script>
@@ -267,7 +267,7 @@
                         <label class="text-xs font-semibold uppercase text-neutral-500 block mb-1">Pesan (opsional)</label>
                         <textarea name="pesan" rows="3"
                                   class="w-full border border-neutral-300 p-3 text-sm focus:border-primary-500 focus:outline-none transition resize-none"
-                                  placeholder="Pesan atau doa untuk YPMD IRJA...">{{ old('pesan') }}</textarea>
+                                  placeholder="Pesan atau doa untuk YPMD-IRJA...">{{ old('pesan') }}</textarea>
                     </div>
 
                     <button type="submit"

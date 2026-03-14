@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     @php
-        $seoTitle = View::yieldContent('seo-title', $situs['nama_situs'] ?? 'YPMD IRJA');
+        $seoTitle = View::yieldContent('seo-title', $situs['nama_situs'] ?? 'YPMD-IRJA');
         $seoDesc = View::yieldContent('seo-description', $situs['seo_meta_description'] ?? '');
         $seoImage = View::yieldContent('seo-image', !empty($situs['seo_og_image']) ? asset('storage/' . $situs['seo_og_image']) : asset('img/logo-ypmd-irja.png'));
         $seoKeywords = $situs['seo_meta_keywords'] ?? '';
     @endphp
 
-    <title>@yield('title', $seoTitle) — {{ $situs['nama_situs'] ?? 'YPMD IRJA' }}</title>
+    <title>@yield('title', $seoTitle) — {{ $situs['nama_situs'] ?? 'YPMD-IRJA' }}</title>
     <meta name="description" content="{{ $seoDesc }}">
     <meta name="keywords" content="{{ $seoKeywords }}">
     <link rel="canonical" href="{{ url()->current() }}">
@@ -23,7 +23,7 @@
     <meta property="og:description" content="{{ $seoDesc }}">
     <meta property="og:image" content="{{ $seoImage }}">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:site_name" content="{{ $situs['nama_situs'] ?? 'YPMD IRJA' }}">
+    <meta property="og:site_name" content="{{ $situs['nama_situs'] ?? 'YPMD-IRJA' }}">
     <meta property="og:locale" content="id_ID">
 
     {{-- Twitter Card --}}
@@ -37,7 +37,7 @@
         $orgSchema = [
             '@context' => 'https://schema.org',
             '@type' => 'Organization',
-            'name' => $situs['nama_situs'] ?? 'YPMD IRJA',
+            'name' => $situs['nama_situs'] ?? 'YPMD-IRJA',
             'url' => url('/'),
             'logo' => !empty($situs['logo']) ? asset('storage/' . $situs['logo']) : asset('img/logo-ypmd-irja.png'),
             'description' => $situs['seo_meta_description'] ?? 'Yayasan Pembangunan Masyarakat Desa Irian Jaya',
@@ -64,7 +64,7 @@
         $webSchema = [
             '@context' => 'https://schema.org',
             '@type' => 'WebSite',
-            'name' => $situs['nama_situs'] ?? 'YPMD IRJA',
+            'name' => $situs['nama_situs'] ?? 'YPMD-IRJA',
             'url' => url('/'),
             'potentialAction' => [
                 '@type' => 'SearchAction',

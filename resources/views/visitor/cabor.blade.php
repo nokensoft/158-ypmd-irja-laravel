@@ -1,7 +1,7 @@
 @extends('layouts.visitor')
-@section('title', 'Cabang Olahraga - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
-@section('seo-title', 'Cabang Olahraga - ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
-@section('seo-description', 'Daftar cabang olahraga binaan ' . ($situs['nama_situs'] ?? 'YPMD IRJA'))
+@section('title', 'Cabang Olahraga - ' . ($situs['nama_situs'] ?? 'YPMD-IRJA'))
+@section('seo-title', 'Cabang Olahraga - ' . ($situs['nama_situs'] ?? 'YPMD-IRJA'))
+@section('seo-description', 'Daftar cabang olahraga binaan ' . ($situs['nama_situs'] ?? 'YPMD-IRJA'))
 
 @section('content')
     @include('partials.page-banner', ['title' => 'Cabang Olahraga', 'breadcrumb' => 'Cabor'])
@@ -10,7 +10,7 @@
         <div class="max-w-7xl mx-auto px-4 text-center">
             <p class="text-primary font-bold uppercase tracking-widest text-base mb-2">Daftar Lengkap</p>
             <h3 class="text-3xl font-extrabold mb-4">Cabang Olahraga Binaan</h3>
-            <p class="text-gray-600 leading-relaxed text-lg">Berikut adalah daftar cabang olahraga yang berada di bawah pembinaan {{ $situs['nama_situs'] ?? 'YPMD IRJA' }}.</p>
+            <p class="text-gray-600 leading-relaxed text-lg">Berikut adalah daftar cabang olahraga yang berada di bawah pembinaan {{ $situs['nama_situs'] ?? 'YPMD-IRJA' }}.</p>
         </div>
     </section>
 

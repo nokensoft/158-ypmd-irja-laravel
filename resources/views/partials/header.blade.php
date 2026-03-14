@@ -4,12 +4,12 @@
         {{-- Logo Desktop --}}
         <a href="{{ route('beranda') }}" class="hidden md:flex items-center gap-3 flex-shrink-0">
             @if (!empty($situs['logo']))
-                <img src="{{ asset('storage/' . $situs['logo']) }}" alt="{{ $situs['nama_situs'] ?? 'YPMD IRJA' }}" class="h-16">
+                <img src="{{ asset('storage/' . $situs['logo']) }}" alt="{{ $situs['nama_situs'] ?? 'YPMD-IRJA' }}" class="h-16">
             @else
-                <img src="{{ asset('img/logo-ypmd-irja.png') }}" alt="YPMD IRJA" class="h-16">
+                <img src="{{ asset('img/logo-ypmd-irja.png') }}" alt="YPMD-IRJA" class="h-16">
             @endif
             <div class="hidden sm:block">
-                <span class="font-display font-bold text-primary-700 text-base leading-tight block">{{ $situs['nama_situs'] ?? 'YPMD IRJA' }}</span>
+                <span class="font-display font-bold text-primary-700 text-base leading-tight block">{{ $situs['nama_situs'] ?? 'YPMD-IRJA' }}</span>
                 <span class="text-neutral-400 text-xs leading-none">Yayasan Pembangunan Masyarakat Desa Irian Jaya</span>
             </div>
         </a>
@@ -69,7 +69,7 @@
             @else
                 <img src="{{ asset('img/logo-ypmd-irja.png') }}" alt="" class="h-7">
             @endif
-            <span class="font-display font-bold text-primary-700 text-sm">{{ $situs['nama_situs'] ?? 'YPMD IRJA' }}</span>
+            <span class="font-display font-bold text-primary-700 text-sm">{{ $situs['nama_situs'] ?? 'YPMD-IRJA' }}</span>
         </div>
 
         {{-- Hamburger --}}

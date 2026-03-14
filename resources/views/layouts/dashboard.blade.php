@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Dashboard') - {{ $situs['nama_situs'] ?? 'YPMD IRJA' }}</title>
+    <title>@yield('title', 'Dashboard') - {{ $situs['nama_situs'] ?? 'YPMD-IRJA' }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="robots" content="noindex, nofollow">
     @if (!empty($situs['logo']))
@@ -91,12 +91,12 @@
             {{-- Logo --}}
             <div class="px-6 py-5 border-b border-gray-800 flex items-center space-x-3">
                 @if (!empty($situs['logo']))
-                    <img src="{{ asset('storage/' . $situs['logo']) }}" alt="Logo {{ $situs['nama_situs'] ?? 'YPMD IRJA' }}" class="h-10">
+                    <img src="{{ asset('storage/' . $situs['logo']) }}" alt="Logo {{ $situs['nama_situs'] ?? 'YPMD-IRJA' }}" class="h-10">
                 @else
                     <img src="{{ asset('img/logo-ypmd-irja.png') }}" alt="Logo" class="h-10 object-contain" onerror="this.style.display='none'">
                 @endif
                 <div>
-                    <span class="font-bold text-sm leading-tight text-primary block">{{ $situs['nama_situs'] ?? 'YPMD IRJA' }}</span>
+                    <span class="font-bold text-sm leading-tight text-primary block">{{ $situs['nama_situs'] ?? 'YPMD-IRJA' }}</span>
                     <span class="text-xs font-medium tracking-widest uppercase text-gray-400 block">{{ session('user.role') === 'admin_master' ? 'Admin' : 'Penulis' }}</span>
                 </div>
             </div>
@@ -310,7 +310,7 @@
             @endphp
             <footer class="bg-white border-t border-gray-200 px-6 py-4">
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-2 text-sm text-gray-500">
-                    <p>&copy; {{ date('Y') }} {{ $situs['nama_situs'] ?? 'YPMD IRJA' }}</p>
+                    <p>&copy; {{ date('Y') }} {{ $situs['nama_situs'] ?? 'YPMD-IRJA' }}</p>
                     <div class="flex items-center gap-3">
                         <a href="{{ route("{$dashPrefix}.dokumentasi") }}" class="hover:text-primary transition-colors">Dokumentasi</a>
                         @if ($faqPage)
