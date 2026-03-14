@@ -50,7 +50,7 @@ if ($kategoriAktif) {
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @forelse ($beritaList as $b)
                             <article class="bg-white shadow-card card-hover border border-neutral-100 fade-in">
-                                <img src="{{ $b->gambar }}" class="w-full h-48 object-cover" alt="{{ $b->judul }}">
+                                <img src="{{ $b->gambar }}" class="w-full aspect-[5/4] object-cover" alt="{{ $b->judul }}">
                                 <div class="p-5">
                                     <div class="flex items-center gap-2 text-xs text-neutral-400 mb-2">
                                         <span class="text-primary-500 font-semibold">{{ $b->kategori?->nama ?? 'Berita' }}</span>
