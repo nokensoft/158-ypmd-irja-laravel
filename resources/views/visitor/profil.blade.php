@@ -72,12 +72,13 @@
                     <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-primary-100 -translate-x-1/2"></div>
                     <div class="space-y-6">
                         @foreach ([
-                            ['no'=>1, 'nama'=>'Ir. Agus Rumansara, MA',       'periode'=>'1984 &ndash; 1986', 'keterangan'=>'Direktur Pertama &mdash; Pendiri'],
-                            ['no'=>2, 'nama'=>'Antonis A. Rahawarin, B.A',    'periode'=>'1987 &ndash; 1990', 'keterangan'=>''],
-                            ['no'=>3, 'nama'=>'Ir. Kliv R. Marlessi',         'periode'=>'1991 &ndash; 1994', 'keterangan'=>''],
-                            ['no'=>4, 'nama'=>'Dra. Fintje S. Jarangga',      'periode'=>'1995 &ndash; 1997', 'keterangan'=>''],
-                            ['no'=>5, 'nama'=>'Drs. Decky Rumaropen',         'periode'=>'1998 &ndash; 2020', 'keterangan'=>'Direktur Terlama &mdash; 22 Tahun'],
-                            ['no'=>6, 'nama'=>'Drs. Johanes Hambur',          'periode'=>'2024 &ndash; Sekarang', 'keterangan'=>'Direktur Aktif'],
+                            ['no'=>1, 'nama'=>'George Junus Aditjondro',   'periode'=>'1982 &ndash; 1985', 'keterangan'=>'Direktur Pertama'],
+                            ['no'=>2, 'nama'=>'Ir. Agus Rumansara, MA',     'periode'=>'1986 &ndash; 1987', 'keterangan'=>''],
+                            ['no'=>3, 'nama'=>'Antonis A. Rahawarin, B.A',  'periode'=>'1988 &ndash; 1991', 'keterangan'=>''],
+                            ['no'=>4, 'nama'=>'Ir. Cliff R. Marlessy',      'periode'=>'1992 &ndash; 1995', 'keterangan'=>''],
+                            ['no'=>5, 'nama'=>'Fientje S. Jarangga, SE',    'periode'=>'1995 &ndash; 1997', 'keterangan'=>''],
+                            ['no'=>6, 'nama'=>'Drs. Decky A. Rumaropen',    'periode'=>'1998 &ndash; 2022', 'keterangan'=>'Direktur Terlama &mdash; 24 Tahun'],
+                            ['no'=>7, 'nama'=>'Drs. Johanes Hambur',        'periode'=>'2024 &ndash; Sekarang', 'keterangan'=>'Direktur Aktif'],
                         ] as $d)
                         <div class="flex md:items-center gap-4 md:gap-0 fade-in">
                             {{-- Kiri (nomor urut) --}}

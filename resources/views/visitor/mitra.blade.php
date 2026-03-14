@@ -35,7 +35,7 @@
                         [
                             'nama'    => 'THD Asia Foundation',
                             'negara'  => 'Asia',
-                            'flag'    => '🌏',
+                            'flag'    => 'AF',
                             'desc'    => 'Lembaga donor yang mendukung program penguatan masyarakat sipil dan pemberdayaan komunitas adat.',
                         ],
                         [
@@ -53,7 +53,7 @@
                         [
                             'nama'    => 'CEMOBE',
                             'negara'  => 'Internasional',
-                            'flag'    => '✝️',
+                            'flag'    => 'C',
                             'desc'    => 'Organisasi Gereja-Gereja Katolik yang mendukung program pendampingan komunitas dan advokasi hak-hak adat.',
                         ],
                         [
@@ -143,13 +143,13 @@
                         [
                             'nama'    => 'BP Bintuni',
                             'negara'  => 'Indonesia',
-                            'flag'    => '🏭',
+                            'flag'    => 'BP',
                             'desc'    => 'Dana CSR untuk mendampingi masyarakat yang terkena dampak operasional perusahaan di wilayah Teluk Bintuni.',
                         ],
                         [
                             'nama'    => 'PT Freeport Indonesia (PT FI)',
                             'negara'  => 'Indonesia',
-                            'flag'    => '🏔️',
+                            'flag'    => 'FI',
                             'desc'    => 'Program CSR pendampingan Organisasi Masyarakat Sipil (CSO) penerima hibah dari PT Freeport Indonesia untuk komunitas di lingkar tambang.',
                         ],
                     ] as $m)

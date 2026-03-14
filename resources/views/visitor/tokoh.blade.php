@@ -28,57 +28,65 @@
             </div>
 
             @php
-            $direktur = [
-                [
-                    'no'        => 1,
-                    'nama'      => 'Ir. Agus Rumansara, MA',
-                    'periode'   => '1984 – 1986',
-                    'label'     => 'Direktur Pertama & Pendiri',
-                    'foto'      => null,
-                    'aktif'     => false,
-                ],
-                [
-                    'no'        => 2,
-                    'nama'      => 'Antonis A. Rahawarin, B.A',
-                    'periode'   => '1987 – 1990',
-                    'label'     => 'Direktur Kedua',
-                    'foto'      => null,
-                    'aktif'     => false,
-                ],
-                [
-                    'no'        => 3,
-                    'nama'      => 'Ir. Kliv R. Marlessi',
-                    'periode'   => '1991 – 1994',
-                    'label'     => 'Direktur Ketiga',
-                    'foto'      => null,
-                    'aktif'     => false,
-                ],
-                [
-                    'no'        => 4,
-                    'nama'      => 'Dra. Fintje S. Jarangga',
-                    'periode'   => '1995 – 1997',
-                    'label'     => 'Direktur Keempat',
-                    'foto'      => null,
-                    'aktif'     => false,
-                ],
-                [
-                    'no'        => 5,
-                    'nama'      => 'Drs. Decky Rumaropen',
-                    'periode'   => '1998 – 2020',
-                    'label'     => 'Direktur Terlama · 22 Tahun',
-                    'foto'      => 'img/galeri/avatar-decky-rumaropen.png',
-                    'aktif'     => false,
-                ],
-                [
-                    'no'        => 6,
-                    'nama'      => 'Drs. Johanes Hambur',
-                    'periode'   => '2024 – Sekarang',
-                    'label'     => 'Direktur Aktif',
-                    'foto'      => null,
-                    'aktif'     => true,
-                ],
-            ];
-            @endphp
+                $direktur = [
+                    [
+                        'no'      => 1,
+                        'nama'    => 'George Junus Aditjondro',
+                        'periode' => '1982 – 1985', // Diasumsikan 1982 karena periode berikutnya mulai 1986
+                        'label'   => 'Direktur Pertama',
+                        'foto'    => null,
+                        'aktif'   => false,
+                    ],
+                    [
+                        'no'      => 2,
+                        'nama'    => 'Ir. Agus Rumansara, MA',
+                        'periode' => '1986 – 1987',
+                        'label'   => 'Direktur Kedua',
+                        'foto'    => null,
+                        'aktif'   => false,
+                    ],
+                    [
+                        'no'      => 3,
+                        'nama'    => 'Antonis A. Rahawarin, B.A',
+                        'periode' => '1988 – 1991',
+                        'label'   => 'Direktur Ketiga',
+                        'foto'    => null,
+                        'aktif'   => false,
+                    ],
+                    [
+                        'no'      => 4,
+                        'nama'    => 'Ir. Cliff R. Marlessy',
+                        'periode' => '1992 – 1995',
+                        'label'   => 'Direktur Keempat',
+                        'foto'    => null,
+                        'aktif'   => false,
+                    ],
+                    [
+                        'no'      => 5,
+                        'nama'    => 'Fientje S. Jarangga, SE',
+                        'periode' => '1995 – 1997',
+                        'label'   => 'Direktur Kelima',
+                        'foto'    => null,
+                        'aktif'   => false,
+                    ],
+                    [
+                        'no'      => 6,
+                        'nama'    => 'Drs. Decky A. Rumaropen',
+                        'periode' => '1998 – 2022',
+                        'label'   => 'Direktur Terlama · 24 Tahun',
+                        'foto'    => 'img/galeri/avatar-decky-rumaropen.png',
+                        'aktif'   => false,
+                    ],
+                    [
+                        'no'      => 7,
+                        'nama'    => 'Drs. Johanes Hambur',
+                        'periode' => '2024 – Sekarang',
+                        'label'   => 'Direktur Aktif',
+                        'foto'    => null,
+                        'aktif'   => true,
+                    ],
+                ];
+                @endphp
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($direktur as $d)

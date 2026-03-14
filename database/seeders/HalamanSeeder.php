@@ -434,7 +434,7 @@ HTML,
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div class="bg-neutral-50 border border-neutral-100 fade-in hover:border-primary-200 hover:shadow-card transition">
                     <div class="h-36 bg-white flex items-center justify-center p-6 border-b border-neutral-100">
-                        <span class="text-4xl">🌏</span>
+                        <span class="text-4xl">AF</span>
                     </div>
                     <div class="p-5">
                         <h4 class="font-display font-bold text-neutral-900 text-sm leading-tight">THD Asia Foundation</h4>
@@ -464,7 +464,7 @@ HTML,
                 </div>
                 <div class="bg-neutral-50 border border-neutral-100 fade-in hover:border-primary-200 hover:shadow-card transition">
                     <div class="h-36 bg-white flex items-center justify-center p-6 border-b border-neutral-100">
-                        <span class="text-4xl">✝️</span>
+                        <span class="text-4xl">I</span>
                     </div>
                     <div class="p-5">
                         <h4 class="font-display font-bold text-neutral-900 text-sm leading-tight">CEMOBE</h4>
@@ -534,7 +534,7 @@ HTML,
             <div class="grid sm:grid-cols-2 gap-4">
                 <div class="bg-neutral-50 border border-neutral-100 fade-in hover:border-neutral-300 hover:shadow-card transition">
                     <div class="h-36 bg-white flex items-center justify-center p-6 border-b border-neutral-100">
-                        <span class="text-4xl">🏭</span>
+                        <span class="text-4xl">BP</span>
                     </div>
                     <div class="p-5">
                         <h4 class="font-display font-bold text-neutral-900 text-sm leading-tight">BP Bintuni</h4>
@@ -544,7 +544,7 @@ HTML,
                 </div>
                 <div class="bg-neutral-50 border border-neutral-100 fade-in hover:border-neutral-300 hover:shadow-card transition">
                     <div class="h-36 bg-white flex items-center justify-center p-6 border-b border-neutral-100">
-                        <span class="text-4xl">🏔️</span>
+                        <span class="text-4xl">PT</span>
                     </div>
                     <div class="p-5">
                         <h4 class="font-display font-bold text-neutral-900 text-sm leading-tight">PT Freeport Indonesia (PT FI)</h4>

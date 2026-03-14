@@ -143,7 +143,7 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
                             <i class="fa-solid fa-newspaper text-xl text-primary-500"></i>
                         </div>
                         <h3 class="font-display font-bold text-neutral-900 mb-2">Informasi</h3>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Penyebaran informasi pembangunan masyarakat melalui Buletin <em>Kabar Dari Kampung</em> (KDK) sebagai media alternatif warga Papua.</p>
+                        <p class="text-neutral-500 text-sm leading-relaxed">Penyebaran informasi pembangunan masyarakat melalui Buletin Kabar Dari Kampung (KDK) sejak tahun 1982 (edisi cetak sampai tahun 2000), sebagai media alternatif, advokasi, dan promosi usaha rakyat.</p>
                         <a href="{{ route('kdk') }}" class="inline-flex items-center gap-1 mt-4 text-primary-600 text-xs font-semibold hover:text-primary-700">
                             Buletin KDK <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </a>
@@ -158,7 +158,7 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
                             <i class="fa-solid fa-chart-line text-xl text-accent-500"></i>
                         </div>
                         <h3 class="font-display font-bold text-neutral-900 mb-2">Ekonomi Kerakyatan</h3>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Pengembangan potensi lokal, aksesibilitas pasar, dan penguatan simpanan/tabungan keuangan masyarakat kampung.</p>
+                        <p class="text-neutral-500 text-sm leading-relaxed">Pengembangan potensi lokal, aksesibilitas pasar, dan mobilisasi simpanan  keuangan masyarakat di bank.</p>
                         <a href="{{ route('program') }}" class="inline-flex items-center gap-1 mt-4 text-accent-600 text-xs font-semibold hover:text-accent-700">
                             Selengkapnya <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </a>
@@ -172,8 +172,8 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
                         <div class="w-12 h-12 bg-sky-50 flex items-center justify-center mb-4">
                             <i class="fa-solid fa-droplet text-xl text-sky-500"></i>
                         </div>
-                        <h3 class="font-display font-bold text-neutral-900 mb-2">Clean Water Supply</h3>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Pembangunan dan pengelolaan instalasi air bersih di kampung-kampung terpencil untuk kebutuhan dasar warga.</p>
+                        <h3 class="font-display font-bold text-neutral-900 mb-2">Kesehatan Lingkungan/Clean Water Supply</h3>
+                        <p class="text-neutral-500 text-sm leading-relaxed">Pembangunan dan pengelolaan instalasi air bersih, sanitasi, dan lingkungan di kampung-kampung terpencil untuk kebutuhan dasar warga.</p>
                         <a href="{{ route('program') }}" class="inline-flex items-center gap-1 mt-4 text-sky-600 text-xs font-semibold hover:text-sky-700">
                             Selengkapnya <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </a>
@@ -188,7 +188,7 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
                             <i class="fa-solid fa-store text-xl text-amber-500"></i>
                         </div>
                         <h3 class="font-display font-bold text-neutral-900 mb-2">Promosi Usaha</h3>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Peningkatan kapasitas bisnis usaha kecil menengah (UKM) masyarakat Papua agar mampu bersaing di pasar yang lebih luas.</p>
+                        <p class="text-neutral-500 text-sm leading-relaxed">Peningkatan kapasitas bisnis usaha kecil menengah (UKM) masyarakat agar mampu bersaing di pasar yang lebih luas.</p>
                         <a href="{{ route('program') }}" class="inline-flex items-center gap-1 mt-4 text-amber-600 text-xs font-semibold hover:text-amber-700">
                             Selengkapnya <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </a>
