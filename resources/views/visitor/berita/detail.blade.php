@@ -56,10 +56,10 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
                             <span class="text-sm bg-primary text-white px-3 py-1 font-bold uppercase">{{ $berita->kategori->nama }}</span>
                         @endif
                     </div>
-                    <div class="mb-8">
-                        <img src="{{ $berita->gambar }}" alt="{{ $berita->judul }}" class="w-full aspect-[5/4] object-cover">
+                    <div class="mb-8 flex justify-center">
+                        <img src="{{ $berita->gambar }}" alt="{{ $berita->judul }}" class="w-[720px] shadow-lg object-cover">
                     </div>
-                    <div class="prose max-w-none text-lg leading-relaxed">
+                    <div class="prose max-w-none text-lg leading-relaxed text-justify">
                         {!! $berita->konten !!}
                     </div>
                     @if ($berita->sumber_nama)
