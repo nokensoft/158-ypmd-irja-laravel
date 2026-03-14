@@ -44,9 +44,9 @@ class PengaturanSitusSeeder extends Seeder
             'sosmed_twitter'   => 'https://x.com/ypmdirja',
             'sosmed_tiktok'    => null,
             // Rekening Donasi
-            'donasi_rek_bri'     => '1234-5678-9012-345 a.n. Yayasan Pembangunan Masyarakat Desa Irian Jaya',
-            'donasi_rek_bni'     => '9876-5432-1098-765 a.n. YPMD IRJA',
-            'donasi_rek_mandiri' => '1111-2222-3333-4444 a.n. YPMD IRJA',
+            'donasi_rek_bri'     => null,
+            'donasi_rek_bni'     => '1984081278 a.n. PEMBANGUNAN MASYARAKAT DESA IRIAN JAYA',
+            'donasi_rek_mandiri' => null,
             // SEO
             'seo_meta_keywords'   => 'YPMD IRJA, Papua, masyarakat desa di Irian Jaya / Papua sekarang, pemberdayaan, kakao, KDK, Kabar Dari Kampung',
             'seo_meta_description'=> 'Website resmi YPMD IRJA — Mendampingi masyarakat desa di Irian Jaya / Papua sekarang dalam pemberdayaan ekonomi, hak tanah, dan ketahanan pangan sejak 1982.',

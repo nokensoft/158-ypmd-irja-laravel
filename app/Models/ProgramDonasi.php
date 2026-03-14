@@ -13,7 +13,7 @@ class ProgramDonasi extends Model
     protected $table = 'program_donasi';
 
     const BANK_NAMA = 'BNI';
-    const BANK_NO_REKENING = '0349-1234-5678';
+    const BANK_NO_REKENING = '1984081278';
     const BANK_ATAS_NAMA = 'Yayasan Pembangunan Masyarakat Desa Irian Jaya';
 
     protected $fillable = [
