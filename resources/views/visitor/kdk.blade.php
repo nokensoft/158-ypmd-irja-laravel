@@ -18,34 +18,87 @@
 
     <section class="py-16 bg-neutral-50">
         <div class="max-w-7xl mx-auto px-6">
+
+            
+            
+
+
             <div class="bg-white shadow-card p-8 md:p-12 mb-12 fade-in">
-                <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="grid md:grid-cols-2 gap-12 items-start">
                     <div>
-                        <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2"><i class="fa-solid fa-book-open mr-2"></i>Tentang KDK</p>
+                        <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2">
+                            <i class="fa-solid fa-book-open mr-2"></i>Media Alternatif Papua
+                        </p>
                         <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900 mb-4">Apa itu KDK?</h2>
-                        <p class="text-neutral-600 leading-relaxed mb-3"><em>Kabar Dari Kampung</em> (KDK) adalah buletin yang pertama kali diterbitkan pada tahun 1982 oleh kelompok idealis yang kemudian mendirikan YPMD-IRJA. Buletin ini hadir sebagai media alternatif yang menyuarakan realita kehidupan masyarakat desa di Irian Jaya / Papua sekarang.</p>
-                        <p class="text-neutral-600 leading-relaxed">KDK mendokumentasikan berbagai isu penting: hak tanah adat, pengorganisasian komunitas, perkembangan program pemberdayaan, serta berbagai cerita dari kampung-kampung di seluruh Papua.</p>
+                        <p class="text-neutral-600 leading-relaxed mb-4 text-lg">
+                            <em>Kabar Dari Kampung</em> (KDK) adalah buletin pionir yang lahir pada tahun 1982. Berbeda dengan media arus utama di Jayapura, KDK berfokus sepenuhnya pada suara masyarakat dari pelosok kampung di Tanah Papua.
+                        </p>
+                        <p class="text-neutral-600 leading-relaxed mb-6 text-lg">
+                            KDK hadir sebagai instrumen advokasi untuk mendokumentasikan isu krusial: mulai dari hak tanah adat, pengorganisasian komunitas, hingga dampak sosial-ekonomi akibat eksploitasi sumber daya alam.
+                        </p>
+
+                        {{-- Accordion Sejarah --}}
+                        <div x-data="{ open: false }" class="border border-neutral-100 rounded-lg overflow-hidden">
+                            <button @click="open = !open" class="w-full flex items-center justify-between p-4 bg-neutral-50 hover:bg-neutral-100 transition-colors">
+                                <span class="font-display font-bold text-neutral-900 text-lg">Baca Sejarah: KDK Hadir Memberikan Pencerahan</span>
+                                <i class="fa-solid" :class="open ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                            </button>
+                            <div x-show="open" x-transition class="p-4 text-lg text-neutral-600 leading-relaxed space-y-4 border-t border-neutral-100">
+                                <p>
+                                    Sejak pengalihan status politik tahun 1963 hingga akhir 1980-an, kondisi sosial, ekonomi, dan politik di Papua kurang menguntungkan bagi Orang Asli Papua (OAP). Kondisi ini diperparah oleh kebijakan "GO EAST" Presiden Soeharto yang memicu eksploitasi hutan besar-besaran, seperti kasus PT Kayu Lapis Indonesia (KLI) di hutan bakau Bintuni.
+                                </p>
+                                <p>
+                                    Melihat keprihatinan ini, Gereja Katolik dan GKI di Tanah Papua membentuk Kelompok Kerja Oikoumene (KKO) yang kemudian berkembang menjadi <strong>Irian Jaya Dissemination Information Service (IRJA DISC) Center</strong>.
+                                </p>
+                                <p>
+                                    Di bawah kepemimpinan <strong>George Junus Aditjondro</strong> (mantan wartawan TEMPO), lahirlah Buletin 'Kabar Dari Kampung'. Dinamakan demikian karena kontennya murni bersumber dari realita di kampung-kampung, mengangkat isu eksploitasi hutan, tanah ulayat, hingga penggalian tambang.
+                                </p>
+                                <p>
+                                    Berkat akurasi data dan gaya jurnalistiknya yang kuat, KDK mendapatkan pengakuan internasional melalui <strong>ISSN (0215-4838)</strong> dari Paris dan LIPI, dengan tujuan utama mempengaruhi kebijakan agar lebih berpihak pada masyarakat Papua. (JH)
+                                </p>
+                            </div>
+                        </div>
                     </div>
-            <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-neutral-50 rounded p-4 text-center shadow-sm">
-                            <div class="text-2xl font-display font-bold text-primary-200">1982</div>
-                            <div class="text-xs text-neutral-400 mt-1">Berdiri</div>
+
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-neutral-50 rounded p-6 text-center shadow-sm border border-neutral-100">
+                                <div class="text-2xl font-display font-bold text-primary-500">1982</div>
+                                <div class="text-xs text-neutral-400 mt-1 uppercase tracking-tighter">Tahun Berdiri</div>
+                            </div>
+                            <div class="bg-neutral-50 rounded p-6 text-center shadow-sm border border-neutral-100">
+                                <div class="text-2xl font-display font-bold text-primary-500">{{ $kdkList->total() }}+</div>
+                                <div class="text-xs text-neutral-400 mt-1 uppercase tracking-tighter">Edisi Terbit</div>
+                            </div>
+                            <div class="bg-neutral-50 rounded p-6 text-center shadow-sm border border-neutral-100">
+                                <div class="text-2xl font-display font-bold text-primary-500">{{ number_format($kdkList->sum('jumlah_dibaca')) }}</div>
+                                <div class="text-xs text-neutral-400 mt-1 uppercase tracking-tighter">Total Pembaca</div>
+                            </div>
+                            <div class="bg-neutral-50 rounded p-6 text-center shadow-sm border border-neutral-100">
+                                <div class="text-2xl font-display font-bold text-primary-500">{{ number_format($kdkList->sum('jumlah_unduhan')) }}</div>
+                                <div class="text-xs text-neutral-400 mt-1 uppercase tracking-tighter">Total Unduhan</div>
+                            </div>
                         </div>
-                        <div class="bg-neutral-50 rounded p-4 text-center shadow-sm">
-                            <div class="text-2xl font-display font-bold text-primary-200">{{ $kdkList->total() }}+</div>
-                            <div class="text-xs text-neutral-400 mt-1">Edisi Terbit</div>
-                        </div>
-                        <div class="bg-neutral-50 rounded p-4 text-center shadow-sm">
-                            <div class="text-2xl font-display font-bold text-primary-200">{{ number_format($kdkList->sum('jumlah_dibaca')) }}</div>
-                            <div class="text-xs text-neutral-400 mt-1">Total Pembaca</div>
-                        </div>
-                        <div class="bg-neutral-50 rounded p-4 text-center shadow-sm">
-                            <div class="text-2xl font-display font-bold text-primary-200">{{ number_format($kdkList->sum('jumlah_unduhan')) }}</div>
-                            <div class="text-xs text-neutral-400 mt-1">Total Unduhan</div>
+                        
+                        <div class="bg-primary-50 p-4 rounded-lg border border-primary-100">
+                            <div class="flex items-center gap-3 text-primary-700 mb-2">
+                                <i class="fa-solid fa-certificate"></i>
+                                <span class="font-bold text-2xl">Sertifikasi Internasional</span>
+                            </div>
+                            <p class="text-lg text-primary-600 leading-tight">
+                                Terdaftar secara resmi dengan nomor ISSN: <strong>0215-4838</strong> melalui LIPI dan pusat ISSN internasional di Paris.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
+
+
+
+
+
+
+
 
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-10">
                 {{-- Main Content --}}

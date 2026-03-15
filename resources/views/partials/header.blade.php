@@ -1,16 +1,16 @@
 <header class="sticky top-0 z-50 bg-white shadow-md border-b border-neutral-200" x-data="{ menuOpen: false, tentangOpen: false }">
-    <nav class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <nav class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
 
         {{-- Logo Desktop --}}
         <a href="{{ route('beranda') }}" class="hidden md:flex items-center gap-3 flex-shrink-0">
             @if (!empty($situs['logo']))
-                <img src="{{ asset('storage/' . $situs['logo']) }}" alt="{{ $situs['nama_situs'] ?? 'YPMD-IRJA' }}" class="h-16">
+                <img src="{{ asset('storage/' . $situs['logo']) }}" alt="{{ $situs['nama_situs'] ?? 'YPMD-IRJA' }}" class="h-24">
             @else
-                <img src="{{ asset('img/logo-ypmd-irja.png') }}" alt="YPMD-IRJA" class="h-16">
+                <img src="{{ asset('img/logo-ypmd-irja.png') }}" alt="YPMD-IRJA" class="h-24">
             @endif
             <div class="hidden sm:block">
-                <span class="font-display font-bold text-primary-700 text-base leading-tight block">{{ $situs['nama_situs'] ?? 'YPMD-IRJA' }}</span>
-                <span class="text-neutral-400 text-xs leading-none">Yayasan Pembangunan Masyarakat Desa Irian Jaya</span>
+                <span class="font-display font-bold text-primary-700 leading-tight block text-3xl">{{ $situs['nama_situs'] ?? 'YPMD-IRJA' }}</span>
+                <span class="text-neutral-400 text-sm leading-none">Yayasan Pembangunan Masyarakat Desa Irian Jaya</span>
             </div>
         </a>
 
@@ -57,7 +57,7 @@
 
             <li><a href="{{ route('program') }}" class="nav-link text-lg font-medium transition-colors {{ request()->routeIs('program') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Program</a></li>
             <li><a href="{{ route('kdk') }}" class="nav-link text-lg font-medium transition-colors {{ request()->routeIs('kdk') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Buletin KDK</a></li>
-            <li><a href="{{ route('berita') }}" class="nav-link text-lg font-medium transition-colors {{ request()->routeIs('berita*') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Papua Terkini</a></li>
+            <li><a href="{{ route('berita') }}" class="nav-link text-lg font-medium transition-colors {{ request()->routeIs('berita*') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Papua Today</a></li>
             <li><a href="{{ route('donasi') }}" class="nav-link text-lg font-medium transition-colors {{ request()->routeIs('donasi') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Donasi</a></li>
             <li><a href="{{ route('kontak') }}" class="nav-link text-lg font-medium transition-colors {{ request()->routeIs('kontak') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Kontak</a></li>
         </ul>

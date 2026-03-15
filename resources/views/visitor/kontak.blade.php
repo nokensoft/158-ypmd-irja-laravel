@@ -71,7 +71,13 @@
                 <div class="fade-in">
                     <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2">Lokasi</p>
                     <h3 class="text-2xl font-display font-bold text-neutral-900 mb-8">Temukan Kami</h3>
-                    <iframe width="100%" height="350" src="https://www.openstreetmap.org/export/embed.html?bbox=136.24145507812503%2C-6.189707330332176%2C141.21276855468753%2C-2.180259769681343&amp;layer=mapnik" style="border:1px solid #e5e5e5"></iframe>
+                    
+                    {{-- <iframe width="100%" height="350" src="https://www.openstreetmap.org/export/embed.html?bbox=136.24145507812503%2C-6.189707330332176%2C141.21276855468753%2C-2.180259769681343&amp;layer=mapnik" style="border:1px solid #e5e5e5"></iframe> --}}
+
+
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3923.0008698508836!2d140.67660557395212!3d-2.5942201967531062!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x686cf5f6f988a501%3A0x46658cf19a11d8d0!2sYPMD%20Papua!5e1!3m2!1sid!2sid!4v1773553228539!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+
                     <small class="text-neutral-400"><a href="https://www.openstreetmap.org/?#map=8/-4.188/138.727&amp;layers=NDG" class="hover:text-primary-600">Lihat Peta Lebih Besar</a></small>
                 </div>
             </div>
