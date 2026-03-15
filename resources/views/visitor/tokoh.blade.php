@@ -32,7 +32,7 @@
                     [
                         'no'      => 1,
                         'nama'    => 'George Junus Aditjondro',
-                        'periode' => '1982 – 1985', // Diasumsikan 1982 karena periode berikutnya mulai 1986
+                        'periode' => '1982 – 1986', // Diasumsikan 1982 karena periode berikutnya mulai 1986
                         'label'   => 'Direktur Pertama',
                         'foto'    => null,
                         'aktif'   => false,
@@ -56,7 +56,7 @@
                     [
                         'no'      => 4,
                         'nama'    => 'Ir. Cliff R. Marlessy',
-                        'periode' => '1992 – 1995',
+                        'periode' => '1992 – 1994',
                         'label'   => 'Direktur Keempat',
                         'foto'    => null,
                         'aktif'   => false,

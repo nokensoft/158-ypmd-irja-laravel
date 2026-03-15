@@ -61,48 +61,61 @@
     <section class="py-20 bg-neutral-50">
         <div class="max-w-7xl mx-auto px-6">
 
-            {{-- Direktur dari Masa ke Masa --}}
+            
+            
+
+
             <div class="mb-16">
-                <div class="mb-10 fade-in">
-                    <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2"><i class="fa-solid fa-user-tie mr-2"></i>Kepemimpinan</p>
+                <div class="mb-12 text-center fade-in">
+                    <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2">
+                        <i class="fa-solid fa-user-tie mr-2"></i>Kepemimpinan
+                    </p>
                     <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900">Direktur dari Masa ke Masa</h2>
+                    <p class="text-neutral-500 text-sm mt-2">Pejabat Direktur YPMD IRJA, Th. 1982 – 2026</p>
                 </div>
+
                 <div class="relative">
-                    {{-- Timeline line --}}
+                    {{-- Garis Tengah (Desktop) --}}
                     <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-primary-100 -translate-x-1/2"></div>
-                    <div class="space-y-6">
+
+                    <div class="space-y-12 md:space-y-8 relative">
                         @foreach ([
-                            ['no'=>1, 'nama'=>'George Junus Aditjondro',   'periode'=>'1982 &ndash; 1985', 'keterangan'=>'Direktur Pertama'],
-                            ['no'=>2, 'nama'=>'Ir. Agus Rumansara, MA',     'periode'=>'1986 &ndash; 1987', 'keterangan'=>''],
-                            ['no'=>3, 'nama'=>'Antonis A. Rahawarin, B.A',  'periode'=>'1988 &ndash; 1991', 'keterangan'=>''],
-                            ['no'=>4, 'nama'=>'Ir. Cliff R. Marlessy',      'periode'=>'1992 &ndash; 1995', 'keterangan'=>''],
-                            ['no'=>5, 'nama'=>'Fientje S. Jarangga, SE',    'periode'=>'1995 &ndash; 1997', 'keterangan'=>''],
-                            ['no'=>6, 'nama'=>'Drs. Decky A. Rumaropen',    'periode'=>'1998 &ndash; 2022', 'keterangan'=>'Direktur Terlama &mdash; 24 Tahun'],
-                            ['no'=>7, 'nama'=>'Drs. Johanes Hambur',        'periode'=>'2024 &ndash; Sekarang', 'keterangan'=>'Direktur Aktif'],
-                        ] as $d)
-                        <div class="flex md:items-center gap-4 md:gap-0 fade-in">
-                            {{-- Kiri (nomor urut) --}}
-                            <div class="md:w-1/2 md:text-right md:pr-10 flex md:block items-center gap-4">
-                                <div class="w-10 h-10 rounded-full bg-primary-500 text-white flex items-center justify-center font-bold text-sm flex-shrink-0 md:hidden">
-                                    {{ $d['no'] }}
+                            ['no'=>1, 'nama'=>'George Junus Aditjondro', 'periode'=>'1982 – 1986', 'ket'=>'Direktur Pertama', 'img'=>'https://ui-avatars.com/api/?name=George+Junus+Aditjondro&background=0D8ABC&color=fff'],
+                            ['no'=>2, 'nama'=>'Ir. August Rumansara, MA', 'periode'=>'1986 – 1987', 'ket'=>'', 'img'=>'https://ui-avatars.com/api/?name=August+Rumansara&background=0D8ABC&color=fff'],
+                            ['no'=>3, 'nama'=>'Antonius A. Rahawarin, BA', 'periode'=>'1988 – 1991', 'ket'=>'', 'img'=>'https://ui-avatars.com/api/?name=Antonius+Rahawarin&background=0D8ABC&color=fff'],
+                            ['no'=>4, 'nama'=>'Ir. Cliff R. Marlessy', 'periode'=>'1992 – 1994', 'ket'=>'', 'img'=>'https://ui-avatars.com/api/?name=Cliff+Marlessy&background=0D8ABC&color=fff'],
+                            ['no'=>5, 'nama'=>'Fientje Salomina Jarangga, SE', 'periode'=>'1995 – 1997', 'ket'=>'', 'img'=>'https://ui-avatars.com/api/?name=Fientje+Jarangga&background=0D8ABC&color=fff'],
+                            ['no'=>6, 'nama'=>'Drs. Decky Rumaropen', 'periode'=>'1998 – 2022', 'ket'=>'Direktur Terlama — 24 Tahun', 'img'=>'https://ui-avatars.com/api/?name=Decky+Rumaropen&background=0D8ABC&color=fff'],
+                            ['no'=>7, 'nama'=>'Drs. Yohannes Hambur', 'periode'=>'2024 – Sekarang', 'ket'=>'Direktur Aktif', 'img'=>'https://ui-avatars.com/api/?name=Yohannes+Hambur&background=0D8ABC&color=fff'],
+                        ] as $index => $d)
+                        
+                        <div class="flex flex-col md:flex-row md:items-center gap-6 md:gap-0 fade-in">
+                            {{-- Sisi Nama (Kiri pada Desktop) --}}
+                            <div class="md:w-1/2 flex items-center gap-4 {{ $index % 2 == 0 ? 'md:flex-row-reverse md:text-right md:pr-12' : 'md:pl-12' }}">
+                                <div class="relative flex-shrink-0">
+                                    <img src="{{ $d['img'] }}" alt="{{ $d['nama'] }}" class="w-14 h-14 rounded-full border-2 border-white shadow-md object-cover grayscale hover:grayscale-0 transition-all duration-300">
+                                    <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center text-[10px] text-white font-bold border-2 border-white md:hidden">
+                                        {{ $d['no'] }}
+                                    </div>
                                 </div>
                                 <div>
-                                    <p class="font-display font-bold text-neutral-900 text-base">{{ $d['nama'] }}</p>
-                                    @if ($d['keterangan'])
-                                        <p class="text-xs text-primary-500 font-semibold mt-0.5">{!! $d['keterangan'] !!}</p>
+                                    <h4 class="font-display font-bold text-neutral-900 text-base leading-tight">{{ $d['nama'] }}</h4>
+                                    @if($d['ket'])
+                                        <p class="text-[10px] uppercase tracking-wider text-primary-500 font-bold mt-1">{{ $d['ket'] }}</p>
                                     @endif
+                                    <p class="text-xs text-neutral-500 mt-1 md:hidden"><i class="fa-regular fa-calendar mr-1"></i> {{ $d['periode'] }}</p>
                                 </div>
                             </div>
-                            {{-- Titik tengah (desktop) --}}
-                            <div class="hidden md:flex w-10 flex-shrink-0 items-center justify-center relative z-10">
-                                <div class="w-10 h-10 rounded-full bg-primary-500 text-white flex items-center justify-center font-bold text-sm shadow-sm">
-                                    {{ $d['no'] }}
-                                </div>
+
+                            {{-- Nomor Tengah (Desktop) --}}
+                            <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 z-10 w-10 h-10 rounded-full bg-white border-2 border-primary-500 text-primary-600 items-center justify-center font-bold text-xs shadow-sm">
+                                {{ $d['no'] }}
                             </div>
-                            {{-- Kanan (periode) --}}
-                            <div class="md:w-1/2 md:pl-10">
-                                <span class="inline-block bg-white border border-primary-100 text-primary-600 text-sm font-semibold px-4 py-2 shadow-sm">
-                                    <i class="fa-regular fa-calendar mr-2 text-primary-300"></i>{!! $d['periode'] !!}
+
+                            {{-- Sisi Periode (Kanan pada Desktop) --}}
+                            <div class="md:w-1/2 hidden md:block {{ $index % 2 == 0 ? 'md:pl-12' : 'md:pr-12 md:text-right' }}">
+                                <span class="inline-flex items-center px-4 py-1.5 rounded-full bg-primary-50 text-primary-700 text-xs font-bold border border-primary-100">
+                                    <i class="fa-regular fa-calendar mr-2 opacity-70"></i> {{ $d['periode'] }}
                                 </span>
                             </div>
                         </div>
@@ -110,6 +123,11 @@
                     </div>
                 </div>
             </div>
+
+
+
+
+
 
             {{-- Identitas Lembaga --}}
             <div class="mb-12 fade-in">
