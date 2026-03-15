@@ -93,287 +93,190 @@
 
 
     
+{{-- Detail Program --}}
+<section class="py-20 bg-neutral-50">
+    <div class="max-w-7xl mx-auto px-6 space-y-24">
 
-    {{-- Detail Program --}}
-    <section class="py-20 bg-neutral-50">
-        <div class="max-w-7xl mx-auto px-6 space-y-24">
-
-            {{-- 01. Informasi / Media & Komunikasi Alternatif --}}
-            <div id="informasi" class="scroll-mt-24">
-                <div class="grid md:grid-cols-2 gap-10 items-center fade-in">
-                    <div>
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 bg-primary-50 flex items-center justify-center"><i class="fa-solid fa-newspaper text-primary-500"></i></div>
-                            <span class="text-5xl font-display font-bold text-neutral-200">01</span>
-                        </div>
-                        <h3 class="text-xl font-display font-bold text-neutral-900 mb-3">Informasi — Media &amp; Komunikasi Alternatif</h3>
-                        <p class="text-neutral-600 leading-relaxed mb-4">Melalui buletin <em>Kabar Dari Kampung</em> (KDK) yang pertama kali terbit pada 1982, YPMD-IRJA membangun media alternatif yang menyuarakan realita kehidupan masyarakat desa di Irian Jaya / Papua sekarang. KDK menjadi jembatan informasi antara masyarakat kampung dengan dunia luar, menyampaikan isu-isu kritis seperti hak tanah ulayat, pembangunan, dan pelestarian budaya.</p>
-                        <ul class="space-y-1.5 mb-6">
-                            @foreach (['Buletin KDK aktif sejak 1982 — media alternatif tertua di Papua','Dokumentasi gerakan dan perjuangan masyarakat desa di Irian Jaya / Papua sekarang','Arsip digital untuk pelestarian sejarah Papua','Jurnalisme komunitas oleh dan untuk masyarakat kampung','Distribusi ke jaringan advokasi nasional & internasional'] as $p)
-                            <li class="flex items-start gap-2 text-sm text-neutral-600"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>{{ $p }}</span></li>
-                            @endforeach
-                        </ul>
-                        <a href="{{ route('kdk') }}" class="inline-flex items-center gap-2 bg-primary-500 text-white px-5 py-2.5 text-sm font-semibold hover:bg-primary-600 transition-colors">
-                            <i class="fa-solid fa-file-pdf"></i>Lihat Arsip Buletin KDK
-                        </a>
+        {{-- 01. Pengembangan Rumpon & Kelautan (Update: Poin 1) --}}
+        <div id="rumpon" class="scroll-mt-24">
+            <div class="grid md:grid-cols-2 gap-10 items-center fade-in">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-primary-50 flex items-center justify-center"><i class="fa-solid fa-fish-fins text-primary-500"></i></div>
+                        <span class="text-5xl font-display font-bold text-neutral-200">01</span>
                     </div>
-                    <div class="h-72 bg-primary-50 rounded-lg shadow-card flex flex-col items-center justify-center gap-4">
-                        {{-- <i class="fa-solid fa-newspaper text-6xl text-primary-200"></i>
-                        <div class="text-center">
-                            <p class="text-primary-700 font-display font-bold text-lg">Buletin KDK</p>
-                            <p class="text-primary-400 text-sm">Sejak 1982 &middot; 6+ Edisi</p>
-                        </div> --}}
-                        <img src="{{ asset('img/bidang-kerja/YPMD-IRJA, Kabar Dari Kampung.png') }}" />
-                    </div>
+                    <h3 class="text-xl font-display font-bold text-neutral-900 mb-3">Pengembangan Rumpon Tradisional</h3>
+                    <p class="text-neutral-600 leading-relaxed mb-4">Berawal dari 3 unit model pada 1989 di Kampung Tablanusu, program ini berkembang secara mandiri oleh nelayan hingga mencapai 50 unit pada 2025. Inisiatif ini meningkatkan kemandirian ekonomi nelayan lokal melalui teknologi tepat guna yang berkelanjutan.</p>
+                    <ul class="space-y-1.5 mb-6">
+                        @foreach ([
+                            'Transformasi dari 3 unit menjadi 50 unit rumpon mandiri',
+                            'Nelayan lokal menjadi tutor ahli di Papua, Maluku, dan Sulawesi',
+                            'Peningkatan hasil tangkap melalui model percontohan yang replikabel',
+                            'Monitoring berkelanjutan untuk memastikan dampak jangka panjang'
+                        ] as $p)
+                        <li class="flex items-start gap-2 text-sm text-neutral-600"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>{{ $p }}</span></li>
+                        @endforeach
+                    </ul>
                 </div>
-                {{-- Sub-detail: Dampak --}}
-                <div class="mt-10 grid sm:grid-cols-3 gap-6 fade-in">
-                    <div class="bg-white border border-neutral-100 p-6 shadow-card">
-                        <div class="w-10 h-10 bg-primary-50 flex items-center justify-center mb-3"><i class="fa-solid fa-clock-rotate-left text-primary-500"></i></div>
-                        <h4 class="font-display font-bold text-neutral-900 mb-1">40+ Tahun Publikasi</h4>
-                        <p class="text-neutral-500 text-sm leading-relaxed">KDK telah menjadi suara masyarakat desa di Irian Jaya / Papua sekarang selama lebih dari empat dekade, mencatat perjalanan perjuangan dan pembangunan.</p>
-                    </div>
-                    <div class="bg-white border border-neutral-100 p-6 shadow-card">
-                        <div class="w-10 h-10 bg-primary-50 flex items-center justify-center mb-3"><i class="fa-solid fa-globe text-primary-500"></i></div>
-                        <h4 class="font-display font-bold text-neutral-900 mb-1">Jangkauan Luas</h4>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Didistribusikan ke berbagai lembaga, organisasi masyarakat sipil, dan jaringan advokasi di tingkat lokal, nasional, hingga internasional.</p>
-                    </div>
-                    <div class="bg-white border border-neutral-100 p-6 shadow-card">
-                        <div class="w-10 h-10 bg-primary-50 flex items-center justify-center mb-3"><i class="fa-solid fa-book-open text-primary-500"></i></div>
-                        <h4 class="font-display font-bold text-neutral-900 mb-1">Arsip Sejarah</h4>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Edisi-edisi KDK kini didigitalisasi sebagai sumber referensi sejarah dan budaya masyarakat desa di Irian Jaya / Papua sekarang yang tak ternilai.</p>
-                    </div>
+                <div class="h-72 bg-primary-50 rounded-lg shadow-card flex flex-col items-center justify-center gap-4">
+                    <img src="{{ asset('img/bidang-kerja/YPMD-IRJA, Kabar Dari Kampung.png') }}" alt="Rumpon Nelayan" />
                 </div>
             </div>
-
-            <hr class="border-neutral-200">
-
-            {{-- 02. Ekonomi Kerakyatan --}}
-            <div id="ekonomi" class="scroll-mt-24">
-                <div class="grid md:grid-cols-2 gap-10 items-center fade-in">
-                    <div class="md:order-2">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 bg-accent-50 flex items-center justify-center"><i class="fa-solid fa-chart-line text-accent-500"></i></div>
-                            <span class="text-5xl font-display font-bold text-neutral-200">02</span>
-                        </div>
-                        <h3 class="text-xl font-display font-bold text-neutral-900 mb-3">Ekonomi Kerakyatan</h3>
-                        <p class="text-neutral-600 leading-relaxed mb-4">YPMD-IRJA mengembangkan program ekonomi kerakyatan yang berfokus pada pengembangan potensi lokal, aksesibilitas pasar, dan penguatan keuangan masyarakat kampung. Program ini mencakup dua pilar utama: ekspor kakao organik dan keuangan mikro melalui BPR Phidectama.</p>
-                        <ul class="space-y-1.5">
-                            @foreach (['Pengembangan potensi ekonomi lokal masyarakat kampung','Fasilitasi akses pasar untuk produk hasil bumi','Pelatihan manajemen usaha & keuangan','Penguatan simpanan dan tabungan masyarakat','Kemitraan strategis dengan lembaga dalam & luar negeri'] as $p)
-                            <li class="flex items-start gap-2 text-sm text-neutral-600"><i class="fa-solid fa-check text-accent-500 mt-0.5 text-xs"></i><span>{{ $p }}</span></li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div class="h-72 bg-accent-50 rounded-lg shadow-card flex flex-col items-center justify-center gap-4 md:order-1">
-                        {{-- <i class="fa-solid fa-chart-line text-6xl text-accent-200"></i>
-                        <div class="text-center">
-                            <p class="text-accent-500 font-display font-bold text-lg">Ekonomi Kerakyatan</p>
-                            <p class="text-accent-300 text-sm">Kakao Organik &middot; BPR Phidectama</p>
-                        </div> --}}
-                        
-                        <img src="{{ asset('img/bidang-kerja/YPMD-IRJA, Akses Pasar.png') }}" />
-
-                    </div>
+            <div class="mt-10 grid sm:grid-cols-3 gap-6 fade-in">
+                <div class="bg-white border border-neutral-100 p-6 shadow-card">
+                    <div class="w-10 h-10 bg-primary-50 flex items-center justify-center mb-3"><i class="fa-solid fa-anchor text-primary-500"></i></div>
+                    <h4 class="font-display font-bold text-neutral-900 mb-1">50 Unit Rumpon</h4>
+                    <p class="text-neutral-500 text-sm leading-relaxed">Keberhasilan replikasi model rumpon oleh nelayan Tablanusu secara swadaya hingga Desember 2025.</p>
                 </div>
-
-                {{-- Sub-program: Ekspor Kakao Organik --}}
-                <div class="mt-12 grid md:grid-cols-2 gap-8 fade-in">
-                    <div class="bg-white border border-neutral-100 p-8 shadow-card">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 bg-primary-50 flex items-center justify-center"><i class="fa-solid fa-seedling text-primary-500"></i></div>
-                            <h4 class="font-display font-bold text-neutral-900">Ekspor Kakao Organik</h4>
-                        </div>
-                        <p class="text-neutral-600 text-sm leading-relaxed mb-4">Sejak 2010, YPMD-IRJA memfasilitasi ekspor biji kakao organik dari petani di Lembah Grime, Kabupaten Jayapura, ke pasar Jepang melalui kemitraan dengan All To Japan (ATJ) dan Green Coop. Program ini membuktikan bahwa produk lokal Papua mampu bersaing di pasar internasional.</p>
-                        <ul class="space-y-1.5">
-                            @foreach (['Lebih dari 10 tahun ekspor ke Jepang','Kemitraan dengan ATJ & Green Coop','Pertanian organik berkelanjutan','Peningkatan pendapatan petani lokal'] as $p)
-                            <li class="flex items-start gap-2 text-sm text-neutral-600"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>{{ $p }}</span></li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div class="bg-white border border-neutral-100 p-8 shadow-card">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 bg-primary-50 flex items-center justify-center"><i class="fa-solid fa-piggy-bank text-primary-500"></i></div>
-                            <h4 class="font-display font-bold text-neutral-900">Keuangan Mikro — BPR Phidectama</h4>
-                        </div>
-                        <p class="text-neutral-600 text-sm leading-relaxed mb-4">Pada tahun 1992, YPMD-IRJA mendirikan Bank Perkreditan Rakyat (BPR) Phidectama sebagai instrumen keuangan mikro untuk membangun kebiasaan menabung dan akses permodalan bagi masyarakat kampung, sehingga mereka tidak bergantung pada rentenir.</p>
-                        <ul class="space-y-1.5">
-                            @foreach (['Berdiri sejak 1992','Akses modal untuk UMKM masyarakat kampung','Program tabungan masyarakat kampung','Pendampingan & edukasi keuangan'] as $p)
-                            <li class="flex items-start gap-2 text-sm text-neutral-600"><i class="fa-solid fa-check text-primary-500 mt-0.5 text-xs"></i><span>{{ $p }}</span></li>
-                            @endforeach
-                        </ul>
-                    </div>
+                <div class="bg-white border border-neutral-100 p-6 shadow-card">
+                    <div class="w-10 h-10 bg-primary-50 flex items-center justify-center mb-3"><i class="fa-solid fa-chalkboard-user text-primary-500"></i></div>
+                    <h4 class="font-display font-bold text-neutral-900 mb-1">Tutor Lintas Provinsi</h4>
+                    <p class="text-neutral-500 text-sm leading-relaxed">Nelayan binaan kini menjadi instruktur pembuatan rumpon di wilayah Maluku hingga Sulawesi.</p>
                 </div>
-
-                {{-- Stats Ekonomi --}}
-                <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 fade-in">
-                    <div class="bg-white border border-neutral-100 p-5 text-center shadow-card">
-                        <div class="text-2xl font-display font-bold text-accent-500">10+</div>
-                        <div class="text-xs text-neutral-500 mt-1 uppercase tracking-wider">Tahun Ekspor Kakao</div>
-                    </div>
-                    <div class="bg-white border border-neutral-100 p-5 text-center shadow-card">
-                        <div class="text-2xl font-display font-bold text-accent-500">1992</div>
-                        <div class="text-xs text-neutral-500 mt-1 uppercase tracking-wider">BPR Phidectama Berdiri</div>
-                    </div>
-                    <div class="bg-white border border-neutral-100 p-5 text-center shadow-card">
-                        <div class="text-2xl font-display font-bold text-primary-600">Jepang</div>
-                        <div class="text-xs text-neutral-500 mt-1 uppercase tracking-wider">Pasar Ekspor Kakao</div>
-                    </div>
-                    <div class="bg-white border border-neutral-100 p-5 text-center shadow-card">
-                        <div class="text-2xl font-display font-bold text-primary-600">Lembah Grime</div>
-                        <div class="text-xs text-neutral-500 mt-1 uppercase tracking-wider">Sentra Produksi</div>
-                    </div>
+                <div class="bg-white border border-neutral-100 p-6 shadow-card">
+                    <div class="w-10 h-10 bg-primary-50 flex items-center justify-center mb-3"><i class="fa-solid fa-chart-line text-primary-500"></i></div>
+                    <h4 class="font-display font-bold text-neutral-900 mb-1">Kemandirian Lokal</h4>
+                    <p class="text-neutral-500 text-sm leading-relaxed">Masyarakat tidak lagi bergantung pada bantuan luar, melainkan melanjutkan model pembangunan secara mandiri.</p>
                 </div>
             </div>
-
-            <hr class="border-neutral-200">
-
-            {{-- 03. Clean Water Supply --}}
-            <div id="air-bersih" class="scroll-mt-24">
-                <div class="grid md:grid-cols-2 gap-10 items-center fade-in">
-                    <div>
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 bg-sky-50 flex items-center justify-center"><i class="fa-solid fa-droplet text-sky-500"></i></div>
-                            <span class="text-5xl font-display font-bold text-neutral-200">03</span>
-                        </div>
-                        <h3 class="text-xl font-display font-bold text-neutral-900 mb-3">Clean Water Supply</h3>
-                        <p class="text-neutral-600 leading-relaxed mb-4">Program penyediaan air bersih merupakan salah satu pilar penting YPMD-IRJA. Banyak kampung di pedalaman Papua yang belum memiliki akses air bersih layak konsumsi. YPMD-IRJA membangun dan mengelola instalasi air bersih berbasis gravitasi maupun pompa untuk memenuhi kebutuhan dasar warga.</p>
-                        <ul class="space-y-1.5 mb-6">
-                            @foreach (['Pembangunan instalasi air bersih berbasis gravitasi','Pemasangan sistem pompa air untuk daerah dataran rendah','Pelatihan pemeliharaan & pengelolaan instalasi oleh warga','Pemetaan sumber mata air di wilayah terpencil','Kerjasama dengan pemerintah daerah & lembaga donor'] as $p)
-                            <li class="flex items-start gap-2 text-sm text-neutral-600"><i class="fa-solid fa-check text-sky-500 mt-0.5 text-xs"></i><span>{{ $p }}</span></li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div class="h-72 bg-sky-50 rounded-lg shadow-card flex flex-col items-center justify-center gap-4">
-                        {{-- <i class="fa-solid fa-droplet text-6xl text-sky-200"></i>
-                        <div class="text-center">
-                            <p class="text-sky-600 font-display font-bold text-lg">Air Bersih</p>
-                            <p class="text-sky-400 text-sm">Hak Dasar Masyarakat Kampung</p>
-                        </div> --}}
-                        
-                        <img src="{{ asset('img/bidang-kerja/YPMD-IRJA, Kesehatan Lingkungan, Clean Water Supply.png') }}" />
-
-                    </div>
-                </div>
-                {{-- Sub-detail --}}
-                <div class="mt-10 grid sm:grid-cols-3 gap-6 fade-in">
-                    <div class="bg-white border border-neutral-100 p-6 shadow-card">
-                        <div class="w-10 h-10 bg-sky-50 flex items-center justify-center mb-3"><i class="fa-solid fa-faucet-drip text-sky-500"></i></div>
-                        <h4 class="font-display font-bold text-neutral-900 mb-1">Instalasi Gravitasi</h4>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Memanfaatkan sumber mata air pegunungan yang dialirkan melalui pipa ke kampung-kampung, tanpa membutuhkan energi listrik.</p>
-                    </div>
-                    <div class="bg-white border border-neutral-100 p-6 shadow-card">
-                        <div class="w-10 h-10 bg-sky-50 flex items-center justify-center mb-3"><i class="fa-solid fa-people-carry-box text-sky-500"></i></div>
-                        <h4 class="font-display font-bold text-neutral-900 mb-1">Pengelolaan Komunitas</h4>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Masyarakat kampung dilibatkan langsung dalam pembangunan dan pengelolaan instalasi agar terjaga keberlanjutannya.</p>
-                    </div>
-                    <div class="bg-white border border-neutral-100 p-6 shadow-card">
-                        <div class="w-10 h-10 bg-sky-50 flex items-center justify-center mb-3"><i class="fa-solid fa-heart-pulse text-sky-500"></i></div>
-                        <h4 class="font-display font-bold text-neutral-900 mb-1">Dampak Kesehatan</h4>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Akses air bersih menurunkan angka penyakit yang ditularkan melalui air dan meningkatkan kualitas hidup masyarakat kampung.</p>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="border-neutral-200">
-
-            {{-- 04. Promosi Usaha --}}
-            <div id="promosi-usaha" class="scroll-mt-24">
-                <div class="grid md:grid-cols-2 gap-10 items-center fade-in">
-                    <div class="md:order-2">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 bg-amber-50 flex items-center justify-center"><i class="fa-solid fa-store text-amber-500"></i></div>
-                            <span class="text-5xl font-display font-bold text-neutral-200">04</span>
-                        </div>
-                        <h3 class="text-xl font-display font-bold text-neutral-900 mb-3">Promosi Usaha</h3>
-                        <p class="text-neutral-600 leading-relaxed mb-4">YPMD-IRJA membantu meningkatkan kapasitas bisnis usaha kecil menengah (UKM) masyarakat Papua agar mampu bersaing di pasar yang lebih luas. Program ini meliputi pelatihan keterampilan produksi, pemasaran, branding produk lokal, hingga pendampingan akses modal usaha.</p>
-                        <ul class="space-y-1.5 mb-6">
-                            @foreach (['Pelatihan keterampilan produksi & manajemen usaha','Pendampingan branding dan pengemasan produk lokal','Fasilitasi akses ke pasar regional dan nasional','Pelatihan pemasaran digital untuk pelaku UKM','Mentoring bisnis berkelanjutan untuk wirausaha lokal'] as $p)
-                            <li class="flex items-start gap-2 text-sm text-neutral-600"><i class="fa-solid fa-check text-amber-500 mt-0.5 text-xs"></i><span>{{ $p }}</span></li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div class="h-72 bg-amber-50 rounded-lg shadow-card flex flex-col items-center justify-center gap-4 md:order-1">
-                        {{-- <i class="fa-solid fa-store text-6xl text-amber-200"></i>
-                        <div class="text-center">
-                            <p class="text-amber-600 font-display font-bold text-lg">Promosi Usaha</p>
-                            <p class="text-amber-400 text-sm">Memajukan UKM Papua</p>
-                        </div> --}}
-
-                        <img src="{{ asset('img/bidang-kerja/YPMD-IRJA, Penguatan Usaha & Pelatihan.png') }}" />
-
-                    </div>
-                </div>
-                {{-- Sub-detail --}}
-                <div class="mt-10 grid sm:grid-cols-3 gap-6 fade-in">
-                    <div class="bg-white border border-neutral-100 p-6 shadow-card">
-                        <div class="w-10 h-10 bg-amber-50 flex items-center justify-center mb-3"><i class="fa-solid fa-graduation-cap text-amber-500"></i></div>
-                        <h4 class="font-display font-bold text-neutral-900 mb-1">Pelatihan Usaha</h4>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Workshop dan pelatihan praktis untuk meningkatkan keterampilan produksi, manajemen keuangan, dan pemasaran bagi pelaku UKM Papua.</p>
-                    </div>
-                    <div class="bg-white border border-neutral-100 p-6 shadow-card">
-                        <div class="w-10 h-10 bg-amber-50 flex items-center justify-center mb-3"><i class="fa-solid fa-tags text-amber-500"></i></div>
-                        <h4 class="font-display font-bold text-neutral-900 mb-1">Branding Produk Lokal</h4>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Pendampingan dalam pengembangan identitas merek, desain kemasan, dan strategi pemasaran untuk produk-produk unggulan Papua.</p>
-                    </div>
-                    <div class="bg-white border border-neutral-100 p-6 shadow-card">
-                        <div class="w-10 h-10 bg-amber-50 flex items-center justify-center mb-3"><i class="fa-solid fa-handshake text-amber-500"></i></div>
-                        <h4 class="font-display font-bold text-neutral-900 mb-1">Akses Pasar</h4>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Menghubungkan pelaku UKM Papua dengan jaringan distribusi dan marketplace untuk memperluas jangkauan pasar produk mereka.</p>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="border-neutral-200">
-
-            {{-- 05. Pendampingan Masyarakat Desa di Irian Jaya / Papua Sekarang --}}
-            <div id="pendampingan" class="scroll-mt-24">
-                <div class="grid md:grid-cols-2 gap-10 items-center fade-in">
-                    <div>
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 bg-accent-50 flex items-center justify-center"><i class="fa-solid fa-users text-accent-400"></i></div>
-                            <span class="text-5xl font-display font-bold text-neutral-200">05</span>
-                        </div>
-                        <h3 class="text-xl font-display font-bold text-neutral-900 mb-3">Pendampingan Masyarakat Desa di Irian Jaya / Papua Sekarang</h3>
-                        <p class="text-neutral-600 leading-relaxed mb-4">Program inti YPMD-IRJA adalah mendampingi dan mengorganisir masyarakat desa di Irian Jaya / Papua sekarang agar mampu mengadvokasi hak-hak mereka atas tanah ulayat dan sumber daya alam. Melalui pendidikan hukum, penguatan organisasi komunitas, dan jaringan advokasi, masyarakat desa di Irian Jaya / Papua sekarang dibekali kemampuan untuk memperjuangkan hak-haknya secara mandiri.</p>
-                        <ul class="space-y-1.5 mb-6">
-                            @foreach (['Pendidikan hukum adat dan hak-hak masyarakat desa di Irian Jaya / Papua sekarang','Penguatan organisasi dan kelembagaan komunitas','Advokasi hak tanah ulayat dan sumber daya alam','Jaringan advokasi di tingkat nasional & internasional','Pendokumentasian kearifan lokal dan budaya adat Papua'] as $p)
-                            <li class="flex items-start gap-2 text-sm text-neutral-600"><i class="fa-solid fa-check text-accent-400 mt-0.5 text-xs"></i><span>{{ $p }}</span></li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div class="h-72 bg-accent-50 rounded-lg shadow-card flex flex-col items-center justify-center gap-4">
-                        {{-- <i class="fa-solid fa-users text-6xl text-accent-200"></i>
-                        <div class="text-center">
-                            <p class="text-accent-500 font-display font-bold text-lg">Masyarakat Desa di Irian Jaya / Papua Sekarang</p>
-                            <p class="text-accent-300 text-sm">Advokasi &middot; Organisasi &middot; Hak Ulayat</p>
-                        </div> --}}
-                        
-                        <img src="{{ asset('img/bidang-kerja/Kantor YPMD-IRJA.png') }}" />
-
-                    </div>
-                </div>
-                {{-- Sub-detail --}}
-                <div class="mt-10 grid sm:grid-cols-3 gap-6 fade-in">
-                    <div class="bg-white border border-neutral-100 p-6 shadow-card">
-                        <div class="w-10 h-10 bg-accent-50 flex items-center justify-center mb-3"><i class="fa-solid fa-scale-balanced text-accent-400"></i></div>
-                        <h4 class="font-display font-bold text-neutral-900 mb-1">Pendidikan Hukum</h4>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Edukasi tentang hak-hak hukum masyarakat desa di Irian Jaya / Papua sekarang, termasuk UU terkait tanah ulayat, sumber daya alam, dan hak asasi manusia.</p>
-                    </div>
-                    <div class="bg-white border border-neutral-100 p-6 shadow-card">
-                        <div class="w-10 h-10 bg-accent-50 flex items-center justify-center mb-3"><i class="fa-solid fa-sitemap text-accent-400"></i></div>
-                        <h4 class="font-display font-bold text-neutral-900 mb-1">Penguatan Organisasi</h4>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Membantu masyarakat desa di Irian Jaya / Papua sekarang membentuk dan mengelola organisasi komunitas yang kuat sebagai wadah aspirasi dan perjuangan bersama.</p>
-                    </div>
-                    <div class="bg-white border border-neutral-100 p-6 shadow-card">
-                        <div class="w-10 h-10 bg-accent-50 flex items-center justify-center mb-3"><i class="fa-solid fa-earth-asia text-accent-400"></i></div>
-                        <h4 class="font-display font-bold text-neutral-900 mb-1">Jaringan Advokasi</h4>
-                        <p class="text-neutral-500 text-sm leading-relaxed">Membangun kemitraan dengan lembaga advokasi lokal, nasional, dan internasional untuk memperkuat suara masyarakat desa di Irian Jaya / Papua sekarang.</p>
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </section>
+
+        <hr class="border-neutral-200">
+
+        {{-- 02. Advokasi & Kebijakan Publik (Update: Poin 2) --}}
+        <div id="advokasi" class="scroll-mt-24">
+            <div class="grid md:grid-cols-2 gap-10 items-center fade-in">
+                <div class="md:order-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-accent-50 flex items-center justify-center"><i class="fa-solid fa-scale-balanced text-accent-500"></i></div>
+                        <span class="text-5xl font-display font-bold text-neutral-200">02</span>
+                    </div>
+                    <h3 class="text-xl font-display font-bold text-neutral-900 mb-3">Advokasi & Kebijakan Publik</h3>
+                    <p class="text-neutral-600 leading-relaxed mb-4">Melalui keterbukaan informasi, YPMD-IRJA berhasil mendorong perubahan kebijakan strategis yang melindungi hak ulayat dan kelestarian alam Papua dari eksploitasi skala besar.</p>
+                    <ul class="space-y-1.5">
+                        @foreach ([
+                            'Pembatalan Scat Paper (Kertas Tisu) dari kayu Mus di Papua Selatan',
+                            'Penghentian Mega Proyek Bendungan Mamberamo demi perlindungan lingkungan',
+                            'Perubahan tata kelola tanah pembangunan & program transmigrasi',
+                            'Regulasi pemanfaatan sumber daya sungai (produk kulit buaya Mamberamo)'
+                        ] as $p)
+                        <li class="flex items-start gap-2 text-sm text-neutral-600"><i class="fa-solid fa-check text-accent-500 mt-0.5 text-xs"></i><span>{{ $p }}</span></li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div class="h-72 bg-accent-50 rounded-lg shadow-card flex flex-col items-center justify-center gap-4 md:order-1">
+                    <img src="{{ asset('img/bidang-kerja/YPMD-IRJA, Akses Pasar.png') }}" />
+                </div>
+            </div>
+            <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 fade-in">
+                <div class="bg-white border border-neutral-100 p-5 text-center shadow-card">
+                    <div class="text-lg font-display font-bold text-accent-500">Mamberamo</div>
+                    <div class="text-xs text-neutral-500 mt-1 uppercase tracking-wider">Proyek Bendungan Dibatalkan</div>
+                </div>
+                <div class="bg-white border border-neutral-100 p-5 text-center shadow-card">
+                    <div class="text-lg font-display font-bold text-accent-500">Kayu Mus</div>
+                    <div class="text-xs text-neutral-500 mt-1 uppercase tracking-wider">Penyelamatan Hutan Selatan</div>
+                </div>
+                <div class="bg-white border border-neutral-100 p-5 text-center shadow-card">
+                    <div class="text-lg font-display font-bold text-primary-600">Tanah Ulayat</div>
+                    <div class="text-xs text-neutral-500 mt-1 uppercase tracking-wider">Perubahan Tata Kelola</div>
+                </div>
+                <div class="bg-white border border-neutral-100 p-5 text-center shadow-card">
+                    <div class="text-lg font-display font-bold text-primary-600">Advokasi</div>
+                    <div class="text-xs text-neutral-500 mt-1 uppercase tracking-wider">Keterbukaan Informasi</div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="border-neutral-200">
+
+        {{-- 03. Promosi Ekonomi Rakyat - Kakao (Update: Poin 3) --}}
+        <div id="ekonomi-kakao" class="scroll-mt-24">
+            <div class="grid md:grid-cols-2 gap-10 items-center fade-in">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-amber-50 flex items-center justify-center"><i class="fa-solid fa-seedling text-amber-500"></i></div>
+                        <span class="text-5xl font-display font-bold text-neutral-200">03</span>
+                    </div>
+                    <h3 class="text-xl font-display font-bold text-neutral-900 mb-3">Promosi Ekonomi Rakyat (Kakao)</h3>
+                    <p class="text-neutral-600 leading-relaxed mb-4">Kolaborasi dengan ATJ Japan membuka pintu ekspor biji kakao Criollo. Program ini tidak hanya tentang perdagangan, tapi juga tentang hilirisasi produk dan edukasi lintas negara.</p>
+                    <ul class="space-y-1.5 mb-6">
+                        @foreach ([
+                            'Ekspor rutin kakao organik ke Jepang (15 ton per tahun)',
+                            'Kunjungan rutin konsumen dan mahasiswa Jepang ke kebun petani',
+                            'Hilirisasi biji kakao menjadi pasta, cokelat batang, dan es krim',
+                            'Kemandirian tata kelola melalui PT Kakao Kita Papua'
+                        ] as $p)
+                        <li class="flex items-start gap-2 text-sm text-neutral-600"><i class="fa-solid fa-check text-amber-500 mt-0.5 text-xs"></i><span>{{ $p }}</span></li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div class="h-72 bg-amber-50 rounded-lg shadow-card flex flex-col items-center justify-center gap-4">
+                    <img src="{{ asset('img/bidang-kerja/YPMD-IRJA, Penguatan Usaha & Pelatihan.png') }}" />
+                </div>
+            </div>
+            <div class="mt-12 grid md:grid-cols-2 gap-8 fade-in">
+                <div class="bg-white border border-neutral-100 p-8 shadow-card">
+                    <h4 class="font-display font-bold text-neutral-900 mb-2">Hilirisasi & Industri</h4>
+                    <p class="text-neutral-600 text-sm leading-relaxed">Transformasi produk dari biji mentah menjadi pasta dan cokelat batang siap konsumsi, kini dikelola secara profesional oleh PT Kakao Kita Papua.</p>
+                </div>
+                <div class="bg-white border border-neutral-100 p-8 shadow-card">
+                    <h4 class="font-display font-bold text-neutral-900 mb-2">Pasar Internasional</h4>
+                    <p class="text-neutral-600 text-sm leading-relaxed">Permintaan pasar Jepang mencapai 30 ton per tahun, memotivasi petani untuk meningkatkan produktivitas kakao organik secara konsisten.</p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="border-neutral-200">
+
+        {{-- 04. Clean Water & Kesehatan Lingkungan (Update: Poin 4) --}}
+        <div id="air-bersih" class="scroll-mt-24">
+            <div class="grid md:grid-cols-2 gap-10 items-center fade-in">
+                <div class="md:order-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-sky-50 flex items-center justify-center"><i class="fa-solid fa-droplet text-sky-500"></i></div>
+                        <span class="text-5xl font-display font-bold text-neutral-200">04</span>
+                    </div>
+                    <h3 class="text-xl font-display font-bold text-neutral-900 mb-3">Clean Water & Kesehatan Lingkungan</h3>
+                    <p class="text-neutral-600 leading-relaxed mb-4">Program berbagi tanggung jawab antara YPMD-IRJA (tenaga ahli & material industri) dan masyarakat (material lokal & tenaga kerja) untuk menjamin keberlanjutan akses air bersih.</p>
+                    <ul class="space-y-1.5 mb-6">
+                        @foreach ([
+                            '98 Jaringan air bersih terbangun di 98 titik (1984 - 2021)',
+                            'Cakupan luas: Papua, Maluku, Sulawesi, hingga Timor-Timur',
+                            'Model pengelolaan pasca-proyek oleh masyarakat secara mandiri',
+                            'Pendampingan teknis penyambungan pipa dan tenaga ahli'
+                        ] as $p)
+                        <li class="flex items-start gap-2 text-sm text-neutral-600"><i class="fa-solid fa-check text-sky-500 mt-0.5 text-xs"></i><span>{{ $p }}</span></li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div class="h-72 bg-sky-50 rounded-lg shadow-card flex flex-col items-center justify-center gap-4 md:order-1">
+                    <img src="{{ asset('img/bidang-kerja/YPMD-IRJA, Kesehatan Lingkungan, Clean Water Supply.png') }}" />
+                </div>
+            </div>
+            <div class="mt-10 grid sm:grid-cols-3 gap-6 fade-in">
+                <div class="bg-white border border-neutral-100 p-6 shadow-card">
+                    <div class="text-2xl font-display font-bold text-sky-500">98</div>
+                    <h4 class="font-display font-bold text-neutral-900 mb-1">Jaringan Air</h4>
+                    <p class="text-neutral-500 text-sm">Titik suplai air bersih yang telah dibangun dan berfungsi.</p>
+                </div>
+                <div class="bg-white border border-neutral-100 p-6 shadow-card">
+                    <div class="text-2xl font-display font-bold text-sky-500">4</div>
+                    <h4 class="font-display font-bold text-neutral-900 mb-1">Wilayah Besar</h4>
+                    <p class="text-neutral-500 text-sm">Papua, Maluku Tenggara, Sulawesi Tenggara, & Timor-Timur.</p>
+                </div>
+                <div class="bg-white border border-neutral-100 p-6 shadow-card">
+                    <div class="text-2xl font-display font-bold text-sky-500">1984</div>
+                    <h4 class="font-display font-bold text-neutral-900 mb-1">Sejak Dini</h4>
+                    <p class="text-neutral-500 text-sm">Komitmen jangka panjang terhadap kesehatan lingkungan desa.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
 
     {{-- CTA --}}
     <section class="bg-primary-600 py-16">
