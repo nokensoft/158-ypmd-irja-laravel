@@ -1,6 +1,6 @@
 @extends('layouts.visitor')
-@section('title', 'KDK')
-@section('seo-title', 'Kabar Dari Kampung (KDK) — Buletin YPMD-IRJA')
+@section('title', 'KdK')
+@section('seo-title', 'Kabar Dari Kampung (KdK) — Buletin YPMD-IRJA')
 @section('seo-description', 'Arsip buletin Kabar Dari Kampung, media alternatif masyarakat desa di Irian Jaya / Papua sekarang sejak 1982.')
 
 @section('json-ld')
@@ -29,18 +29,18 @@
                         <p class="text-xs font-semibold tracking-widest uppercase text-primary-500 mb-2">
                             <i class="fa-solid fa-book-open mr-2"></i>Media Alternatif Papua
                         </p>
-                        <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900 mb-4">Apa itu KDK?</h2>
+                        <h2 class="text-2xl md:text-3xl font-display font-bold text-neutral-900 mb-4">Apa itu KdK?</h2>
                         <p class="text-neutral-600 leading-relaxed mb-4 text-lg">
-                            <em>Kabar Dari Kampung</em> (KDK) adalah buletin pionir yang lahir pada tahun 1982. Berbeda dengan media arus utama di Jayapura, KDK berfokus sepenuhnya pada suara masyarakat dari pelosok kampung di Tanah Papua.
+                            <em>Kabar Dari Kampung</em> (KdK) adalah buletin pionir yang lahir pada tahun 1982. Berbeda dengan media arus utama di Jayapura, KDK berfokus sepenuhnya pada suara masyarakat dari pelosok kampung di Tanah Papua.
                         </p>
                         <p class="text-neutral-600 leading-relaxed mb-6 text-lg">
-                            KDK hadir sebagai instrumen advokasi untuk mendokumentasikan isu krusial: mulai dari hak tanah adat, pengorganisasian komunitas, hingga dampak sosial-ekonomi akibat eksploitasi sumber daya alam.
+                            KdK hadir sebagai instrumen advokasi untuk mendokumentasikan isu krusial: mulai dari hak tanah adat, pengorganisasian komunitas, hingga dampak sosial-ekonomi akibat eksploitasi sumber daya alam.
                         </p>
 
                         {{-- Accordion Sejarah --}}
                         <div x-data="{ open: false }" class="border border-neutral-100 rounded-lg overflow-hidden">
                             <button @click="open = !open" class="w-full flex items-center justify-between p-4 bg-neutral-50 hover:bg-neutral-100 transition-colors">
-                                <span class="font-display font-bold text-neutral-900 text-lg">Baca Sejarah: KDK Hadir Memberikan Pencerahan</span>
+                                <span class="font-display font-bold text-neutral-900 text-lg">Baca Sejarah: KdK Hadir Memberikan Pencerahan</span>
                                 <i class="fa-solid" :class="open ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
                             </button>
                             <div x-show="open" x-transition class="p-4 text-lg text-neutral-600 leading-relaxed space-y-4 border-t border-neutral-100">
@@ -54,7 +54,7 @@
                                     Di bawah kepemimpinan <strong>George Junus Aditjondro</strong> (mantan wartawan TEMPO), lahirlah Buletin 'Kabar Dari Kampung'. Dinamakan demikian karena kontennya murni bersumber dari realita di kampung-kampung, mengangkat isu eksploitasi hutan, tanah ulayat, hingga penggalian tambang.
                                 </p>
                                 <p>
-                                    Berkat akurasi data dan gaya jurnalistiknya yang kuat, KDK mendapatkan pengakuan internasional melalui <strong>ISSN (0215-4838)</strong> dari Paris dan LIPI, dengan tujuan utama mempengaruhi kebijakan agar lebih berpihak pada masyarakat Papua. (JH)
+                                    Berkat akurasi data dan gaya jurnalistiknya yang kuat, KdK mendapatkan pengakuan internasional melalui <strong>ISSN (0215-4838)</strong> dari Paris dan LIPI, dengan tujuan utama mempengaruhi kebijakan agar lebih berpihak pada masyarakat Papua. (JH)
                                 </p>
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                 {{-- Main Content --}}
                 <div class="lg:col-span-3">
                     <div class="mb-10 fade-in">
-                        <h3 class="text-xl font-display font-bold text-neutral-900 mb-2">Arsip Edisi KDK</h3>
+                        <h3 class="text-xl font-display font-bold text-neutral-900 mb-2">Arsip Edisi KdK</h3>
                         <p class="text-neutral-500">Unduh edisi-edisi buletin Kabar Dari Kampung dalam format PDF.</p>
                     </div>
 

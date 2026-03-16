@@ -40,13 +40,13 @@
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 @foreach ([
                     ['nama' => 'THD Asia Foundation', 'desc' => 'Pembiayaan sistem informasi dan penelitian berkaitan dengan dampak pembangunan.'],
-                    ['nama' => 'Pemerintah Kanada', 'desc' => 'Pengembangan buletin KDK (Kabar Dari Kampung).'],
+                    ['nama' => 'Pemerintah Kanada', 'desc' => 'Pengembangan buletin KdK (Kabar Dari Kampung).'],
                     ['nama' => 'Block Grant Canada Fund', 'desc' => 'Mendukung penguatan kapasitas LSM di Papua.'],
                     ['nama' => 'ICCO Cooperation', 'desc' => 'Penguatan program pengembangan ekonomi dan pengadaan fasilitas air bersih.'],
                     ['nama' => 'CEBEMO', 'desc' => 'Penguatan program ekonomi kerakyatan.'],
                     ['nama' => 'Hivos', 'desc' => 'Penguatan akses pasar produk nelayan.'],
                     ['nama' => 'PKN (Peleburan ICCO)', 'desc' => 'Pemberdayaan ekonomi kerakyatan.'],
-                    ['nama' => 'Brot für die Welt (BfdW)', 'desc' => 'Pengembangan pusat belajar petani di Maribu, pengembangan KDK, dan operasional lembaga.'],
+                    ['nama' => 'Brot für die Welt (BfdW)', 'desc' => 'Pengembangan pusat belajar petani di Maribu, pengembangan KdK, dan operasional lembaga.'],
                     ['nama' => 'USAID', 'desc' => 'Inventarisasi dampak pembangunan daerah.'],
                     ['nama' => 'SoFEI', 'desc' => 'Penguatan kapasitas Masyarakat Adat (Indigenous People).'],
                     ['nama' => 'Konsulat Jepang di Makassar', 'desc' => 'Pengadaan peralatan pertanian, kendaraan angkutan pasar, dan pembangunan kios.'],

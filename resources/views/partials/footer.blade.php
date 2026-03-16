@@ -42,7 +42,7 @@
                 <li><a href="{{ route('profil') }}" class="hover:text-white transition-colors">{{ __('Profil Lembaga') }}</a></li>
                 <li><a href="{{ route('sejarah') }}" class="hover:text-white transition-colors">{{ __('Sejarah Singkat') }}</a></li>
                 <li><a href="{{ route('program') }}" class="hover:text-white transition-colors">{{ __('Program') }}</a></li>
-                <li><a href="{{ route('kdk') }}" class="hover:text-white transition-colors">{{ __('Buletin KDK') }}</a></li>
+                <li><a href="{{ route('kdk') }}" class="hover:text-white transition-colors">{{ __('Buletin KdK') }}</a></li>
                 <li><a href="{{ route('berita') }}" class="hover:text-white transition-colors">{{ __('Papua Today') }}</a></li>
             </ul>
         </div>

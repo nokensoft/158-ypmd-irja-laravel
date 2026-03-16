@@ -104,7 +104,7 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
         <div class="max-w-7xl mx-auto px-6">
             <div class="mb-12 fade-in">
                 <span class="text-xs font-semibold tracking-widest uppercase text-primary-500"><i class="fa-solid fa-newspaper mr-2"></i>Buletin</span>
-                <h2 class="text-2xl md:text-4xl font-display font-bold text-neutral-900 mt-2">Arsip KDK</h2>
+                <h2 class="text-2xl md:text-4xl font-display font-bold text-neutral-900 mt-2">Arsip KdK</h2>
                 <p class="text-neutral-500 text-lg mt-3 max-w-xl">Dokumentasi berbagai seri buletin <em>Kabar Dari Kampung</em> &mdash; media alternatif masyarakat desa di Irian Jaya / Papua sekarang sejak 1982.</p>
             </div>
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">

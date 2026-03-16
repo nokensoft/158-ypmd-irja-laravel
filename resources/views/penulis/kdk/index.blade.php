@@ -1,9 +1,9 @@
 @extends('layouts.dashboard')
-@section('title', 'KDK — Kabar Dari Kampung')
-@section('page-title', 'KDK — Kabar Dari Kampung')
+@section('title', 'KdK — Kabar Dari Kampung')
+@section('page-title', 'KdK — Kabar Dari Kampung')
 @section('content')
     @include('partials.crud-index', [
-        'title' => 'Edisi KDK',
+        'title' => 'Edisi KdK',
         'createRoute' => route('penulis.kdk.create'),
         'trashedRoute' => route('penulis.kdk.index'),
         'columns' => ['Cover', 'Edisi', 'Judul', 'Tanggal Terbit', 'File PDF', 'Dibaca', 'Unduhan'],

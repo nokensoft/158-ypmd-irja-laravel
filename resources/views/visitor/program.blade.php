@@ -42,7 +42,7 @@
                         </div>
                         <h3 class="font-display font-bold text-neutral-900 mb-4 group-hover:text-green-600 transition-colors">Informasi</h3>
                         <p class="text-neutral-500 text-sm leading-relaxed">
-                            Penyebaran informasi pembangunan masyarakat melalui Buletin Kabar Dari Kampung (KDK) sejak tahun 1982 (edisi cetak sampai tahun 2000), sebagai media alternatif, advokasi, dan promosi usaha rakyat.
+                            Penyebaran informasi pembangunan masyarakat melalui Buletin Kabar Dari Kampung (KdK) sejak tahun 1982 (edisi cetak sampai tahun 2000), sebagai media alternatif, advokasi, dan promosi usaha rakyat.
                         </p>
                     </div>
                 </div>

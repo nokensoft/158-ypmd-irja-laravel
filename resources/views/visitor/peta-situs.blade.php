@@ -51,7 +51,7 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
                         <li><a href="{{ route('bidang-kerja') }}" class="text-neutral-700 hover:text-primary-600 transition"><i class="fa-solid fa-angle-right text-neutral-300 mr-2 text-xs"></i>Bidang Kerja</a></li>
                         <li><a href="{{ route('mitra') }}" class="text-neutral-700 hover:text-primary-600 transition"><i class="fa-solid fa-angle-right text-neutral-300 mr-2 text-xs"></i>Mitra Kerja</a></li>
                         <li><a href="{{ route('program') }}" class="text-neutral-700 hover:text-primary-600 transition"><i class="fa-solid fa-angle-right text-neutral-300 mr-2 text-xs"></i>Program</a></li>
-                        <li><a href="{{ route('kdk') }}" class="text-neutral-700 hover:text-primary-600 transition"><i class="fa-solid fa-angle-right text-neutral-300 mr-2 text-xs"></i>Buletin KDK</a></li>
+                        <li><a href="{{ route('KdK') }}" class="text-neutral-700 hover:text-primary-600 transition"><i class="fa-solid fa-angle-right text-neutral-300 mr-2 text-xs"></i>Buletin KdK</a></li>
                         <li><a href="{{ route('berita') }}" class="text-neutral-700 hover:text-primary-600 transition"><i class="fa-solid fa-angle-right text-neutral-300 mr-2 text-xs"></i>Papua Today (Berita)</a></li>
                         <li><a href="{{ route('galeri') }}" class="text-neutral-700 hover:text-primary-600 transition"><i class="fa-solid fa-angle-right text-neutral-300 mr-2 text-xs"></i>Galeri</a></li>
                         <li><a href="{{ route('donasi') }}" class="text-neutral-700 hover:text-primary-600 transition"><i class="fa-solid fa-angle-right text-neutral-300 mr-2 text-xs"></i>Donasi</a></li>
@@ -139,20 +139,20 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
                     </ul>
                 </div>
 
-                {{-- KDK Terbaru --}}
+                {{-- KdK Terbaru --}}
                 <div class="bg-neutral-50 border border-neutral-100 p-6">
                     <h2 class="text-lg font-display font-bold text-neutral-900 mb-4">
-                        <i class="fa-solid fa-book-open text-primary-500 mr-2 text-sm"></i>Buletin KDK
+                        <i class="fa-solid fa-book-open text-primary-500 mr-2 text-sm"></i>Buletin KdK
                     </h2>
                     <ul class="space-y-2 text-sm">
-                        @forelse ($kdkTerbaru as $k)
+                        @forelse ($KdKTerbaru as $k)
                             <li>
                                 <a href="{{ $k->pdf_url ?? '#' }}" class="text-neutral-700 hover:text-primary-600 transition" {{ $k->pdf_url ? 'target=_blank rel=noopener' : '' }}>
                                     <i class="fa-solid fa-angle-right text-neutral-300 mr-2 text-xs"></i>{{ $k->judul }}
                                 </a>
                             </li>
                         @empty
-                            <li class="text-neutral-400 text-sm">Belum ada buletin KDK.</li>
+                            <li class="text-neutral-400 text-sm">Belum ada buletin KdK.</li>
                         @endforelse
                     </ul>
                 </div>

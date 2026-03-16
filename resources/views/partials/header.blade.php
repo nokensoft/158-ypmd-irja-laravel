@@ -56,7 +56,7 @@
             </li>
 
             <li><a href="{{ route('program') }}" class="nav-link text-lg font-medium transition-colors {{ request()->routeIs('program') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Program</a></li>
-            <li><a href="{{ route('kdk') }}" class="nav-link text-lg font-medium transition-colors {{ request()->routeIs('kdk') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Buletin KDK</a></li>
+            <li><a href="{{ route('kdk') }}" class="nav-link text-lg font-medium transition-colors {{ request()->routeIs('KdK') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Buletin KdK</a></li>
             <li><a href="{{ route('berita') }}" class="nav-link text-lg font-medium transition-colors {{ request()->routeIs('berita*') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Papua Today</a></li>
             <li><a href="{{ route('donasi') }}" class="nav-link text-lg font-medium transition-colors {{ request()->routeIs('donasi') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Donasi</a></li>
             <li><a href="{{ route('kontak') }}" class="nav-link text-lg font-medium transition-colors {{ request()->routeIs('kontak') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Kontak</a></li>
@@ -104,7 +104,7 @@
                 </div>
             </li>
             <li><a href="{{ route('program') }}" class="block px-6 py-3 text-lg {{ request()->routeIs('program') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">Program</a></li>
-            <li><a href="{{ route('kdk') }}" class="block px-6 py-3 text-lg {{ request()->routeIs('kdk') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">Buletin KDK</a></li>
+            <li><a href="{{ route('kdk') }}" class="block px-6 py-3 text-lg {{ request()->routeIs('KdK') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">Buletin KdK</a></li>
             <li><a href="{{ route('berita') }}" class="block px-6 py-3 text-lg {{ request()->routeIs('berita*') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">Papua Terkini</a></li>
             <li><a href="{{ route('donasi') }}" class="block px-6 py-3 text-lg {{ request()->routeIs('donasi') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">Donasi</a></li>
             <li><a href="{{ route('kontak') }}" class="block px-6 py-3 text-lg {{ request()->routeIs('kontak') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">Kontak</a></li>
