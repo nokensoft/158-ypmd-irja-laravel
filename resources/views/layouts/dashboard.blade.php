@@ -196,7 +196,7 @@
                     </div>
                     <div>
                         <p class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3 px-3">KdK</p>
-                        <a href="{{ route('penulis.KdK.index') }}"
+                        <a href="{{ route('penulis.kdk.index') }}"
                            class="flex items-center space-x-3 px-3 py-3 text-base font-medium transition no-round {{ request()->routeIs('penulis.KdK.*') ? 'bg-primary text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white' }}">
                             <i class="fas fa-book-open w-6 text-center"></i>
                             <span>Edisi KdK</span>
