@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PengaturanSitusController;
 use App\Http\Controllers\Admin\AktivitasLoginController;
 use App\Http\Controllers\Admin\PenggunaController;
 use App\Http\Controllers\Admin\BackupDatabaseController;
+use App\Http\Controllers\Admin\BackupStorageController;
 use App\Http\Controllers\Admin\HalamanController;
 use App\Http\Controllers\Penulis\AktivitasLoginController as PenulisAktivitasLoginController;
 use App\Http\Controllers\Penulis\DashboardController as PenulisDashboardController;
@@ -102,6 +103,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth.custom', 'role:admin_m
     Route::get('/backup-database/download/{filename}', [BackupDatabaseController::class, 'download'])->name('backup-database.download');
     Route::delete('/backup-database/{filename}', [BackupDatabaseController::class, 'destroy'])->name('backup-database.destroy');
     Route::post('/backup-database/restore', [BackupDatabaseController::class, 'restore'])->name('backup-database.restore');
+
+    // Backup Storage
+    Route::get('/backup-storage', [BackupStorageController::class, 'index'])->name('backup-storage');
+    Route::post('/backup-storage/create', [BackupStorageController::class, 'create'])->name('backup-storage.create');
+    Route::get('/backup-storage/download/{filename}', [BackupStorageController::class, 'download'])->name('backup-storage.download');
+    Route::delete('/backup-storage/{filename}', [BackupStorageController::class, 'destroy'])->name('backup-storage.destroy');
+    Route::post('/backup-storage/restore', [BackupStorageController::class, 'restore'])->name('backup-storage.restore');
 
     // Pengguna CRUD
     Route::resource('pengguna', PenggunaController::class)->except(['show']);

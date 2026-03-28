@@ -1,0 +1,4 @@
+- [ ] Check the status of `public/storage` and `storage/app/public`.
+- [ ] Remove the problematic `public/storage` link/directory.
+- [ ] Recreate the symbolic link using `php artisan storage:link`.
+- [ ] Verify the fix by running `npm run dev`.
