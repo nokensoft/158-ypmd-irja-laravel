@@ -65,9 +65,13 @@ class BackupDatabaseController extends Controller
             escapeshellarg($filePath)
         );
 
-        $output = [];
-        $resultCode = 0;
-        \exec($command . ' 2>&1', $output, $resultCode);
+        $resultCode = 1;
+
+        if (function_exists('exec')) {
+            $output = [];
+            $resultCode = 0;
+            \exec($command . ' 2>&1', $output, $resultCode);
+        }
 
         if ($resultCode !== 0 || !file_exists($filePath) || filesize($filePath) === 0) {
             // Fallback: pure PHP dump
@@ -253,6 +257,13 @@ class BackupDatabaseController extends Controller
             escapeshellarg($dbName),
             escapeshellarg($sqlFilePath)
         );
+
+        if (!function_exists('exec')) {
+            return [
+                'success' => false,
+                'error' => 'exec() is disabled on this server.',
+            ];
+        }
 
         $output = [];
         $resultCode = 0;
