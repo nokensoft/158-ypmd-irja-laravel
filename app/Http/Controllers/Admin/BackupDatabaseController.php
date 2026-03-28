@@ -67,7 +67,7 @@ class BackupDatabaseController extends Controller
 
         $output = [];
         $resultCode = 0;
-        exec($command . ' 2>&1', $output, $resultCode);
+        \exec($command . ' 2>&1', $output, $resultCode);
 
         if ($resultCode !== 0 || !file_exists($filePath) || filesize($filePath) === 0) {
             // Fallback: pure PHP dump
@@ -256,7 +256,7 @@ class BackupDatabaseController extends Controller
 
         $output = [];
         $resultCode = 0;
-        exec($command . ' 2>&1', $output, $resultCode);
+        \exec($command . ' 2>&1', $output, $resultCode);
 
         return [
             'success' => $resultCode === 0,

@@ -51,6 +51,11 @@ class BackupStorageController extends Controller
         $fileCount = 0;
         foreach ($files as $file) {
             if (!$file->isDir()) {
+                // Skip dotfiles seperti .gitignore
+                if (str_starts_with($file->getFilename(), '.')) {
+                    continue;
+                }
+
                 $filePath = $file->getRealPath();
                 $relativePath = substr($filePath, strlen(realpath($sourcePath)) + 1);
                 // Normalize path separators for ZIP
@@ -127,6 +132,11 @@ class BackupStorageController extends Controller
 
             // Skip direktori
             if (str_ends_with($entryName, '/')) {
+                continue;
+            }
+
+            // Skip dotfiles seperti .gitignore
+            if (str_starts_with(basename($entryName), '.')) {
                 continue;
             }
 
