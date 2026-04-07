@@ -65,21 +65,30 @@ composer dev       # Jalankan server, queue, logs, dan vite secara bersamaan
 
 ## 4. Auto Deploy (GitHub Webhook)
 
-Sistem auto-deploy otomatis memperbarui server production ketika ada push/merge ke branch `main` melalui GitHub Webhook.
+Sistem auto-deploy otomatis memperbarui server production ketika ada push/merge ke branch `main` melalui GitHub Webhook. Selama proses deploy, situs otomatis masuk **maintenance mode** dan database di-**backup** terlebih dahulu.
 
 ### Alur Kerja
 
 ```
-Merge PR ke main → GitHub kirim POST ke /deploy/webhook
-→ Laravel validasi signature → Jalankan deploy.sh di background
-→ git pull → composer install → migrate → cache clear
+Merge PR ke main → GitHub kirim POST ke https://ypmd-irja.org/deploy.php
+→ Validasi signature → Maintenance mode ON → Backup database SQL
+→ git pull → composer install → migrate → cache rebuild
+→ Maintenance mode OFF
 ```
 
 ### Komponen
 
-- `deploy.sh` — Shell script yang menjalankan proses deploy (pull, install, migrate, cache)
-- `DeployController` — Controller Laravel untuk menerima dan memvalidasi webhook
-- Route `POST /deploy/webhook` — Endpoint webhook (excluded dari CSRF)
+- `public/deploy.php` — Standalone webhook handler (endpoint utama)
+- `deploy.sh` — Shell script alternatif untuk deploy manual dari server
+- `DeployController` — Controller Laravel (endpoint alternatif via `/deploy/webhook`)
+
+### Fitur Deploy
+
+- **Maintenance mode** otomatis selama proses deploy (bypass secret: `bypass-deploy-2026`)
+- **Backup database SQL** otomatis sebelum deploy (MySQL & SQLite)
+- **Rotasi backup** — hanya menyimpan 5 backup terakhir
+- **Rollback otomatis** — jika git pull gagal, maintenance mode langsung dinonaktifkan
+- **Log lengkap** setiap langkah deploy
 
 ### Setup di Server
 
@@ -95,16 +104,11 @@ Merge PR ke main → GitHub kirim POST ke /deploy/webhook
    DEPLOY_SECRET=hasil_random_key
    ```
 
-3. **Set permission deploy script:**
+3. **Set permission:**
 
    ```bash
    chmod +x deploy.sh
-   ```
-
-4. **Pastikan web server user punya akses git:**
-
-   ```bash
-   # Contoh untuk nginx/apache
+   # Pastikan web server user punya akses git
    sudo chown -R www-data:www-data /path/to/project
    ```
 
@@ -112,16 +116,18 @@ Merge PR ke main → GitHub kirim POST ke /deploy/webhook
 
 1. Buka repo → **Settings** → **Webhooks** → **Add webhook**
 2. Isi form:
-   - **Payload URL:** `https://domain-anda.com/deploy/webhook`
+   - **Payload URL:** `https://ypmd-irja.org/deploy.php`
    - **Content type:** `application/json`
    - **Secret:** isi dengan secret key yang sama dengan `DEPLOY_SECRET` di `.env`
    - **Events:** pilih **Just the push event**
    - **Active:** ✅
 3. Klik **Add webhook**
 
-### Log Deploy
+### Log & Backup
 
-Log deploy tersimpan di `storage/logs/deploy.log`.
+- **Log deploy:** `storage/logs/deploy.log`
+- **Backup database:** `storage/app/backups/`
+- **Akses saat maintenance:** `https://ypmd-irja.org/bypass-deploy-2026`
 
 ### Penulis (`/penulis`)
 
