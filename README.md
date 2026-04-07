@@ -61,6 +61,68 @@ composer dev       # Jalankan server, queue, logs, dan vite secara bersamaan
 - **Profil** — Edit profil akun (nama, email, password, nomor HP, keterangan singkat)
 - **Dokumentasi** — Dokumentasi teknis proyek, download PDF, copy informasi
 
+---
+
+## 4. Auto Deploy (GitHub Webhook)
+
+Sistem auto-deploy otomatis memperbarui server production ketika ada push/merge ke branch `main` melalui GitHub Webhook.
+
+### Alur Kerja
+
+```
+Merge PR ke main → GitHub kirim POST ke /deploy/webhook
+→ Laravel validasi signature → Jalankan deploy.sh di background
+→ git pull → composer install → migrate → cache clear
+```
+
+### Komponen
+
+- `deploy.sh` — Shell script yang menjalankan proses deploy (pull, install, migrate, cache)
+- `DeployController` — Controller Laravel untuk menerima dan memvalidasi webhook
+- Route `POST /deploy/webhook` — Endpoint webhook (excluded dari CSRF)
+
+### Setup di Server
+
+1. **Generate secret key:**
+
+   ```bash
+   openssl rand -hex 32
+   ```
+
+2. **Tambahkan ke `.env` server:**
+
+   ```env
+   DEPLOY_SECRET=hasil_random_key
+   ```
+
+3. **Set permission deploy script:**
+
+   ```bash
+   chmod +x deploy.sh
+   ```
+
+4. **Pastikan web server user punya akses git:**
+
+   ```bash
+   # Contoh untuk nginx/apache
+   sudo chown -R www-data:www-data /path/to/project
+   ```
+
+### Setup di GitHub
+
+1. Buka repo → **Settings** → **Webhooks** → **Add webhook**
+2. Isi form:
+   - **Payload URL:** `https://domain-anda.com/deploy/webhook`
+   - **Content type:** `application/json`
+   - **Secret:** isi dengan secret key yang sama dengan `DEPLOY_SECRET` di `.env`
+   - **Events:** pilih **Just the push event**
+   - **Active:** ✅
+3. Klik **Add webhook**
+
+### Log Deploy
+
+Log deploy tersimpan di `storage/logs/deploy.log`.
+
 ### Penulis (`/penulis`)
 
 - **Dashboard** — Ringkasan konten

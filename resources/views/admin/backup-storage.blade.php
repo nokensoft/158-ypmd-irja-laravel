@@ -57,6 +57,25 @@
         </div>
     </div>
 
+    {{-- Buat Storage Link --}}
+    <div class="bg-white shadow-sm p-6 mb-6">
+        <h3 class="text-lg font-extrabold uppercase text-dark tracking-wide mb-6 pb-3 border-b-2 border-primary">
+            <i class="fas fa-link mr-2 text-primary"></i> Storage Link (Symlink)
+        </h3>
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+                <p class="text-base text-gray-500">Buat symlink <code class="bg-gray-100 px-2 py-0.5 text-xs font-mono">public/storage</code> → <code class="bg-gray-100 px-2 py-0.5 text-xs font-mono">storage/app/public</code> agar file media dapat diakses di website.</p>
+                <p class="text-sm text-gray-400 mt-1">Jalankan ini jika gambar/file tidak tampil setelah restore atau deploy ulang.</p>
+            </div>
+            <form action="{{ route('admin.backup-storage.storage-link') }}" method="POST">
+                @csrf
+                <button type="submit" class="bg-primary text-white px-6 py-3 font-bold text-base hover:bg-red-700 transition no-round whitespace-nowrap">
+                    <i class="fas fa-link mr-2"></i> Buat Storage Link
+                </button>
+            </form>
+        </div>
+    </div>
+
     {{-- Riwayat Backup --}}
     <div class="bg-white shadow-sm p-6">
         <h3 class="text-lg font-extrabold uppercase text-dark tracking-wide mb-6 pb-3 border-b-2 border-primary">

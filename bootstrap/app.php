@@ -17,6 +17,11 @@ return Application::configure(basePath: dirname(__DIR__))
             'guest.custom' => \App\Http\Middleware\GuestMiddleware::class,
             'track.visitor' => \App\Http\Middleware\TrackVisitorMiddleware::class,
         ]);
+
+        // Exclude webhook route from CSRF verification
+        $middleware->validateCsrfTokens(except: [
+            'deploy/webhook',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
