@@ -4,16 +4,11 @@
 @section('seo-description', 'Daftar mitra kerja dan sponsor yang telah mendukung program pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang bersama YPMD-IRJA.')
 
 @section('content')
-    <div class="bg-primary-600 py-16">
-        <div class="max-w-7xl mx-auto px-6">
-            <span class="text-primary-200 text-xs uppercase tracking-widest">
-                <a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> ›
-                <a href="{{ route('profil') }}" class="hover:text-white">Tentang</a> › Mitra Kerja
-            </span>
-            <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">Mitra Kerja & Sponsor</h1>
-            <p class="text-primary-200 mt-2 text-lg">Lembaga dan organisasi yang telah bermitra bersama YPMD-IRJA</p>
-        </div>
-    </div>
+    @include('partials.section-header', [
+        'headerTitle' => 'Mitra Kerja & Sponsor',
+        'headerSubtitle' => 'Lembaga dan organisasi yang telah bermitra bersama YPMD-IRJA',
+        'headerBreadcrumb' => ' › <a href="' . route('profil') . '" class="hover:text-white">Tentang</a> › Mitra Kerja',
+    ])
 
 
     

@@ -16,8 +16,19 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
 @section('content')
 
     {{-- HERO --}}
-    <section class="bg-white">
-        <div class="max-w-7xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center">
+    <section class="bg-white relative overflow-hidden">
+        {{-- Polygonal background (light theme) --}}
+        <svg class="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none" viewBox="0 0 1440 560" xmlns="http://www.w3.org/2000/svg" style="z-index:0">
+            <polygon fill="#f0f7f2" points="0,560 180,340 380,480 580,200 780,380 980,120 1180,300 1440,160 1440,560"/>
+            <polygon fill="#d9ede0" points="0,560 120,420 320,520 520,320 720,460 920,240 1120,400 1320,280 1440,350 1440,560" style="opacity:.35"/>
+            <polygon fill="#f0f7f2" points="0,560 80,480 280,540 480,400 680,500 880,340 1080,460 1280,380 1440,440 1440,560" style="opacity:.5"/>
+        </svg>
+        <div class="absolute inset-0 pointer-events-none" style="z-index:0;overflow:hidden">
+            <div style="position:absolute;top:-30%;right:-8%;width:50%;height:160%;background:rgba(45,128,87,.03);transform:rotate(-12deg)"></div>
+            <div style="position:absolute;bottom:-25%;left:-6%;width:35%;height:130%;background:rgba(45,128,87,.02);transform:rotate(18deg)"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center relative z-10">
             <div class="fade-in">
                 <span class="inline-block text-xs font-semibold tracking-widest uppercase text-primary-500 mb-4">
                     <i class="fa-solid fa-leaf mr-2"></i>Pionir Pemberdayaan Masyarakat Desa di Irian Jaya / Papua Sekarang &middot; Sejak 1984 &middot; Jayapura, Papua
@@ -58,6 +69,9 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
         </div>
     </section>
 
+    {{-- Motif Papua border (centered between sections) --}}
+    <div class="w-full relative z-20" style="height:35px;margin-top:-17px;margin-bottom:-18px;background:url('{{ asset('img/dekorasi/motif-papua.png') }}') repeat-x center/auto 100%"></div>
+
     {{-- Papua Today / Berita --}}
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-6">
@@ -68,23 +82,20 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
             </div>
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse ($beritaTerbaru as $b)
-                    <article class="shadow-card card-hover bg-white border border-neutral-100 fade-in">
-                        <img src="{{ $b->gambar }}" alt="{{ $b->judul }}" class="w-full aspect-[5/4] object-cover"/>
-                        <div class="p-5">
-                            <div class="flex items-center gap-3 text-xs text-neutral-400 mb-2">
-                                <span>{{ $b->kategori?->nama ?? 'Berita' }}</span>
-                                <span>&bull;</span>
-                                <span>{{ $b->tanggal_terbit?->translatedFormat('d M Y') }}</span>
+                    <a href="{{ route('berita.detail', $b->slug) }}" class="block shadow-card card-hover bg-white border border-neutral-100 fade-in">
+                        <article>
+                            <img src="{{ $b->gambar }}" alt="{{ $b->judul }}" class="w-full aspect-[5/4] object-cover"/>
+                            <div class="p-5">
+                                <div class="text-xs text-neutral-400 mb-2">
+                                    <span>{{ $b->kategori?->nama ?? 'Berita' }}</span>
+                                </div>
+                                <h3 class="font-display font-bold text-neutral-900 mb-2 line-clamp-2">{{ $b->judul }}</h3>
+                                @if ($b->ringkasan)
+                                    <p class="text-neutral-500 text-sm leading-relaxed line-clamp-2">{{ $b->ringkasan }}</p>
+                                @endif
                             </div>
-                            <h3 class="font-display font-bold text-neutral-900 mb-2 line-clamp-2">{{ $b->judul }}</h3>
-                            @if ($b->ringkasan)
-                                <p class="text-neutral-500 text-sm leading-relaxed mb-3 line-clamp-2">{{ $b->ringkasan }}</p>
-                            @endif
-                            <a href="{{ route('berita.detail', $b->slug) }}" class="text-primary-600 text-sm font-semibold hover:text-primary-700">
-                                Baca Selengkapnya <i class="fa-solid fa-arrow-right text-xs ml-1"></i>
-                            </a>
-                        </div>
-                    </article>
+                        </article>
+                    </a>
                 @empty
                     <div class="col-span-full text-center py-12 text-neutral-400">
                         <p>Belum ada berita.</p>
@@ -100,14 +111,19 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
     </section>
 
     {{-- KDK Terbaru --}}
-    <section class="py-20 bg-neutral-50">
-        <div class="max-w-7xl mx-auto px-6">
+    <section class="py-20 bg-neutral-50 relative">
+        {{-- Noise/grain overlay --}}
+        <svg class="absolute inset-0 w-full h-full pointer-events-none" style="z-index:0;opacity:.4">
+            <filter id="grainKdk"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+            <rect width="100%" height="100%" filter="url(#grainKdk)"/>
+        </svg>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="mb-12 fade-in">
                 <span class="text-xs font-semibold tracking-widest uppercase text-primary-500"><i class="fa-solid fa-newspaper mr-2"></i>Buletin</span>
                 <h2 class="text-2xl md:text-4xl font-display font-bold text-neutral-900 mt-2">Arsip KdK</h2>
                 <p class="text-neutral-500 text-lg mt-3 max-w-xl">Dokumentasi berbagai seri buletin <em>Kabar Dari Kampung</em> &mdash; media alternatif masyarakat desa di Irian Jaya / Papua sekarang sejak 1982.</p>
             </div>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 @forelse ($kdkTerbaru as $k)
                     <x-kdk-card :kdk="$k" />
                 @empty
@@ -205,24 +221,56 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
     </section>
 
     {{-- Galeri --}}
-    <section class="py-20 bg-neutral-50">
-        <div class="max-w-7xl mx-auto px-6">
+    <section class="py-20 bg-neutral-50 relative">
+        {{-- Noise/grain overlay --}}
+        <svg class="absolute inset-0 w-full h-full pointer-events-none" style="z-index:0;opacity:.4">
+            <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+            <rect width="100%" height="100%" filter="url(#grain)"/>
+        </svg>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="mb-12 fade-in">
                 <span class="text-xs font-semibold tracking-widest uppercase text-primary-500"><i class="fa-solid fa-images mr-2"></i>Dokumentasi</span>
                 <h2 class="text-2xl md:text-4xl font-display font-bold text-neutral-900 mt-2">Galeri Kegiatan</h2>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse ($galeriTerbaru as $g)
-                    @php $cover = $g->media->first(); @endphp
-                    @if ($cover)
-                        <div class="overflow-hidden rounded-lg shadow-card fade-in">
-                            <img src="{{ asset('storage/' . $cover->file_path) }}" alt="{{ $g->judul }}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"/>
+                    @php
+                        $cover = $g->media->first();
+                        if ($cover && $cover->tipe === 'video') {
+                            $coverUrl = 'https://img.youtube.com/vi/' . $cover->file_name . '/hqdefault.jpg';
+                        } elseif ($cover) {
+                            $coverUrl = asset('storage/' . $cover->file_path);
+                        } else {
+                            $coverUrl = asset('img/galeri/ypmd-irja-ulang-tahun-38-jubi.jpg');
+                        }
+                    @endphp
+                    <a href="{{ route('galeri.detail', $g->slug) }}"
+                       class="group bg-white shadow-card card-hover border border-neutral-100 overflow-hidden fade-in">
+                        <div class="relative overflow-hidden">
+                            <img src="{{ $coverUrl }}" alt="{{ $g->judul }}"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition flex items-center justify-center">
+                                <i class="fa-solid fa-images text-white text-2xl opacity-0 group-hover:opacity-100 transition"></i>
+                            </div>
+                            <span class="absolute top-3 left-3 bg-primary-500/90 text-white text-xs font-bold px-2 py-0.5">
+                                {{ $g->kategori }}
+                            </span>
+                            <span class="absolute top-3 right-3 bg-black/60 text-white text-xs font-bold px-2 py-0.5">
+                                <i class="fa-solid fa-image mr-1"></i>{{ $g->media_count }}
+                            </span>
                         </div>
-                    @endif
+                        <div class="p-4">
+                            <h4 class="font-display font-bold text-neutral-900 group-hover:text-primary-600 transition line-clamp-2">{{ $g->judul }}</h4>
+                            @if ($g->deskripsi)
+                                <p class="text-neutral-500 text-sm mt-1 line-clamp-2">{{ $g->deskripsi }}</p>
+                            @endif
+                        </div>
+                    </a>
                 @empty
-                    <div class="overflow-hidden rounded-lg shadow-card fade-in"><img src="{{ asset('img/galeri/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD-IRJA" class="w-full object-cover hover:scale-105 transition-transform duration-300"/></div>
-                    <div class="overflow-hidden rounded-lg shadow-card fade-in"><img src="{{ asset('img/galeri/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD-IRJA" class="w-full object-cover hover:scale-105 transition-transform duration-300"/></div>
-                    <div class="overflow-hidden rounded-lg shadow-card fade-in"><img src="{{ asset('img/galeri/Kantor YPMD-IRJA.png') }}" alt="Kantor YPMD-IRJA" class="w-full object-cover hover:scale-105 transition-transform duration-300"/></div>
+                    <div class="col-span-full text-center py-12 text-neutral-400">
+                        <i class="fa-solid fa-images text-4xl mb-4 block"></i>
+                        <p>Belum ada album di galeri.</p>
+                    </div>
                 @endforelse
             </div>
             <div class="text-center mt-10 fade-in">
@@ -277,9 +325,18 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
     </section>
 
 
+
     {{-- CTA --}}
-    <section class="bg-primary-600 py-16">
-        <div class="max-w-7xl mx-auto px-6 text-center fade-in">
+    <section class="py-16 relative overflow-hidden" style="background:#1a5236;padding-top:calc(18px + 4rem)">
+        {{-- Mesh gradient blobs --}}
+        <div class="absolute inset-0 pointer-events-none" style="z-index:0">
+            <div style="position:absolute;top:-30%;left:-10%;width:60%;height:120%;border-radius:50%;background:radial-gradient(circle,rgba(45,128,87,.8) 0%,transparent 70%)"></div>
+            <div style="position:absolute;bottom:-40%;right:-5%;width:55%;height:130%;border-radius:50%;background:radial-gradient(circle,rgba(31,102,66,.9) 0%,transparent 70%)"></div>
+            <div style="position:absolute;top:10%;right:20%;width:40%;height:80%;border-radius:50%;background:radial-gradient(circle,rgba(79,161,116,.5) 0%,transparent 65%)"></div>
+            <div style="position:absolute;bottom:0;left:30%;width:50%;height:90%;border-radius:50%;background:radial-gradient(circle,rgba(201,151,42,.12) 0%,transparent 60%)"></div>
+            <div style="position:absolute;top:-20%;left:50%;width:35%;height:70%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.06) 0%,transparent 55%)"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 text-center fade-in relative z-10">
             <h2 class="text-2xl md:text-3xl font-display font-bold text-white mb-4">Bersama Membangun Papua</h2>
             <p class="text-primary-200 text-lg max-w-lg mx-auto mb-8">Dukung program pemberdayaan masyarakat desa di Irian Jaya / Papua sekarang. Setiap kontribusi membantu mewujudkan kemandirian ekonomi dan keadilan sosial.</p>
             <div class="flex flex-wrap justify-center gap-4">

@@ -24,10 +24,15 @@ class VisitorController extends Controller
 
         $kdkTerbaru = Kdk::with('media')
             ->orderByDesc('tanggal_terbit')
-            ->take(3)
+            ->take(4)
             ->get();
 
-        $galeriTerbaru = Galeri::with('media')->where('is_publik', true)->latest()->take(6)->get();
+        $galeriTerbaru = Galeri::withCount('media')
+            ->with(['media' => fn ($q) => $q->limit(1)])
+            ->where('is_publik', true)
+            ->latest()
+            ->take(6)
+            ->get();
 
         return view('visitor.beranda', compact('beritaTerbaru', 'kdkTerbaru', 'galeriTerbaru'));
     }

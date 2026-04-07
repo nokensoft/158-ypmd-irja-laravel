@@ -14,12 +14,25 @@
     @endif
 </div>
 
-<footer class="bg-neutral-900 text-neutral-300">
-    <div class="max-w-7xl mx-auto px-6 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+
+<footer class="bg-neutral-900 text-neutral-300 relative overflow-hidden">
+    {{-- Polygonal overlay (top area) --}}
+    <svg class="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none" viewBox="0 0 1440 400" xmlns="http://www.w3.org/2000/svg" style="z-index:0;opacity:.06">
+        <polygon fill="#2d8057" points="0,0 200,120 400,40 600,160 800,60 1000,140 1200,30 1440,100 1440,0 0,0"/>
+        <polygon fill="#ffffff" points="0,0 150,80 350,20 550,100 750,30 950,90 1150,10 1350,70 1440,40 1440,0 0,0" style="opacity:.4"/>
+        <polygon fill="#2d8057" points="0,0 100,50 300,10 500,70 700,20 900,60 1100,15 1300,45 1440,25 1440,0 0,0" style="opacity:.5"/>
+    </svg>
+    <div class="absolute inset-0 pointer-events-none" style="z-index:0;overflow:hidden">
+        <div style="position:absolute;top:-20%;right:-10%;width:50%;height:140%;background:rgba(45,128,87,.04);transform:rotate(-15deg)"></div>
+        <div style="position:absolute;top:-15%;left:-8%;width:35%;height:120%;background:rgba(255,255,255,.02);transform:rotate(20deg)"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10 relative z-10">
 
         {{-- Kolom 1: Logo + Deskripsi --}}
-        <div>
-            <div class="flex items-center gap-3 mb-4">
+        <div class="text-center sm:text-left">
+            <div class="flex items-center gap-3 mb-4 justify-center sm:justify-start">
                 <span class="bg-white rounded p-1.5 inline-flex items-center justify-center">
                     @if (!empty($situs['logo']))
                         <img src="{{ asset('storage/' . $situs['logo']) }}" alt="" class="h-16">
@@ -35,7 +48,7 @@
         </div>
 
         {{-- Kolom 2: Navigasi --}}
-        <div>
+        <div class="text-center sm:text-left">
             <h4 class="text-white text-xs font-semibold uppercase tracking-widest mb-4">{{ __('Navigasi') }}</h4>
             <ul class="space-y-2 text-sm">
                 <li><a href="{{ route('beranda') }}" class="hover:text-white transition-colors">{{ __('Beranda') }}</a></li>
@@ -48,7 +61,7 @@
         </div>
 
         {{-- Kolom 3: Halaman (dinamis dari DB) --}}
-        <div>
+        <div class="text-center sm:text-left">
             <h4 class="text-white text-xs font-semibold uppercase tracking-widest mb-4">Halaman</h4>
             <ul class="space-y-2 text-sm">
                 <li><a href="{{ route('galeri') }}" class="hover:text-white transition-colors">Galeri</a></li>
@@ -65,43 +78,39 @@
         </div>
 
         {{-- Kolom 4: Kontak --}}
-        <div>
+        <div class="text-center sm:text-left">
             <h4 class="text-white text-xs font-semibold uppercase tracking-widest mb-4">{{ __('Kontak') }}</h4>
             <ul class="space-y-2 text-sm text-neutral-400">
                 @if (!empty($situs['alamat']))
-                    <li class="flex items-start gap-2">
+                    <li class="flex items-center sm:items-start justify-center sm:justify-start gap-2">
                         <i class="fa-solid fa-location-dot text-primary-400 mt-0.5 w-4"></i>
                         <span>{{ $situs['alamat'] }}</span>
                     </li>
                 @else
-                    <li class="flex items-start gap-2">
+                    <li class="flex items-center sm:items-start justify-center sm:justify-start gap-2">
                         <i class="fa-solid fa-location-dot text-primary-400 mt-0.5 w-4"></i>
                         <span>Jl. Jeruk Nipis 117 Kotaraja, Jayapura 99225</span>
                     </li>
                 @endif
-                @if (!empty($situs['telepon']))
-                    <li class="flex items-start gap-2">
-                        <i class="fa-solid fa-phone text-primary-400 mt-0.5 w-4"></i>
-                        <span>{{ $situs['telepon'] }}</span>
-                    </li>
-                @else
-                    <li class="flex items-start gap-2">
-                        <i class="fa-solid fa-phone text-primary-400 mt-0.5 w-4"></i>
-                        <span>0967-581071</span>
-                    </li>
-                @endif
-                @if (!empty($situs['email']))
-                    <li class="flex items-start gap-2">
-                        <i class="fa-solid fa-envelope text-primary-400 mt-0.5 w-4"></i>
-                        <a href="mailto:{{ $situs['email'] }}" class="hover:text-white transition-colors">{{ $situs['email'] }}</a>
-                    </li>
-                @endif
+                <li class="flex items-center sm:items-start justify-center sm:justify-start gap-2">
+                    <i class="fa-solid fa-phone text-primary-400 mt-0.5 w-4"></i>
+                    <a href="tel:+6282239084055" class="hover:text-white transition-colors">+62 822-3908-4055</a>
+                </li>
+                <li class="flex items-center sm:items-start justify-center sm:justify-start gap-2">
+                    <i class="fa-brands fa-instagram text-primary-400 mt-0.5 w-4"></i>
+                    <a href="https://www.instagram.com/ypmd.irja" target="_blank" rel="noopener" class="hover:text-white transition-colors">@ypmd.irja</a>
+                </li>
             </ul>
         </div>
     </div>
 
+    
+        {{-- Motif Papua border (centered between mitra and CTA) --}}
+    <div class="w-full relative z-20 " style="height:45px;margin-bottom:-22px;background:url('{{ asset('img/dekorasi/motif-papua.png') }}') repeat-x center/auto 100%"></div>
+
+
     {{-- Copyright Bar --}}
-    <div class="border-t border-neutral-800">
+    <div class="border-t border-neutral-800 py-5">
         <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
             <p class="text-neutral-600 text-xs">&copy; {{ date('Y') }} {{ $situs['nama_situs'] ?? 'YPMD-IRJA' }}. {{ __('Seluruh hak cipta dilindungi.') }}</p>
             <div class="flex items-center gap-4">

@@ -21,18 +21,11 @@
 @endsection
 
 @section('content')
-    {{-- Breadcrumb Header --}}
-    <div class="bg-primary-600 py-16">
-        <div class="max-w-7xl mx-auto px-6">
-            <span class="text-primary-200 text-xs uppercase tracking-widest">
-                <a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> › {{ $halaman->judul }}
-            </span>
-            <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">{{ $halaman->judul }}</h1>
-            @if ($halaman->keterangan)
-                <p class="text-primary-200 mt-2 text-lg">{{ $halaman->keterangan }}</p>
-            @endif
-        </div>
-    </div>
+    @include('partials.section-header', [
+        'headerTitle' => $halaman->judul,
+        'headerSubtitle' => $halaman->keterangan ?? null,
+        'headerBreadcrumb' => ' › ' . e($halaman->judul),
+    ])
 
     {{-- Konten Halaman --}}
     {!! $halaman->konten !!}

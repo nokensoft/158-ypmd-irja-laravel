@@ -13,7 +13,26 @@ $_bc = ['@context'=>'https://schema.org','@type'=>'BreadcrumbList','itemListElem
     ['@type'=>'ListItem','position'=>2,'name'=>'Galeri','item'=>route('galeri')],
     ['@type'=>'ListItem','position'=>3,'name'=>$galeri->judul],
 ]];
-$_ig = ['@context'=>'https://schema.org','@type'=>'ImageGallery','name'=>$galeri->judul,'description'=>$galeri->deskripsi ?? 'Album galeri foto '.$galeri->judul,'url'=>route('galeri.detail',$galeri->slug),'numberOfItems'=>$galeri->media->count()];
+$_images = $galeri->media->where('tipe', 'foto')->map(fn ($m) => [
+    '@type' => 'ImageObject',
+    'contentUrl' => asset('storage/' . $m->file_path),
+    'name' => $galeri->judul . ' - Foto',
+])->values()->toArray();
+$_ig = [
+    '@context' => 'https://schema.org',
+    '@type' => 'ImageGallery',
+    'name' => $galeri->judul,
+    'description' => $galeri->deskripsi ?? 'Album galeri foto ' . $galeri->judul,
+    'url' => route('galeri.detail', $galeri->slug),
+    'numberOfItems' => $galeri->media->count(),
+    'inLanguage' => 'id-ID',
+    'creator' => ['@type' => 'Organization', 'name' => $situs['nama_situs'] ?? 'YPMD-IRJA'],
+    'dateCreated' => $galeri->created_at?->toW3cString(),
+    'dateModified' => $galeri->updated_at?->toW3cString(),
+];
+if (count($_images)) {
+    $_ig['image'] = $_images;
+}
 $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
 @endphp
 <script type="application/ld+json">{!! json_encode($_bc, $_f) !!}</script>
@@ -21,13 +40,15 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
 @endsection
 
 @section('content')
-    @include('partials.page-banner', [
-        'title' => $galeri->judul,
-        'breadcrumb' => '<a href="' . route('galeri') . '" class="hover:text-white transition">Galeri</a> / ' . $galeri->judul
+    @include('partials.section-header', [
+        'headerTitle' => $galeri->judul,
+        'headerBreadcrumb' => ' › <a href="' . route('galeri') . '" class="hover:text-white">Galeri</a> › ' . e($galeri->judul),
     ])
 
-    <section class="py-20 bg-white" x-data="galeriLightbox()">
-        <div class="container mx-auto px-4">
+    <section class="py-20 bg-white" x-data="galeriLightbox()" itemscope itemtype="https://schema.org/ImageGallery">
+        <meta itemprop="name" content="{{ $galeri->judul }}">
+        <meta itemprop="numberOfItems" content="{{ $galeri->media->count() }}">
+        <div class="max-w-7xl mx-auto px-6">
             <!-- Header -->
             <div class="mb-10">
                 <a href="{{ route('galeri') }}" class="inline-flex items-center text-primary hover:text-primary/80 font-semibold mb-4 transition">
@@ -63,8 +84,8 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
                     @if ($m->tipe === 'video')
                         <div @click="open({{ $index }})"
                              class="relative group overflow-hidden rounded-lg cursor-pointer">
-                            <img src="https://img.youtube.com/vi/{{ $m->file_name }}/hqdefault.jpg"
-                                 class="w-full h-52 object-cover group-hover:scale-110 transition duration-500"
+                    <img src="https://img.youtube.com/vi/{{ $m->file_name }}/hqdefault.jpg"
+                                 class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
                                  alt="{{ $galeri->judul }} - Video {{ $index + 1 }}">
                             <div class="absolute inset-0 bg-dark/0 group-hover:bg-dark/50 transition flex items-center justify-center">
                                 <span class="bg-red-600/90 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg group-hover:scale-110 transition">
@@ -78,9 +99,9 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
                     @else
                         <div @click="open({{ $index }})"
                              class="relative group overflow-hidden rounded-lg cursor-pointer">
-                            <img src="{{ asset('storage/' . $m->file_path) }}"
-                                 class="w-full h-52 object-cover group-hover:scale-110 transition duration-500"
-                                 alt="{{ $galeri->judul }} - Foto {{ $index + 1 }}">
+                    <img src="{{ asset('storage/' . $m->file_path) }}"
+                                 class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                                 alt="{{ $galeri->judul }} - Foto {{ $index + 1 }}" itemprop="image">
                             <div class="absolute inset-0 bg-dark/0 group-hover:bg-dark/50 transition flex items-center justify-center">
                                 <i class="fas fa-search-plus text-white text-xl opacity-0 group-hover:opacity-100 transition"></i>
                             </div>

@@ -4,13 +4,11 @@
 @section('seo-description', 'Struktur bidang kerja YPMD-IRJA: Bidang Informasi, Bidang CBO & CBA, serta Bidang Administrasi dan Financial.')
 
 @section('content')
-    <div class="bg-primary-600 py-16">
-        <div class="max-w-7xl mx-auto px-6">
-            <span class="text-primary-200 text-xs uppercase tracking-widest"><a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> › Tentang › Bidang Kerja</span>
-            <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">Bidang Kerja</h1>
-            <p class="text-primary-200 text-lg mt-3 max-w-xl">Struktur bidang kerja yang menopang seluruh program dan kegiatan YPMD-IRJA.</p>
-        </div>
-    </div>
+    @include('partials.section-header', [
+        'headerTitle' => 'Bidang Kerja',
+        'headerSubtitle' => 'Struktur bidang kerja yang menopang seluruh program dan kegiatan YPMD-IRJA.',
+        'headerBreadcrumb' => ' › Tentang › Bidang Kerja',
+    ])
 
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-6">

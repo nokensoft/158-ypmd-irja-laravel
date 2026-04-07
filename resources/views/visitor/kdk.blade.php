@@ -8,13 +8,11 @@
 @endsection
 
 @section('content')
-    <div class="bg-primary-600 py-16">
-        <div class="max-w-7xl mx-auto px-6">
-            <span class="text-primary-200 text-xs uppercase tracking-widest"><a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> › KDK</span>
-            <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">Kabar Dari Kampung</h1>
-            <p class="text-primary-200 mt-2 text-lg">Buletin — Media Alternatif Masyarakat Desa di Irian Jaya / Papua Sekarang</p>
-        </div>
-    </div>
+    @include('partials.section-header', [
+        'headerTitle' => 'Kabar Dari Kampung',
+        'headerSubtitle' => 'Buletin — Media Alternatif Masyarakat Desa di Irian Jaya / Papua Sekarang',
+        'headerBreadcrumb' => ' › KDK',
+    ])
 
     <section class="py-16 bg-neutral-50">
         <div class="max-w-7xl mx-auto px-6">

@@ -17,22 +17,12 @@ if ($kategoriAktif) {
 @endsection
 
 @section('content')
-    <div class="bg-primary-600 py-16">
-        <div class="max-w-7xl mx-auto px-6">
-            <span class="text-primary-200 text-xs uppercase tracking-widest">
-                <a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a>
-                &rsaquo;
-                @if ($kategoriAktif)
-                    <a href="{{ route('berita') }}" class="hover:text-white">Papua Today</a> &rsaquo; {{ $kategoriAktif->nama }}
-                @else
-                    Papua Today
-                @endif
-            </span>
-            <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">
-                {{ $kategoriAktif ? 'Berita: ' . $kategoriAktif->nama : 'Papua Today' }}
-            </h1>
-        </div>
-    </div>
+    @include('partials.section-header', [
+        'headerTitle' => $kategoriAktif ? 'Berita: ' . $kategoriAktif->nama : 'Papua Today',
+        'headerBreadcrumb' => $kategoriAktif
+            ? ' › <a href="' . route('berita') . '" class="hover:text-white">Papua Today</a> › ' . e($kategoriAktif->nama)
+            : ' › Papua Today',
+    ])
 
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-6">
@@ -49,20 +39,17 @@ if ($kategoriAktif) {
                     @endif
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @forelse ($beritaList as $b)
-                            <article class="bg-white shadow-card card-hover border border-neutral-100 fade-in">
-                                <img src="{{ $b->gambar }}" class="w-full aspect-[5/4] object-cover" alt="{{ $b->judul }}">
-                                <div class="p-5">
-                                    <div class="flex items-center gap-2 text-xs text-neutral-400 mb-2">
-                                        <span class="text-primary-500 font-semibold">{{ $b->kategori?->nama ?? 'Berita' }}</span>
-                                        <span>&bull;</span>
-                                        <span>{{ $b->tanggal_terbit?->translatedFormat('d M Y') }}</span>
+                            <a href="{{ route('berita.detail', $b->slug) }}" class="block bg-white shadow-card card-hover border border-neutral-100 fade-in">
+                                <article>
+                                    <img src="{{ $b->gambar }}" class="w-full aspect-[5/4] object-cover" alt="{{ $b->judul }}">
+                                    <div class="p-5">
+                                        <div class="text-xs text-neutral-400 mb-2">
+                                            <span class="text-primary-500 font-semibold">{{ $b->kategori?->nama ?? 'Berita' }}</span>
+                                        </div>
+                                        <h4 class="font-display font-bold text-neutral-900 mb-3 line-clamp-2">{{ $b->judul }}</h4>
                                     </div>
-                                    <h4 class="font-display font-bold text-neutral-900 mb-3 line-clamp-2">{{ $b->judul }}</h4>
-                                    <a href="{{ route('berita.detail', $b->slug) }}" class="text-primary-600 text-xs font-semibold hover:text-primary-700">
-                                        Baca Selengkapnya <i class="fa-solid fa-arrow-right text-xs ml-1"></i>
-                                    </a>
-                                </div>
-                            </article>
+                                </article>
+                            </a>
                         @empty
                             <div class="col-span-full text-center py-12 text-neutral-400">
                                 <i class="fa-solid fa-newspaper text-4xl mb-3 block"></i>

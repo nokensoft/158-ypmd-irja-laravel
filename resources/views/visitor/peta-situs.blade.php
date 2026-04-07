@@ -15,15 +15,11 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
 @endsection
 
 @section('content')
-    <div class="bg-primary-600 py-16">
-        <div class="max-w-7xl mx-auto px-6">
-            <span class="text-primary-200 text-xs uppercase tracking-widest">
-                <a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> › Peta Situs
-            </span>
-            <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">Peta Situs</h1>
-            <p class="text-primary-200 mt-2 text-lg">Daftar lengkap halaman publik untuk pengunjung dan mesin pencari</p>
-        </div>
-    </div>
+    @include('partials.section-header', [
+        'headerTitle' => 'Peta Situs',
+        'headerSubtitle' => 'Daftar lengkap halaman publik untuk pengunjung dan mesin pencari',
+        'headerBreadcrumb' => ' › Peta Situs',
+    ])
 
     <section class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-6 space-y-10">
@@ -51,7 +47,7 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
                         <li><a href="{{ route('bidang-kerja') }}" class="text-neutral-700 hover:text-primary-600 transition"><i class="fa-solid fa-angle-right text-neutral-300 mr-2 text-xs"></i>Bidang Kerja</a></li>
                         <li><a href="{{ route('mitra') }}" class="text-neutral-700 hover:text-primary-600 transition"><i class="fa-solid fa-angle-right text-neutral-300 mr-2 text-xs"></i>Mitra Kerja</a></li>
                         <li><a href="{{ route('program') }}" class="text-neutral-700 hover:text-primary-600 transition"><i class="fa-solid fa-angle-right text-neutral-300 mr-2 text-xs"></i>Program</a></li>
-                        <li><a href="{{ route('KdK') }}" class="text-neutral-700 hover:text-primary-600 transition"><i class="fa-solid fa-angle-right text-neutral-300 mr-2 text-xs"></i>Buletin KdK</a></li>
+                        <li><a href="{{ route('kdk') }}" class="text-neutral-700 hover:text-primary-600 transition"><i class="fa-solid fa-angle-right text-neutral-300 mr-2 text-xs"></i>Buletin KdK</a></li>
                         <li><a href="{{ route('berita') }}" class="text-neutral-700 hover:text-primary-600 transition"><i class="fa-solid fa-angle-right text-neutral-300 mr-2 text-xs"></i>Papua Today (Berita)</a></li>
                         <li><a href="{{ route('galeri') }}" class="text-neutral-700 hover:text-primary-600 transition"><i class="fa-solid fa-angle-right text-neutral-300 mr-2 text-xs"></i>Galeri</a></li>
                         <li><a href="{{ route('donasi') }}" class="text-neutral-700 hover:text-primary-600 transition"><i class="fa-solid fa-angle-right text-neutral-300 mr-2 text-xs"></i>Donasi</a></li>

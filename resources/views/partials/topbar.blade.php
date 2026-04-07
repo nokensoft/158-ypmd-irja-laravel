@@ -1,14 +1,3 @@
-{{-- Alert: Website dalam pengembangan --}}
-<div class="bg-amber-500 text-amber-950 text-xs font-semibold relative z-[61]" x-data="{ showAlert: true }" x-show="showAlert" x-transition>
-    <div class="max-w-7xl mx-auto px-6 py-2 flex items-center justify-center gap-2">
-        <i class="fa-solid fa-triangle-exclamation"></i>
-        <span>Website ini masih dalam tahap pengembangan. Konten teks, gambar, dan link yang ditampilkan belum valid dan masih dalam proses pengerjaan.</span>
-        <button @click="showAlert = false" class="ml-3 hover:text-amber-800 transition-colors" title="Tutup">
-            <i class="fa-solid fa-xmark"></i>
-        </button>
-    </div>
-</div>
-
 {{-- Topbar: Social Media | Clock | Language Switcher --}}
 <div class="bg-neutral-900 text-neutral-400 text-xs hidden md:block relative z-[60]" id="topbar">
     <div class="max-w-7xl mx-auto px-6 py-2.5 flex items-center justify-between">
@@ -40,13 +29,9 @@
                     <i class="fa-brands fa-tiktok"></i>
                 </a>
             @endif
-            @if (!empty($situs['email']))
-                <span class="text-neutral-700">|</span>
-                <a href="mailto:{{ $situs['email'] }}" class="hover:text-white transition-colors flex items-center gap-1.5" title="Email">
-                    <i class="fa-solid fa-envelope"></i>
-                    <span>{{ $situs['email'] }}</span>
-                </a>
-            @endif
+
+            <span class="text-neutral-700">|</span>
+            <span id="topbar-typing" class="text-neutral-300 font-medium"></span>
         </div>
 
         {{-- Right: Clock + Language Switcher --}}
@@ -196,6 +181,53 @@
         }
         update();
         setInterval(update, 1000);
+    })();
+
+    // Typing animation
+    (function () {
+        const el = document.getElementById('topbar-typing');
+        if (!el) return;
+        const sentences = [
+            'Selamat datang di website YPMD-IRJA',
+            'Yayasan Pembangunan Masyarakat Desa Irian Jaya',
+            'Kami telah mendampingi masyarakat desa di Irian Jaya / Papua sekarang sejak 1982',
+            'Buletin KdK merupakan salah satu program unggulan yang berdampak',
+            'Kabar Dari Kampung (KdK) adalah buletin pionir yang lahir pada tahun 1982',
+            'Sertifikasi Internasional Terdaftar secara resmi...',
+            'dengan nomor ISSN: 0215-4838 melalui LIPI dan pusat ISSN internasional di Paris'
+        ];
+        let idx = 0;
+        let i = 0;
+        let deleting = false;
+        const speed = 80;
+        const pauseEnd = 2000;
+        const pauseStart = 500;
+
+        function tick() {
+            var text = sentences[idx];
+            if (!deleting) {
+                el.textContent = text.slice(0, i + 1) + '|';
+                i++;
+                if (i >= text.length) {
+                    deleting = true;
+                    setTimeout(tick, pauseEnd);
+                    return;
+                }
+                setTimeout(tick, speed);
+            } else {
+                el.textContent = text.slice(0, i) + '|';
+                i--;
+                if (i < 0) {
+                    i = 0;
+                    deleting = false;
+                    idx = (idx + 1) % sentences.length;
+                    setTimeout(tick, pauseStart);
+                    return;
+                }
+                setTimeout(tick, 40);
+            }
+        }
+        tick();
     })();
 </script>
 

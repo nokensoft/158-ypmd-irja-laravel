@@ -46,13 +46,11 @@
         </a>
     </nav>
 
-    <div class="bg-primary-600 py-16">
-        <div class="max-w-7xl mx-auto px-6">
-            <span class="text-primary-200 text-xs uppercase tracking-widest"><a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> › Donasi</span>
-            <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">Donasi</h1>
-            <p class="text-primary-200 mt-2 text-lg">Bersama Membangun Papua yang Bermartabat</p>
-        </div>
-    </div>
+    @include('partials.section-header', [
+        'headerTitle' => 'Donasi',
+        'headerSubtitle' => 'Bersama Membangun Papua yang Bermartabat',
+        'headerBreadcrumb' => ' › Donasi',
+    ])
 
     {{-- Program Donasi --}}
     @if ($programs->isNotEmpty())

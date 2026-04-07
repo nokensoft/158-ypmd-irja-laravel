@@ -3,12 +3,10 @@
 @section('seo-description', 'Sejarah berdiri dan perjalanan panjang Yayasan Pembangunan Masyarakat Desa Irian Jaya sejak 1984.')
 
 @section('content')
-    <div class="bg-primary-600 py-16">
-        <div class="max-w-7xl mx-auto px-6">
-            <span class="text-primary-200 text-xs uppercase tracking-widest"><a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> › Tentang › Sejarah</span>
-            <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">Sejarah YPMD-IRJA</h1>
-        </div>
-    </div>
+    @include('partials.section-header', [
+        'headerTitle' => 'Sejarah YPMD-IRJA',
+        'headerBreadcrumb' => ' › <a href="' . route('profil') . '" class="hover:text-white">Tentang</a> › Sejarah',
+    ])
 
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-6">
