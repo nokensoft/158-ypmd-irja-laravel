@@ -8,16 +8,11 @@
 @endsection
 
 @section('content')
-    <div class="bg-primary-600 py-16">
-        <div class="max-w-7xl mx-auto px-6">
-            <span class="text-primary-200 text-xs uppercase tracking-widest">
-                <a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> ›
-                <a href="{{ route('profil') }}" class="hover:text-white">Tentang</a> › Direktur
-            </span>
-            <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">Direktur dari Masa ke Masa</h1>
-            <p class="text-primary-200 mt-2 text-lg">Pemimpin yang menggerakkan YPMD-IRJA sejak 1984</p>
-        </div>
-    </div>
+    @include('partials.section-header', [
+        'headerTitle' => 'Direktur dari Masa ke Masa',
+        'headerSubtitle' => 'Pemimpin yang menggerakkan YPMD-IRJA sejak 1984',
+        'headerBreadcrumb' => ' › <a href="' . route('profil') . '" class="hover:text-white">Tentang</a> › Direktur',
+    ])
 
     <section class="py-20 bg-white">
         <div class="max-w-5xl mx-auto px-6">

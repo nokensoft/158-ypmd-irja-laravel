@@ -1,6 +1,8 @@
 @props(['kdk'])
 
-<article class="shadow-card card-hover bg-white border border-neutral-100 fade-in">
+<article class="shadow-card card-hover bg-white border border-neutral-100 fade-in relative">
+    {{-- Overlay link: seluruh box clickable --}}
+    <a href="{{ route('kdk.detail', $kdk->id) }}" class="absolute inset-0 z-10" aria-label="{{ $kdk->judul }}"></a>
     {{-- Cover portrait --}}
     <div class="aspect-[2/3] relative overflow-hidden">
         @if ($kdk->media && $kdk->media->file_path)
@@ -24,9 +26,7 @@
             Edisi {{ $kdk->nomor_edisi }}
             @if ($kdk->tanggal_terbit) &bull; {{ $kdk->tanggal_terbit->translatedFormat('F Y') }} @endif
         </span>
-        <h3 class="font-display font-bold text-neutral-900 mt-1 mb-2 line-clamp-2">
-            <a href="{{ route('kdk.detail', $kdk->id) }}" class="hover:text-primary-600 transition-colors">{{ $kdk->judul }}</a>
-        </h3>
+        <h3 class="font-display font-bold text-neutral-900 mt-1 mb-2 line-clamp-2">{{ $kdk->judul }}</h3>
         @if ($kdk->deskripsi)
             <p class="text-xs text-neutral-500 mb-3 line-clamp-2">{{ $kdk->deskripsi }}</p>
         @endif
@@ -40,11 +40,11 @@
         </div>
         @if ($kdk->file_pdf)
             <a href="{{ route('kdk.download', $kdk->id) }}"
-               class="inline-flex items-center gap-2 bg-primary-500 text-white px-4 py-2 text-xs font-semibold hover:bg-primary-600 transition-colors">
+               class="relative z-20 inline-flex items-center gap-2 bg-primary-500 text-white px-4 py-2 text-xs font-semibold hover:bg-primary-600 transition-colors">
                 <i class="fa-solid fa-file-pdf"></i>Unduh PDF
             </a>
         @else
-            <span class="inline-flex items-center gap-2 bg-neutral-100 text-neutral-400 px-4 py-2 text-xs font-semibold cursor-not-allowed">
+            <span class="relative z-20 inline-flex items-center gap-2 bg-neutral-100 text-neutral-400 px-4 py-2 text-xs font-semibold cursor-not-allowed">
                 <i class="fa-solid fa-clock"></i>PDF Belum Tersedia
             </span>
         @endif

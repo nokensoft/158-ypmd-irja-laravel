@@ -15,7 +15,7 @@
         </a>
 
         {{-- Nav Desktop --}}
-        <ul class="hidden md:flex items-center gap-6">
+        <ul class="hidden md:flex items-center gap-6 uppercase">
             <li>
                 <a href="{{ route('beranda') }}"
                    class="nav-link text-lg font-medium transition-colors {{ request()->routeIs('beranda') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">
@@ -25,12 +25,12 @@
 
             {{-- Tentang Dropdown --}}
             <li class="relative" x-data="{ open: false }" @mouseenter="open=true" @mouseleave="open=false">
-                <button class="nav-link text-lg font-medium flex items-center gap-1 transition-colors
-                    {{ request()->routeIs('sejarah') || request()->routeIs('profil') || request()->routeIs('tokoh') || request()->routeIs('mitra') || request()->routeIs('bidang-kerja') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">
+                <button class="nav-link text-lg font-medium flex items-center gap-1 transition-colors uppercase
+                    {{ request()->routeIs('sejarah') || request()->routeIs('profil') || request()->routeIs('tokoh') || request()->routeIs('mitra') || request()->routeIs('bidang-kerja') || request()->routeIs('program') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">
                     Tentang <i class="fa-solid fa-chevron-down text-[10px]"></i>
                 </button>
                 <div x-show="open" x-transition style="display:none;"
-                     class="absolute top-full left-0 mt-1 w-52 bg-white shadow-lg border border-neutral-100 py-1 z-50">
+                     class="absolute top-full left-0 mt-1 w-52 bg-white shadow-lg border border-neutral-100 py-1 z-50 uppercase">
                     <a href="{{ route('sejarah') }}"
                        class="block px-4 py-2.5 text-sm hover:bg-primary-50 hover:text-primary-600 {{ request()->routeIs('sejarah') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-600' }}">
                         Sejarah Singkat
@@ -47,6 +47,10 @@
                        class="block px-4 py-2.5 text-sm hover:bg-primary-50 hover:text-primary-600 {{ request()->routeIs('bidang-kerja') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-600' }}">
                         Bidang Kerja
                     </a>
+                    <a href="{{ route('program') }}"
+                       class="block px-4 py-2.5 text-sm hover:bg-primary-50 hover:text-primary-600 {{ request()->routeIs('program') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-600' }}">
+                        <i class="fa-solid fa-list-check mr-1.5 text-xs"></i>Program
+                    </a>
                     <div class="border-t border-neutral-100 my-1"></div>
                     <a href="{{ route('mitra') }}"
                        class="block px-4 py-2.5 text-sm hover:bg-primary-50 hover:text-primary-600 {{ request()->routeIs('mitra') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-600' }}">
@@ -54,8 +58,6 @@
                     </a>
                 </div>
             </li>
-
-            <li><a href="{{ route('program') }}" class="nav-link text-lg font-medium transition-colors {{ request()->routeIs('program') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Program</a></li>
             <li><a href="{{ route('kdk') }}" class="nav-link text-lg font-medium transition-colors {{ request()->routeIs('KdK') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Buletin KdK</a></li>
             <li><a href="{{ route('berita') }}" class="nav-link text-lg font-medium transition-colors {{ request()->routeIs('berita*') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Papua Today</a></li>
             <li><a href="{{ route('donasi') }}" class="nav-link text-lg font-medium transition-colors {{ request()->routeIs('donasi') ? 'active text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Donasi</a></li>
@@ -81,7 +83,7 @@
     {{-- Mobile Menu --}}
     <div x-show="menuOpen" x-transition style="display:none;"
          class="md:hidden bg-white border-t border-neutral-200 shadow-md">
-        <ul class="flex flex-col py-2">
+        <ul class="flex flex-col py-2 uppercase">
             <li>
                 <a href="{{ route('beranda') }}"
                    class="block px-6 py-3 text-lg {{ request()->routeIs('beranda') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">
@@ -91,19 +93,19 @@
             <li>
                 <button @click="tentangOpen=!tentangOpen"
                         class="w-full flex items-center justify-between px-6 py-3 text-lg
-                        {{ request()->routeIs('sejarah') || request()->routeIs('profil') || request()->routeIs('tokoh') || request()->routeIs('mitra') || request()->routeIs('bidang-kerja') ? 'text-primary-600 font-semibold bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">
+                        {{ request()->routeIs('sejarah') || request()->routeIs('profil') || request()->routeIs('tokoh') || request()->routeIs('mitra') || request()->routeIs('bidang-kerja') || request()->routeIs('program') ? 'text-primary-600 font-semibold bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">
                     Tentang
                     <i class="fa-solid fa-chevron-down text-[10px] transition-transform" :class="tentangOpen && 'rotate-180'"></i>
                 </button>
-                <div x-show="tentangOpen" x-transition style="display:none;" class="bg-neutral-50">
+                <div x-show="tentangOpen" x-transition style="display:none;" class="bg-neutral-50 uppercase">
                     <a href="{{ route('sejarah') }}" class="block px-10 py-2.5 text-base {{ request()->routeIs('sejarah') ? 'font-semibold text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Sejarah Singkat</a>
                     <a href="{{ route('profil') }}" class="block px-10 py-2.5 text-base {{ request()->routeIs('profil') ? 'font-semibold text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Profil Lembaga</a>
                     <a href="{{ route('tokoh') }}" class="block px-10 py-2.5 text-base {{ request()->routeIs('tokoh') ? 'font-semibold text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Direktur</a>
                     <a href="{{ route('bidang-kerja') }}" class="block px-10 py-2.5 text-base {{ request()->routeIs('bidang-kerja') ? 'font-semibold text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}">Bidang Kerja</a>
                     <a href="{{ route('mitra') }}" class="block px-10 py-2.5 text-base {{ request()->routeIs('mitra') ? 'font-semibold text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}"><i class="fa-solid fa-handshake mr-1.5 text-xs"></i>Mitra Kerja</a>
+                    <a href="{{ route('program') }}" class="block px-10 py-2.5 text-base {{ request()->routeIs('program') ? 'font-semibold text-primary-600' : 'text-neutral-600 hover:text-primary-600' }}"><i class="fa-solid fa-list-check mr-1.5 text-xs"></i>Program</a>
                 </div>
             </li>
-            <li><a href="{{ route('program') }}" class="block px-6 py-3 text-lg {{ request()->routeIs('program') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">Program</a></li>
             <li><a href="{{ route('kdk') }}" class="block px-6 py-3 text-lg {{ request()->routeIs('KdK') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">Buletin KdK</a></li>
             <li><a href="{{ route('berita') }}" class="block px-6 py-3 text-lg {{ request()->routeIs('berita*') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">Papua Terkini</a></li>
             <li><a href="{{ route('donasi') }}" class="block px-6 py-3 text-lg {{ request()->routeIs('donasi') ? 'font-semibold text-primary-600 bg-primary-50' : 'text-neutral-700 hover:bg-neutral-50' }}">Donasi</a></li>

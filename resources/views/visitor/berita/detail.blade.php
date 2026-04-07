@@ -5,8 +5,17 @@
 @section('seo-image', $berita->gambar)
 @section('og-type', 'article')
 
+@section('seo-article-meta')
+<meta property="article:published_time" content="{{ $berita->tanggal_terbit?->toW3cString() }}">
+<meta property="article:modified_time" content="{{ $berita->updated_at?->toW3cString() }}">
+<meta property="article:section" content="{{ $berita->kategori?->nama ?? 'Berita' }}">
+<meta property="article:author" content="{{ $berita->user?->name ?? ($situs['nama_situs'] ?? 'YPMD-IRJA') }}">
+@endsection
+
 @section('json-ld')
 @php
+$_plainText = strip_tags($berita->konten ?? '');
+$_wordCount = str_word_count($_plainText);
 $_article = [
     '@context' => 'https://schema.org',
     '@type' => 'NewsArticle',
@@ -19,6 +28,8 @@ $_article = [
     'publisher' => ['@type' => 'Organization', 'name' => $situs['nama_situs'] ?? 'YPMD-IRJA', 'logo' => ['@type' => 'ImageObject', 'url' => !empty($situs['logo']) ? asset('storage/'.$situs['logo']) : asset('img/logo-ypmd-irja.png')]],
     'mainEntityOfPage' => ['@type' => 'WebPage', '@id' => route('berita.detail', $berita->slug)],
     'articleSection' => $berita->kategori?->nama ?? 'Berita',
+    'wordCount' => $_wordCount,
+    'inLanguage' => 'id-ID',
 ];
 $_bc = ['@context'=>'https://schema.org','@type'=>'BreadcrumbList','itemListElement'=>[
     ['@type'=>'ListItem','position'=>1,'name'=>'Beranda','item'=>route('beranda')],
@@ -32,34 +43,35 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
 @endsection
 
 @section('content')
-    <div class="bg-primary-600 py-16">
-        <div class="max-w-7xl mx-auto px-6">
-            <span class="text-primary-200 text-xs uppercase tracking-widest">
-                <a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> ›
-                <a href="{{ route('berita') }}" class="hover:text-white">Papua Today</a>
-                @if ($berita->kategori) › {{ $berita->kategori->nama }} @endif
-            </span>
-            <h1 class="text-2xl md:text-3xl font-display font-bold text-white mt-3 leading-tight">{{ $berita->judul }}</h1>
-            <p class="text-primary-200 mt-2 text-sm">
-                {{ $berita->tanggal_terbit?->translatedFormat('d M Y') }}
-                @if ($berita->user) &middot; {{ $berita->user->name }} @endif
-            </p>
-        </div>
-    </div>
+    @php
+        $_beritaBc = ' › <a href="' . route('berita') . '" class="hover:text-white">Papua Today</a>';
+        if ($berita->kategori) $_beritaBc .= ' › ' . e($berita->kategori->nama);
+        $_beritaMeta = '<time datetime="' . ($berita->tanggal_terbit?->toW3cString() ?? '') . '">' . ($berita->tanggal_terbit?->translatedFormat('d M Y') ?? '') . '</time>';
+        if ($berita->user) $_beritaMeta .= ' &middot; ' . e($berita->user->name);
+    @endphp
+    @include('partials.section-header', [
+        'headerTitle' => $berita->judul,
+        'headerMeta' => $_beritaMeta,
+        'headerBreadcrumb' => $_beritaBc,
+    ])
 
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-4">
+    <article class="py-20 bg-white" itemscope itemtype="https://schema.org/NewsArticle">
+        <meta itemprop="headline" content="{{ $berita->judul }}">
+        <meta itemprop="datePublished" content="{{ $berita->tanggal_terbit?->toW3cString() }}">
+        <meta itemprop="dateModified" content="{{ $berita->updated_at?->toW3cString() }}">
+        <meta itemprop="author" content="{{ $berita->user?->name ?? ($situs['nama_situs'] ?? 'YPMD-IRJA') }}">
+        <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-12">
                 <div class="lg:col-span-3">
                     <div class="mb-6">
                         @if ($berita->kategori)
-                            <span class="text-sm bg-primary text-white px-3 py-1 font-bold uppercase">{{ $berita->kategori->nama }}</span>
+                            <span class="text-sm bg-primary text-white px-3 py-1 font-bold uppercase" itemprop="articleSection">{{ $berita->kategori->nama }}</span>
                         @endif
                     </div>
                     <div class="mb-8 flex justify-center">
-                        <img src="{{ $berita->gambar }}" alt="{{ $berita->judul }}" class="w-[720px] shadow-lg object-cover">
+                        <img src="{{ $berita->gambar }}" alt="{{ $berita->judul }}" class="w-[640px] shadow-lg object-cover" itemprop="image">
                     </div>
-                    <div class="prose max-w-none text-lg leading-relaxed text-justify">
+                    <div class="prose max-w-none text-lg leading-relaxed text-justify" itemprop="articleBody">
                         {!! $berita->konten !!}
                     </div>
                     @if ($berita->sumber_nama)
@@ -132,5 +144,5 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
                 </div>
             </div>
         </div>
-    </section>
+    </article>
 @endsection

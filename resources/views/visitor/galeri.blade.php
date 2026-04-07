@@ -8,22 +8,12 @@
 @endsection
 
 @section('content')
-    <div class="bg-primary-600 py-16">
-        <div class="max-w-7xl mx-auto px-6">
-            <span class="text-primary-200 text-xs uppercase tracking-widest">
-                <a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a>
-                &rsaquo;
-                @if ($kategoriAktif)
-                    <a href="{{ route('galeri') }}" class="hover:text-white">Galeri</a> &rsaquo; {{ $kategoriAktif }}
-                @else
-                    Galeri
-                @endif
-            </span>
-            <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">
-                {{ $kategoriAktif ? 'Galeri: ' . $kategoriAktif : 'Galeri Kegiatan' }}
-            </h1>
-        </div>
-    </div>
+    @include('partials.section-header', [
+        'headerTitle' => $kategoriAktif ? 'Galeri: ' . $kategoriAktif : 'Galeri Kegiatan',
+        'headerBreadcrumb' => $kategoriAktif
+            ? ' › <a href="' . route('galeri') . '" class="hover:text-white">Galeri</a> › ' . e($kategoriAktif)
+            : ' › Galeri',
+    ])
 
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-6">
@@ -56,7 +46,7 @@
                                class="group bg-white shadow-card card-hover border border-neutral-100 overflow-hidden fade-in">
                                 <div class="relative overflow-hidden">
                                     <img src="{{ $coverUrl }}" alt="{{ $album->judul }}"
-                                         class="w-full h-52 object-cover group-hover:scale-105 transition duration-300">
+                                         class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                                     <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition flex items-center justify-center">
                                         <i class="fa-solid fa-images text-white text-2xl opacity-0 group-hover:opacity-100 transition"></i>
                                     </div>

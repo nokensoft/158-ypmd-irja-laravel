@@ -77,6 +77,9 @@
     <script type="application/ld+json">{!! json_encode($orgSchema, $jsonFlags) !!}</script>
     <script type="application/ld+json">{!! json_encode($webSchema, $jsonFlags) !!}</script>
 
+    {{-- Article meta tags (dari child view) --}}
+    @yield('seo-article-meta')
+
     {{-- JSON-LD: BreadcrumbList (dari child view) --}}
     @yield('json-ld')
 

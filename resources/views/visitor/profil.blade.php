@@ -4,12 +4,10 @@
 @section('seo-description', 'Profil, visi, misi, dan struktur organisasi YPMD-IRJA.')
 
 @section('content')
-    <div class="bg-primary-600 py-16">
-        <div class="max-w-7xl mx-auto px-6">
-            <span class="text-primary-200 text-xs uppercase tracking-widest"><a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> › Tentang › Profil</span>
-            <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">Profil Organisasi</h1>
-        </div>
-    </div>
+    @include('partials.section-header', [
+        'headerTitle' => 'Profil Organisasi',
+        'headerBreadcrumb' => ' › Tentang › Profil',
+    ])
 
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-6">

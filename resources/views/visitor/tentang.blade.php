@@ -5,16 +5,11 @@
 
 @section('content')
 
-    {{-- Hero Banner --}}
-    <div class="bg-primary-600 py-16">
-        <div class="max-w-7xl mx-auto px-6">
-            <span class="text-primary-200 text-xs uppercase tracking-widest">
-                <a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> › Tentang Kami
-            </span>
-            <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">Tentang YPMD-IRJA</h1>
-            <p class="text-primary-200 mt-2 text-lg">Mengenal lebih dekat Yayasan Pembangunan Masyarakat Desa Irian Jaya</p>
-        </div>
-    </div>
+    @include('partials.section-header', [
+        'headerTitle' => 'Tentang YPMD-IRJA',
+        'headerSubtitle' => 'Mengenal lebih dekat Yayasan Pembangunan Masyarakat Desa Irian Jaya',
+        'headerBreadcrumb' => ' › Tentang Kami',
+    ])
 
     {{-- Intro --}}
     <section class="py-20 bg-white">

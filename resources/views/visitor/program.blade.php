@@ -8,14 +8,11 @@
 @endsection
 
 @section('content')
-    {{-- Hero Banner --}}
-    <div class="bg-primary-600 py-16">
-        <div class="max-w-7xl mx-auto px-6">
-            <span class="text-primary-200 text-xs uppercase tracking-widest"><a href="{{ route('beranda') }}" class="hover:text-white">Beranda</a> › Program</span>
-            <h1 class="text-3xl md:text-4xl font-display font-bold text-white mt-3">Program Kami</h1>
-            <p class="text-primary-200 mt-3 max-w-2xl">Empat pilar program utama YPMD-IRJA dalam memberdayakan masyarakat kampung di Papua, didukung program pendampingan masyarakat desa di Irian Jaya / Papua sekarang dan keuangan mikro.</p>
-        </div>
-    </div>
+    @include('partials.section-header', [
+        'headerTitle' => 'Program Kami',
+        'headerSubtitle' => 'Empat pilar program utama YPMD-IRJA dalam memberdayakan masyarakat kampung di Papua, didukung program pendampingan masyarakat desa di Irian Jaya / Papua sekarang dan keuangan mikro.',
+        'headerBreadcrumb' => ' › Program',
+    ])
 
     
 
