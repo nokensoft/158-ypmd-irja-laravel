@@ -31,7 +31,7 @@ $_f = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
                     {{ $situs['deskripsi_situs'] ?? 'LSM pertama di Tanah Papua yang lahir dari keresahan kelompok idealis Gereja dan Tokoh Masyarakat, hadir sebagai jembatan informasi dan agen perubahan bagi masyarakat desa di Irian Jaya / Papua sekarang dalam mempertahankan hak-hak mereka atas tanah dan sumber daya alam.' }}
                 </p>
                 <div class="flex flex-wrap gap-3">
-                    <a href="{{ route('program') }}" class="bg-primary-500 text-white px-6 py-2.5 text-sm font-semibold hover:bg-primary-600 transition-colors shadow-card">Program YPMD-IRJA</a>
+                    <a href="{{ route('program') }}" class="bg-primary-500 text-white px-6 py-2.5 text-sm font-semibold hover:bg-primary-600 transition-colors shadow-card">Program</a>
                     <a href="{{ route('profil') }}" class="border border-neutral-300 text-neutral-700 px-6 py-2.5 text-sm font-semibold hover:border-primary-400 hover:text-primary-600 transition-colors">Tentang Kami</a>
                 </div>
             </div>
