@@ -163,6 +163,9 @@ class BackupStorageController extends Controller
         $extractedCount = $zip->numFiles;
         $zip->close();
 
+        // Pastikan symlink public/storage ada
+        $this->ensureStorageLink();
+
         return redirect()->route('admin.backup-storage')
             ->with('success', "Storage berhasil di-restore dari file ZIP ({$extractedCount} item).");
     }
@@ -179,6 +182,46 @@ class BackupStorageController extends Controller
 
         return redirect()->route('admin.backup-storage')
             ->with('error', 'File backup tidak ditemukan.');
+    }
+
+    /**
+     * Buat ulang symlink public/storage -> storage/app/public.
+     */
+    public function createStorageLink()
+    {
+        $result = $this->ensureStorageLink();
+
+        if ($result === true) {
+            return redirect()->route('admin.backup-storage')
+                ->with('success', 'Symlink storage berhasil dibuat.');
+        }
+
+        return redirect()->route('admin.backup-storage')
+            ->with('error', $result);
+    }
+
+    /**
+     * Pastikan symlink public/storage -> storage/app/public ada.
+     */
+    private function ensureStorageLink(): true|string
+    {
+        $link = public_path('storage');
+        $target = storage_path('app/public');
+
+        if (file_exists($link) || is_link($link)) {
+            return true;
+        }
+
+        if (!is_dir($target)) {
+            mkdir($target, 0755, true);
+        }
+
+        try {
+            symlink($target, $link);
+            return true;
+        } catch (\Throwable $e) {
+            return 'Gagal membuat symlink: ' . $e->getMessage();
+        }
     }
 
     /**

@@ -22,6 +22,18 @@ use App\Http\Controllers\Penulis\GaleriController;
 use App\Http\Controllers\Penulis\MediaController;
 use App\Http\Controllers\SeoController;
 use App\Http\Controllers\StatistikPengunjungController;
+use App\Http\Controllers\DeployController;
+use App\Http\Controllers\StorageFileController;
+
+/*
+|--------------------------------------------------------------------------
+| Storage Fallback
+|--------------------------------------------------------------------------
+| Serve file dari storage/app/public via PHP.
+| Aktif otomatis jika web server tidak bisa serve file statis
+| (cPanel tanpa symlink, php artisan serve di Windows, dll).
+*/
+Route::get('/storage/{path}', [StorageFileController::class, 'show'])->where('path', '.*')->name('storage.serve');
 
 /*
 |--------------------------------------------------------------------------
@@ -110,6 +122,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth.custom', 'role:admin_m
     Route::get('/backup-storage/download/{filename}', [BackupStorageController::class, 'download'])->name('backup-storage.download');
     Route::delete('/backup-storage/{filename}', [BackupStorageController::class, 'destroy'])->name('backup-storage.destroy');
     Route::post('/backup-storage/restore', [BackupStorageController::class, 'restore'])->name('backup-storage.restore');
+    Route::post('/backup-storage/storage-link', [BackupStorageController::class, 'createStorageLink'])->name('backup-storage.storage-link');
 
     // Pengguna CRUD
     Route::resource('pengguna', PenggunaController::class)->except(['show']);
@@ -131,6 +144,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth.custom', 'role:admin_m
     // Dokumentasi
     Route::view('/dokumentasi', 'admin.dokumentasi')->name('dokumentasi');
 });
+
+/*
+|--------------------------------------------------------------------------
+| GitHub Webhook - Auto Deploy
+|--------------------------------------------------------------------------
+*/
+Route::post('/deploy/webhook', [DeployController::class, 'webhook'])->name('deploy.webhook');
 
 /*
 |--------------------------------------------------------------------------
